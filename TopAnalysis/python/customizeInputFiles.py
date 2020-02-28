@@ -22,7 +22,8 @@ def customTestInputFiles(process,era,runOnData,runWithAOD):
                 process.source.fileNames = cms.untracked.vstring('/store/mc/RunIISummer16MiniAODv3/ST_t-channel_antitop_4f_mtop1715_inclusiveDecays_13TeV-powhegV2-madspin-pythia8/MINIAODSIM/PUMoriond17_94X_mcRun2_asymptotic_v3_ext1-v1/120000/16CEB785-3FE6-E811-AAE8-FA163E9D74F8.root')
     elif '2017' in era:
         if runOnData:
-            process.source.fileNames = cms.untracked.vstring('/store/data/Run2017F/DoubleMuon/MINIAOD/09Aug2019_UL2017-v1/270000/E6579C3C-A837-6045-AEAF-8957079DF1AE.root')
+            #process.source.fileNames = cms.untracked.vstring('/store/data/Run2017F/DoubleMuon/MINIAOD/09Aug2019_UL2017-v1/270000/E6579C3C-A837-6045-AEAF-8957079DF1AE.root')
+            process.source.fileNames = cms.untracked.vstring('/store/data/Run2017B/SingleMuon/MINIAOD/09Aug2019_UL2017-v1/270000/8AD1BD78-84EB-EE4C-992C-4BF1C34D1D5B.root')
             if runWithAOD:
                 print 'Adding secondary filenames'
                 process.source.secondaryFileNames = cms.untracked.vstring([
@@ -45,7 +46,8 @@ def customTestInputFiles(process,era,runOnData,runWithAOD):
                     '/store/data/Run2017F/DoubleMuon/RAW/v1/000/305/112/00000/50180243-7EB3-E711-A516-02163E01A4DD.root'
                 ])
         else:
-            process.source.fileNames = cms.untracked.vstring('/store/mc/RunIISummer19UL17MiniAOD/DYJetsToEE_M-50_TuneCP5_13TeV-madgraphMLM-pythia8/MINIAODSIM/106X_mc2017_realistic_v6-v2/30000/FB5A928B-75DF-D54E-B930-F1CB916D6930.root')
+            #process.source.fileNames = cms.untracked.vstring('/store/mc/RunIISummer19UL17MiniAOD/DYJetsToEE_M-50_TuneCP5_13TeV-madgraphMLM-pythia8/MINIAODSIM/106X_mc2017_realistic_v6-v2/30000/FB5A928B-75DF-D54E-B930-F1CB916D6930.root')
+			process.source.fileNames = cms.untracked.vstring('/store/mc/RunIISummer19UL17MiniAOD/TTTo2L2Nu_TuneCP5_erdON_13TeV-powheg-pythia8/MINIAODSIM/106X_mc2017_realistic_v6-v2/40000/E8ADD300-0AFF-1245-B18F-606B3A57F581.root')	
     elif '2018' in era:
         if runOnData:
             process.source.fileNames = cms.untracked.vstring('/store/data/Run2018C/SingleMuon/MINIAOD/17Sep2018-v1/00000/AB61FB4F-3A42-4B4F-93E2-78CD7E7CF0A4.root')
