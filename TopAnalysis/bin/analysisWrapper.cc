@@ -3,7 +3,8 @@
 #include "TopLJets2015/TopAnalysis/interface/CommonTools.h"
 #include "TopLJets2015/TopAnalysis/interface/SMP-19-005.h"
 #include "TopLJets2015/TopAnalysis/interface/PhotonAnalyzers.h"
-#include "TopLJets2015/TopAnalysis/interface/TopSummer2019.h"
+//#include "TopLJets2015/TopAnalysis/interface/TopSummer2019.h"
+#include "TopLJets2015/TopAnalysis/interface/ExYukawa.h"
 
 #include "TH1F.h"
 #include "TFile.h"
@@ -42,7 +43,7 @@ int main(int argc, char* argv[])
   float xsec(1.0);
   for(int i=1;i<argc;i++){
     string arg(argv[i]);
-    if(arg.find("--help") !=string::npos)                       { printHelp(); return -1;} 
+    if(arg.find("--help") !=string::npos)                       { printHelp(); return -1;}
     else if(arg.find("--runSysts")!=string::npos )              { runSysts=true;  }
     else if(arg.find("--systVar")!=string::npos && i+1<argc)    { systVar=argv[i+1]; i++;}
     else if(arg.find("--channel")!=string::npos && i+1<argc)    { sscanf(argv[i+1],"%d",&channel); i++;}
@@ -68,22 +69,22 @@ int main(int argc, char* argv[])
   if(normF)
     {
       normH=(TH1F *)normF->Get(normTag);
-      if(normH) 
+      if(normH)
         normH->SetDirectory(0);
       puH=(TH1F *)normF->Get(normTag+"_pu");
       if(puH)
-        puH->SetDirectory(0);   
+        puH->SetDirectory(0);
       normF->Close();
     }
   if(normH==0)
     {
-      cout << "Check normalization file " << genWeights << " in era=" << era 
+      cout << "Check normalization file " << genWeights << " in era=" << era
 	   << " and tag (" << normTag << ")" << endl
 	   << "Will run without any" << endl;
       printHelp();
       //return -1;
     }
-  
+
   //check input/output
   if(in=="" || out=="")
     {
@@ -93,8 +94,8 @@ int main(int argc, char* argv[])
     }
 
   //check method to run
-  if(method=="RunTopSummer2019") {
-    RunTopSummer2019(in,out,normH,puH,era,debug);
+  if(method=="RunExYukawa") {
+    RunExYukawa(in,out,normH,puH,era,debug);
   }
   else if(method=="PhotonTrigEff::RunPhotonTrigEff") {
     RunPhotonTrigEff(in,out,normH,puH,era,debug);
@@ -107,12 +108,7 @@ int main(int argc, char* argv[])
     printHelp();
     return -1;
   }
-  
+
   //all done
   return 0;
-}  
-
-
-
-
-
+}
