@@ -67,11 +67,16 @@ void RunExYukawa(const TString in_fname,
   ht.setNsyst(0);
   ht.addHist("nvtx",         new TH1F("nvtx",        ";Vertex multiplicity;Events",50,0,100));
   ht.addHist("njets",        new TH1F("njets",       ";Jet multiplicity;Events",10,0,10));
+  ht.addHist("nbjets",		 new TH1F("nbjets",      ";b-jet multiplicity;Events",10,0,10));
   ht.addHist("mlb",          new TH1F("mlb",         ";m(l,b) [GeV];Events",20,0,250));
-  ht.addHist("nprotons",     new TH1F("nprotons",    ";Proton multiplicity; Events",6,0,6) );
-  ht.addHist("csi",          new TH1F("csi",         ";#xi = #deltap/p; Events",50,0,0.3) );
-  ht.addHist("x",            new TH1F("x",           ";x  [cm]; Events",50,0,25) );
   ht.addHist("ratevsrun",    new TH1F("ratevsrun",   ";Run number; #sigma [pb]",int(lumiPerRun.size()),0,float(lumiPerRun.size())));
+  ht.addHist("mu_pt",		 new TH1F("mu_pt",       ";p_T(#mu) [GeV]; Events", 60,0,300));
+  ht.addHist("mu_eta",		 new TH1F("mu_eta",      ";#eta(#mu) ; Events", 50,-2.5,2.5));
+  ht.addHist("bjet_pt",      new TH1F("bjet_pt",     ";p_T(b jet) [GeV]; Events", 60,0,300));
+  ht.addHist("bjet_eta",	 new TH1F("bjet_eta",    ";#eta(b jet) ; Events", 50,-2.5,2.5));
+  ht.addHist("met_pt",       new TH1F("met_pt",      ";MET p_T [GeV]; Events", 60,0,300));
+
+   	
   int i=0;
   for(auto key : lumiPerRun) {
     i++;
@@ -120,7 +125,6 @@ void RunExYukawa(const TString in_fname,
       SelectionTool::QualityFlags muId(SelectionTool::TIGHT);
       if(isLowPUrun) muId=SelectionTool::LOOSE;
       leptons = selector.selLeptons(leptons,muId,SelectionTool::MVA90,minLeptonPt,2.1);
-      cout << "nl=" << leptons.size() << endl;
       if(leptons.size()!=1) continue;
       if(leptons[0].id()!=13) continue;
 
@@ -165,46 +169,30 @@ void RunExYukawa(const TString in_fname,
 
       ht.fill("nvtx",       ev.nvtx,        evWgt, "inc");
       ht.fill("njets",      allJets.size(), evWgt, "inc");
-
+      ht.fill("mu_pt",		leptons[0].pt(), evWgt, "inc");
+      ht.fill("mu_eta",     leptons[0].eta(), evWgt, "inc");
       if(!passJets) continue;
+	
 
       //lepton-b systems
+      int num_btags = 0;
       for(size_t ij=0; ij<allJets.size(); ij++)
         {
           int idx=allJets[ij].getJetIndex();
           bool passBtag(ev.j_btag[idx]>0);
           if(!passBtag) continue;
 
+		  num_btags++;
+
           float mlb( (leptons[0]+allJets[ij]).M() );
           std::vector<TString> tags={"inc",leptons[0].charge()>0 ? "plus" : "minus"};
           ht.fill("mlb",mlb,evWgt,tags);
+          
+          ht.fill("bjet_pt",allJets[ij].pt(),evWgt,"inc");
+          ht.fill("bjet_eta",allJets[ij].eta(),evWgt,"inc");
         }
-
-      //roman pots
-      int nprotons23(0), nprotons123(0);
-      int ntrks( isLowPUrun ? ev.nppstrk : ev.nfwdtrk );
-      for (int ift=0; ift<ntrks; ift++) {
-
-        //single pot reconstruction
-        if(!isLowPUrun && ev.fwdtrk_method[ift]!=0) continue;
-
-        //only near (pixels) detectors
-        const unsigned short pot_raw_id = (isLowPUrun ? ev.ppstrk_pot[ift] : ev.fwdtrk_pot[ift]);
-        if (pot_raw_id!=23 && pot_raw_id!=123) continue;
-
-        nprotons23 += (pot_raw_id==23);
-        nprotons123 += (pot_raw_id==123);
-        std::vector<TString> tags={"inc",Form("rp%d",pot_raw_id)};
-
-        float xi= (isLowPUrun ? 0.               : ev.fwdtrk_xi[ift]);
-        float x=  (isLowPUrun ? ev.ppstrk_x[ift] :  0. );
-
-        ht.fill("csi",     xi,                    evWgt,tags);
-        ht.fill("x",       x,                     evWgt,tags);
-        ht.fill("nprotons",nprotons23+nprotons123,evWgt,"inc");
-        ht.fill("nprotons",nprotons23,            evWgt,"rp23");
-        ht.fill("nprotons",nprotons123,           evWgt,"rp123");
-      }
+	   ht.fill("nbjets",num_btags,evWgt,"inc");	
+	   ht.fill("met_pt",ev.met_pt,evWgt,"inc");
 
     }
 
