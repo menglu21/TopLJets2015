@@ -43,7 +43,7 @@ void RunExYukawa(const TString in_fname,
 
   //preselection cuts to apply
   float minLeptonPt( isLowPUrun ? 20. : 27);
-  size_t minJetMultiplicity(4);
+  size_t minJetMultiplicity(3);
 
   //CORRECTIONS: LUMINOSITY+PILEUP
   LumiTools lumi(era,genPU);
@@ -104,7 +104,7 @@ void RunExYukawa(const TString in_fname,
   SelectionTool selector(in_fname, false, triggerList);
 
   //EVENT LOOP
-  //select mu+>=4 jets events triggered by a single muon trigger
+  //select mu+>=3 jets events triggered by a single muon trigger
   for (Int_t iev=0;iev<nentries;iev++)
     {
       t->GetEntry(iev);
@@ -117,7 +117,7 @@ void RunExYukawa(const TString in_fname,
         if(isLowPUrun) hasMTrigger=(selector.hasTriggerBit("HLT_HIMu12_v",  ev.addTriggerBits) );
         else           hasMTrigger=(selector.hasTriggerBit("HLT_IsoMu27_v", ev.triggerBits) );
       }
-      cout << hasMTrigger << endl;
+      //cout << hasMTrigger << endl;
       if(!hasMTrigger) continue;
 
       //select one offline muon
