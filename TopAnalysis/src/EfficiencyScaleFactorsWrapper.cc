@@ -114,8 +114,10 @@ void EfficiencyScaleFactorsWrapper::init(TString era)
     lumiWgts.push_back(0.5);
   }
   else{
-    m_idSF.push_back( era+"/RunBCDEF_SF_ID.root");
-    m_isoSF.push_back( era+"/RunBCDEF_SF_ISO.root");
+    //m_idSF.push_back( era+"/RunBCDEF_SF_ID.root");
+    //m_isoSF.push_back( era+"/RunBCDEF_SF_ISO.root");
+    m_idSF.push_back( era+"/RunBCDEF_SF_MuID.root");
+    m_isoSF.push_back( era+"/RunBCDEF_SF_MuISO.root");
     lumiWgts.push_back(1.0);
   }
 
