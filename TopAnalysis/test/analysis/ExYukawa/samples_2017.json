@@ -19,6 +19,7 @@
   "MC13TeV_2017_TTZZ"                 : [0.001386,     0,   "MC13TeV_2017_TTZZ", "TTZZ", 920, true, false, 1],
   "MC13TeV_2017_tZq_ll"               : [0.07358,     0,   "MC13TeV_2017_tZq_ll", "tZq_ll", 920, true, false, 1],
   "MC13TeV_2017_ttHToNonbb_M125"      : [0.5638,     0,   "MC13TeV_2017_ttHToNonbb_M125", "ttHToNonbb_M125", 920, true, false, 1],
+  "MC13TeV_2017_TTGamma_Dilept"       : [0.6343, 0, "/TTGamma_Dilept_TuneCP5_PSweights_13TeV_madgraph_pythia8/RunIIFall17MiniAODv2-PU2017_12Apr2018_94X_mc2017_realistic_v14-v1/MINIAODSIM", "TTGamma_Dilept",920, true, false, 1],      
   "Data13TeV_2017B_DoubleMuon"         : [1,    1, "/DoubleMuon/Run2017B-31Mar2018-v1/MINIAOD", "Data", 1, false, false, 0],
   "Data13TeV_2017C_DoubleMuon"         : [1,    1, "/DoubleMuon/Run2017C-31Mar2018-v1/MINIAOD", "Data", 1, false, false, 0],
   "Data13TeV_2017D_DoubleMuon"         : [1,    1, "/DoubleMuon/Run2017D-31Mar2018-v1/MINIAOD", "Data", 1, false, false, 0],
