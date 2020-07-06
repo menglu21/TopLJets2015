@@ -4,7 +4,7 @@
 
 These installation instructions correspond to the 2017 data/MC production.
 To install execute the following in your work area.
-Notice: if you are not creating the ntuples, you can skip the part of the instructions 
+Notice: if you are not creating the ntuples, you can skip the part of the instructions
 marked with the `##OPTIONAL/##END OPTIONAL` markers.
 If compilation fails for some reason repeat the scram b...
 
@@ -21,7 +21,7 @@ git clone git@github.com:cms-data/EgammaAnalysis-ElectronTools.git EgammaAnalysi
 scram b -j 8
 
 #B-fragmentation analyzer
-mkdir TopQuarkAnalysis 
+mkdir TopQuarkAnalysis
 cd TopQuarkAnalysis
 git clone -b 94x https://gitlab.cern.ch/psilva/BFragmentationAnalyzer.git
 scram b -j 8
@@ -81,17 +81,17 @@ a=(`find grid/ -maxdepth 1 | grep crab_Data `)
 for i in ${a[@]}; do
     crab kill ${i};
     crab status ${i};
-    crab report ${i}; 
+    crab report ${i};
 done
-``` 
-In case of failed jobs the missing lumis can be processed with the following script to wrap the tedious process of 
+```
+In case of failed jobs the missing lumis can be processed with the following script to wrap the tedious process of
 updating the cfg with a finer grain luminosity per job and the missing lumis json
 ```
 for i in ${a[@]}; do
     python scripts/runMissingLumiSecs.py ${i}
 done
 ```
-You can then run the brilcalc tool to get the integrated luminosity in total and per run 
+You can then run the brilcalc tool to get the integrated luminosity in total and per run
 (see http://cms-service-lumi.web.cern.ch/cms-service-lumi/brilwsdoc.html for more details).
 
 ```
@@ -104,7 +104,7 @@ It takes a bit to run, depending on the number of triggers configured to use in 
 
 ```
 python scripts/convertLumiTable.py --normtag /cvmfs/cms-bril.cern.ch/cms-lumi-pog/Normtags/normtag_PHYSICS.json --lumi /afs/cern.ch/cms/CAF/CMSCOMM/COMM_DQM/certification/Collisions18/13TeV/ReReco/Cert_314472-325175_13TeV_17SeptEarlyReReco2018ABC_PromptEraD_Collisions18_JSON.txt -y 2018 -o data/era2018
-python scripts/convertLumiTable.py --normtag /cvmfs/cms-bril.cern.ch/cms-lumi-pog/Normtags/normtag_PHYSICS.json 
+python scripts/convertLumiTable.py --normtag /cvmfs/cms-bril.cern.ch/cms-lumi-pog/Normtags/normtag_PHYSICS.json
 python scripts/convertLumiTable.py -o data/era2016/ -y 2016 --lumi /afs/cern.ch/cms/CAF/CMSCOMM/COMM_DQM/certification/Collisions16/13TeV/Final/Cert_271036-284044_13TeV_PromptReco_Collisions16_JSON.txt
 ```
 
@@ -123,7 +123,7 @@ python scripts/checkLocalNtuplizerInteg.py condor_file
 ```
 
 
-## Preparing the analysis 
+## Preparing the analysis
 
 Correction and uncertainty files are stored under data by era directories (e.g data/era2017) in order no to mix different periods.
 
@@ -144,7 +144,7 @@ python scripts/saveExpectedBtagEff.py -i /store/cmst3/group/top/RunIIReReco/2016
 python scripts/produceNormalizationCache.py -i /store/cmst3/group/top/RunIIReReco/ab05162      -o data/era2017/genweights_ab05162.root
 python scripts/produceNormalizationCache.py -i /store/cmst3/group/top/RunIIReReco/2016/0c522df -o data/era2016/genweights_0c522df.root
 ```
-The lepton/photon trigger/id/iso efficiencies should also be placed under data/era2017. 
+The lepton/photon trigger/id/iso efficiencies should also be placed under data/era2017.
 The src/EfficiencyScaleFactorsWrapper.cc  should then be updated to handle the reading of the ROOT files and the application of the scale factors
 event by event.
 
@@ -152,13 +152,13 @@ event by event.
 
 Commit your changes regularly with
 ```
-git commit -a -m'comment on the changes made'
+git commit -a -m 'comment on the changes made'
 ```
 Push to your forked repository
 ```
 git push git@github.com:MYGITHUBLOGIN/TopLJets2015.git
 ```
-From the github area of the repository cleak on the green button "Compare,review and create a pull request" to create the PR to merge with your colleagues.
+From the github area of the repository click on the green button "Compare,review and create a pull request" to create the PR to merge with your colleagues.
 
 # Local analyses
 
@@ -171,48 +171,33 @@ To plot the output of the local analysis you can run the following:
 ```
 python scripts/plotter.py -i analysis/   -j data/era2017/samples.json  -l 12870
 ```
-# BDT training
-This part currently works only for the VBF analysis. The signal and background trees must have been produced in the previous session by enabling "--mvatree" with "SEL" option.
-The training is done per category with the following command:
-```
-python scripts/trainVbfBDT --vbf nt=50:mns=5:md=3:abb=0.6:nc=1 --ext LowVPtHighMJJ --sig signal.root --bkg backgrounds.root --cat A:VBF --card LowVPtHighMJJCard
-```
-The example above is for "LowVPtHighMJJ" category. Once happy with the training, 
-```
-cp vbf/weights/LowVPtHighMJJ_BDT_VBF0LowVPtHighMJJ* test/analysis/VBF_weights
-```
-Update src/VBFVectorBoson.cc accordingly and compile.
 
-## Transformed BDT
-To make the background BDT distribution flat, following steps must be followed:
-   * Produce plots with the compiled version of the code including new BDT weights (see Local analysis) and
-     ```
-     cd test/analysis/VBF_weights
-     python getInverseCDFFromPlotter.py PATH_TO_plotter.root
-     ```
-   * Reproduce the plots to have the proper flat BDT distribution of background
+main analysis code: ExYukawa.cc (ExYukawa.h) included in ``bin/analysisWrapper.cc`` so that it can be used with ``scripts/runLocalAnalysis.py`` that allows to run over single files or full directories.
 
-# Preparation of the data cards and workspaces
+Test code:
+```
+python $CMSSW_BASE/src/TopLJets2015/TopAnalysis/scripts/runLocalAnalysis.py -i /store/cmst3/group/top/RunIIReReco/ab05162/MC13TeV_2017_TTTo2L2Nu_psweights/Chunk_71_ext0.root --tag MC13TeV_2017_dilepton -o ttbar_dilepton_71.root --njobs 1 -q local --debug --era era2017 -m RunExYukawa
+```
 
-This part currently works only for the VBF analysis. It assumes that there are root files in the working directory which includes the plots created in the previous section. For the example below, the root file is called plotter_LowVPtHighMJJ2016.root. Running the script below will make two data cards and a single corresponding workspace for signal region (here gamma+jets) and control region (here Z+jets) of the "LowVPtHighMJJ" the category:
+Submitting the analysis to condor:
 ```
-python scripts/makeWorkspace.py --Chan LowVPtHighMJJ --Hist vbfmva --nBin 20 --year 2016 --shapeOnly --doSignalPH
+source test/analysis/ExYukawa/steerAnalysis.sh -o SEL
 ```
-The input histogram will be rebinned to have five bins. If you remove "--doSignalPH", the signal process in the signal and control region will NOT be connected via the transfer function (TF). Note that the TF part is not developed fully since it is statistics limited. "--shapeOnly" is to disentangle the shape and rate systematics for non-TF version.
-# Photon fake rate estimation and distributions
-The method is explained in AN-18-046. The FR is measured in bins of mjj separately for photons in the barrel and endcap. It is measured in a control region (CR) which has the same selection as the signal region except the 2nd jet that is required to ```fail``` the loose pileup identification.
-## Input data for FR measurement
-   * Photon data (HighVPt categories): add ```--CR``` to the SEL option in steerVBFVectorBoson.sh
-   * Jet data (LowVPt category): run steerVBFVectorBoson.sh with SELJETHT in which ```--CR``` is a default input
-## Input templates for FR measurement
-   * Tight template: the output of running default SEL option in steerVBFVectorBoson.sh on GJet samples
-   * Fake template: the output of running SELJETHT option with ```-q QCDTemp``` argument in steerVBFVectorBoson.sh
-## Fake rate estimation
-   * Run the command below on the output of the aforementioned steps:
-```
-python scripts/createFakeRatio.py --fGdata PHOTON-DATA --fJdata JETHT-DATA --fJQCD JETHT-DATA-QCDTEMP --fGMC GJET-MC --cats HighVPtHighMJJA:HighVPtLowMJJA:LowVPtHighMJJA
-```
-   * Copy the output ```fakeRatios.root``` to data/eraYEAR
-## Fake rate application
-Here the distributions of not-tight photons are scaled by the estimated FR. The distributions can be used then in plotting. Need to activate ```--SRfake``` for the SEL option in steerVBFVectorBoson.sh and run on SinglePhoton data
+(note the two groups of ntuples that needs to be commented/uncommented exclusively:
+1) https://github.com/efeyazgan/TopLJets2015/blob/e745fad072c0ecd1c66b343a87691daaf4dedfe4/TopAnalysis/test/analysis/ExYukawa/steerAnalysis.sh#L39-L40
+2) https://github.com/efeyazgan/TopLJets2015/blob/e745fad072c0ecd1c66b343a87691daaf4dedfe4/TopAnalysis/test/analysis/ExYukawa/steerAnalysis.sh#L41-L42
+  )
 
+Making plots:
+```
+python scripts/plotter.py -i /eos/user/e/efe/DataAnalysis/ntuples/ -l 41500 -j test/analysis/ExYukawa/samples_2017.json  -o whatever.root
+```
+
+To separately the signal from the stack histogram:
+```
+python scripts/plotter.py -i /eos/user/e/efe/DataAnalysis/ntuples/ -l 41500    -j test/analysis/ExYukawa/samples_2017.json  -o final_plotter.root --signalJson test/analysis/ExYukawa/samples_2017_signal.json
+```
+
+Legend sizes are controlled in:
+https://github.com/efeyazgan/TopLJets2015/blob/e745fad072c0ecd1c66b343a87691daaf4dedfe4/TopAnalysis/python/Plot.py#L259
+https://github.com/efeyazgan/TopLJets2015/blob/e745fad072c0ecd1c66b343a87691daaf4dedfe4/TopAnalysis/python/Plot.py#L290-L291
