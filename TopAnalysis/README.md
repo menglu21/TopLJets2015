@@ -192,6 +192,7 @@ Making plots:
 ```
 python scripts/plotter.py -i /eos/user/e/efe/DataAnalysis/ntuples/ -l 41500 -j test/analysis/ExYukawa/samples_2017.json  -o whatever.root
 ```
+(note that the code uses the cross sections entered in the json files)
 
 To separately the signal from the stack histogram:
 ```
