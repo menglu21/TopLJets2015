@@ -26,6 +26,7 @@ fi
 queue=tomorrow
 samples=$CMSSW_BASE/src/TopLJets2015/TopAnalysis/test/analysis/ExYukawa/samples_${ERA}.json
 outdir=$CMSSW_BASE/src/TopLJets2015/TopAnalysis/test/analysis/ExYukawa/analysis_${ERA}
+#outdir=/eos/cms/store/group/phys_top/efe/ExYukawa/analysis_${ERA}
 if [[ ${ERA} = "2016" ]]; then
     githash=0c522df
     eosdir=/store/cmst3/group/top/RunIIReReco/2016/${githash}
@@ -35,20 +36,23 @@ if [[ ${ERA} = "2016" ]]; then
     testtag=Data13TeV_2016B_SingleMuon
     testfile=${eosdir}/${testtag}/Chunk_0_ext0.root
 elif [[ ${ERA} = "2017" ]]; then
-    githash=ab05162
+#    githash=ab05162
 #    eosdir=/store/cmst3/group/top/RunIIReReco/${githash}
-#    dataeosdir=${eosdir}
-#    lumi=41367
-#    lumiUnc=0.025
-#    testtag=Data13TeV_2017B_SingleMuon
-#    testfile=${eosdir}/${testtag}/Chunk_0_ext0.root
-    eosdir=${samples}
- 	  dataeosdir=${eosdir}
- 	  lumi=41367
- 	  lumiUnc=0.025
- 	  testtag=Data13TeV_SingleMu_UL
-# 	  testfile=/afs/cern.ch/work/e/efe/Top/CMSSW_10_6_2/src/TopLJets2015/TopAnalysis/test/analysis/ExYukawa/analysis_2017/MC13TeV_2017_TTJets.root
-	  testfile=/afs/cern.ch/work/e/efe/Top/CMSSW_10_6_2/src/TopLJets2015/TopAnalysis/test/analysis/Exukawa/analysis_2017/Data13TeV_SingleMu_UL.root	
+    githash=ae6e08e
+    eosdir=/store/cmst3/group/top/RunIIReReco/2017/${githash}
+    dataeosdir=${eosdir}
+    lumi=41367
+    lumiUnc=0.025
+    testtag=MC13TeV_2017_TTJets
+    testfile=/eos/cms/store/cmst3/group/top/RunIIReReco/ab05162/MC13TeV_2017_TTTo2L2Nu_psweights/Chunk_70_ext0.root
+#  elif [[ ${ERA} = "2017_add_bkgs" ]]; then
+#      githash=ae6e08e
+#      eosdir=/store/cmst3/group/top/RunIIReReco/2017/${githash}
+#      dataeosdir=${eosdir}
+#      lumi=41367
+#      lumiUnc=0.025
+#      testtag=MC13TeV_2017_TTHH
+#      testfile=/eos/cms/store/cmst3/group/top/RunIIReReco/2017/ae6e08e/MC13TeV_2017_TTHH/Chunk_0_ext0.root
 elif [[ ${ERA} = "2017lowpu" ]]; then
     ERA=2017
     githash=ab05162
@@ -78,9 +82,9 @@ case $WHAT in
         baseOpt="${baseOpt} -o ${outdir} -q ${queue} --era era${ERA} -m RunExYukawa"
         baseOpt="${baseOpt} --only ${samples}";
 	python $CMSSW_BASE/src/TopLJets2015/TopAnalysis/scripts/runLocalAnalysis.py ${baseOpt} -i ${eosdir};
-        if [ "${eosdir}" != "{dataeosdir}" ]; then
-	    python $CMSSW_BASE/src/TopLJets2015/TopAnalysis/scripts/runLocalAnalysis.py ${baseOpt} -i ${dataeosdir} --farmappendix data;
-        fi
+#        if [ "${eosdir}" != "{dataeosdir}" ]; then
+#	    python $CMSSW_BASE/src/TopLJets2015/TopAnalysis/scripts/runLocalAnalysis.py ${baseOpt} -i ${dataeosdir} --farmappendix data;
+#        fi
 	;;
 
     CHECKSELINTEG )

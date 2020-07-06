@@ -15,7 +15,7 @@ class HistTool {
  public:
   HistTool(unsigned int nsyst = 20);
   ~HistTool() {}
-  
+
   void setNsyst(unsigned int nsyst) { nsyst_ = nsyst; }
   void addHist(TString title, TH1* hist);
   void fill(TString title, double value, std::vector<double> weights,std::vector<TString> cats);
@@ -26,7 +26,7 @@ class HistTool {
   void fill(TString title, double value, double weight,std::vector<TString> cats) { fill(title,value,std::vector<double>(1,weight),cats); }
   std::map<TString, TH1 *> &getPlots()   { return allPlots_; }
   std::map<TString, TH2 *> &get2dPlots() { return all2dPlots_; }
-  
+
  private:
   unsigned int nsyst_;
   std::map<TString, TH1 *> allPlots_;

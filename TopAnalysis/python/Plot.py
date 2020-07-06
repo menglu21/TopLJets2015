@@ -61,7 +61,7 @@ class Plot(object):
         self.dataH = None
         self.data = None
         self._garbageList = []
-        self.plotformats = ['pdf','png']
+        self.plotformats = ['pdf']#self.plotformats = ['pdf','png']
         self.savelog = False
         self.doChi2 = False
         self.range=None
@@ -139,12 +139,12 @@ class Plot(object):
                 self._garbageList.append(h)
         else:
             try:
-                if spImpose : 
+                if spImpose :
                     self.spimpose[title].Add(h)
-                else : 
+                else :
                     self.mc[title].Add(h)
-            except Exception as e: 
-                
+            except Exception as e:
+
                 h.SetName('%s_%s' % (h.GetName(), title ) )
                 if h.InheritsFrom('TH1'):
                     h.SetDirectory(0)
@@ -248,13 +248,15 @@ class Plot(object):
             inix,dx=0.6,0.35
             iniy,dy,ndy=0.85,0.03,len(self.mc)
 
-        leg = ROOT.TLegend(inix, iniy-dy*ndy, inix+dx, iniy+0.06)
+#        leg = ROOT.TLegend(inix, iniy-dy*ndy, inix+dx, iniy+0.06)
+        leg = ROOT.TLegend(inix, iniy-0.5*dy*ndy, inix+dx, iniy+0.06)
 
         leg.SetBorderSize(0)
         leg.SetFillStyle(0)
         leg.SetTextFont(42)
-        leg.SetTextSize(0.045 if self.wideCanvas else 0.04)
-        if noRatio : leg.SetTextSize(0.035)
+        leg.SetTextSize(0.045 if self.wideCanvas else 0.03)
+#        if noRatio : leg.SetTextSize(0.035)
+        if noRatio : leg.SetTextSize(0.025)
         nlegCols = 0
 
         if self.dataH is not None:
@@ -285,8 +287,8 @@ class Plot(object):
             print '%s is empty'%self.name
             return
 
-        #if not noStack:
-        #    leg.SetNColumns(ROOT.TMath.Min(nlegCols/2,3))
+#        if not noStack:
+#            leg.SetNColumns(ROOT.TMath.Min(nlegCols/2,4))
 
         # Build the stack to plot from all backgrounds
         totalMC = None
@@ -371,7 +373,7 @@ class Plot(object):
         frame = None
         if totalMC      : frame=totalMC.Clone('frame')
         elif self.dataH : frame=self.dataH.Clone('frame')
-        else            : 
+        else            :
             spobj=self.spimpose[self.spimpose.keys()[0]]
             if spobj.InheritsFrom('TH1'):
                 frame=self.spimpose[self.spimpose.keys()[0]].Clone('frame')
@@ -385,22 +387,22 @@ class Plot(object):
         if frame.InheritsFrom('TH1'):
             maxY=frame.GetMaximum()
             if noStack:
-                if self.dataH:   
-                    maxY=self.dataH.GetMaximum()*1.25 
+                if self.dataH:
+                    maxY=self.dataH.GetMaximum()*1.25
                 elif len(self.mc)>0:
                     maxY=0
                     for ih in self.mc:
                         maxY=max(self.mc[ih].GetMaximum(),maxY)
                     #maxY=maxY*1.25
-                else:       
+                else:
                     maxY=frame.GetMaximum()*1.25
             elif totalMC:
                 maxY = totalMC.GetMaximum()
                 if self.dataH:
                     if maxY<self.dataH.GetMaximum():
-                        maxY=self.dataH.GetMaximum()                                     
+                        maxY=self.dataH.GetMaximum()
             frame.Draw()
-            frame.GetYaxis().SetRangeUser(self.frameMin,self.frameMax*maxY)            
+            frame.GetYaxis().SetRangeUser(self.frameMin,self.frameMax*maxY)
             frame.SetDirectory(0)
             frame.Reset('ICE')
 
@@ -409,7 +411,7 @@ class Plot(object):
         else:
             frame.Draw('ap')
             maxY=frame.GetYaxis().GetXmax()
-            
+
         if self.ytit:
             frame.GetYaxis().SetTitle(self.ytit)
         if self.xtit:
@@ -476,7 +478,7 @@ class Plot(object):
         txt.SetTextSize(0.045)
         txt.SetTextAlign(12)
         iniy=0.88 if self.wideCanvas else 0.88
- 
+
         ycms=0.9
         if noRatio or self.dataH is None or len(self.mc)==0: ycms=0.88
         txt.DrawLatex(0.16,ycms,self.cmsLabel)
@@ -544,14 +546,14 @@ class Plot(object):
                     ratioGrs[-1].SetLineColor(ci)
                     ratioGrs[-1].SetLineWidth(self.data.GetLineWidth())
                     ratioGrs[-1].Draw('p')
-                    
+
             #in case we stacked compare only the total
             else:
                 if (len(self.mcsyst)>0):
                     ratioframeshape=ratioframe.Clone('ratioframeshape')
                     self._garbageList.append(ratioframeshape)
-                    ratioframeshape.SetFillColor(ROOT.TColor.GetColor('#d73027'))            
-                
+                    ratioframeshape.SetFillColor(ROOT.TColor.GetColor('#d73027'))
+
                 totalMCnoUnc=totalMC.Clone('totalMCnounc')
                 self._garbageList.append(totalMCnoUnc)
                 for xbin in xrange(1,totalMC.GetNbinsX()+1):

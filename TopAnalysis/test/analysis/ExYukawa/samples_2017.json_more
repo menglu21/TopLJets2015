@@ -1,0 +1,5 @@
+{
+"MC13TeV_2017_TTJets"                : [832,     0,   "/TTJets_TuneCP5_13TeV-amcatnloFXFX-pythia8/RunIIFall17MiniAODv2-PU2017_12Apr2018_94X_mc2017_realistic_v14-v1/MINIAODSIM", "t#bar{t}", 920, true, false, 1],
+"CGToBHpm_MH-300-rtc04-rtt06_2017" : [0.66, 0, "/CGToBHpm_MH-300_TuneCP5_13TeV_G2HDM-rtc04-rtt06-madgraphMLM-pythia8/RunIISummer19UL17MiniAOD-106X_mc2017_realistic_v6-v1/MINIAODSIM", "CGToBHpm_MH-300-rtc04-rtt06_2017", 900, true, false, 1],
+"Data13TeV_SingleMu_UL"         : [1,    1, "/SingleMuon/Run2017B-31Mar2018-v1/MINIAOD", "Data", 1, false, false, 0]
+}

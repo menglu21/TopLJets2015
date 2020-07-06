@@ -10,18 +10,18 @@ SelectionTool::SelectionTool(TString dataset_,bool debug,TH1 *triggerList, Analy
   dataset(dataset_),
   debug_(debug),
   anType_(anType),
-  isZeroBiasPD_(dataset.Contains("ZeroBias")), 
-  isSingleElectronPD_(dataset.Contains("SingleElectron")), 
-  isSingleMuonPD_(dataset.Contains("SingleMuon")), 
-  isDoubleEGPD_(dataset.Contains("DoubleEG")), 
-  isDoubleMuonPD_(dataset.Contains("DoubleMuon")), 
+  isZeroBiasPD_(dataset.Contains("ZeroBias")),
+  isSingleElectronPD_(dataset.Contains("SingleElectron")),
+  isSingleMuonPD_(dataset.Contains("SingleMuon")),
+  isDoubleEGPD_(dataset.Contains("DoubleEG")),
+  isDoubleMuonPD_(dataset.Contains("DoubleMuon")),
   isMuonEGPD_(dataset.Contains("MuonEG")),
   isPhotonPD_(dataset.Contains("Photon") || dataset.Contains("EGamma")),
   isJetHTPD_(dataset.Contains("JetHT"))
 {
   if(triggerList!=0)
     for(int xbin=0; xbin<triggerList->GetNbinsX(); xbin++)
-      triggerBits_[ triggerList->GetXaxis()->GetBinLabel(xbin+1) ] = xbin;  
+      triggerBits_[ triggerList->GetXaxis()->GetBinLabel(xbin+1) ] = xbin;
 
   setPhotonSelection();
 }
@@ -36,7 +36,7 @@ bool SelectionTool::passSingleLeptonTrigger(MiniEvent_t &ev) {
   bool hasETrigger(  hasTriggerBit("HLT_Ele35_eta2p1_WPTight_Gsf_v",           ev.triggerBits) ||
                      hasTriggerBit("HLT_Ele28_eta2p1_WPTight_Gsf_HT150_v",     ev.triggerBits) ||
                      hasTriggerBit("HLT_Ele30_eta2p1_WPTight_Gsf_CentralPFJet35_EleCleaned_v",     ev.triggerBits) );
-  bool hasMTrigger(  //hasTriggerBit("HLT_IsoMu24_2p1_v",                                        ev.triggerBits) || 
+  bool hasMTrigger(  //hasTriggerBit("HLT_IsoMu24_2p1_v",                                        ev.triggerBits) ||
 		     hasTriggerBit("HLT_IsoMu27_v",                                            ev.triggerBits) );
 
   if(!hasETrigger && !hasMTrigger) return false;
@@ -53,7 +53,7 @@ bool SelectionTool::passSingleLeptonTrigger(MiniEvent_t &ev) {
 TString SelectionTool::flagFinalState(MiniEvent_t &ev, std::vector<Particle> preselLeptons,std::vector<Particle> preselPhotons, bool isCR, bool isQCDTemp, bool isSRfake) {
 
  //clear vectors
-  leptons_.clear(); 
+  leptons_.clear();
   photons_.clear();
   vetoLeptons_.clear();
   jets_.clear();
@@ -91,12 +91,12 @@ TString SelectionTool::flagFinalState(MiniEvent_t &ev, std::vector<Particle> pre
         leptons_=tightLeptons;
         vetoLeptons_=selLeptons(preselLeptons,VETO, VETO, 0., 99., leptons_);
       }
-    } else if(anType_==VBF){ 
+    } else if(anType_==VBF){
       if (!isCR){
 	if(tightLeptons.size()==2){
 	  int ch( abs(tightLeptons[0].id()*tightLeptons[1].id()) );
 	  float mll( (tightLeptons[0]+tightLeptons[1]).M() );
-	  if( ch==13*13 && fabs(mll-91)<15 && (tightLeptons[0].pt()>30 || tightLeptons[1].pt()>30)) chTag="MM";          
+	  if( ch==13*13 && fabs(mll-91)<15 && (tightLeptons[0].pt()>30 || tightLeptons[1].pt()>30)) chTag="MM";
 	  leptons_=tightLeptons;
 	} else {
 	  bool passPhoton = (!isSRfake && tightPhotons.size()>=1) || (isSRfake && fakePhotons.size()>=1);
@@ -119,12 +119,12 @@ TString SelectionTool::flagFinalState(MiniEvent_t &ev, std::vector<Particle> pre
 	} else 	if(tightLeptons.size()==2){
 	  int ch( abs(tightLeptons[0].id()*tightLeptons[1].id()) );
 	  float mll( (tightLeptons[0]+tightLeptons[1]).M() );
-	  if( ch==13*13 && fabs(mll-91)<15 && (tightLeptons[0].pt()>30 || tightLeptons[1].pt()>30)) chTag="MM";          
+	  if( ch==13*13 && fabs(mll-91)<15 && (tightLeptons[0].pt()>30 || tightLeptons[1].pt()>30)) chTag="MM";
 	  leptons_=tightLeptons;
 	}
       }
     }
-  
+
   //select jets based on the leptons and photon candidates
   float maxJetEta(2.4);
   if(anType_==VBF) maxJetEta=4.7;
@@ -190,21 +190,21 @@ TString SelectionTool::flagFinalState(MiniEvent_t &ev, std::vector<Particle> pre
     {
       if(!hasPhotonTrigger) chTag="";
       if(ev.isData && isCR && !isPhotonPD_ && !isJetHTPD_) chTag = "";
-      if(ev.isData && !isCR && !isPhotonPD_ ) chTag = "";  
-      //if(ev.isData && !isPhotonPD_) chTag="";    
+      if(ev.isData && !isCR && !isPhotonPD_ ) chTag = "";
+      //if(ev.isData && !isPhotonPD_) chTag="";
     }
-      
+
   if(debug_) cout << "[flagFinalState] chTag=" << chTag << endl
 		  << "\t Pre-selection lepton mult." << preselLeptons.size() << endl
                   << "\t tight lepton cands=" << tightLeptons.size()  << endl
                   << "\t Pre-selection photon mult." << preselPhotons.size()
-                  << "\t photon cands=" << tightPhotons.size() << endl               
+                  << "\t photon cands=" << tightPhotons.size() << endl
 		  << "\t Trig bits."
-                  << " e=" << hasETrigger << " m=" << hasMTrigger 
-                  << " em=" << hasEMTrigger << " mm=" << hasMMTrigger << " ee=" << hasEETrigger 
+                  << " e=" << hasETrigger << " m=" << hasMTrigger
+                  << " em=" << hasEMTrigger << " mm=" << hasMMTrigger << " ee=" << hasEETrigger
                   << " gamma=" << hasPhotonTrigger << endl
-		  << "\t Sel mult. l=" << leptons_.size() << " vl=" << vetoLeptons_.size() 
-                  << " photons=" << photons_.size() 
+		  << "\t Sel mult. l=" << leptons_.size() << " vl=" << vetoLeptons_.size()
+                  << " photons=" << photons_.size()
                   << " j=" << jets_.size() << endl;
 
   //all done
@@ -212,16 +212,16 @@ TString SelectionTool::flagFinalState(MiniEvent_t &ev, std::vector<Particle> pre
 }
 
 //
-bool SelectionTool::hasTriggerBit(TString triggerName,unsigned int word) 
-{ 
+bool SelectionTool::hasTriggerBit(TString triggerName,unsigned int word)
+{
   std::map<TString,unsigned int>::iterator it=triggerBits_.find(triggerName);
   if(it==triggerBits_.end()) return false;
   unsigned int bit=it->second;
-  return ((word>>bit)&0x1); 
+  return ((word>>bit)&0x1);
 }
 
 //
-bool SelectionTool::passMETFilters(MiniEvent_t &ev){  
+bool SelectionTool::passMETFilters(MiniEvent_t &ev){
   if(ev.isData) return ev.met_filterBits==0xff;
   else          return ((ev.met_filterBits&0xf)==0xf) && ((ev.met_filterBits>>5)==0x7);
 }
@@ -270,29 +270,29 @@ std::vector<Particle> SelectionTool::flaggedLeptons(MiniEvent_t &ev)
         if(pt>20 && eta<2.5) {
           if( (pid&reco::Muon::Selector::CutBasedIdLoose)==reco::Muon::Selector::CutBasedIdLoose ) {
             qualityFlagsWord |= (0x1 << LOOSEIDONLY);
-            if( (pid&reco::Muon::Selector::PFIsoLoose)==reco::Muon::Selector::PFIsoLoose ) 
+            if( (pid&reco::Muon::Selector::PFIsoLoose)==reco::Muon::Selector::PFIsoLoose )
               qualityFlagsWord |= (0x1 << LOOSE);
           }
           if( (pid&reco::Muon::Selector::CutBasedIdMedium)==reco::Muon::Selector::CutBasedIdMedium ) {
             qualityFlagsWord |= (0x1 << MEDIUMIDONLY);
-            if( (pid&reco::Muon::Selector::PFIsoMedium)==reco::Muon::Selector::PFIsoMedium ) 
+            if( (pid&reco::Muon::Selector::PFIsoMedium)==reco::Muon::Selector::PFIsoMedium )
               qualityFlagsWord |= (0x1 << MEDIUM);
           }
           if( (pid&reco::Muon::Selector::CutBasedIdTight)==reco::Muon::Selector::CutBasedIdTight ) {
             qualityFlagsWord |= (0x1 << TIGHTIDONLY);
-            if( (pid&reco::Muon::Selector::PFIsoTight)==reco::Muon::Selector::PFIsoTight ) 
+            if( (pid&reco::Muon::Selector::PFIsoTight)==reco::Muon::Selector::PFIsoTight )
               qualityFlagsWord |= (0x1 << TIGHT);
           }
           if( (pid&reco::Muon::Selector::CutBasedIdTrkHighPt)==reco::Muon::Selector::CutBasedIdTrkHighPt ) {
             qualityFlagsWord |= (0x1 << HIGHPTIDONLY);
-            if( (pid&reco::Muon::Selector::TkIsoLoose)==reco::Muon::Selector::TkIsoLoose) 
-              qualityFlagsWord |= (0x1 << HIGHPT);            
+            if( (pid&reco::Muon::Selector::TkIsoLoose)==reco::Muon::Selector::TkIsoLoose)
+              qualityFlagsWord |= (0x1 << HIGHPT);
           }
         }
       }
 
-    if(debug_) cout << "Lepton #" << il << " id=" << ev.l_id[il] 
-		    << " pt=" << pt << "+/-" << unc << " eta=" << eta << " relIso=" << relIso 
+    if(debug_) cout << "Lepton #" << il << " id=" << ev.l_id[il]
+		    << " pt=" << pt << "+/-" << unc << " eta=" << eta << " relIso=" << relIso
 		    << " charge=" << ev.l_charge[il]
                     << " rawId = 0x" << std::hex << pid
 		    << " quality flag=0x" << qualityFlagsWord << std::dec << endl;
@@ -303,7 +303,7 @@ std::vector<Particle> SelectionTool::flaggedLeptons(MiniEvent_t &ev)
     lp4.SetPtEtaPhiM(ev.l_pt[il],ev.l_eta[il],ev.l_phi[il],ev.l_mass[il]);
     leptons.push_back(Particle(lp4, ev.l_charge[il], ev.l_id[il], qualityFlagsWord, il, 1.0, unc));
   }
-  
+
   return leptons;
 }
 
@@ -320,7 +320,7 @@ std::vector<Particle> SelectionTool::selLeptons(std::vector<Particle> &leptons,i
       //check kinematics
       if(leptons[i].pt()<minPt || fabs(leptons[i].eta())>maxEta) continue;
 
-      //check if this lepton should be vetoed by request      
+      //check if this lepton should be vetoed by request
       bool skipThisLepton(false);
       for(auto &vetoL : veto){
         if(vetoL.originalReference()!=leptons[i].originalReference()) continue;
@@ -328,8 +328,8 @@ std::vector<Particle> SelectionTool::selLeptons(std::vector<Particle> &leptons,i
         break;
       }
       if(skipThisLepton) continue;
-      
-      
+
+
       //lepton is selected
       selLeptons.push_back(leptons[i]);
     }
@@ -353,7 +353,7 @@ std::vector<Particle> SelectionTool::flaggedPhotons(MiniEvent_t &ev)
     bool hasPixelSeed( ((addpid>>1) & 0x1) );
     bool hasmvaWP80( ((addpid>>2) & 0x1) );
     bool hasmvaWP90( ((addpid>>3) & 0x1) );
-    
+
     //see bits in plugins/MiniAnalyzer.cc
     int qualityFlagsWord(0);
     if( pt>30 && eta<2.4)
@@ -384,14 +384,14 @@ std::vector<Particle> SelectionTool::flaggedPhotons(MiniEvent_t &ev)
     p4.SetPtEtaPhiM(ev.gamma_pt[ig],ev.gamma_eta[ig],ev.gamma_phi[ig],0);
     photons.push_back(Particle(p4, 0, 22, qualityFlagsWord, ig, 1.0, unc));
 
-    if(debug_) std::cout << "Photon #"<< photons.size() 
+    if(debug_) std::cout << "Photon #"<< photons.size()
                          << " pt=" << pt << "+/-" << unc << " eta=" << p4.Eta()
-                         << hex << " raw particle id bits=" << pid 
-                         << " quality bits=" << qualityFlagsWord 
+                         << hex << " raw particle id bits=" << pid
+                         << " quality bits=" << qualityFlagsWord
                          << dec << endl;
 
   }
-  
+
   return photons;
 }
 
@@ -406,7 +406,7 @@ std::vector<Particle> SelectionTool::selPhotons(std::vector<Particle> &photons,i
       //check kinematics
       if(photons[i].pt()<minPt || fabs(photons[i].eta())>maxEta) continue;
 
-      //check if this lepton should be vetoed by request      
+      //check if this lepton should be vetoed by request
       bool skipThisPhoton(false);
       for(auto &vetoL : veto){
         if(vetoL.originalReference()!=photons[i].originalReference()) continue;
@@ -420,7 +420,7 @@ std::vector<Particle> SelectionTool::selPhotons(std::vector<Particle> &photons,i
       for (auto& lepton : leptons) {
 	if(photons[i].p4().DeltaR(lepton.p4())<0.4) overlapsWithPhysicsObject=true;
       }
-      
+
       if(overlapsWithPhysicsObject) continue;
 
       //photon is selected
@@ -435,7 +435,7 @@ std::vector<Particle> SelectionTool::selPhotons(std::vector<Particle> &photons,i
 //
 std::vector<Jet> SelectionTool::getGoodJets(MiniEvent_t &ev, double minPt, double maxEta, std::vector<Particle> leptons,std::vector<Particle> photons) {
   std::vector<Jet> jets;
-  
+
   for (int k=0; k<ev.nj; k++) {
     TLorentzVector jp4;
     jp4.SetPtEtaPhiM(ev.j_pt[k],ev.j_eta[k],ev.j_phi[k],ev.j_mass[k]);
@@ -449,14 +449,14 @@ std::vector<Jet> SelectionTool::getGoodJets(MiniEvent_t &ev, double minPt, doubl
       if(jp4.DeltaR(photon.p4())<0.4) overlapsWithPhysicsObject=true;
     }
     if(overlapsWithPhysicsObject) continue;
-    
+
     //jet kinematic selection
     if(jp4.Pt() < minPt || abs(jp4.Eta()) > maxEta) continue;
 
     //flavor based on b tagging
     int flavor = 0;
     if (ev.j_btag[k]) flavor = 5;
-    
+
     Jet jet(jp4, flavor, k);
     jet.setCSV(ev.j_csv[k]);
     jet.setDeepCSV(ev.j_deepcsv[k]);
@@ -464,35 +464,35 @@ std::vector<Jet> SelectionTool::getGoodJets(MiniEvent_t &ev, double minPt, doubl
 
     //jes/jer uncertainty
     int jflav(abs(ev.j_flav[k]));
-    float jecUp(0),jecDn(0);   
+    float jecUp(0),jecDn(0);
     jecUp=pow(1-ev.j_jerUp[k],2);
     jecDn=pow(1-ev.j_jerDn[k],2);
-   
+
     for(int iunc=0; iunc<29; iunc++){
-           
+
       //see python/miniAnalyzer_cfi.py for these
       if(iunc==6 && jflav!=21) continue; //FlavorPureGluon
       if(iunc==7 && jflav>=4)  continue; //FlavorPureQuark
       if(iunc==8 && jflav!=4)  continue; //FlavorPureCharm
       if(iunc==9 && jflav!=5)  continue; //FlavorPureGluon
-      
+
       if(ev.j_jecUp[iunc][k]!=0) jecUp += pow(1-ev.j_jecUp[iunc][k],2);
       if(ev.j_jecDn[iunc][k]!=0) jecDn += pow(1-ev.j_jecDn[iunc][k],2);
 
     }
-    
+
     jecUp=TMath::Sqrt(jecUp);
     jecDn=TMath::Sqrt(jecDn);
     jet.setScaleUnc(0.5*(jecUp+jecDn));
 
     if(debug_)
-      cout << "Jet #" << jets.size() 
+      cout << "Jet #" << jets.size()
            << " pt=" << jp4.Pt() << "+/-" << jet.getScaleUnc()*jp4.Pt() << " (jec+jer)"
            << " eta=" << jp4.Eta() << " deepCSV=" << ev.j_deepcsv[k] << " flav=" << jflav << endl;
-    
+
     jets.push_back(jet);
   }
-  
+
   //additional jet-jet information
   for (unsigned int i = 0; i < jets.size(); i++) {
     for (unsigned int j = i+1; j < jets.size(); j++) {
@@ -510,7 +510,7 @@ std::vector<Jet> SelectionTool::getGoodJets(MiniEvent_t &ev, double minPt, doubl
       }
     }
   }
-  
+
   return jets;
 }
 
@@ -530,7 +530,7 @@ std::vector<Jet> SelectionTool::getGoodJets(MiniEvent_t &ev, double minPt, doubl
       if(jp4.DeltaR(photon.p4())<0.4) overlapsWithPhysicsObject=true;
     }
     if(overlapsWithPhysicsObject) continue;
-    
+
     //jet kinematic selection
     if(jp4.Pt() < minPt || abs(jp4.Eta()) > maxEta) continue;
 
@@ -539,7 +539,7 @@ std::vector<Jet> SelectionTool::getGoodJets(MiniEvent_t &ev, double minPt, doubl
     if (ev.j_btag[k]) {
       flavor = 5;
     }
-    
+
     Jet jet(jp4, flavor, k);
     jet.setCSV(ev.j_csv[k]);
     jet.setDeepCSV(ev.j_deepcsv[k]);
@@ -555,17 +555,17 @@ std::vector<Jet> SelectionTool::getGoodJets(MiniEvent_t &ev, double minPt, doubl
       }
     }
 
-    if(debug_) cout << "Jet #" << jets_.size() 
+    if(debug_) cout << "Jet #" << jets_.size()
 		    << " pt=" << jp4.Pt() << " eta=" << jp4.Eta() << " deepCSV=" << ev.j_deepcsv[k] << endl;
-    
+
     int jid=ev.j_id[k];
     bool passLoosePu((jid>>2)&0x1);
-    if(!passLoosePu) 
+    if(!passLoosePu)
       pujets_.push_back(jet);
     else
       jets_.push_back(jet);
   }
-  
+
   //additional jet-jet information
   for (unsigned int i = 0; i < jets_.size(); i++) {
     for (unsigned int j = i+1; j < jets_.size(); j++) {
@@ -587,10 +587,10 @@ std::vector<Jet> SelectionTool::getGoodJets(MiniEvent_t &ev, double minPt, doubl
 
 //
 // PARTICLE LEVEL SELECTORS
-// 
+//
 
 //
-TString SelectionTool::flagGenFinalState(MiniEvent_t &ev, std::vector<Particle> leptons, std::vector<Particle> photons) 
+TString SelectionTool::flagGenFinalState(MiniEvent_t &ev, std::vector<Particle> leptons, std::vector<Particle> photons)
 {
   //update current state
   genLeptons_=leptons;
@@ -628,14 +628,14 @@ TString SelectionTool::flagGenFinalState(MiniEvent_t &ev, std::vector<Particle> 
         }
       if(genPhotons_.size()>=1) chTag="A";
     }
-  
+
   return chTag;
 }
 
 //
 std::vector<Particle> SelectionTool::getGenLeptons(MiniEvent_t &ev, double minPt, double maxEta){
   std::vector<Particle> leptons;
-  
+
   //loop over leptons from pseudotop producer
   for (int i = 0; i < ev.ng; i++) {
     int absid(abs(ev.g_id[i]));
@@ -648,14 +648,14 @@ std::vector<Particle> SelectionTool::getGenLeptons(MiniEvent_t &ev, double minPt
     lp4.SetPtEtaPhiM(ev.g_pt[i],ev.g_eta[i],ev.g_phi[i],ev.g_m[i]);
     leptons.push_back( Particle(lp4, -ev.g_id[i]/abs(ev.g_id[i]), ev.g_id[i], 0, 1));
   }
-  
+
   return leptons;
 }
 
 //
 std::vector<Particle> SelectionTool::getGenPhotons(MiniEvent_t &ev, double minPt, double maxEta){
   std::vector<Particle> photons;
-  
+
   //loop over leptons from pseudotop producer
   for (int i = 0; i < ev.ng; i++) {
     int absid(abs(ev.g_id[i]));
@@ -668,14 +668,14 @@ std::vector<Particle> SelectionTool::getGenPhotons(MiniEvent_t &ev, double minPt
     p4.SetPtEtaPhiM(ev.g_pt[i],ev.g_eta[i],ev.g_phi[i],ev.g_m[i]);
 	photons.push_back( Particle(p4, 0, 22, 0, 1));
   }
-  
+
   return photons;
 }
 
 //
 std::vector<Jet> SelectionTool::getGenJets(MiniEvent_t &ev, double minPt, double maxEta, std::vector<Particle> leptons,std::vector<Particle> photons) {
   std::vector<Jet> jets;
-  
+
   for (int i = 0; i < ev.ng; i++) {
     if (abs(ev.g_id[i])>10) continue;
     TLorentzVector jp4;
@@ -690,7 +690,7 @@ std::vector<Jet> SelectionTool::getGenJets(MiniEvent_t &ev, double minPt, double
       if(jp4.DeltaR(photon.p4())<0.4) overlapsWithPhysicsObject=true;
     }
     if(overlapsWithPhysicsObject) continue;
-    
+
     //jet kinematic selection
     if(jp4.Pt() < minPt || abs(jp4.Eta()) > maxEta) continue;
 
@@ -699,7 +699,7 @@ std::vector<Jet> SelectionTool::getGenJets(MiniEvent_t &ev, double minPt, double
     Jet jet(jp4, flavor, i);
     jets.push_back(jet);
   }
-  
+
   //additional jet-jet information
   for (unsigned int i = 0; i < jets.size(); i++) {
     for (unsigned int j = i+1; j < jets.size(); j++) {
@@ -717,9 +717,6 @@ std::vector<Jet> SelectionTool::getGenJets(MiniEvent_t &ev, double minPt, double
       }
     }
   }
-  
+
   return jets;
 }
-
-
-

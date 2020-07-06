@@ -10,7 +10,7 @@ from TopLJets2015.TopAnalysis.Plot import *
 """
 steer the script
 """
-	
+
 def main():
 
     #configuration
@@ -70,7 +70,7 @@ def main():
         jsonFile.close()
     except:
         pass
-    
+
     skipList=opt.skip.split(',')
 
 
@@ -89,7 +89,7 @@ def main():
         procList=opt.procSF.split(',')
         for newProc in procList:
             proc,cacheUrl=newProc.split(':')
-            if os.path.isfile(cacheUrl) : 
+            if os.path.isfile(cacheUrl) :
                 cache=open(cacheUrl,'r')
                 procSF[proc]=pickle.load(cache)
                 cache.close()
@@ -104,7 +104,7 @@ def main():
 
     onlyList=opt.only.split(',')
 
-    #read plots 
+    #read plots
     plots=OrderedDict()
 
     report=''
@@ -125,7 +125,7 @@ def main():
                 for flav in [(1,sample[3]+'+l'),(4,sample[3]+'+c'),(5,sample[3]+'+b',sample[4])]:
                     subProcs.append(('%d_%s'%(flav[0],tag),flav[1],sample[4]+3*len(subProcs)))
             for sp in subProcs:
-                print '%s/%s.root' % ( opt.inDir, sp[0]) 
+                print '%s/%s.root' % ( opt.inDir, sp[0])
                 fIn=ROOT.TFile.Open('%s/%s.root' % ( opt.inDir, sp[0]) )
                 if not fIn : continue
 
@@ -138,7 +138,7 @@ def main():
                         wgt=puCorrH.GetBinContent(2)
                         if wgt>0 :
                             puNormSF=nonWgt/wgt
-                            if puNormSF>1.3 or puNormSF<0.7 : 
+                            if puNormSF>1.3 or puNormSF<0.7 :
                                 puNormSF=1
                                 report += '%s wasn\'t be scaled as too large SF was found (probably low stats)\n' % sp[0]
                             else :
@@ -172,7 +172,7 @@ def main():
                                                 obj.SetBinContent(xbin, ybin, 0)
                                                 obj.SetBinError(xbin, ybin, 0)
                                         weighthist = obj.ProjectionX('_px'+str(ybin), ybin, ybin)
-                                        weighthist.SetTitle(sp[1]+' weight '+str(ybin))                                  
+                                        weighthist.SetTitle(sp[1]+' weight '+str(ybin))
                                         weighthist.Draw()
                                         if (weighthist.Integral() > 0): histos.append(weighthist)
                                 else:
@@ -189,32 +189,32 @@ def main():
                                 tmpBin = hist.GetXaxis().FindBin(0.2)
                                 for iBin in range(tmpBin,hist.GetXaxis().GetNbins()):
                                     hist.SetBinContent(iBin, 0.0000001)
-                                
-                            if not isData and not '(data)' in sp[1]: 
+
+                            if not isData and not '(data)' in sp[1]:
 
                                 #check if a special scale factor needs to be applied
-                                sfVal=1.0                                                 
+                                sfVal=1.0
                                 for procToScale in procSF:
-                                    if sp[1]==procToScale:                                        
-                                        for pcat in procSF[procToScale]:                                    
+                                    if sp[1]==procToScale:
+                                        for pcat in procSF[procToScale]:
                                             if pcat not in key: continue
                                             sfVal=procSF[procToScale][pcat][0]
                                             break
 
                                 #scale by lumi
                                 lumi=opt.lumi
-                                for tag in lumiSpecs:                                    
+                                for tag in lumiSpecs:
                                     if not tag in key.split('_'): continue
                                     lumi=lumiSpecs[tag]
                                     break
                                 if not opt.rawYields:
-                                    hist.Scale(xsec*lumi*puNormSF*sfVal)       
-             
+                                    hist.Scale(xsec*lumi*puNormSF*sfVal)
+
                             #rebin if needed
                             if opt.rebin>1:  hist.Rebin(opt.rebin)
 
                             #create new plot if needed
-                            if not key in plots : 
+                            if not key in plots :
                                 plots[key]=Plot(key,com=opt.com)
                                 plots[key].ratiorange=opt.ratioRange
 
@@ -226,7 +226,7 @@ def main():
                                            spImpose=isSignal,
                                            isSyst=(isSyst or keyIsSyst),
                                            doDivideByBinWidth=opt.binWid)
-                            
+
                     except Exception as e:
                         print e
                         pass
@@ -243,7 +243,7 @@ def main():
         plots[p].mcUnc=opt.mcUnc
         if opt.saveLog    : plots[p].savelog=True
         skipPlot=False
-        if opt.onlyData and plots[p].dataH is None: skipPlot=True 
+        if opt.onlyData and plots[p].dataH is None: skipPlot=True
         if opt.silent : skipPlot=True
         lumi=opt.lumi
         for tag in lumiSpecs:
@@ -262,10 +262,9 @@ def main():
     if len(report) : print report
     print '-'*50
 
-        
+
 """
 for execution from another script
 """
 if __name__ == "__main__":
     sys.exit(main())
-
