@@ -22,7 +22,7 @@ def customTestInputFiles(process,era,runOnData,runWithAOD):
                 process.source.fileNames = cms.untracked.vstring('/store/mc/RunIISummer16MiniAODv3/ST_t-channel_antitop_4f_mtop1715_inclusiveDecays_13TeV-powhegV2-madspin-pythia8/MINIAODSIM/PUMoriond17_94X_mcRun2_asymptotic_v3_ext1-v1/120000/16CEB785-3FE6-E811-AAE8-FA163E9D74F8.root')
     elif '2017' in era:
         if runOnData:
-            process.source.fileNames = cms.untracked.vstring('/store/data/Run2017B/SingleMuon/MINIAOD/09Aug2019_UL2017-v1/270000/8AD1BD78-84EB-EE4C-992C-4BF1C34D1D5B.root')
+            process.source.fileNames = cms.untracked.vstring('/store/data/Run2017B/DoubleMuon/MINIAOD/31Mar2018-v1/90000/86858092-2437-E811-8DF5-549F3525C380.root')
             if runWithAOD:
                 print 'Adding secondary filenames'
                 process.source.secondaryFileNames = cms.untracked.vstring([
@@ -46,9 +46,10 @@ def customTestInputFiles(process,era,runOnData,runWithAOD):
                 ])
         else:
             #process.source.fileNames = cms.untracked.vstring('/store/mc/RunIISummer19UL17MiniAOD/DYJetsToEE_M-50_TuneCP5_13TeV-madgraphMLM-pythia8/MINIAODSIM/106X_mc2017_realistic_v6-v2/30000/FB5A928B-75DF-D54E-B930-F1CB916D6930.root')
-            process.source.fileNames = cms.untracked.vstring('/store/mc/RunIISummer19UL17MiniAOD/TTTo2L2Nu_TuneCP5_erdON_13TeV-powheg-pythia8/MINIAODSIM/106X_mc2017_realistic_v6-v2/40000/E8ADD300-0AFF-1245-B18F-606B3A57F581.root')
+            #process.source.fileNames = cms.untracked.vstring('/store/mc/RunIISummer19UL17MiniAOD/TTTo2L2Nu_TuneCP5_erdON_13TeV-powheg-pythia8/MINIAODSIM/106X_mc2017_realistic_v6-v2/40000/E8ADD300-0AFF-1245-B18F-606B3A57F581.root')
+            process.source.fileNames = cms.untracked.vstring('/store/mc/RunIIFall17MiniAODv2/TTJets_DiLept_TuneCP5_13TeV-madgraphMLM-pythia8/MINIAODSIM/PU2017_12Apr2018_94X_mc2017_realistic_v14-v1/50000/48981A53-3DA3-E811-8754-AC1F6B1AF186.root')
 #            process.source.fileNames = cms.untracked.vstring('/store/mc/RunIISummer19UL17MiniAOD/CGToBHpm_MH-300_TuneCP5_13TeV_G2HDM-rtc04-rtt06-madgraphMLM-pythia8/MINIAODSIM/106X_mc2017_realistic_v6-v1/20000/05BD3CF0-8CE3-3945-ACA1-0773740C9C35.root')
-	    process.source.fileNames = cms.untracked.vstring(
+	    #process.source.fileNames = cms.untracked.vstring(
 # TAToTTQ_MA-200_TuneCP5_13TeV_G2HDM-rtc04
 		#'/store/mc/RunIISummer19UL17MiniAOD/TAToTTQ_MA-200_TuneCP5_13TeV_G2HDM-rtc04-madgraphMLM-pythia8/MINIAODSIM/106X_mc2017_realistic_v6-v1/240000/FC33A962-D05F-D742-9C6D-8639EC6AE7B2.root',
 		#'/store/mc/RunIISummer19UL17MiniAOD/TAToTTQ_MA-200_TuneCP5_13TeV_G2HDM-rtc04-madgraphMLM-pythia8/MINIAODSIM/106X_mc2017_realistic_v6-v1/240000/E4DC354E-C985-7541-9741-0686D657AAE4.root',
@@ -67,7 +68,7 @@ def customTestInputFiles(process,era,runOnData,runWithAOD):
 #		'/store/mc/RunIISummer19UL17MiniAOD/TS0ToTTQ_MS-200_TuneCP5_13TeV_G2HDM-rtc04-madgraphMLM-pythia8/MINIAODSIM/106X_mc2017_realistic_v6-v1/240000/4DDA4659-37DC-0349-9488-55DEE0D5A9AA.root',
 #		'/store/mc/RunIISummer19UL17MiniAOD/TS0ToTTQ_MS-200_TuneCP5_13TeV_G2HDM-rtc04-madgraphMLM-pythia8/MINIAODSIM/106X_mc2017_realistic_v6-v1/240000/3AC1827D-F2D9-B540-ACF9-A897C46EDE9C.root',
 #		'/store/mc/RunIISummer19UL17MiniAOD/TS0ToTTQ_MS-200_TuneCP5_13TeV_G2HDM-rtc04-madgraphMLM-pythia8/MINIAODSIM/106X_mc2017_realistic_v6-v1/240000/2457E21F-937C-0C45-A00A-F340FF35470C.root'
-		)
+		#)
     elif '2018' in era:
         if runOnData:
             process.source.fileNames = cms.untracked.vstring('/store/data/Run2018C/SingleMuon/MINIAOD/17Sep2018-v1/00000/AB61FB4F-3A42-4B4F-93E2-78CD7E7CF0A4.root')

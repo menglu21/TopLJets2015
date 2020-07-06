@@ -81,7 +81,7 @@ options.parseArguments()
 
 #start process
 from Configuration.StandardSequences.Eras import eras
-process = cms.Process("MiniAnalysis", eras.ctpps_2016)      
+process = cms.Process("MiniAnalysis", eras.ctpps_2016)
 
 #get the configuration to apply
 from TopLJets2015.TopAnalysis.EraConfig import getEraConfiguration
@@ -110,7 +110,7 @@ print 'Global tag is',globalTag
 process.load("GeneratorInterface.RivetInterface.mergedGenParticles_cfi")
 process.load("GeneratorInterface.RivetInterface.genParticles2HepMC_cfi")
 process.genParticles2HepMC.genParticles = cms.InputTag("mergedGenParticles")
-process.load("GeneratorInterface.RivetInterface.particleLevel_cfi") 
+process.load("GeneratorInterface.RivetInterface.particleLevel_cfi")
 
 # particle level definitions
 process.load('SimGeneral.HepPDTESSource.pythiapdt_cfi')
@@ -143,9 +143,9 @@ process.MessageLogger.cerr.FwkReport.reportEvery = 1000
 # set input to process
 process.source = cms.Source("PoolSource",
                             fileNames = cms.untracked.vstring(),
-                            duplicateCheckMode = cms.untracked.string('noDuplicateCheck') 
+                            duplicateCheckMode = cms.untracked.string('noDuplicateCheck')
                             )
-      
+
 if options.inputFile:
       import os
 
@@ -156,7 +156,7 @@ if options.inputFile:
             inDir=options.inputFile
             fileList = ['file:'+os.path.join(inDir,f) for f in os.listdir(inDir)]
       print 'Will run on',fileList
-      process.source.fileNames = cms.untracked.vstring(fileList)     
+      process.source.fileNames = cms.untracked.vstring(fileList)
 
       if options.secInputFile:
             secFileList=[]
@@ -212,7 +212,7 @@ else:
 if options.runOnData:
       process.analysis.metFilterBits = cms.InputTag("TriggerResults","","RECO")
       print '\t will save met filter bits'
-      process.analysis.tagRecoProtons = cms.InputTag('ctppsProtons','singleRP')      
+      process.analysis.tagRecoProtons = cms.InputTag('ctppsProtons','singleRP')
 
 #schedule execution
 toSchedule=[]
@@ -253,6 +253,6 @@ if options.runProtonFastSim:
 
 process.ana=cms.Path(process.analysis)
 toSchedule.append( process.ana )
-                           
+
 process.schedule=cms.Schedule( (p for p in toSchedule) )
 print process.schedule
