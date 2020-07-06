@@ -620,7 +620,7 @@ void MiniAnalyzer::recAnalysis(const edm::Event& iEvent, const edm::EventSetup& 
             ev_.fwdtrk_vy[ev_.nfwdtrk]        = proton.vy();
             ev_.fwdtrk_vz[ev_.nfwdtrk]        = proton.vz();
             ev_.fwdtrk_time[ev_.nfwdtrk]      = proton.time();
-            ev_.fwdtrk_timeError[ev_.nfwdtrk] = proton.timeError();            
+            ev_.fwdtrk_timeError[ev_.nfwdtrk] = proton.timeError();
             ev_.fwdtrk_xi[ev_.nfwdtrk]        = proton.xi();
             ev_.fwdtrk_xiError[ev_.nfwdtrk]   = proton.xiError();
             ev_.fwdtrk_t[ev_.nfwdtrk]         = proton.t();
@@ -634,9 +634,9 @@ void MiniAnalyzer::recAnalysis(const edm::Event& iEvent, const edm::EventSetup& 
   }
 
   //
-  //LEPTON SELECTION 
-  ev_.nl=0; 
-  
+  //LEPTON SELECTION
+  ev_.nl=0;
+
   //MUON SELECTION: cf. https://twiki.cern.ch/twiki/bin/viewauth/CMS/SWGuideMuonIdRun2
   edm::Handle<pat::MuonCollection> muons;
   iEvent.getByToken(muonToken_, muons);
@@ -1084,6 +1084,12 @@ void MiniAnalyzer::recAnalysis(const edm::Event& iEvent, const edm::EventSetup& 
       ev_.j_csv[ev_.nj]     = j->bDiscriminator("pfCombinedInclusiveSecondaryVertexV2BJetTags");
       ev_.j_deepcsv[ev_.nj] = j->bDiscriminator("pfDeepCSVJetTags:probb") + j->bDiscriminator("pfDeepCSVJetTags:probbb");
       ev_.j_btag[ev_.nj]    = (ev_.j_deepcsv[ev_.nj]>0.4941);
+      ev_.j_probc[ev_.nj]   = j->bDiscriminator("pfDeepCSVJetTags:probc");
+      ev_.j_probudsg[ev_.nj]= j->bDiscriminator("pfDeepCSVJetTags:probudsg");
+      ev_.j_probb[ev_.nj]   = j->bDiscriminator("pfDeepCSVJetTags:probb");
+      ev_.j_probbb[ev_.nj]  = j->bDiscriminator("pfDeepCSVJetTags:probbb");
+      ev_.j_CvsL[ev_.nj]    = j->bDiscriminator("pfDeepCSVJetTags:probc")/(j->bDiscriminator("pfDeepCSVJetTags:probc")+j->bDiscriminator("pfDeepCSVJetTags:probudsg"));
+      ev_.j_CvsB[ev_.nj]    = j->bDiscriminator("pfDeepCSVJetTags:probc")/(j->bDiscriminator("pfDeepCSVJetTags:probc")+j->bDiscriminator("pfDeepCSVJetTags:probb")+j->bDiscriminator("pfDeepCSVJetTags:probbb"));
       ev_.j_emf[ev_.nj]     = CEMF+NEMF;
 
       //jet shape variables
