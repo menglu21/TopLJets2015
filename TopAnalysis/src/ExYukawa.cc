@@ -68,7 +68,6 @@ void RunExYukawa(const TString in_fname,
   ht.setNsyst(0);
   ht.addHist("h_Z_mass", new TH1F("h_Z_mass",    ";M(Z) [GeV];Events",62,75,106));
   ht.addHist("nvtx_before_cuts_w", new TH1F("nvtx_before_cuts_w",        ";Vertex multiplicity;Events",35,0,140));
-  ht.addHist("nvtx_before_cuts_uw", new TH1F("nvtx_before_cuts_uw",        ";Vertex multiplicity;Events",35,0,140));
   ht.addHist("nvtx",         new TH1F("nvtx",        ";Vertex multiplicity;Events",35,0,140));
   ht.addHist("nvtx_w",      new TH1F("nvtx_w",     ";Vertex multiplicity w pileupWeight",35,0,140));
   ht.addHist("nvtx_uw",      new TH1F("nvtx_uw",     ";Vertex multiplicity w/o pileupWeight",35,0,140));
@@ -112,9 +111,8 @@ void RunExYukawa(const TString in_fname,
   ht.addHist("bjet_eta",	 new TH1F("bjet_eta",    ";#eta(b jet) ; Events", 25,-2.5,2.5));
   ht.addHist("met",       new TH1F("met",      ";MET [GeV]; Events", 24,0,600));
   ht.addHist("met_phi",       new TH1F("met_phi",      ";MET #phi; Events", 25, -4,4));
-  ht.addHist("b_matched_jet",  new TH1F("b_matched_jet", ";p_T(b matched jet) [GeV]; Events", 24,0,600));
-  ht.addHist("c_matched_jet",  new TH1F("c_matched_jet", ";p_T(c matched jet) [GeV]; Events", 24,0,600));
-  ht.addHist("DR_reco_gen_jet", new TH1F("DR_reco_gen_jet", ";#Delta R; Events", 30,0,1.5));
+//  ht.addHist("b_matched_jet",  new TH1F("b_matched_jet", ";p_T(b matched jet) [GeV]; Events", 24,0,600));
+//  ht.addHist("c_matched_jet",  new TH1F("c_matched_jet", ";p_T(c matched jet) [GeV]; Events", 24,0,600));
 
   int i=0;
   for(auto key : lumiPerRun) {
@@ -156,6 +154,7 @@ void RunExYukawa(const TString in_fname,
   int N_after_all_selections = 0;
 
   int Ntotal_Z = 0;
+
   for (Int_t iev=0;iev<nentries;iev++)
     {
       t->GetEntry(iev);
@@ -168,7 +167,9 @@ void RunExYukawa(const TString in_fname,
 	hasMTrigger=(selector.hasTriggerBit("HLT_IsoMu24_v", ev.triggerBits) ||
 			selector.hasTriggerBit("HLT_Mu50_v", ev.triggerBits) ||
 			selector.hasTriggerBit("HLT_Mu17_TrkIsoVVL_Mu8_TrkIsoVVL_DZ_Mass8_v", ev.triggerBits) ||
-			selector.hasTriggerBit("HLT_Mu17_TrkIsoVVL_Mu8_TrkIsoVVL_DZ_Mass3p8_v", ev.triggerBits));
+			selector.hasTriggerBit("HLT_Mu17_TrkIsoVVL_Mu8_TrkIsoVVL_DZ_Mass3p8_v", ev.triggerBits)
+      || selector.hasTriggerBit("HLT_Ele23_Ele12_CaloIdL_TrackIdL_IsoVL_v", ev.triggerBits)
+      );
       }
       Ntotal++;
 
@@ -192,8 +193,9 @@ void RunExYukawa(const TString in_fname,
 	}
       );
 
-//      if (!ev.isData && (leptons[0].id() != 13 || leptons[1].id() != 13)) continue;
-      if (leptons[0].id() != 13 || leptons[1].id() != 13) continue;
+      int dimuon_event = 0;
+      if ((leptons[0].id() != 13 || leptons[1].id() != 13) && (leptons[0].id() != 11 || leptons[1].id() != 11)) continue;
+      if (leptons[0].id() == 13 && leptons[1].id() == 13) dimuon_event = 1;
 
       //select jets
       btvSF.addBTagDecisions(ev);
@@ -228,17 +230,29 @@ void RunExYukawa(const TString in_fname,
         float normWgt(normH? normH->GetBinContent(1) : 1.0);
         TString period = lumi.assignRunPeriod();
         double puWgt(lumi.pileupWeight(ev.g_pu,period)[0]);
-        EffCorrection_t selSF(1.0,0.0);// = lepEffH.getOfflineCorrection(leptons[0], period);
+//        EffCorrection_t selSF(1.0,0.0);// = lepEffH.getOfflineCorrection(leptons[0], period);
+        float muonSF = 1.;
+        float electronSF = 1.;
+        if (dimuon_event == 1){
+          EffCorrection_t muon1SF = lepEffH.getMuonSF(leptons[0].pt(),leptons[0].eta());
+          EffCorrection_t muon2SF = lepEffH.getMuonSF(leptons[1].pt(),leptons[1].eta());
+          muonSF = muon1SF.first*muon2SF.first;
+        }else{
+          EffCorrection_t electron1SF = lepEffH.getElectronSF(leptons[0].pt(),leptons[0].eta());
+          EffCorrection_t electron2SF = lepEffH.getElectronSF(leptons[1].pt(),leptons[1].eta());
+          electronSF = electron1SF.first*electron2SF.first;
+        }
         EffCorrection_t l1prefireProb=l1PrefireWR.getCorrection(allJets,{});
-
-        evWgt  = normWgt*puWgt*selSF.first*l1prefireProb.first;
+        float leptonSF = muonSF*electronSF;
+//        evWgt  = normWgt*puWgt*selSF.first*l1prefireProb.first;
+//        evWgt  = normWgt*puWgt*muonSF.first*l1prefireProb.first;
+        evWgt  = normWgt*puWgt*leptonSF*l1prefireProb.first;
         evWgt_test  = normWgt*puWgt;
         evWgt *= (ev.g_nw>0 ? ev.g_w[0] : 1.0);//generator weights
         evWgt_test *= (ev.g_nw>0 ? ev.g_w[0] : 1.0);
       }
 
       ht.fill("nvtx_before_cuts_w",       ev.nvtx,        evWgt_test, "inc");
-      ht.fill("nvtx_before_cuts_uw",       ev.nvtx,        1., "inc");
 
       for (size_t in_nmu=0; in_nmu<leptons.size();in_nmu++){
         ht.fill("mu_pt_bc",          leptons[in_nmu].pt(), evWgt, "inc");
@@ -332,19 +346,19 @@ void RunExYukawa(const TString in_fname,
          ht.fill("bjet_eta",allJets[ij].eta(),evWgt,"inc");
      }
 
+     /*
      for(size_t ij=0; ij<allJets.size(); ij++){
        for (int i=0;i<ev.ng;i++){
          if (abs(ev.g_id[i]>5)) continue;
          TLorentzVector genjet4mom;
          genjet4mom.SetPtEtaPhiM(ev.g_pt[i],ev.g_eta[i],ev.g_phi[i],ev.g_m[i]);
-//         if (DeltaR(allJets[ij].eta(),ev.g_eta[i],allJets[ij].Phi(),ev.g_phi[i])<0.4 && (allJets[ij].pt()/ev.g_pt[i]) > 0.6 ){
-         ht.fill("DR_reco_gen_jet",allJets[ij].DeltaR(genjet4mom),evWgt,"inc");
          if (allJets[ij].DeltaR(genjet4mom) < 0.4 && (allJets[ij].pt()/ev.g_pt[i]) > 0.6 ){
            if (ev.g_id[i] == 4) ht.fill("c_matched_jet",allJets[ij].pt(),evWgt,"inc");
            if (ev.g_id[i] == 5) ht.fill("b_matched_jet",allJets[ij].pt(),evWgt,"inc");
          }
        }
      }
+     */
 
      int num_mu = 0;
 //     if (!ev.isData){
@@ -383,11 +397,8 @@ void RunExYukawa(const TString in_fname,
 
     }
 
-
   int nbins_label = 8;
   TH1I *h_yields = new TH1I("h_yields","h_yields",nbins_label,-0.5,nbins_label-0.5);
-  TH1I *h_yields_Z = new TH1I("h_yields_Z","h_yields_Z",nbins_label,-0.5,nbins_label-0.5);
-
 
   cout<<endl;
   cout<<"Notal: "<<Ntotal<<endl;
@@ -395,7 +406,7 @@ void RunExYukawa(const TString in_fname,
   cout<<"Ntotal_after_all_selections: "<<N_after_all_selections<<"   "<<100.*N_after_all_selections/Ntotal<<" %"<<endl;
 
   const char *labels[nbins_label]  = {"Total","Trig","Lepton","Same Sign","jet","b-tag","MET","All"};
-  const char *labels_Z[nbins_label]  = {"Total","Opp. Sign Lep.","Null","Null","Null","Null","Null","Null"};
+  //const char *labels_Z[nbins_label]  = {"Total","Opp. Sign Lep.","Null","Null","Null","Null","Null","Null"};
 
   h_yields->SetBinContent(1,Ntotal);
   h_yields->SetBinContent(2,Ntotal_after_trig);
@@ -407,12 +418,6 @@ void RunExYukawa(const TString in_fname,
   h_yields->SetBinContent(8,N_after_all_selections);
   for (int i=1;i<=nbins_label;i++) h_yields->GetXaxis()->SetBinLabel(i,labels[i-1]);
   h_yields->SetDirectory(0);
-
-  h_yields_Z->SetBinContent(1,Ntotal);
-  h_yields_Z->SetBinContent(2,Ntotal_Z);
-  for (int i=3;i<=nbins_label;i++)  h_yields_Z->SetBinContent(i,0.);
-  for (int i=1;i<=nbins_label;i++) h_yields_Z->GetXaxis()->SetBinLabel(i,labels_Z[i-1]);
-  h_yields_Z->SetDirectory(0);
 
   //close input file
   f->Close();
@@ -429,7 +434,6 @@ void RunExYukawa(const TString in_fname,
   }
 
   h_yields->Write();
-  h_yields_Z->Write();
   fOut->Close();
 }
 
