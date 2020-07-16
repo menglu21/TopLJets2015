@@ -2,6 +2,7 @@
 
 #include "TFile.h"
 #include "TSystem.h"
+#include "TMath.h"
 
 #include <iostream>
 
@@ -54,11 +55,11 @@ void EfficiencyScaleFactorsWrapper::init(TString era)
     cout << "photons: pixel-seed-veto SF from" << a_psvSF << endl;
     if(era_==2016) {
       scaleFactorsH_["g_psv"]=(TH2 *)fIn->Get("Scaling_Factors_HasPix_R9 Inclusive")->Clone();
-      scaleFactorsH_["g_psv"]->SetDirectory(0);      
+      scaleFactorsH_["g_psv"]->SetDirectory(0);
     }else {
       scaleFactors1DH_["g_psv"]=(TH1 *)fIn->Get("Tight_ID")->Clone();
       scaleFactors1DH_["g_psv"]->SetDirectory(0);
-    }      
+    }
     fIn->Close();
   }
 
@@ -67,7 +68,7 @@ void EfficiencyScaleFactorsWrapper::init(TString era)
   if(fIn && !fIn->IsZombie()) {
     cout << "photons: id SF from" << a_psvSF << endl;
     scaleFactorsH_["g_id"]=(TH2 *)fIn->Get("EGamma_SF2D")->Clone();
-    scaleFactorsH_["g_id"]->SetDirectory(0);     
+    scaleFactorsH_["g_id"]->SetDirectory(0);
     fIn->Close();
   }
 
@@ -95,12 +96,13 @@ void EfficiencyScaleFactorsWrapper::init(TString era)
   if(fIn && !fIn->IsZombie()) {
     cout << "electrons: id SF from" << e_idSF << endl;
     scaleFactorsH_["e_id"]=(TH2 *)fIn->Get("EGamma_SF2D")->Clone();
-    scaleFactorsH_["e_id"]->SetDirectory(0);     
+    scaleFactorsH_["e_id"]->SetDirectory(0);
     fIn->Close();
   }
 
-  
+
   //MUONS
+
   std::vector<float>   lumiWgts;
   std::vector<TString> m_tkSF, m_idSF,m_isoSF;
   if(era_==2016){
@@ -121,7 +123,15 @@ void EfficiencyScaleFactorsWrapper::init(TString era)
     lumiWgts.push_back(1.0);
   }
 
-  /*
+/*
+  TString m_tkSF, m_idSF,m_isoSF;
+  if(era_==2017){
+    m_idSF=era+"/RunBCDEF_SF_MuID.root";
+    m_isoSF=era+"/RunBCDEF_SF_MuISO.root";
+  }
+*/
+///////////
+/*
   for(size_t i=0; i<m_tkSF.size(); i++) {
     gSystem->ExpandPathName(m_tkSF[i]);
     fIn=TFile::Open(m_tkSF[i]);
@@ -131,14 +141,14 @@ void EfficiencyScaleFactorsWrapper::init(TString era)
       fIn->Close();
     }
   }
-
+*/
 
   for(size_t i=0; i<m_idSF.size(); i++) {
     gSystem->ExpandPathName(m_idSF[i]);
     fIn=TFile::Open(m_idSF[i]);
     if(fIn && !fIn->IsZombie()) {
-      cout << "muons: id SF from" << m_idSF[i] << " with weight " << lumiWgts[i] << endl;
-      scaleFactorsH_["m_id"]=(TH2F *)fIn->Get("NUM_TightID_DEN_genTracks_eta_pt")->Clone();
+      cout << "muons: id SF from" << m_idSF[i] << endl;
+      scaleFactorsH_["m_id"]=(TH2F *)fIn->Get("NUM_TightID_DEN_genTracks_pt_abseta")->Clone();
       scaleFactorsH_["m_id"]->SetDirectory(0);
       fIn->Close();
     }
@@ -148,13 +158,14 @@ void EfficiencyScaleFactorsWrapper::init(TString era)
     gSystem->ExpandPathName(m_isoSF[i]);
     fIn=TFile::Open(m_isoSF[i]);
     if(fIn && !fIn->IsZombie()) {
-      cout << "muons: iso SF from" << m_isoSF[i] << " with weight " << lumiWgts[i] << endl;
-      scaleFactorsH_["m_iso"]=(TH2F *)fIn->Get("NUM_TightRelIso_DEN_TightID_eta_pt")->Clone();
+      cout << "muons: iso SF from" << m_isoSF[i] << endl;
+      scaleFactorsH_["m_iso"]=(TH2F *)fIn->Get("NUM_TightRelIso_DEN_TightIDandIPCut_pt_abseta")->Clone();
       scaleFactorsH_["m_iso"]->SetDirectory(0);
       fIn->Close();
     }
   }
-  */
+
+  ////////////
 }
 
 
@@ -163,7 +174,7 @@ EffCorrection_t EfficiencyScaleFactorsWrapper::getPhotonSF(float pt,float eta)
 {
   EffCorrection_t sf(1.0,0.01);
 
-  if(scaleFactorsH_.find("g_rec") != scaleFactorsH_.end()) { 
+  if(scaleFactorsH_.find("g_rec") != scaleFactorsH_.end()) {
     TH2 *h=scaleFactorsH_["g_rec"];
     float etaForSF  = TMath::Min(h->GetXaxis()->GetXmax(),TMath::Max(eta,h->GetXaxis()->GetXmin()));
     int   xbinForSF = h->GetXaxis()->FindBin(etaForSF);
@@ -171,9 +182,9 @@ EffCorrection_t EfficiencyScaleFactorsWrapper::getPhotonSF(float pt,float eta)
     int   ybinForSF = h->GetYaxis()->FindBin(ptForSF);
     sf.first  *= h->GetBinContent(xbinForSF,ybinForSF);
     sf.second *= pow(h->GetBinError(xbinForSF,ybinForSF),2);
-  } 
+  }
 
-  if(scaleFactorsH_.find("g_id") != scaleFactorsH_.end()) { 
+  if(scaleFactorsH_.find("g_id") != scaleFactorsH_.end()) {
     TH2 *h=scaleFactorsH_["g_id"];
     float etaForSF  = TMath::Min(h->GetXaxis()->GetXmax(),TMath::Max(eta,h->GetXaxis()->GetXmin()));
     int   xbinForSF = h->GetXaxis()->FindBin(etaForSF);
@@ -181,15 +192,15 @@ EffCorrection_t EfficiencyScaleFactorsWrapper::getPhotonSF(float pt,float eta)
     int   ybinForSF = h->GetYaxis()->FindBin(ptForSF);
     sf.first  *= h->GetBinContent(xbinForSF,ybinForSF);
     sf.second *= pow(h->GetBinError(xbinForSF,ybinForSF),2);
-  } 
+  }
 
-  if(scaleFactorsH_.find("g_psv") != scaleFactorsH_.end()) { 
+  if(scaleFactorsH_.find("g_psv") != scaleFactorsH_.end()) {
     if(era_==2016){
       TH2 *h=scaleFactorsH_["g_psv"];
       int   xbinForSF(fabs(eta)<1.5 ? 1 : 3);
       sf.first  *= h->GetBinContent(xbinForSF,1);
       sf.second *= pow(h->GetBinError(xbinForSF,1),2);
-    } 
+    }
     else if(era_==2017){
       TH1 *h=scaleFactors1DH_["g_psv"];
       int   xbinForSF(fabs(eta)<1.5 ? 1 : 4);
@@ -209,7 +220,7 @@ EffCorrection_t EfficiencyScaleFactorsWrapper::getElectronSF(float pt,float eta)
 {
   EffCorrection_t sf(1.0,0.01);
 
-  if(scaleFactorsH_.find("e_rec") != scaleFactorsH_.end()) { 
+  if(scaleFactorsH_.find("e_rec") != scaleFactorsH_.end()) {
     TH2 *h=scaleFactorsH_["e_rec"];
     float etaForSF  = TMath::Min(h->GetXaxis()->GetXmax(),TMath::Max(eta,h->GetXaxis()->GetXmin()));
     int   xbinForSF = h->GetXaxis()->FindBin(etaForSF);
@@ -217,9 +228,9 @@ EffCorrection_t EfficiencyScaleFactorsWrapper::getElectronSF(float pt,float eta)
     int   ybinForSF = h->GetYaxis()->FindBin(ptForSF);
     sf.first  *= h->GetBinContent(xbinForSF,ybinForSF);
     sf.second *= pow(h->GetBinError(xbinForSF,ybinForSF),2);
-  } 
+  }
 
-  if(scaleFactorsH_.find("e_id") != scaleFactorsH_.end()) { 
+  if(scaleFactorsH_.find("e_id") != scaleFactorsH_.end()) {
     TH2 *h=scaleFactorsH_["e_id"];
     float etaForSF  = TMath::Min(h->GetXaxis()->GetXmax(),TMath::Max(eta,h->GetXaxis()->GetXmin()));
     int   xbinForSF = h->GetXaxis()->FindBin(etaForSF);
@@ -227,7 +238,7 @@ EffCorrection_t EfficiencyScaleFactorsWrapper::getElectronSF(float pt,float eta)
     int   ybinForSF = h->GetYaxis()->FindBin(ptForSF);
     sf.first  *= h->GetBinContent(xbinForSF,ybinForSF);
     sf.second *= pow(h->GetBinError(xbinForSF,ybinForSF),2);
-  } 
+  }
 
   sf.second=sqrt(sf.second);
 
@@ -238,6 +249,37 @@ EffCorrection_t EfficiencyScaleFactorsWrapper::getElectronSF(float pt,float eta)
 EffCorrection_t EfficiencyScaleFactorsWrapper::getMuonSF(float pt,float eta)
 {
   EffCorrection_t sf(1.0,0.01);
+
+  if(scaleFactorsH_.find("m_iso") != scaleFactorsH_.end()) {
+    TH2 *h=scaleFactorsH_["m_iso"];
+    float ptForSF = pt;
+    float etaForSF = fabs(eta);
+    if (pt > h->GetXaxis()->GetXmax()) ptForSF = h->GetXaxis()->GetXmax() - 0.01;
+    if (pt < h->GetXaxis()->GetXmin()) ptForSF = h->GetXaxis()->GetXmin() + 0.01;
+    if (fabs(eta) > h->GetYaxis()->GetXmax()) etaForSF = h->GetYaxis()->GetXmax() - 0.01;
+    if (fabs(eta) < h->GetYaxis()->GetXmin()) etaForSF = h->GetYaxis()->GetXmin() + 0.01;
+    int   ybinForSF = h->GetYaxis()->FindBin(etaForSF);
+    int   xbinForSF = h->GetXaxis()->FindBin(ptForSF);
+    sf.first  *= h->GetBinContent(xbinForSF,ybinForSF);
+    sf.second *= pow(h->GetBinError(xbinForSF,ybinForSF),2);
+  }
+
+  if(scaleFactorsH_.find("m_id") != scaleFactorsH_.end()) {
+    TH2 *h=scaleFactorsH_["m_id"];
+    float ptForSF = pt;
+    float etaForSF = fabs(eta);
+    if (pt > h->GetXaxis()->GetXmax()) ptForSF = h->GetXaxis()->GetXmax() - 0.01;
+    if (pt < h->GetXaxis()->GetXmin()) ptForSF = h->GetXaxis()->GetXmin() + 0.01;
+    if (fabs(eta) > h->GetYaxis()->GetXmax()) etaForSF = h->GetYaxis()->GetXmax() - 0.01;
+    if (fabs(eta) < h->GetYaxis()->GetXmin()) etaForSF = h->GetYaxis()->GetXmin() + 0.01;
+    int   ybinForSF = h->GetYaxis()->FindBin(etaForSF);
+    int   xbinForSF = h->GetXaxis()->FindBin(ptForSF);
+    sf.first  *= h->GetBinContent(xbinForSF,ybinForSF);
+    sf.second *= pow(h->GetBinError(xbinForSF,ybinForSF),2);
+  }
+
+  //cout<<"sf "<<sf.first<<"  "<<sf.second<<endl;
+  sf.second=sqrt(sf.second);
   return sf;
 }
 
