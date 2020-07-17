@@ -28,6 +28,10 @@
   "Data13TeV_2017C_DoubleEG"         : [1,    1, "/DoubleEG/Run2017C-31Mar2018-v1/MINIAOD", "Data", 1, false, false, 0],
   "Data13TeV_2017D_DoubleEG"         : [1,    1, "/DoubleEG/Run2017D-31Mar2018-v1/MINIAOD", "Data", 1, false, false, 0],
   "Data13TeV_2017E_DoubleEG"         : [1,    1, "/DoubleEG/Run2017E-31Mar2018-v1/MINIAOD", "Data", 1, false, false, 0],
-  "Data13TeV_2017F_DoubleEG"         : [1,    1, "/DoubleEG/Run2017F-31Mar2018-v1/MINIAOD", "Data", 1, false, false, 0]
-
+  "Data13TeV_2017F_DoubleEG"         : [1,    1, "/DoubleEG/Run2017F-31Mar2018-v1/MINIAOD", "Data", 1, false, false, 0],
+  "Data13TeV_2017B_MuonEG"         : [1,    1, "/MuonEG/Run2017B-31Mar2018-v1/MINIAOD", "Data", 1, false, false, 0],
+  "Data13TeV_2017C_MuonEG"         : [1,    1, "/MuonEG/Run2017C-31Mar2018-v1/MINIAOD", "Data", 1, false, false, 0],
+  "Data13TeV_2017D_MuonEG"         : [1,    1, "/MuonEG/Run2017D-31Mar2018-v1/MINIAOD", "Data", 1, false, false, 0],
+  "Data13TeV_2017E_MuonEG"         : [1,    1, "/MuonEG/Run2017E-31Mar2018-v1/MINIAOD", "Data", 1, false, false, 0],
+  "Data13TeV_2017F_MuonEG"         : [1,    1, "/MuonEG/Run2017F-31Mar2018-v1/MINIAOD", "Data", 1, false, false, 0]
 }

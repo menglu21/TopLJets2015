@@ -67,9 +67,7 @@ void RunExYukawa(const TString in_fname,
   HistTool ht;
   ht.setNsyst(0);
   ht.addHist("h_Z_mass", new TH1F("h_Z_mass",    ";M(Z) [GeV];Events",62,75,106));
-  ht.addHist("nvtx_before_cuts_w", new TH1F("nvtx_before_cuts_w",        ";Vertex multiplicity;Events",35,0,140));
   ht.addHist("nvtx",         new TH1F("nvtx",        ";Vertex multiplicity;Events",35,0,140));
-  ht.addHist("nvtx_w",      new TH1F("nvtx_w",     ";Vertex multiplicity w pileupWeight",35,0,140));
   ht.addHist("nvtx_uw",      new TH1F("nvtx_uw",     ";Vertex multiplicity w/o pileupWeight",35,0,140));
   ht.addHist("njets",        new TH1F("njets",       ";Jet multiplicity;Events",12,0.5,12.5));
   ht.addHist("njets_bc",        new TH1F("njets_bc",       ";Jet multiplicity;Events",12,0.5,12.5));
@@ -93,20 +91,22 @@ void RunExYukawa(const TString in_fname,
   ht.addHist("ratevsrun",    new TH1F("ratevsrun",   ";Run number; #sigma [pb]",int(lumiPerRun.size()),0,float(lumiPerRun.size())));
   ht.addHist("nmuons",   new TH1F("nmuons",       ";N(muons);Events",6,-0.5,5.5));
   ht.addHist("mu_q",   new TH1F("mu_q",       ";Muon charge;Events",5,-2.5,2.5));
+  ht.addHist("nelectrons",   new TH1F("nelectrons",       ";N(electrons);Events",6,-0.5,5.5));
+  ht.addHist("el_q",   new TH1F("el_q",       ";Electron charge;Events",5,-2.5,2.5));
 
-  ht.addHist("mu_pt",		 new TH1F("mu_pt",       ";p_T(#mu) [GeV]; Events", 24,0,600));
-  ht.addHist("mu_pt_bc",		 new TH1F("mu_pt_bc",       ";p_T(#mu) [GeV]; Events", 24,0,600));
+  ht.addHist("lep_pt",		 new TH1F("lep_pt",       ";p_T(#mu) [GeV]; Events", 24,0,600));
+  ht.addHist("lep_pt_bc",		 new TH1F("lep_pt_bc",       ";p_T(#mu) [GeV]; Events", 24,0,600));
 
-  ht.addHist("mu_pt1",            new TH1F("mu_pt1",       ";p_T(Leading #mu) [GeV]; Events", 24,0,600));
-  ht.addHist("mu_pt2",            new TH1F("mu_pt2",       ";p_T(Sub-leadeing #mu) [GeV]; Events", 24,0,600));
+  ht.addHist("lep_pt1",            new TH1F("lep_pt1",       ";p_T(Leading #mu) [GeV]; Events", 24,0,600));
+  ht.addHist("lep_pt2",            new TH1F("lep_pt2",       ";p_T(Sub-leadeing #mu) [GeV]; Events", 24,0,600));
 
-  ht.addHist("mu_eta",		 new TH1F("mu_eta",      ";#eta(#mu) ; Events", 25,-2.5,2.5));
-  ht.addHist("mu_eta_bc",		 new TH1F("mu_eta_bc",      ";#eta(#mu) ; Events", 25,-2.5,2.5));
+  ht.addHist("lep_eta",		 new TH1F("lep_eta",      ";#eta(#mu) ; Events", 25,-2.5,2.5));
+  ht.addHist("lep_eta_bc",		 new TH1F("lep_eta_bc",      ";#eta(#mu) ; Events", 25,-2.5,2.5));
 
-  ht.addHist("mu_phi1",		 new TH1F("mu_phi1",      ";#phi(#mu1) ; Events", 25,-3.2,3.2));
-  ht.addHist("mu_phi2",		 new TH1F("mu_phi2",      ";#phi(#mu2) ; Events", 25,-3.2,3.2));
-  ht.addHist("dphi_mumu",        new TH1F("dphi_mumu",   ";#Delta#phi(#mu,#mu);Events", 25, -6,6));
-  ht.addHist("deta_mumu",        new TH1F("deta_mumu",   ";#Delta#eta(#mu,#mu);Events", 25, -6,6));
+  ht.addHist("lep_phi1",		 new TH1F("lep_phi1",      ";#phi(#mu1) ; Events", 25,-3.2,3.2));
+  ht.addHist("lep_phi2",		 new TH1F("lep_phi2",      ";#phi(#mu2) ; Events", 25,-3.2,3.2));
+  ht.addHist("dphi_dilep",        new TH1F("dphi_dilep",   ";#Delta#phi(#mu,#mu);Events", 25, -6,6));
+  ht.addHist("deta_dilep",        new TH1F("deta_dilep",   ";#Delta#eta(#mu,#mu);Events", 25, -6,6));
   ht.addHist("bjet_pt",      new TH1F("bjet_pt",     ";p_T(b jet) [GeV]; Events", 24,0,600));
   ht.addHist("bjet_eta",	 new TH1F("bjet_eta",    ";#eta(b jet) ; Events", 25,-2.5,2.5));
   ht.addHist("met",       new TH1F("met",      ";MET [GeV]; Events", 24,0,600));
@@ -167,8 +167,10 @@ void RunExYukawa(const TString in_fname,
 	hasMTrigger=(selector.hasTriggerBit("HLT_IsoMu24_v", ev.triggerBits) ||
 			selector.hasTriggerBit("HLT_Mu50_v", ev.triggerBits) ||
 			selector.hasTriggerBit("HLT_Mu17_TrkIsoVVL_Mu8_TrkIsoVVL_DZ_Mass8_v", ev.triggerBits) ||
-			selector.hasTriggerBit("HLT_Mu17_TrkIsoVVL_Mu8_TrkIsoVVL_DZ_Mass3p8_v", ev.triggerBits)
-      || selector.hasTriggerBit("HLT_Ele23_Ele12_CaloIdL_TrackIdL_IsoVL_v", ev.triggerBits)
+			selector.hasTriggerBit("HLT_Mu17_TrkIsoVVL_Mu8_TrkIsoVVL_DZ_Mass3p8_v", ev.triggerBits) ||
+      selector.hasTriggerBit("HLT_Ele35_WPTight_Gsf_v", ev.triggerBits) ||
+      selector.hasTriggerBit("HLT_Ele32_WPTight_Gsf_L1DoubleEG_v", ev.triggerBits) ||
+      selector.hasTriggerBit("HLT_Ele23_Ele12_CaloIdL_TrackIdL_IsoVL_v", ev.triggerBits)
       );
       }
       Ntotal++;
@@ -193,9 +195,15 @@ void RunExYukawa(const TString in_fname,
 	}
       );
 
+
       int dimuon_event = 0;
-      if ((leptons[0].id() != 13 || leptons[1].id() != 13) && (leptons[0].id() != 11 || leptons[1].id() != 11)) continue;
+      int dielectron_event = 0;
+      int emu_event = 0;
+      int mue_event = 0;
+      if (leptons[0].id() == 11 && leptons[1].id() == 11) dielectron_event = 1;
       if (leptons[0].id() == 13 && leptons[1].id() == 13) dimuon_event = 1;
+      if (leptons[0].id() == 11 && leptons[1].id() == 13) emu_event = 1;
+      if (leptons[0].id() == 13 && leptons[1].id() == 11) mue_event = 1;
 
       //select jets
       btvSF.addBTagDecisions(ev);
@@ -209,7 +217,6 @@ void RunExYukawa(const TString in_fname,
 
       //event weight
       float evWgt(1.0);
-      float evWgt_test(1.0);
 
       //data specific: check event rates after selection
       if(ev.isData){
@@ -233,30 +240,40 @@ void RunExYukawa(const TString in_fname,
 //        EffCorrection_t selSF(1.0,0.0);// = lepEffH.getOfflineCorrection(leptons[0], period);
         float muonSF = 1.;
         float electronSF = 1.;
+        float emuSF = 1.;
         if (dimuon_event == 1){
           EffCorrection_t muon1SF = lepEffH.getMuonSF(leptons[0].pt(),leptons[0].eta());
           EffCorrection_t muon2SF = lepEffH.getMuonSF(leptons[1].pt(),leptons[1].eta());
           muonSF = muon1SF.first*muon2SF.first;
-        }else{
+        }
+        if (dielectron_event == 1){
           EffCorrection_t electron1SF = lepEffH.getElectronSF(leptons[0].pt(),leptons[0].eta());
           EffCorrection_t electron2SF = lepEffH.getElectronSF(leptons[1].pt(),leptons[1].eta());
           electronSF = electron1SF.first*electron2SF.first;
         }
+        if (emu_event == 1){
+          EffCorrection_t electron1SF = lepEffH.getElectronSF(leptons[0].pt(),leptons[0].eta());
+          EffCorrection_t muon2SF = lepEffH.getMuonSF(leptons[1].pt(),leptons[1].eta());
+          emuSF = electron1SF.first*muon2SF.first;
+        }
+        if (mue_event == 1){
+          EffCorrection_t muon1SF = lepEffH.getMuonSF(leptons[0].pt(),leptons[0].eta());
+          EffCorrection_t electron2SF = lepEffH.getElectronSF(leptons[1].pt(),leptons[1].eta());
+          emuSF = muon1SF.first*electron2SF.first;
+        }
         EffCorrection_t l1prefireProb=l1PrefireWR.getCorrection(allJets,{});
-        float leptonSF = muonSF*electronSF;
+        float leptonSF = muonSF*electronSF*emuSF;
 //        evWgt  = normWgt*puWgt*selSF.first*l1prefireProb.first;
 //        evWgt  = normWgt*puWgt*muonSF.first*l1prefireProb.first;
         evWgt  = normWgt*puWgt*leptonSF*l1prefireProb.first;
-        evWgt_test  = normWgt*puWgt;
         evWgt *= (ev.g_nw>0 ? ev.g_w[0] : 1.0);//generator weights
-        evWgt_test *= (ev.g_nw>0 ? ev.g_w[0] : 1.0);
+//        cout<<leptons[0].id()<<"  "<<leptons[0].charge()<<"  "<<leptons[1].id()<<"  "<<leptons[1].charge()<<"  "<<leptonSF<<endl;
       }
 
-      ht.fill("nvtx_before_cuts_w",       ev.nvtx,        evWgt_test, "inc");
 
-      for (size_t in_nmu=0; in_nmu<leptons.size();in_nmu++){
-        ht.fill("mu_pt_bc",          leptons[in_nmu].pt(), evWgt, "inc");
-        ht.fill("mu_eta_bc",     leptons[in_nmu].eta(), evWgt, "inc");
+      for (size_t in_nlep=0; in_nlep<leptons.size();in_nlep++){
+        ht.fill("lep_pt_bc",          leptons[in_nlep].pt(), evWgt, "inc");
+        ht.fill("lep_eta_bc",     leptons[in_nlep].eta(), evWgt, "inc");
       }
 
       if (leptons[0].charge()*leptons[1].charge() < 0){
@@ -361,11 +378,16 @@ void RunExYukawa(const TString in_fname,
      */
 
      int num_mu = 0;
+     int num_el = 0;
 //     if (!ev.isData){
-        for (size_t ind_mu = 0;ind_mu<leptons.size();ind_mu++){
-          if(abs(leptons[ind_mu].id())==13){
+        for (size_t ind_lep = 0;ind_lep<leptons.size();ind_lep++){
+          if(abs(leptons[ind_lep].id())==13){
             num_mu++;
-            ht.fill("mu_q",     leptons[ind_mu].charge(), evWgt, "inc");
+            ht.fill("mu_q",     leptons[ind_lep].charge(), evWgt, "inc");
+          }
+          if(abs(leptons[ind_lep].id())==11){
+            num_el++;
+            ht.fill("el_q",     leptons[ind_lep].charge(), evWgt, "inc");
           }
         }
 //      }
@@ -373,24 +395,24 @@ void RunExYukawa(const TString in_fname,
 
 
       ht.fill("nvtx",       ev.nvtx,        evWgt, "inc");
-      ht.fill("nvtx_w",     ev.nvtx,        evWgt_test, "inc");
       ht.fill("nvtx_uw",    ev.nvtx,        1., "inc");
       ht.fill("njets",      allJets.size(), evWgt, "inc");
       ht.fill("jet_pt1",   allJets[0].pt(), evWgt, "inc");
       ht.fill("jet_pt2",   allJets[1].pt(), evWgt, "inc");
       ht.fill("jet_pt3",   allJets[2].pt(), evWgt, "inc");
       ht.fill("HT", HT, evWgt, "inc");
-      for (size_t in_nmu=0; in_nmu<leptons.size();in_nmu++){
-      	ht.fill("mu_pt",          leptons[in_nmu].pt(), evWgt, "inc");
-      	ht.fill("mu_eta",     leptons[in_nmu].eta(), evWgt, "inc");
+      for (size_t in_nlep=0; in_nlep<leptons.size();in_nlep++){
+      	ht.fill("lep_pt",          leptons[in_nlep].pt(), evWgt, "inc");
+      	ht.fill("lep_eta",     leptons[in_nlep].eta(), evWgt, "inc");
       }
-      ht.fill("mu_pt1",          leptons[0].pt(), evWgt, "inc");
-      ht.fill("mu_pt2",          leptons[1].pt(), evWgt, "inc");
+      ht.fill("lep_pt1",          leptons[0].pt(), evWgt, "inc");
+      ht.fill("lep_pt2",          leptons[1].pt(), evWgt, "inc");
       ht.fill("nmuons",   num_mu, evWgt, "inc");
-      ht.fill("dphi_mumu", delta_phi,evWgt,"inc");
-      ht.fill("mu_phi1",leptons[0].phi(),evWgt,"inc");
-      ht.fill("mu_phi2",leptons[1].phi(),evWgt,"inc");
-      ht.fill("deta_mumu", DeltaEta(leptons[0].eta(),leptons[1].eta()),evWgt,"inc");
+      ht.fill("nelectrons",   num_el, evWgt, "inc");
+      ht.fill("dphi_dilep", delta_phi,evWgt,"inc");
+      ht.fill("lep_phi1",leptons[0].phi(),evWgt,"inc");
+      ht.fill("lep_phi2",leptons[1].phi(),evWgt,"inc");
+      ht.fill("deta_dilep", DeltaEta(leptons[0].eta(),leptons[1].eta()),evWgt,"inc");
       ht.fill("nbjets",num_btags,evWgt,"inc");
       ht.fill("met",ev.met_pt,evWgt,"inc");
       ht.fill("met_phi",ev.met_phi,evWgt,"inc");
