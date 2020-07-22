@@ -166,6 +166,27 @@ void EfficiencyScaleFactorsWrapper::init(TString era)
   }
 
   ////////////
+
+
+  // trigger mumu
+  std::vector<TString> mumu_trg_SF;
+  if (era_==2017){
+    mumu_trg_SF.push_back(era+"/AN2019_140_TriggerSF_2017.root");
+  }
+
+  for(size_t i=0; i<mumu_trg_SF.size(); i++) {
+    gSystem->ExpandPathName(mumu_trg_SF[i]);
+    fIn=TFile::Open(mumu_trg_SF[i]);
+    if(fIn && !fIn->IsZombie()) {
+      cout << "Dimuon trigger SF from" << mumu_trg_SF[i] << endl;
+      scaleFactorsH_["mumu_pt_SF"]=(TH2F *)fIn->Get("h2D_SF_mumu_lepABpt")->Clone();
+      scaleFactorsH_["mumu_eta_SF"]=(TH2F *)fIn->Get("h2D_SF_mumu_lepABeta")->Clone();
+      scaleFactorsH_["mumu_pt_SF"]->SetDirectory(0);
+      scaleFactorsH_["mumu_eta_SF"]->SetDirectory(0);
+      fIn->Close();
+    }
+  }
+
 }
 
 
@@ -280,6 +301,51 @@ EffCorrection_t EfficiencyScaleFactorsWrapper::getMuonSF(float pt,float eta)
 
   //cout<<"sf "<<sf.first<<"  "<<sf.second<<endl;
   sf.second=sqrt(sf.second);
+  return sf;
+}
+
+//
+EffCorrection_t EfficiencyScaleFactorsWrapper::getMuMuPtSF(float pt1,float pt2)
+{
+  EffCorrection_t sf(1.0,0.01);
+
+  if(scaleFactorsH_.find("mumu_pt_SF") != scaleFactorsH_.end()) {
+    TH2 *h=scaleFactorsH_["mumu_pt_SF"];
+    float pt1ForSF = pt1;
+    float pt2ForSF = pt2;
+    if (pt1 > h->GetXaxis()->GetXmax()) pt1ForSF = h->GetXaxis()->GetXmax() - 0.01;
+    if (pt1 < h->GetXaxis()->GetXmin()) pt1ForSF = h->GetXaxis()->GetXmin() + 0.01;
+    if (pt2 > h->GetYaxis()->GetXmax()) pt2ForSF = h->GetYaxis()->GetXmax() - 0.01;
+    if (pt2 < h->GetYaxis()->GetXmin()) pt2ForSF = h->GetYaxis()->GetXmin() + 0.01;
+    int   ybinForSF = h->GetYaxis()->FindBin(pt2ForSF);
+    int   xbinForSF = h->GetXaxis()->FindBin(pt1ForSF);
+    sf.first  *= h->GetBinContent(xbinForSF,ybinForSF);
+    sf.second *= h->GetBinError(xbinForSF,ybinForSF);
+  }
+
+  cout<<"sf "<<sf.first<<"  "<<sf.second<<endl;
+  return sf;
+}
+
+EffCorrection_t EfficiencyScaleFactorsWrapper::getMuMuEtaSF(float eta1,float eta2)
+{
+  EffCorrection_t sf(1.0,0.01);
+
+  if(scaleFactorsH_.find("mumu_eta_SF") != scaleFactorsH_.end()) {
+    TH2 *h=scaleFactorsH_["mumu_eta_SF"];
+    float eta1ForSF = eta1;
+    float eta2ForSF = eta2;
+    if (eta1 > h->GetXaxis()->GetXmax()) eta1ForSF = h->GetXaxis()->GetXmax() - 0.01;
+    if (eta1 < h->GetXaxis()->GetXmin()) eta1ForSF = h->GetXaxis()->GetXmin() + 0.01;
+    if (eta2 > h->GetYaxis()->GetXmax()) eta2ForSF = h->GetYaxis()->GetXmax() - 0.01;
+    if (eta2 < h->GetYaxis()->GetXmin()) eta2ForSF = h->GetYaxis()->GetXmin() + 0.01;
+    int   ybinForSF = h->GetYaxis()->FindBin(eta2ForSF);
+    int   xbinForSF = h->GetXaxis()->FindBin(eta1ForSF);
+    sf.first  *= h->GetBinContent(xbinForSF,ybinForSF);
+    sf.second *= h->GetBinError(xbinForSF,ybinForSF);
+  }
+
+  cout<<"sf "<<sf.first<<"  "<<sf.second<<endl;
   return sf;
 }
 
