@@ -11,14 +11,16 @@
 
 typedef std::pair<float,float> EffCorrection_t;
 
-class EfficiencyScaleFactorsWrapper 
+class EfficiencyScaleFactorsWrapper
 {
  public:
   EfficiencyScaleFactorsWrapper(bool isData,TString era);
   EffCorrection_t getMuonSF(float pt,float eta);
   EffCorrection_t getElectronSF(float pt,float eta);
   EffCorrection_t getPhotonSF(float pt,float eta);
-  ~EfficiencyScaleFactorsWrapper();  
+  EffCorrection_t getMuMuPtSF(float pt1, float pt2);
+  EffCorrection_t getMuMuEtaSF(float eta1, float eta2);
+  ~EfficiencyScaleFactorsWrapper();
 
  private:
   void init(TString era);

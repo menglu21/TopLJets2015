@@ -264,6 +264,11 @@ void RunExYukawa(const TString in_fname,
           EffCorrection_t muon1SF = lepEffH.getMuonSF(leptons[0].pt(),leptons[0].eta());
           EffCorrection_t muon2SF = lepEffH.getMuonSF(leptons[1].pt(),leptons[1].eta());
           muonSF = muon1SF.first*muon2SF.first;
+          EffCorrection_t dimuon_pt_trig_factor = lepEffH.getMuMuPtSF(leptons[0].pt(),leptons[1].pt());
+          EffCorrection_t dimuon_eta_trig_factor = lepEffH.getMuMuEtaSF(abs(leptons[0].eta()),abs(leptons[1].eta()));
+          cout<<"-------------------------------------"<<endl;
+          cout<<"%%%%%%%%% pt1, pt2, SF = "<<leptons[0].pt()<<"  "<<leptons[1].pt()<<"  "<<dimuon_pt_trig_factor.first<<endl;
+          cout<<"%%%%%%%%% eta1, eta2, SF = "<<leptons[0].eta()<<"  "<<leptons[1].eta()<<"  "<<dimuon_eta_trig_factor.first<<endl;
         }
         if (dielectron_event == 1){
           EffCorrection_t electron1SF = lepEffH.getElectronSF(leptons[0].pt(),leptons[0].eta());
