@@ -68,46 +68,48 @@ void RunExYukawa(const TString in_fname,
   ht.setNsyst(0);
   ht.addHist("h_Z_mass", new TH1F("h_Z_mass",    ";M(Z) [GeV];Events",62,75,106));
   ht.addHist("nvtx",         new TH1F("nvtx",        ";Vertex multiplicity;Events",35,0,140));
-  ht.addHist("nvtx_uw",      new TH1F("nvtx_uw",     ";Vertex multiplicity w/o pileupWeight",35,0,140));
+  //ht.addHist("nvtx_uw",      new TH1F("nvtx_uw",     ";Vertex multiplicity w/o pileupWeight",35,0,140));
   ht.addHist("njets",        new TH1F("njets",       ";Jet multiplicity;Events",12,0.5,12.5));
   ht.addHist("njets_bc",        new TH1F("njets_bc",       ";Jet multiplicity;Events",12,0.5,12.5));
 
-  ht.addHist("jet_pt",       new TH1F("jet_pt",      ";p{_T}(jet) [GeV];Events",24,0,600));
-  ht.addHist("jet_pt_bc",       new TH1F("jet_pt_bc",      ";p{_T}(jet) [GeV];Events",24,0,600));
+  ht.addHist("jet_pt",       new TH1F("jet_pt",      ";p_{T}(jet) [GeV];Events",24,0,600));
+  ht.addHist("jet_pt_bc",       new TH1F("jet_pt_bc",      ";p_{T}(jet) [GeV];Events",24,0,600));
 
-  ht.addHist("jet_pt1",       new TH1F("jet_pt1",      ";p{_T}(1st jet) [GeV];Events",24,0,600));
-  ht.addHist("jet_pt2",       new TH1F("jet_pt2",      ";p{_T}(2nd jet) [GeV];Events",24,0,600));
-  ht.addHist("jet_pt3",       new TH1F("jet_pt3",      ";p{_T}(3rd jet) [GeV];Events",24,0,600));
-  ht.addHist("bjet_pt1",       new TH1F("bjet_pt1",      ";p{_T}(1st jet) [GeV];Events",24,0,600));
-  ht.addHist("bjet_pt2",       new TH1F("bjet_pt2",      ";p{_T}(2nd jet) [GeV];Events",24,0,600));
-  ht.addHist("bjet_pt3",       new TH1F("bjet_pt3",      ";p{_T}(3rd jet) [GeV];Events",24,0,600));
+  ht.addHist("jet_pt1",       new TH1F("jet_pt1",      ";p_{T}(1st jet) [GeV];Events",24,0,600));
+  ht.addHist("jet_pt2",       new TH1F("jet_pt2",      ";p_{T}(2nd jet) [GeV];Events",24,0,600));
+  ht.addHist("jet_pt3",       new TH1F("jet_pt3",      ";p_{T}(3rd jet) [GeV];Events",24,0,600));
+  ht.addHist("bjet_pt1",       new TH1F("bjet_pt1",      ";p_{T}(1st jet) [GeV];Events",24,0,600));
+  ht.addHist("bjet_pt2",       new TH1F("bjet_pt2",      ";p_{T}(2nd jet) [GeV];Events",24,0,600));
+  ht.addHist("bjet_pt3",       new TH1F("bjet_pt3",      ";p_{T}(3rd jet) [GeV];Events",24,0,600));
 
-  ht.addHist("HT",            new TH1F("HT",           ";H{_T} [GeV];Events",50,0,1000));
-  ht.addHist("HT_bc",            new TH1F("HT_bc",           ";H{_T} [GeV];Events",50,0,1000));
+  ht.addHist("HT",            new TH1F("HT",           ";H_{T} [GeV];Events",50,0,1000));
+  ht.addHist("HT_bc",            new TH1F("HT_bc",           ";H_{T} [GeV];Events",50,0,1000));
 
   ht.addHist("nbjets",		 new TH1F("nbjets",      ";b-jet multiplicity;Events",5,0.5,5.5));
 
   ht.addHist("mllb",          new TH1F("mllb",         ";m(l,b) [GeV];Events",50,0,1000));
   ht.addHist("ratevsrun",    new TH1F("ratevsrun",   ";Run number; #sigma [pb]",int(lumiPerRun.size()),0,float(lumiPerRun.size())));
   ht.addHist("nmuons",   new TH1F("nmuons",       ";N(muons);Events",6,-0.5,5.5));
-  ht.addHist("mu_q",   new TH1F("mu_q",       ";Muon charge;Events",5,-2.5,2.5));
   ht.addHist("nelectrons",   new TH1F("nelectrons",       ";N(electrons);Events",6,-0.5,5.5));
+  ht.addHist("nelmu",   new TH1F("nelmu",       ";N(elmu);Events",6,-0.5,5.5));
+  ht.addHist("mu_q",   new TH1F("mu_q",       ";Muon charge;Events",5,-2.5,2.5));
   ht.addHist("el_q",   new TH1F("el_q",       ";Electron charge;Events",5,-2.5,2.5));
+  ht.addHist("muel_q",   new TH1F("muel_q",       ";Muon-Electron charge;Events",5,-2.5,2.5));
 
-  ht.addHist("lep_pt",		 new TH1F("lep_pt",       ";p_T(#mu) [GeV]; Events", 24,0,600));
-  ht.addHist("lep_pt_bc",		 new TH1F("lep_pt_bc",       ";p_T(#mu) [GeV]; Events", 24,0,600));
+  ht.addHist("lep_pt",		 new TH1F("lep_pt",       ";p_{T}(l) [GeV]; Events", 24,0,600));
+  ht.addHist("lep_pt_bc",		 new TH1F("lep_pt_bc",       ";p_{T}(l) [GeV]; Events", 24,0,600));
 
-  ht.addHist("lep_pt1",            new TH1F("lep_pt1",       ";p_T(Leading #mu) [GeV]; Events", 24,0,600));
-  ht.addHist("lep_pt2",            new TH1F("lep_pt2",       ";p_T(Sub-leadeing #mu) [GeV]; Events", 24,0,600));
+  ht.addHist("lep_pt1",            new TH1F("lep_pt1",       ";p_{T}(Leading lepton) [GeV]; Events", 24,0,600));
+  ht.addHist("lep_pt2",            new TH1F("lep_pt2",       ";p_{T}(Sub-leading lepton) [GeV]; Events", 24,0,600));
 
-  ht.addHist("lep_eta",		 new TH1F("lep_eta",      ";#eta(#mu) ; Events", 25,-2.5,2.5));
-  ht.addHist("lep_eta_bc",		 new TH1F("lep_eta_bc",      ";#eta(#mu) ; Events", 25,-2.5,2.5));
+  ht.addHist("lep_eta",		 new TH1F("lep_eta",      ";#eta(lepton) ; Events", 25,-2.5,2.5));
+  ht.addHist("lep_eta_bc",		 new TH1F("lep_eta_bc",      ";#eta(lepton) ; Events", 25,-2.5,2.5));
 
-  ht.addHist("lep_phi1",		 new TH1F("lep_phi1",      ";#phi(#mu1) ; Events", 25,-3.2,3.2));
-  ht.addHist("lep_phi2",		 new TH1F("lep_phi2",      ";#phi(#mu2) ; Events", 25,-3.2,3.2));
-  ht.addHist("dphi_dilep",        new TH1F("dphi_dilep",   ";#Delta#phi(#mu,#mu);Events", 25, -6,6));
-  ht.addHist("deta_dilep",        new TH1F("deta_dilep",   ";#Delta#eta(#mu,#mu);Events", 25, -6,6));
-  ht.addHist("bjet_pt",      new TH1F("bjet_pt",     ";p_T(b jet) [GeV]; Events", 24,0,600));
+  ht.addHist("lep_phi1",		 new TH1F("lep_phi1",      ";#phi(lepton1) ; Events", 25,-3.2,3.2));
+  ht.addHist("lep_phi2",		 new TH1F("lep_phi2",      ";#phi(lepton2) ; Events", 25,-3.2,3.2));
+  ht.addHist("dphi_dilep",        new TH1F("dphi_dilep",   ";#Delta#phi(l,l);Events", 25, -6,6));
+  ht.addHist("deta_dilep",        new TH1F("deta_dilep",   ";#Delta#eta(l,l);Events", 25, -6,6));
+  ht.addHist("bjet_pt",      new TH1F("bjet_pt",     ";p_{T}(b jet) [GeV]; Events", 24,0,600));
   ht.addHist("bjet_eta",	 new TH1F("bjet_eta",    ";#eta(b jet) ; Events", 25,-2.5,2.5));
   ht.addHist("met",       new TH1F("met",      ";MET [GeV]; Events", 24,0,600));
   ht.addHist("met_phi",       new TH1F("met_phi",      ";MET #phi; Events", 25, -4,4));
@@ -164,13 +166,29 @@ void RunExYukawa(const TString in_fname,
       bool hasMTrigger(false);
       if(era.Contains("2016")) hasMTrigger=(selector.hasTriggerBit("HLT_IsoMu24_v", ev.triggerBits) );
       if(era.Contains("2017")) {
-	hasMTrigger=(selector.hasTriggerBit("HLT_IsoMu24_v", ev.triggerBits) ||
-			selector.hasTriggerBit("HLT_Mu50_v", ev.triggerBits) ||
-			selector.hasTriggerBit("HLT_Mu17_TrkIsoVVL_Mu8_TrkIsoVVL_DZ_Mass8_v", ev.triggerBits) ||
-			selector.hasTriggerBit("HLT_Mu17_TrkIsoVVL_Mu8_TrkIsoVVL_DZ_Mass3p8_v", ev.triggerBits) ||
-      selector.hasTriggerBit("HLT_Ele35_WPTight_Gsf_v", ev.triggerBits) ||
-      selector.hasTriggerBit("HLT_Ele32_WPTight_Gsf_L1DoubleEG_v", ev.triggerBits) ||
-      selector.hasTriggerBit("HLT_Ele23_Ele12_CaloIdL_TrackIdL_IsoVL_v", ev.triggerBits)
+	hasMTrigger=(
+    /* previous random selection
+        selector.hasTriggerBit("HLT_IsoMu24_v", ev.triggerBits) ||
+			  selector.hasTriggerBit("HLT_Mu50_v", ev.triggerBits) ||
+			  selector.hasTriggerBit("HLT_Mu17_TrkIsoVVL_Mu8_TrkIsoVVL_DZ_Mass8_v", ev.triggerBits) ||
+			  selector.hasTriggerBit("HLT_Mu17_TrkIsoVVL_Mu8_TrkIsoVVL_DZ_Mass3p8_v", ev.triggerBits) ||
+        selector.hasTriggerBit("HLT_Ele35_WPTight_Gsf_v", ev.triggerBits) ||
+        selector.hasTriggerBit("HLT_Ele32_WPTight_Gsf_L1DoubleEG_v", ev.triggerBits) ||
+        selector.hasTriggerBit("HLT_Ele23_Ele12_CaloIdL_TrackIdL_IsoVL_v", ev.triggerBits) || // OK
+        selector.hasTriggerBit("HLT_Photon200_v", ev.triggerBits)
+    */
+    //From AN2019_140_v3
+        // emu triggers
+        selector.hasTriggerBit("HLT_Mu8_TrkIsoVVL_Ele23_CaloIdL_TrackIdL_IsoVL_DZ_v", ev.triggerBits) || //??
+        selector.hasTriggerBit("HLT_Mu23_TrkIsoVVL_Ele12_CaloIdL_TrackIdL_IsoVL_v", ev.triggerBits) ||
+        selector.hasTriggerBit("HLT_Ele35_WPTight_Gsf", ev.triggerBits) ||
+        selector.hasTriggerBit("HLT_IsoMu27_v", ev.triggerBits) ||
+        // ee triggers
+        selector.hasTriggerBit("HLT_Ele23_Ele12_CaloIdL_TrackIdL_IsoVL_v", ev.triggerBits) ||
+        selector.hasTriggerBit("HLT_Ele35_WPTight_Gsf_v", ev.triggerBits) ||
+        // mumu triggers
+        selector.hasTriggerBit("HLT_Mu17_TrkIsoVVL_Mu8_TrkIsoVVL_DZ_Mass8_v", ev.triggerBits) ||
+        selector.hasTriggerBit("HLT_IsoMu27_v", ev.triggerBits)
       );
       }
       Ntotal++;
@@ -179,7 +197,8 @@ void RunExYukawa(const TString in_fname,
 
 
 //      cout << "Trigger = "<<hasMTrigger << endl;
-      if(ev.isData && !hasMTrigger) continue;
+//      if(ev.isData && !hasMTrigger) continue;
+      if(!hasMTrigger) continue;
       Ntotal_after_trig++;
 
       //select two offline muons
@@ -377,17 +396,26 @@ void RunExYukawa(const TString in_fname,
      }
      */
 
+
+
      int num_mu = 0;
      int num_el = 0;
+     int num_muel = 0;
+
+
 //     if (!ev.isData){
         for (size_t ind_lep = 0;ind_lep<leptons.size();ind_lep++){
-          if(abs(leptons[ind_lep].id())==13){
+          if(dimuon_event){
             num_mu++;
             ht.fill("mu_q",     leptons[ind_lep].charge(), evWgt, "inc");
           }
-          if(abs(leptons[ind_lep].id())==11){
+          if(dielectron_event){
             num_el++;
             ht.fill("el_q",     leptons[ind_lep].charge(), evWgt, "inc");
+          }
+          if (emu_event || mue_event){
+            num_muel++;
+            ht.fill("muel_q",     leptons[ind_lep].charge(), evWgt, "inc");
           }
         }
 //      }
@@ -409,6 +437,7 @@ void RunExYukawa(const TString in_fname,
       ht.fill("lep_pt2",          leptons[1].pt(), evWgt, "inc");
       ht.fill("nmuons",   num_mu, evWgt, "inc");
       ht.fill("nelectrons",   num_el, evWgt, "inc");
+      ht.fill("nelmu", num_muel, evWgt, "inc");
       ht.fill("dphi_dilep", delta_phi,evWgt,"inc");
       ht.fill("lep_phi1",leptons[0].phi(),evWgt,"inc");
       ht.fill("lep_phi2",leptons[1].phi(),evWgt,"inc");

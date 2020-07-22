@@ -243,7 +243,7 @@ std::vector<Particle> SelectionTool::flaggedLeptons(MiniEvent_t &ev)
     Float_t unc(0.);
     if(abs(ev.l_id[il])==11)
       {
-	if( pt>20 && eta<2.5 ) {
+	if( pt>15 && eta<2.5 ) {
           if((pid>>1)&0x1)  qualityFlagsWord |= (0x1 << VETO);
           if((pid>>2)&0x1)  qualityFlagsWord |= (0x1 << LOOSEIDONLY);
           if((pid>>3)&0x1)  qualityFlagsWord |= (0x1 << LOOSE);
@@ -267,7 +267,7 @@ std::vector<Particle> SelectionTool::flaggedLeptons(MiniEvent_t &ev)
       }
     else
       {
-        if(pt>20 && eta<2.5) {
+        if(pt>15 && eta<2.5) {
           if( (pid&reco::Muon::Selector::CutBasedIdLoose)==reco::Muon::Selector::CutBasedIdLoose ) {
             qualityFlagsWord |= (0x1 << LOOSEIDONLY);
             if( (pid&reco::Muon::Selector::PFIsoLoose)==reco::Muon::Selector::PFIsoLoose )
