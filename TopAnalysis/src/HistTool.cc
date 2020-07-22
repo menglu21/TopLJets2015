@@ -36,7 +36,7 @@ void HistTool::fill(TString title, double value, std::vector<double> weights,std
 
 //
 void HistTool::fill(TString title, double value, std::vector<double> weights,TString cat) {
-  
+
   if (not allPlots_.count(title)) {
     //std::cout << "Histogram " << title << " not registered, not filling." << std::endl;
     return;
@@ -75,7 +75,7 @@ void HistTool::fill2D(TString title, double valueX, double valueY, std::vector<d
 
 
 void HistTool::fill2D(TString title, double valueX, double valueY, std::vector<double> weights,TString cat) {
-  
+
   if (not all2dPlots_.count(title)) {
     std::cout << "Histogram " << title << " not registered, not filling." << std::endl;
     return;
@@ -96,4 +96,3 @@ void HistTool::fill2D(TString title, double valueX, double valueY, std::vector<d
 
   all2dPlots_[title]->Fill(valueX,valueY, weights[0]);
 }
-

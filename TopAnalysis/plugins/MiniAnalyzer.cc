@@ -772,17 +772,17 @@ void MiniAnalyzer::recAnalysis(const edm::Event& iEvent, const edm::EventSetup& 
       if(!passPt || !passEta) continue;
 
       //full id+iso decisions
-      bool isVeto( e.electronID("cutBasedElectronID-Fall17-94X-V1-veto") );
-      int vetoBits( e.userInt("cutBasedElectronID-Fall17-94X-V1-veto")  );
+      bool isVeto( e.electronID("cutBasedElectronID-Fall17-94X-V2-veto") );
+      int vetoBits( e.userInt("cutBasedElectronID-Fall17-94X-V2-veto")  );
       bool passVetoId( (vetoBits | 0xc0)== 0x3ff);  //mask isolation cuts and require all bits active
-      bool isLoose( e.electronID("cutBasedElectronID-Fall17-94X-V1-loose") );
-      int looseBits( e.userInt("cutBasedElectronID-Fall17-94X-V1-loose")  );
+      bool isLoose( e.electronID("cutBasedElectronID-Fall17-94X-V2-loose") );
+      int looseBits( e.userInt("cutBasedElectronID-Fall17-94X-V2-loose")  );
       bool passLooseId( (looseBits | 0xc0)== 0x3ff);  //mask isolation cuts and require all bits active
-      bool isMedium( e.electronID("cutBasedElectronID-Fall17-94X-V1-medium") );
-      int mediumBits( e.userInt("cutBasedElectronID-Fall17-94X-V1-medium")  );
+      bool isMedium( e.electronID("cutBasedElectronID-Fall17-94X-V2-medium") );
+      int mediumBits( e.userInt("cutBasedElectronID-Fall17-94X-V2-medium")  );
       bool passMediumId( (mediumBits | 0xc0)== 0x3ff);  //mask isolation cuts and require all bits active
-      bool isTight( e.electronID("cutBasedElectronID-Fall17-94X-V1-tight") );
-      int tightBits( e.userInt("cutBasedElectronID-Fall17-94X-V1-tight") );
+      bool isTight( e.electronID("cutBasedElectronID-Fall17-94X-V2-tight") );
+      int tightBits( e.userInt("cutBasedElectronID-Fall17-94X-V2-tight") );
       bool passTightId( (tightBits | 0xc0)== 0x3ff);  //mask isolation cuts and require all bits active
 
       bool mvawp80(e.electronID("mvaEleID-Fall17-iso-V2-wp80"));
@@ -1084,7 +1084,7 @@ void MiniAnalyzer::recAnalysis(const edm::Event& iEvent, const edm::EventSetup& 
       ev_.j_csv[ev_.nj]     = j->bDiscriminator("pfCombinedInclusiveSecondaryVertexV2BJetTags");
       ev_.j_deepcsv[ev_.nj] = j->bDiscriminator("pfDeepCSVJetTags:probb") + j->bDiscriminator("pfDeepCSVJetTags:probbb");
       ev_.j_btag[ev_.nj]    = (ev_.j_deepcsv[ev_.nj]>0.4941);
-      ev_.j_probc[ev_.nj]   = j->bDiscriminator("pfDeepCSVJetTags:probc"); 
+      ev_.j_probc[ev_.nj]   = j->bDiscriminator("pfDeepCSVJetTags:probc");
       ev_.j_probudsg[ev_.nj]= j->bDiscriminator("pfDeepCSVJetTags:probudsg");
       ev_.j_probb[ev_.nj]   = j->bDiscriminator("pfDeepCSVJetTags:probb");
       ev_.j_probbb[ev_.nj]  = j->bDiscriminator("pfDeepCSVJetTags:probbb");
