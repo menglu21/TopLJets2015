@@ -20,6 +20,10 @@ class EfficiencyScaleFactorsWrapper
   EffCorrection_t getPhotonSF(float pt,float eta);
   EffCorrection_t getMuMuPtSF(float pt1, float pt2);
   EffCorrection_t getMuMuEtaSF(float eta1, float eta2);
+  EffCorrection_t getEMuPtSF(float pt1, float pt2);
+  EffCorrection_t getEMuEtaSF(float eta1, float eta2);
+  EffCorrection_t getEEPtSF(float pt1, float pt2);
+  EffCorrection_t getEEEtaSF(float eta1, float eta2);
   ~EfficiencyScaleFactorsWrapper();
 
  private:

@@ -168,24 +168,35 @@ void EfficiencyScaleFactorsWrapper::init(TString era)
   ////////////
 
 
-  // trigger mumu
-  std::vector<TString> mumu_trg_SF;
+  // trigger scale factors
+  TString trg_SF;
   if (era_==2017){
-    mumu_trg_SF.push_back(era+"/AN2019_140_TriggerSF_2017.root");
+    trg_SF = era+"/AN2019_140_TriggerSF_2017.root";
   }
 
-  for(size_t i=0; i<mumu_trg_SF.size(); i++) {
-    gSystem->ExpandPathName(mumu_trg_SF[i]);
-    fIn=TFile::Open(mumu_trg_SF[i]);
+  // mumu
+//  for(size_t i=0; i<trg_SF.size(); i++) {
+    gSystem->ExpandPathName(trg_SF);
+    fIn=TFile::Open(trg_SF);
     if(fIn && !fIn->IsZombie()) {
-      cout << "Dimuon trigger SF from" << mumu_trg_SF[i] << endl;
+      cout << "trigger SF from" << trg_SF << endl;
       scaleFactorsH_["mumu_pt_SF"]=(TH2F *)fIn->Get("h2D_SF_mumu_lepABpt")->Clone();
       scaleFactorsH_["mumu_eta_SF"]=(TH2F *)fIn->Get("h2D_SF_mumu_lepABeta")->Clone();
       scaleFactorsH_["mumu_pt_SF"]->SetDirectory(0);
       scaleFactorsH_["mumu_eta_SF"]->SetDirectory(0);
+
+      scaleFactorsH_["emu_pt_SF"]=(TH2F *)fIn->Get("h2D_SF_emu_lepABpt")->Clone();
+      scaleFactorsH_["emu_eta_SF"]=(TH2F *)fIn->Get("h2D_SF_emu_lepABeta")->Clone();
+      scaleFactorsH_["emu_pt_SF"]->SetDirectory(0);
+      scaleFactorsH_["emu_eta_SF"]->SetDirectory(0);
+
+      scaleFactorsH_["ee_pt_SF"]=(TH2F *)fIn->Get("h2D_SF_ee_lepABpt")->Clone();
+      scaleFactorsH_["ee_eta_SF"]=(TH2F *)fIn->Get("h2D_SF_ee_lepABeta")->Clone();
+      scaleFactorsH_["ee_pt_SF"]->SetDirectory(0);
+      scaleFactorsH_["ee_eta_SF"]->SetDirectory(0);
       fIn->Close();
     }
-  }
+//  }
 
 }
 
@@ -323,7 +334,7 @@ EffCorrection_t EfficiencyScaleFactorsWrapper::getMuMuPtSF(float pt1,float pt2)
     sf.second *= h->GetBinError(xbinForSF,ybinForSF);
   }
 
-  cout<<"sf "<<sf.first<<"  "<<sf.second<<endl;
+  //cout<<"sf mumu pt"<<sf.first<<"  "<<sf.second<<endl;
   return sf;
 }
 
@@ -333,6 +344,50 @@ EffCorrection_t EfficiencyScaleFactorsWrapper::getMuMuEtaSF(float eta1,float eta
 
   if(scaleFactorsH_.find("mumu_eta_SF") != scaleFactorsH_.end()) {
     TH2 *h=scaleFactorsH_["mumu_eta_SF"];
+    float eta1ForSF= eta1;
+    float eta2ForSF = eta2;
+    if (eta1 > h->GetXaxis()->GetXmax()) eta1ForSF = h->GetXaxis()->GetXmax() - 0.01;
+    if (eta1 < h->GetXaxis()->GetXmin()) eta1ForSF = h->GetXaxis()->GetXmin() + 0.01;
+    if (eta2 > h->GetYaxis()->GetXmax()) eta2ForSF = h->GetYaxis()->GetXmax() - 0.01;
+    if (eta2 < h->GetYaxis()->GetXmin()) eta2ForSF = h->GetYaxis()->GetXmin() + 0.01;
+    int   ybinForSF = h->GetYaxis()->FindBin(eta2ForSF);
+    int   xbinForSF = h->GetXaxis()->FindBin(eta1ForSF);
+    sf.first  *= h->GetBinContent(xbinForSF,ybinForSF);
+    sf.second *= h->GetBinError(xbinForSF,ybinForSF);
+  }
+
+  //cout<<"sf mumu eta"<<sf.first<<"  "<<sf.second<<endl;
+  return sf;
+}
+
+EffCorrection_t EfficiencyScaleFactorsWrapper::getEMuPtSF(float pt1,float pt2)
+{
+  EffCorrection_t sf(1.0,0.01);
+
+  if(scaleFactorsH_.find("emu_pt_SF") != scaleFactorsH_.end()) {
+    TH2 *h=scaleFactorsH_["emu_pt_SF"];
+    float pt1ForSF = pt1;
+    float pt2ForSF = pt2;
+    if (pt1 > h->GetXaxis()->GetXmax()) pt1ForSF = h->GetXaxis()->GetXmax() - 0.01;
+    if (pt1 < h->GetXaxis()->GetXmin()) pt1ForSF = h->GetXaxis()->GetXmin() + 0.01;
+    if (pt2 > h->GetYaxis()->GetXmax()) pt2ForSF = h->GetYaxis()->GetXmax() - 0.01;
+    if (pt2 < h->GetYaxis()->GetXmin()) pt2ForSF = h->GetYaxis()->GetXmin() + 0.01;
+    int   ybinForSF = h->GetYaxis()->FindBin(pt2ForSF);
+    int   xbinForSF = h->GetXaxis()->FindBin(pt1ForSF);
+    sf.first  *= h->GetBinContent(xbinForSF,ybinForSF);
+    sf.second *= h->GetBinError(xbinForSF,ybinForSF);
+  }
+
+  //cout<<"sf emu pt"<<sf.first<<"  "<<sf.second<<endl;
+  return sf;
+}
+
+EffCorrection_t EfficiencyScaleFactorsWrapper::getEMuEtaSF(float eta1,float eta2)
+{
+  EffCorrection_t sf(1.0,0.01);
+
+  if(scaleFactorsH_.find("emu_eta_SF") != scaleFactorsH_.end()) {
+    TH2 *h=scaleFactorsH_["emu_eta_SF"];
     float eta1ForSF = eta1;
     float eta2ForSF = eta2;
     if (eta1 > h->GetXaxis()->GetXmax()) eta1ForSF = h->GetXaxis()->GetXmax() - 0.01;
@@ -345,10 +400,53 @@ EffCorrection_t EfficiencyScaleFactorsWrapper::getMuMuEtaSF(float eta1,float eta
     sf.second *= h->GetBinError(xbinForSF,ybinForSF);
   }
 
-  cout<<"sf "<<sf.first<<"  "<<sf.second<<endl;
+  //cout<<"sf emu eta"<<sf.first<<"  "<<sf.second<<endl;
   return sf;
 }
 
+EffCorrection_t EfficiencyScaleFactorsWrapper::getEEPtSF(float pt1,float pt2)
+{
+  EffCorrection_t sf(1.0,0.01);
+
+  if(scaleFactorsH_.find("ee_pt_SF") != scaleFactorsH_.end()) {
+    TH2 *h=scaleFactorsH_["ee_pt_SF"];
+    float pt1ForSF = pt1;
+    float pt2ForSF = pt2;
+    if (pt1 > h->GetXaxis()->GetXmax()) pt1ForSF = h->GetXaxis()->GetXmax() - 0.01;
+    if (pt1 < h->GetXaxis()->GetXmin()) pt1ForSF = h->GetXaxis()->GetXmin() + 0.01;
+    if (pt2 > h->GetYaxis()->GetXmax()) pt2ForSF = h->GetYaxis()->GetXmax() - 0.01;
+    if (pt2 < h->GetYaxis()->GetXmin()) pt2ForSF = h->GetYaxis()->GetXmin() + 0.01;
+    int   ybinForSF = h->GetYaxis()->FindBin(pt2ForSF);
+    int   xbinForSF = h->GetXaxis()->FindBin(pt1ForSF);
+    sf.first  *= h->GetBinContent(xbinForSF,ybinForSF);
+    sf.second *= h->GetBinError(xbinForSF,ybinForSF);
+  }
+
+  //cout<<"sf ee pt"<<sf.first<<"  "<<sf.second<<endl;
+  return sf;
+}
+
+EffCorrection_t EfficiencyScaleFactorsWrapper::getEEEtaSF(float eta1,float eta2)
+{
+  EffCorrection_t sf(1.0,0.01);
+
+  if(scaleFactorsH_.find("ee_eta_SF") != scaleFactorsH_.end()) {
+    TH2 *h=scaleFactorsH_["ee_eta_SF"];
+    float eta1ForSF = eta1;
+    float eta2ForSF = eta2;
+    if (eta1 > h->GetXaxis()->GetXmax()) eta1ForSF = h->GetXaxis()->GetXmax() - 0.01;
+    if (eta1 < h->GetXaxis()->GetXmin()) eta1ForSF = h->GetXaxis()->GetXmin() + 0.01;
+    if (eta2 > h->GetYaxis()->GetXmax()) eta2ForSF = h->GetYaxis()->GetXmax() - 0.01;
+    if (eta2 < h->GetYaxis()->GetXmin()) eta2ForSF = h->GetYaxis()->GetXmin() + 0.01;
+    int   ybinForSF = h->GetYaxis()->FindBin(eta2ForSF);
+    int   xbinForSF = h->GetXaxis()->FindBin(eta1ForSF);
+    sf.first  *= h->GetBinContent(xbinForSF,ybinForSF);
+    sf.second *= h->GetBinError(xbinForSF,ybinForSF);
+  }
+
+  //cout<<"sf ee eta"<<sf.first<<"  "<<sf.second<<endl;
+  return sf;
+}
 //
 EfficiencyScaleFactorsWrapper::~EfficiencyScaleFactorsWrapper()
 {
