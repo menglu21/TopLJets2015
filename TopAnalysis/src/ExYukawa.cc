@@ -96,15 +96,23 @@ void RunExYukawa(const TString in_fname,
   ht.addHist("el_q",   new TH1F("el_q",       ";Electron charge;Events",5,-2.5,2.5));
   ht.addHist("muel_q",   new TH1F("muel_q",       ";Muon-Electron charge;Events",5,-2.5,2.5));
 
-  ht.addHist("lep_pt",		 new TH1F("lep_pt",       ";p_{T}(l) [GeV]; Events", 24,0,600));
+
   ht.addHist("lep_pt_bc",		 new TH1F("lep_pt_bc",       ";p_{T}(l) [GeV]; Events", 24,0,600));
-
-  ht.addHist("lep_pt1",            new TH1F("lep_pt1",       ";p_{T}(Leading lepton) [GeV]; Events", 24,0,600));
-  ht.addHist("lep_pt2",            new TH1F("lep_pt2",       ";p_{T}(Sub-leading lepton) [GeV]; Events", 24,0,600));
-
-  ht.addHist("lep_eta",		 new TH1F("lep_eta",      ";#eta(lepton) ; Events", 25,-2.5,2.5));
   ht.addHist("lep_eta_bc",		 new TH1F("lep_eta_bc",      ";#eta(lepton) ; Events", 25,-2.5,2.5));
 
+  ht.addHist("lep_pt_bc_mumu",		 new TH1F("lep_pt_bc_mumu",       ";p_{T}(l) [GeV]; Dimuon Events", 24,0,600));
+  ht.addHist("lep_eta_bc_mumu",		 new TH1F("lep_eta_bc_mumu",      ";#eta(lepton) ; Dimuon Events", 25,-2.5,2.5));
+
+  ht.addHist("lep_pt_bc_ee",		 new TH1F("lep_pt_bc_ee",       ";p_{T}(l) [GeV]; Dielecton Events", 24,0,600));
+  ht.addHist("lep_eta_bc_ee",		 new TH1F("lep_eta_bc_ee",      ";#eta(lepton) ; Dielecton Events", 25,-2.5,2.5));
+
+  ht.addHist("lep_pt_bc_emu",		 new TH1F("lep_pt_bc_emu",       ";p_{T}(l) [GeV]; e-#mu Events", 24,0,600));
+  ht.addHist("lep_eta_bc_emu",		 new TH1F("lep_eta_bc_emu",      ";#eta(lepton) ; e-#mu Events", 25,-2.5,2.5));
+
+  ht.addHist("lep_pt",		 new TH1F("lep_pt",       ";p_{T}(l) [GeV]; Events", 24,0,600));
+  ht.addHist("lep_pt1",            new TH1F("lep_pt1",       ";p_{T}(Leading lepton) [GeV]; Events", 24,0,600));
+  ht.addHist("lep_pt2",            new TH1F("lep_pt2",       ";p_{T}(Sub-leading lepton) [GeV]; Events", 24,0,600));
+  ht.addHist("lep_eta",		 new TH1F("lep_eta",      ";#eta(lepton) ; Events", 25,-2.5,2.5));
   ht.addHist("lep_phi1",		 new TH1F("lep_phi1",      ";#phi(lepton1) ; Events", 25,-3.2,3.2));
   ht.addHist("lep_phi2",		 new TH1F("lep_phi2",      ";#phi(lepton2) ; Events", 25,-3.2,3.2));
   ht.addHist("dphi_dilep",        new TH1F("dphi_dilep",   ";#Delta#phi(l,l);Events", 25, -6,6));
@@ -260,36 +268,44 @@ void RunExYukawa(const TString in_fname,
         float muonSF = 1.;
         float electronSF = 1.;
         float emuSF = 1.;
+        float dilepton_trig_SF = 1.;
         if (dimuon_event == 1){
           EffCorrection_t muon1SF = lepEffH.getMuonSF(leptons[0].pt(),leptons[0].eta());
           EffCorrection_t muon2SF = lepEffH.getMuonSF(leptons[1].pt(),leptons[1].eta());
           muonSF = muon1SF.first*muon2SF.first;
           EffCorrection_t dimuon_pt_trig_factor = lepEffH.getMuMuPtSF(leptons[0].pt(),leptons[1].pt());
           EffCorrection_t dimuon_eta_trig_factor = lepEffH.getMuMuEtaSF(abs(leptons[0].eta()),abs(leptons[1].eta()));
-          cout<<"-------------------------------------"<<endl;
-          cout<<"%%%%%%%%% pt1, pt2, SF = "<<leptons[0].pt()<<"  "<<leptons[1].pt()<<"  "<<dimuon_pt_trig_factor.first<<endl;
-          cout<<"%%%%%%%%% eta1, eta2, SF = "<<leptons[0].eta()<<"  "<<leptons[1].eta()<<"  "<<dimuon_eta_trig_factor.first<<endl;
+          dilepton_trig_SF = dimuon_pt_trig_factor.first*dimuon_eta_trig_factor.first;
         }
         if (dielectron_event == 1){
           EffCorrection_t electron1SF = lepEffH.getElectronSF(leptons[0].pt(),leptons[0].eta());
           EffCorrection_t electron2SF = lepEffH.getElectronSF(leptons[1].pt(),leptons[1].eta());
           electronSF = electron1SF.first*electron2SF.first;
+          EffCorrection_t dielectron_pt_trig_factor = lepEffH.getEEPtSF(leptons[0].pt(),leptons[1].pt());
+          EffCorrection_t dielectron_eta_trig_factor = lepEffH.getEEEtaSF(abs(leptons[0].eta()),abs(leptons[1].eta()));
+          dilepton_trig_SF = dielectron_pt_trig_factor.first*dielectron_eta_trig_factor.first;
         }
         if (emu_event == 1){
           EffCorrection_t electron1SF = lepEffH.getElectronSF(leptons[0].pt(),leptons[0].eta());
           EffCorrection_t muon2SF = lepEffH.getMuonSF(leptons[1].pt(),leptons[1].eta());
           emuSF = electron1SF.first*muon2SF.first;
+          EffCorrection_t emu_pt_trig_factor = lepEffH.getEMuPtSF(leptons[0].pt(),leptons[1].pt());
+          EffCorrection_t emu_eta_trig_factor = lepEffH.getEMuEtaSF(abs(leptons[0].eta()),abs(leptons[1].eta()));
+          dilepton_trig_SF = emu_pt_trig_factor.first*emu_eta_trig_factor.first;
         }
         if (mue_event == 1){
           EffCorrection_t muon1SF = lepEffH.getMuonSF(leptons[0].pt(),leptons[0].eta());
           EffCorrection_t electron2SF = lepEffH.getElectronSF(leptons[1].pt(),leptons[1].eta());
           emuSF = muon1SF.first*electron2SF.first;
+          EffCorrection_t emu_pt_trig_factor = lepEffH.getEMuPtSF(leptons[0].pt(),leptons[1].pt());
+          EffCorrection_t emu_eta_trig_factor = lepEffH.getEMuEtaSF(abs(leptons[0].eta()),abs(leptons[1].eta()));
+          dilepton_trig_SF = emu_pt_trig_factor.first*emu_eta_trig_factor.first;
         }
         EffCorrection_t l1prefireProb=l1PrefireWR.getCorrection(allJets,{});
         float leptonSF = muonSF*electronSF*emuSF;
 //        evWgt  = normWgt*puWgt*selSF.first*l1prefireProb.first;
 //        evWgt  = normWgt*puWgt*muonSF.first*l1prefireProb.first;
-        evWgt  = normWgt*puWgt*leptonSF*l1prefireProb.first;
+        evWgt  = normWgt*puWgt*leptonSF*dilepton_trig_SF*l1prefireProb.first;
         evWgt *= (ev.g_nw>0 ? ev.g_w[0] : 1.0);//generator weights
 //        cout<<leptons[0].id()<<"  "<<leptons[0].charge()<<"  "<<leptons[1].id()<<"  "<<leptons[1].charge()<<"  "<<leptonSF<<endl;
       }
@@ -298,6 +314,18 @@ void RunExYukawa(const TString in_fname,
       for (size_t in_nlep=0; in_nlep<leptons.size();in_nlep++){
         ht.fill("lep_pt_bc",          leptons[in_nlep].pt(), evWgt, "inc");
         ht.fill("lep_eta_bc",     leptons[in_nlep].eta(), evWgt, "inc");
+        if (dimuon_event){
+          ht.fill("lep_pt_bc_mumu",          leptons[in_nlep].pt(), evWgt, "inc");
+          ht.fill("lep_eta_bc_mumu",     leptons[in_nlep].eta(), evWgt, "inc");
+        }
+        if (dielectron_event){
+          ht.fill("lep_pt_bc_ee",          leptons[in_nlep].pt(), evWgt, "inc");
+          ht.fill("lep_eta_bc_ee",     leptons[in_nlep].eta(), evWgt, "inc");
+        }
+        if (emu_event || mue_event){
+          ht.fill("lep_pt_bc_emu",          leptons[in_nlep].pt(), evWgt, "inc");
+          ht.fill("lep_eta_bc_emu",     leptons[in_nlep].eta(), evWgt, "inc");
+        }
       }
 
       if (leptons[0].charge()*leptons[1].charge() < 0){

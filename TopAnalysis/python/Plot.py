@@ -62,7 +62,7 @@ class Plot(object):
         self.data = None
         self._garbageList = []
         self.plotformats = ['pdf','png']#self.plotformats = ['pdf','png']
-        self.savelog = False
+        self.savelog = True
         self.doChi2 = False
         self.range=None
         self.ratiorange = [0.4,1.6]
