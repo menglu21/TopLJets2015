@@ -96,18 +96,21 @@ void RunExYukawa(const TString in_fname,
   ht.addHist("el_q",   new TH1F("el_q",       ";Electron charge;Events",5,-2.5,2.5));
   ht.addHist("muel_q",   new TH1F("muel_q",       ";Muon-Electron charge;Events",5,-2.5,2.5));
 
-
   ht.addHist("lep_pt_bc",		 new TH1F("lep_pt_bc",       ";p_{T}(l) [GeV]; Events", 24,0,600));
   ht.addHist("lep_eta_bc",		 new TH1F("lep_eta_bc",      ";#eta(lepton) ; Events", 25,-2.5,2.5));
+  ht.addHist("m_ll_bc",			 new TH1F("m_ll_bc",         ";M(l,l) [GeV] ; Events", 24,0,600));
 
   ht.addHist("lep_pt_bc_mumu",		 new TH1F("lep_pt_bc_mumu",       ";p_{T}(l) [GeV]; Dimuon Events", 24,0,600));
   ht.addHist("lep_eta_bc_mumu",		 new TH1F("lep_eta_bc_mumu",      ";#eta(lepton) ; Dimuon Events", 25,-2.5,2.5));
+  ht.addHist("m_ll_bc_mumu",             new TH1F("m_ll_bc_mumu",         ";M(mu,mu) [GeV] ; Events", 24,0,600));
 
   ht.addHist("lep_pt_bc_ee",		 new TH1F("lep_pt_bc_ee",       ";p_{T}(l) [GeV]; Dielecton Events", 24,0,600));
   ht.addHist("lep_eta_bc_ee",		 new TH1F("lep_eta_bc_ee",      ";#eta(lepton) ; Dielecton Events", 25,-2.5,2.5));
+  ht.addHist("m_ll_bc_ee",               new TH1F("m_ll_bc_ee",         ";M(e,e) [GeV] ; Events", 24,0,600));
 
   ht.addHist("lep_pt_bc_emu",		 new TH1F("lep_pt_bc_emu",       ";p_{T}(l) [GeV]; e-#mu Events", 24,0,600));
   ht.addHist("lep_eta_bc_emu",		 new TH1F("lep_eta_bc_emu",      ";#eta(lepton) ; e-#mu Events", 25,-2.5,2.5));
+  ht.addHist("m_ll_bc_emu",              new TH1F("m_ll_bc_emu",         ";M(e,mu) [GeV] ; Events", 24,0,600));
 
   ht.addHist("lep_pt",		 new TH1F("lep_pt",       ";p_{T}(l) [GeV]; Events", 24,0,600));
   ht.addHist("lep_pt1",            new TH1F("lep_pt1",       ";p_{T}(Leading lepton) [GeV]; Events", 24,0,600));
@@ -143,7 +146,7 @@ void RunExYukawa(const TString in_fname,
   TTree *t = (TTree*)f->Get("analysis/data");
   attachToMiniEventTree(t,ev,true);
   Int_t nentries(t->GetEntriesFast());
-  if (debug) nentries = min(300000,nentries); //restrict number of entries for testing
+  if (debug) nentries = min(10000000,nentries); //restrict number of entries for testing
   t->GetEntry(0);
   cout << "...producing " << outname << " from " << nentries << " events" << endl;
 
@@ -172,19 +175,20 @@ void RunExYukawa(const TString in_fname,
 
       //trigger
       bool hasMTrigger(false);
+
       if(era.Contains("2016")) hasMTrigger=(selector.hasTriggerBit("HLT_IsoMu24_v", ev.triggerBits) );
       if(era.Contains("2017")) {
 	hasMTrigger=(
-    /* previous random selection
-        selector.hasTriggerBit("HLT_IsoMu24_v", ev.triggerBits) ||
-			  selector.hasTriggerBit("HLT_Mu50_v", ev.triggerBits) ||
-			  selector.hasTriggerBit("HLT_Mu17_TrkIsoVVL_Mu8_TrkIsoVVL_DZ_Mass8_v", ev.triggerBits) ||
-			  selector.hasTriggerBit("HLT_Mu17_TrkIsoVVL_Mu8_TrkIsoVVL_DZ_Mass3p8_v", ev.triggerBits) ||
-        selector.hasTriggerBit("HLT_Ele35_WPTight_Gsf_v", ev.triggerBits) ||
-        selector.hasTriggerBit("HLT_Ele32_WPTight_Gsf_L1DoubleEG_v", ev.triggerBits) ||
-        selector.hasTriggerBit("HLT_Ele23_Ele12_CaloIdL_TrackIdL_IsoVL_v", ev.triggerBits) || // OK
-        selector.hasTriggerBit("HLT_Photon200_v", ev.triggerBits)
-    */
+    // previous random selection
+    //    selector.hasTriggerBit("HLT_IsoMu24_v", ev.triggerBits) ||
+    //			  selector.hasTriggerBit("HLT_Mu50_v", ev.triggerBits) ||
+    //			  selector.hasTriggerBit("HLT_Mu17_TrkIsoVVL_Mu8_TrkIsoVVL_DZ_Mass8_v", ev.triggerBits) ||
+    //			  selector.hasTriggerBit("HLT_Mu17_TrkIsoVVL_Mu8_TrkIsoVVL_DZ_Mass3p8_v", ev.triggerBits) ||
+    //    selector.hasTriggerBit("HLT_Ele35_WPTight_Gsf_v", ev.triggerBits) ||
+    //    selector.hasTriggerBit("HLT_Ele32_WPTight_Gsf_L1DoubleEG_v", ev.triggerBits) ||
+    //    selector.hasTriggerBit("HLT_Ele23_Ele12_CaloIdL_TrackIdL_IsoVL_v", ev.triggerBits) || // OK
+    //    selector.hasTriggerBit("HLT_Photon200_v", ev.triggerBits)
+
     //From AN2019_140_v3
         // emu triggers
         selector.hasTriggerBit("HLT_Mu8_TrkIsoVVL_Ele23_CaloIdL_TrackIdL_IsoVL_DZ_v", ev.triggerBits) || //??
@@ -194,12 +198,14 @@ void RunExYukawa(const TString in_fname,
         // ee triggers
         selector.hasTriggerBit("HLT_Ele23_Ele12_CaloIdL_TrackIdL_IsoVL_v", ev.triggerBits) ||
         selector.hasTriggerBit("HLT_Ele35_WPTight_Gsf_v", ev.triggerBits) ||
+
         // mumu triggers
         selector.hasTriggerBit("HLT_Mu17_TrkIsoVVL_Mu8_TrkIsoVVL_DZ_Mass8_v", ev.triggerBits) ||
         selector.hasTriggerBit("HLT_IsoMu27_v", ev.triggerBits)
       );
       }
-      Ntotal++;
+
+     Ntotal++;
 
 
 
@@ -212,9 +218,17 @@ void RunExYukawa(const TString in_fname,
       //select two offline muons
       std::vector<Particle> flaggedleptons = selector.flaggedLeptons(ev);
       SelectionTool::QualityFlags muId(SelectionTool::TIGHT);
-      std::vector<Particle> leptons = selector.selLeptons(flaggedleptons,muId,SelectionTool::MVA90,minLeptonPt,2.4);
+      //std::vector<Particle> leptons = selector.selLeptons(flaggedleptons,muId,SelectionTool::MVA90,minLeptonPt,2.4);
+      std::vector<Particle> leptons = selector.selLeptons(flaggedleptons,muId,SelectionTool::TIGHT,minLeptonPt,2.4);
+
       if(leptons.size()<2) continue;
       Ntotal_lepton++;
+
+/*
+      for (size_t in_nlep=0; in_nlep<leptons.size();in_nlep++){
+        if (leptons[in_nlep].id()==11) ht.fill("lep_pt_bc_ee",          leptons[in_nlep].pt(), 1., "inc");
+      }
+*/
 
       sort(leptons.begin(),leptons.end(),
 	[](const Particle& a, const Particle& b){
@@ -305,7 +319,9 @@ void RunExYukawa(const TString in_fname,
         float leptonSF = muonSF*electronSF*emuSF;
 //        evWgt  = normWgt*puWgt*selSF.first*l1prefireProb.first;
 //        evWgt  = normWgt*puWgt*muonSF.first*l1prefireProb.first;
+
         evWgt  = normWgt*puWgt*leptonSF*dilepton_trig_SF*l1prefireProb.first;
+
         evWgt *= (ev.g_nw>0 ? ev.g_w[0] : 1.0);//generator weights
 //        cout<<leptons[0].id()<<"  "<<leptons[0].charge()<<"  "<<leptons[1].id()<<"  "<<leptons[1].charge()<<"  "<<leptonSF<<endl;
       }
@@ -327,6 +343,12 @@ void RunExYukawa(const TString in_fname,
           ht.fill("lep_eta_bc_emu",     leptons[in_nlep].eta(), evWgt, "inc");
         }
       }
+
+      float invariant_mass = (leptons[0]+leptons[1]).M();
+      ht.fill("m_ll_bc_emu",  invariant_mass,        evWgt, "inc");
+      if (dimuon_event)      		ht.fill("m_ll_bc_mumu", invariant_mass,        evWgt, "inc");
+      if (dielectron_event)  		ht.fill("m_ll_bc_ee",   invariant_mass,        evWgt, "inc");
+      if (emu_event || mue_event) 	ht.fill("m_ll_bc_emu",  invariant_mass,        evWgt, "inc");
 
       if (leptons[0].charge()*leptons[1].charge() < 0){
         float zmass = (leptons[0]+leptons[1]).M();

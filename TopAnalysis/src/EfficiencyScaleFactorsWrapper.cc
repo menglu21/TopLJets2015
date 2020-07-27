@@ -254,20 +254,28 @@ EffCorrection_t EfficiencyScaleFactorsWrapper::getElectronSF(float pt,float eta)
 
   if(scaleFactorsH_.find("e_rec") != scaleFactorsH_.end()) {
     TH2 *h=scaleFactorsH_["e_rec"];
-    float etaForSF  = TMath::Min(h->GetXaxis()->GetXmax(),TMath::Max(eta,h->GetXaxis()->GetXmin()));
-    int   xbinForSF = h->GetXaxis()->FindBin(etaForSF);
-    float ptForSF   = TMath::Min(h->GetYaxis()->GetXmax(),TMath::Max(pt,h->GetYaxis()->GetXmin()));
+    float ptForSF = pt;
+    float etaForSF = fabs(eta);
+    if (pt > h->GetYaxis()->GetXmax()) ptForSF = h->GetYaxis()->GetXmax() - 0.01;
+    if (pt < h->GetYaxis()->GetXmin()) ptForSF = h->GetYaxis()->GetXmin() + 0.01;
+    if (fabs(eta) > h->GetXaxis()->GetXmax()) etaForSF = h->GetXaxis()->GetXmax() - 0.01;
+    if (fabs(eta) < h->GetXaxis()->GetXmin()) etaForSF = h->GetXaxis()->GetXmin() + 0.01;
     int   ybinForSF = h->GetYaxis()->FindBin(ptForSF);
+    int   xbinForSF = h->GetXaxis()->FindBin(etaForSF);
     sf.first  *= h->GetBinContent(xbinForSF,ybinForSF);
     sf.second *= pow(h->GetBinError(xbinForSF,ybinForSF),2);
   }
 
   if(scaleFactorsH_.find("e_id") != scaleFactorsH_.end()) {
     TH2 *h=scaleFactorsH_["e_id"];
-    float etaForSF  = TMath::Min(h->GetXaxis()->GetXmax(),TMath::Max(eta,h->GetXaxis()->GetXmin()));
-    int   xbinForSF = h->GetXaxis()->FindBin(etaForSF);
-    float ptForSF   = TMath::Min(h->GetYaxis()->GetXmax(),TMath::Max(pt,h->GetYaxis()->GetXmin()));
+    float ptForSF = pt;
+    float etaForSF = fabs(eta);
+    if (pt > h->GetYaxis()->GetXmax()) ptForSF = h->GetYaxis()->GetXmax() - 0.01;
+    if (pt < h->GetYaxis()->GetXmin()) ptForSF = h->GetYaxis()->GetXmin() + 0.01;
+    if (fabs(eta) > h->GetXaxis()->GetXmax()) etaForSF = h->GetXaxis()->GetXmax() - 0.01;
+    if (fabs(eta) < h->GetXaxis()->GetXmin()) etaForSF = h->GetXaxis()->GetXmin() + 0.01;
     int   ybinForSF = h->GetYaxis()->FindBin(ptForSF);
+    int   xbinForSF = h->GetXaxis()->FindBin(etaForSF);
     sf.first  *= h->GetBinContent(xbinForSF,ybinForSF);
     sf.second *= pow(h->GetBinError(xbinForSF,ybinForSF),2);
   }
