@@ -219,7 +219,7 @@ void RunExYukawa(const TString in_fname,
       std::vector<Particle> flaggedleptons = selector.flaggedLeptons(ev);
       SelectionTool::QualityFlags muId(SelectionTool::TIGHT);
       //std::vector<Particle> leptons = selector.selLeptons(flaggedleptons,muId,SelectionTool::MVA90,minLeptonPt,2.4);
-      std::vector<Particle> leptons = selector.selLeptons(flaggedleptons,muId,SelectionTool::LOOSE,minLeptonPt,2.4);
+      std::vector<Particle> leptons = selector.selLeptons(flaggedleptons,muId,SelectionTool::TIGHT,minLeptonPt,2.4);
 
       if(leptons.size()<2) continue;
       Ntotal_lepton++;
