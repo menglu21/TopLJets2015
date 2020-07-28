@@ -199,6 +199,8 @@ To separately the signal from the stack histogram:
 python scripts/plotter.py -i /eos/user/e/efe/DataAnalysis/ntuples/ -l 41500    -j test/analysis/ExYukawa/samples_2017.json  -o final_plotter.root --signalJson test/analysis/ExYukawa/samples_2017_signal.json
 ```
 
+Once you make plots you can copy it to a web accessible area and there you should also copy https://github.com/efeyazgan/TopLJets2015/blob/106_protonreco/TopAnalysis/test/index.php 
+
 Legend sizes are controlled in:
 https://github.com/efeyazgan/TopLJets2015/blob/e745fad072c0ecd1c66b343a87691daaf4dedfe4/TopAnalysis/python/Plot.py#L259
 https://github.com/efeyazgan/TopLJets2015/blob/e745fad072c0ecd1c66b343a87691daaf4dedfe4/TopAnalysis/python/Plot.py#L290-L291
