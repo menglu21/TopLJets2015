@@ -124,6 +124,8 @@ void RunExYukawa(const TString in_fname,
   ht.addHist("bjet_eta",	 new TH1F("bjet_eta",    ";#eta(b jet) ; Events", 25,-2.5,2.5));
   ht.addHist("met",       new TH1F("met",      ";MET [GeV]; Events", 24,0,600));
   ht.addHist("met_phi",       new TH1F("met_phi",      ";MET #phi; Events", 25, -4,4));
+  ht.addHist("DR_jl",       new TH1F("DR_jl",      ";#DeltaR(j,l); Events", 100, 0.,4.));
+
 //  ht.addHist("b_matched_jet",  new TH1F("b_matched_jet", ";p_T(b matched jet) [GeV]; Events", 24,0,600));
 //  ht.addHist("c_matched_jet",  new TH1F("c_matched_jet", ";p_T(c matched jet) [GeV]; Events", 24,0,600));
 
@@ -224,18 +226,11 @@ void RunExYukawa(const TString in_fname,
       if(leptons.size()<2) continue;
       Ntotal_lepton++;
 
-/*
-      for (size_t in_nlep=0; in_nlep<leptons.size();in_nlep++){
-        if (leptons[in_nlep].id()==11) ht.fill("lep_pt_bc_ee",          leptons[in_nlep].pt(), 1., "inc");
-      }
-*/
-
       sort(leptons.begin(),leptons.end(),
-	[](const Particle& a, const Particle& b){
-		return a.Pt() > b.Pt();
-	}
+	            [](const Particle& a, const Particle& b){
+		          return a.Pt() > b.Pt();
+	           }
       );
-
 
       int dimuon_event = 0;
       int dielectron_event = 0;
@@ -317,13 +312,10 @@ void RunExYukawa(const TString in_fname,
         }
         EffCorrection_t l1prefireProb=l1PrefireWR.getCorrection(allJets,{});
         float leptonSF = muonSF*electronSF*emuSF;
-//        evWgt  = normWgt*puWgt*selSF.first*l1prefireProb.first;
-//        evWgt  = normWgt*puWgt*muonSF.first*l1prefireProb.first;
 
-        evWgt  = normWgt*puWgt*leptonSF*dilepton_trig_SF*l1prefireProb.first;
+        evWgt  = normWgt*puWgt*l1prefireProb.first*leptonSF*dilepton_trig_SF;
 
         evWgt *= (ev.g_nw>0 ? ev.g_w[0] : 1.0);//generator weights
-//        cout<<leptons[0].id()<<"  "<<leptons[0].charge()<<"  "<<leptons[1].id()<<"  "<<leptons[1].charge()<<"  "<<leptonSF<<endl;
       }
 
 
@@ -427,6 +419,9 @@ void RunExYukawa(const TString in_fname,
          ht.fill("jet_pt",    allJets[ij].pt(), evWgt, "inc");
          //cout<<"Jet flavor"<<"  "<<allJets[ij].flavor()<<"  "<<allJets[ij].pt()<<"  "<<allJets[ij].eta()<<"  "<<allJets[ij].Phi()<<endl;
 	       HT += allJets[ij].pt();
+         for (size_t ik = 0;ik<leptons.size();ik++){
+           ht.fill("DR_jl",sqrt(pow(leptons[ik].DeltaPhi(allJets[ij]),2)+pow(DeltaEta(leptons[ik].eta(),allJets[ij].eta()),2)),evWgt,"inc");
+         }
          int idx=allJets[ij].getJetIndex();
          bool passBtag(ev.j_btag[idx]>0);
          if(!passBtag) continue;
