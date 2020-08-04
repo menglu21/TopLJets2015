@@ -42,7 +42,7 @@ void RunExYukawa(const TString in_fname,
   }
 
   //preselection cuts to apply
-  float minLeptonPt( isLowPUrun ? 20. : 27);
+  float minLeptonPt( isLowPUrun ? 20. : 15);
   size_t minJetMultiplicity(3);
   int minNum_btags = 2;
 
@@ -67,6 +67,10 @@ void RunExYukawa(const TString in_fname,
   HistTool ht;
   ht.setNsyst(0);
   ht.addHist("h_Z_mass", new TH1F("h_Z_mass",    ";M(Z) [GeV];Events",62,75,106));
+  ht.addHist("h_Z_mass_ee", new TH1F("h_Z_mass_ee",    ";M(Z) [GeV];Events",62,75,106));
+  ht.addHist("h_Z_mass_mm", new TH1F("h_Z_mass_mm",    ";M(Z) [GeV];Events",62,75,106));
+  ht.addHist("h_Z_mass_em", new TH1F("h_Z_mass_em",    ";M(Z) [GeV];Events",62,75,106));
+
   ht.addHist("nvtx",         new TH1F("nvtx",        ";Vertex multiplicity;Events",35,0,140));
   //ht.addHist("nvtx_uw",      new TH1F("nvtx_uw",     ";Vertex multiplicity w/o pileupWeight",35,0,140));
   ht.addHist("njets",        new TH1F("njets",       ";Jet multiplicity;Events",12,0.5,12.5));
@@ -96,25 +100,25 @@ void RunExYukawa(const TString in_fname,
   ht.addHist("el_q",   new TH1F("el_q",       ";Electron charge;Events",5,-2.5,2.5));
   ht.addHist("muel_q",   new TH1F("muel_q",       ";Muon-Electron charge;Events",5,-2.5,2.5));
 
-  ht.addHist("lep_pt_bc",		 new TH1F("lep_pt_bc",       ";p_{T}(l) [GeV]; Events", 24,0,600));
+  ht.addHist("lep_pt_bc",		 new TH1F("lep_pt_bc",       ";p_{T}(l) [GeV]; Events", 58,20,600));
   ht.addHist("lep_eta_bc",		 new TH1F("lep_eta_bc",      ";#eta(lepton) ; Events", 25,-2.5,2.5));
-  ht.addHist("m_ll_bc",			 new TH1F("m_ll_bc",         ";M(l,l) [GeV] ; Events", 24,0,600));
+  ht.addHist("m_ll_bc",			 new TH1F("m_ll_bc",         ";M(l,l) [GeV] ; Events", 20,0,600));
 
-  ht.addHist("lep_pt_bc_mumu",		 new TH1F("lep_pt_bc_mumu",       ";p_{T}(l) [GeV]; Dimuon Events", 24,0,600));
+  ht.addHist("lep_pt_bc_mumu",		 new TH1F("lep_pt_bc_mumu",       ";p_{T}(l) [GeV]; Dimuon Events", 58,20,600));
   ht.addHist("lep_eta_bc_mumu",		 new TH1F("lep_eta_bc_mumu",      ";#eta(lepton) ; Dimuon Events", 25,-2.5,2.5));
-  ht.addHist("m_ll_bc_mumu",             new TH1F("m_ll_bc_mumu",         ";M(mu,mu) [GeV] ; Events", 24,0,600));
+  ht.addHist("m_ll_bc_mumu",             new TH1F("m_ll_bc_mumu",         ";M(mu,mu) [GeV] ; Events", 20,0,600));
 
-  ht.addHist("lep_pt_bc_ee",		 new TH1F("lep_pt_bc_ee",       ";p_{T}(l) [GeV]; Dielecton Events", 24,0,600));
+  ht.addHist("lep_pt_bc_ee",		 new TH1F("lep_pt_bc_ee",       ";p_{T}(l) [GeV]; Dielecton Events", 58,20,600));
   ht.addHist("lep_eta_bc_ee",		 new TH1F("lep_eta_bc_ee",      ";#eta(lepton) ; Dielecton Events", 25,-2.5,2.5));
-  ht.addHist("m_ll_bc_ee",               new TH1F("m_ll_bc_ee",         ";M(e,e) [GeV] ; Events", 24,0,600));
+  ht.addHist("m_ll_bc_ee",               new TH1F("m_ll_bc_ee",         ";M(e,e) [GeV] ; Events", 20,0,600));
 
-  ht.addHist("lep_pt_bc_emu",		 new TH1F("lep_pt_bc_emu",       ";p_{T}(l) [GeV]; e-#mu Events", 24,0,600));
+  ht.addHist("lep_pt_bc_emu",		 new TH1F("lep_pt_bc_emu",       ";p_{T}(l) [GeV]; e-#mu Events", 58,20,600));
   ht.addHist("lep_eta_bc_emu",		 new TH1F("lep_eta_bc_emu",      ";#eta(lepton) ; e-#mu Events", 25,-2.5,2.5));
-  ht.addHist("m_ll_bc_emu",              new TH1F("m_ll_bc_emu",         ";M(e,mu) [GeV] ; Events", 24,0,600));
+  ht.addHist("m_ll_bc_emu",              new TH1F("m_ll_bc_emu",         ";M(e,mu) [GeV] ; Events", 20,0,600));
 
-  ht.addHist("lep_pt",		 new TH1F("lep_pt",       ";p_{T}(l) [GeV]; Events", 24,0,600));
-  ht.addHist("lep_pt1",            new TH1F("lep_pt1",       ";p_{T}(Leading lepton) [GeV]; Events", 24,0,600));
-  ht.addHist("lep_pt2",            new TH1F("lep_pt2",       ";p_{T}(Sub-leading lepton) [GeV]; Events", 24,0,600));
+  ht.addHist("lep_pt",		 new TH1F("lep_pt",       ";p_{T}(l) [GeV]; Events", 58,20,600));
+  ht.addHist("lep_pt1",            new TH1F("lep_pt1",       ";p_{T}(Leading lepton) [GeV]; Events", 58,20,600));
+  ht.addHist("lep_pt2",            new TH1F("lep_pt2",       ";p_{T}(Sub-leading lepton) [GeV]; Events", 58,20,600));
   ht.addHist("lep_eta",		 new TH1F("lep_eta",      ";#eta(lepton) ; Events", 25,-2.5,2.5));
   ht.addHist("lep_phi1",		 new TH1F("lep_phi1",      ";#phi(lepton1) ; Events", 25,-3.2,3.2));
   ht.addHist("lep_phi2",		 new TH1F("lep_phi2",      ";#phi(lepton2) ; Events", 25,-3.2,3.2));
@@ -232,6 +236,11 @@ void RunExYukawa(const TString in_fname,
 	           }
       );
 
+      if (leptons[0].pt() < 30.) continue;
+      if (leptons[1].pt() < 20.) continue;
+      if (leptons[2].pt() > 15.) continue;
+
+
       int dimuon_event = 0;
       int dielectron_event = 0;
       int emu_event = 0;
@@ -292,7 +301,8 @@ void RunExYukawa(const TString in_fname,
           electronSF = electron1SF.first*electron2SF.first;
           EffCorrection_t dielectron_pt_trig_factor = lepEffH.getEEPtSF(leptons[0].pt(),leptons[1].pt());
           EffCorrection_t dielectron_eta_trig_factor = lepEffH.getEEEtaSF(abs(leptons[0].eta()),abs(leptons[1].eta()));
-          dilepton_trig_SF = dielectron_pt_trig_factor.first*dielectron_eta_trig_factor.first;
+          //1.25 from fit to Z->e+e- data/MC ratio
+          dilepton_trig_SF = 1.25*dielectron_pt_trig_factor.first*dielectron_eta_trig_factor.first;
         }
         if (emu_event == 1){
           EffCorrection_t electron1SF = lepEffH.getElectronSF(leptons[0].pt(),leptons[0].eta());
@@ -342,11 +352,14 @@ void RunExYukawa(const TString in_fname,
       if (dielectron_event)  		ht.fill("m_ll_bc_ee",   invariant_mass,        evWgt, "inc");
       if (emu_event || mue_event) 	ht.fill("m_ll_bc_emu",  invariant_mass,        evWgt, "inc");
 
+      float zmass = (leptons[0]+leptons[1]).M();
       if (leptons[0].charge()*leptons[1].charge() < 0){
-        float zmass = (leptons[0]+leptons[1]).M();
         ht.fill("h_Z_mass", zmass,        evWgt, "inc");
+        if (dimuon_event) ht.fill("h_Z_mass_mm", zmass,        evWgt, "inc");
+        if (dielectron_event) ht.fill("h_Z_mass_ee", zmass,        evWgt, "inc");
         Ntotal_Z++;
       }
+      if (emu_event || mue_event) ht.fill("h_Z_mass_em", zmass,        evWgt, "inc");
 
       if (leptons[0].charge()*leptons[1].charge() < 0) continue;
       Ntotal_after_samesign++;
