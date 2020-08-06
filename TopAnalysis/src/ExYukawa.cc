@@ -158,8 +158,6 @@ void RunExYukawa(const TString in_fname,
 
   int Ntotal_Z = 0;
 
-  vector<int> event_number;
-  vector<int> run_number;
   for (Int_t iev=0;iev<nentries;iev++)
     {
       t->GetEntry(iev);
@@ -254,13 +252,8 @@ void RunExYukawa(const TString in_fname,
       //event weight
       float evWgt(1.0);
 
-      std::vector<int>::iterator kop = std::find(event_number.begin(),event_number.end(),ev.event*ev.run);
-      if (ev.isData && kop != event_number.end()) continue;
-
       //data specific: check event rates after selection
       if(ev.isData){
-        event_number.push_back(ev.event*ev.run);
-
         std::map<Int_t,Float_t>::iterator rIt=lumiPerRun.find(ev.run);
         if(rIt!=lumiPerRun.end()){
           int runBin=std::distance(lumiPerRun.begin(),rIt);
@@ -269,11 +262,9 @@ void RunExYukawa(const TString in_fname,
         }else{
           cout << "[Warning] Unable to find run=" << ev.run << endl;
         }
-        //cout<<"Run: "<<ev.run<<"  "<<ev.event<<endl;
       }
+
       //MC specific: compute event weight
-
-
       if (!ev.isData) {
 
         float normWgt(normH? normH->GetBinContent(1) : 1.0);
@@ -299,7 +290,8 @@ void RunExYukawa(const TString in_fname,
           EffCorrection_t dielectron_pt_trig_factor = lepEffH.getEEPtSF(leptons[0].pt(),leptons[1].pt());
           EffCorrection_t dielectron_eta_trig_factor = lepEffH.getEEEtaSF(abs(leptons[0].eta()),abs(leptons[1].eta()));
           //1.25 from fit to Z->e+e- data/MC ratio
-          dilepton_trig_SF = 1.25*dielectron_pt_trig_factor.first*dielectron_eta_trig_factor.first;
+          //dilepton_trig_SF = 1.25*dielectron_pt_trig_factor.first*dielectron_eta_trig_factor.first;
+          dilepton_trig_SF = dielectron_pt_trig_factor.first*dielectron_eta_trig_factor.first;
         }
         if (emu_event == 1){
           EffCorrection_t electron1SF = lepEffH.getElectronSF(leptons[0].pt(),leptons[0].eta());
