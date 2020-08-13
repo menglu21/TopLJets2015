@@ -42,7 +42,7 @@ void RunExYukawa(const TString in_fname,
   }
 
   //preselection cuts to apply
-  float minLeptonPt( isLowPUrun ? 20. : 15);
+  float minLeptonPt( isLowPUrun ? 20. : 20);
   size_t minJetMultiplicity(3);
   int minNum_btags = 2;
 
@@ -66,53 +66,60 @@ void RunExYukawa(const TString in_fname,
   fOut->cd();
   HistTool ht;
   ht.setNsyst(0);
-  ht.addHist("h_Z_mass", new TH1F("h_Z_mass",    ";M(Z) [GeV];Events",62,75,106));
+  ht.addHist("control_Z_mass",    new TH1F("control_Z_mass",    ";M(Z) [GeV];Events",40,70,110));
+  ht.addHist("control_lep_pt_bc", new TH1F("control_lep_pt_bc", ";p_{T}(l) [GeV]; Events", 30,0,600));
+  ht.addHist("control_lep_eta_bc",new TH1F("control_lep_eta_bc",";#eta(lepton) ; Events", 10,-2.5,2.5));
+  ht.addHist("control_m_ll_bc",		new TH1F("control_m_ll_bc",   ";M(l+,l-) [GeV] ; Events", 20,12,600));
+  ht.addHist("control_pT_ll_bc",  new TH1F("control_pT_ll_bc",  ";p_{T}(l+,l-) [GeV] ; Events", 80,0,200));
+  ht.addHist("control_y_ll_bc",  new TH1F("control_y_ll_bc",  ";y(l+,l-) [GeV] ; Events", 20,-5,5));
+
+  ht.addHist("control_2_lep_pt_bc", new TH1F("control_2_lep_pt_bc", ";p_{T}(l) [GeV]; Events", 30,0,600));
+  ht.addHist("control_2_lep_eta_bc",new TH1F("control_2_lep_eta_bc",";#eta(lepton) ; Events", 10,-2.5,2.5));
 
   ht.addHist("nvtx",         new TH1F("nvtx",        ";Vertex multiplicity;Events",35,0,140));
-  //ht.addHist("nvtx_uw",      new TH1F("nvtx_uw",     ";Vertex multiplicity w/o pileupWeight",35,0,140));
-  ht.addHist("njets",        new TH1F("njets",       ";Jet multiplicity;Events",12,0.5,12.5));
+
   ht.addHist("njets_bc",        new TH1F("njets_bc",       ";Jet multiplicity;Events",12,0.5,12.5));
+  ht.addHist("jet_pt_bc",       new TH1F("jet_pt_bc",      ";p_{T}(jet) [GeV];Events",15,0,300));
+  ht.addHist("jet_eta_bc",       new TH1F("jet_eta_bc",      ";#eta(jet) ;Events",12,-3,3));
 
-  ht.addHist("jet_pt",       new TH1F("jet_pt",      ";p_{T}(jet) [GeV];Events",24,0,600));
-  ht.addHist("jet_pt_bc",       new TH1F("jet_pt_bc",      ";p_{T}(jet) [GeV];Events",24,0,600));
-
-  ht.addHist("jet_pt1",       new TH1F("jet_pt1",      ";p_{T}(1st jet) [GeV];Events",24,0,600));
-  ht.addHist("jet_pt2",       new TH1F("jet_pt2",      ";p_{T}(2nd jet) [GeV];Events",24,0,600));
-  ht.addHist("jet_pt3",       new TH1F("jet_pt3",      ";p_{T}(3rd jet) [GeV];Events",24,0,600));
-  ht.addHist("bjet_pt1",       new TH1F("bjet_pt1",      ";p_{T}(1st jet) [GeV];Events",24,0,600));
-  ht.addHist("bjet_pt2",       new TH1F("bjet_pt2",      ";p_{T}(2nd jet) [GeV];Events",24,0,600));
-  ht.addHist("bjet_pt3",       new TH1F("bjet_pt3",      ";p_{T}(3rd jet) [GeV];Events",24,0,600));
-
-  ht.addHist("HT",            new TH1F("HT",           ";H_{T} [GeV];Events",50,0,1000));
-  ht.addHist("HT_bc",            new TH1F("HT_bc",           ";H_{T} [GeV];Events",50,0,1000));
+  ht.addHist("njets",        new TH1F("njets",       ";Jet multiplicity;Events",12,0.5,12.5));
+  ht.addHist("jet_pt",       new TH1F("jet_pt",      ";p_{T}(jet) [GeV];Events",15,0,300));
+  ht.addHist("jet_eta",       new TH1F("jet_eta",      ";#eta(jet) ;Events",12,-3,3));
+  ht.addHist("jet_pt1",       new TH1F("jet_pt1",      ";p_{T}(1st jet) [GeV];Events",15,0,300));
+  ht.addHist("jet_pt2",       new TH1F("jet_pt2",      ";p_{T}(2nd jet) [GeV];Events",15,0,300));
+  ht.addHist("jet_pt3",       new TH1F("jet_pt3",      ";p_{T}(3rd jet) [GeV];Events",15,0,300));
 
   ht.addHist("nbjets",		 new TH1F("nbjets",      ";b-jet multiplicity;Events",5,0.5,5.5));
+  ht.addHist("bjet_pt1",       new TH1F("bjet_pt1",      ";p_{T}(1st jet) [GeV];Events",15,0,300));
+  ht.addHist("bjet_pt2",       new TH1F("bjet_pt2",      ";p_{T}(2nd jet) [GeV];Events",15,0,300));
+  ht.addHist("bjet_pt3",       new TH1F("bjet_pt3",      ";p_{T}(3rd jet) [GeV];Events",15,0,300));
 
-  ht.addHist("mllb",          new TH1F("mllb",         ";m(l,b) [GeV];Events",50,0,1000));
+  ht.addHist("HT",            new TH1F("HT",           ";H_{T} [GeV];Events",20,0,1000));
+  ht.addHist("mllb",          new TH1F("mllb",         ";m(l,b) [GeV];Events",12,0,1000));
+
   ht.addHist("ratevsrun",    new TH1F("ratevsrun",   ";Run number; #sigma [pb]",int(lumiPerRun.size()),0,float(lumiPerRun.size())));
   ht.addHist("nmuons",   new TH1F("nmuons",       ";N(muons);Events",6,-0.5,5.5));
   ht.addHist("nelectrons",   new TH1F("nelectrons",       ";N(electrons);Events",6,-0.5,5.5));
   ht.addHist("nelmu",   new TH1F("nelmu",       ";N(elmu);Events",6,-0.5,5.5));
   ht.addHist("q",   new TH1F("q",       ";charge;Events",5,-2.5,2.5));
 
-  ht.addHist("lep_pt_bc",		 new TH1F("lep_pt_bc",       ";p_{T}(l) [GeV]; Events", 58,20,600));
-  ht.addHist("lep_eta_bc",		 new TH1F("lep_eta_bc",      ";#eta(lepton) ; Events", 25,-2.5,2.5));
-  ht.addHist("m_ll_bc",			 new TH1F("m_ll_bc",         ";M(l,l) [GeV] ; Events", 20,0,600));
+  ht.addHist("lep_pt",		 new TH1F("lep_pt",       ";p_{T}(l) [GeV]; Events", 20,0,300));
+  ht.addHist("lep_pt1",            new TH1F("lep_pt1",       ";p_{T}(Leading lepton) [GeV]; Events", 20,0,300));
+  ht.addHist("lep_pt2",            new TH1F("lep_pt2",       ";p_{T}(Sub-leading lepton) [GeV]; Events", 20,0,300));
+  ht.addHist("lep_eta",		 new TH1F("lep_eta",      ";#eta(lepton) ; Events", 10,-2.5,2.5));
 
+  ht.addHist("lep_2_pt",		 new TH1F("lep_2_pt",       ";p_{T}(l) [GeV]; Events", 20,15,300));
+  ht.addHist("lep_2_eta",		 new TH1F("lep_2_eta",       ";#eta(l) [GeV]; Events", 10,-2.5,2.5));
 
-  ht.addHist("lep_pt",		 new TH1F("lep_pt",       ";p_{T}(l) [GeV]; Events", 58,20,600));
-  ht.addHist("lep_pt1",            new TH1F("lep_pt1",       ";p_{T}(Leading lepton) [GeV]; Events", 58,20,600));
-  ht.addHist("lep_pt2",            new TH1F("lep_pt2",       ";p_{T}(Sub-leading lepton) [GeV]; Events", 58,20,600));
-  ht.addHist("lep_eta",		 new TH1F("lep_eta",      ";#eta(lepton) ; Events", 25,-2.5,2.5));
-  ht.addHist("lep_phi1",		 new TH1F("lep_phi1",      ";#phi(lepton1) ; Events", 25,-3.2,3.2));
-  ht.addHist("lep_phi2",		 new TH1F("lep_phi2",      ";#phi(lepton2) ; Events", 25,-3.2,3.2));
-  ht.addHist("dphi_dilep",        new TH1F("dphi_dilep",   ";#Delta#phi(l,l);Events", 25, -6,6));
-  ht.addHist("deta_dilep",        new TH1F("deta_dilep",   ";#Delta#eta(l,l);Events", 25, -6,6));
-  ht.addHist("bjet_pt",      new TH1F("bjet_pt",     ";p_{T}(b jet) [GeV]; Events", 24,0,600));
-  ht.addHist("bjet_eta",	 new TH1F("bjet_eta",    ";#eta(b jet) ; Events", 25,-2.5,2.5));
-  ht.addHist("met",       new TH1F("met",      ";MET [GeV]; Events", 24,0,600));
-  ht.addHist("met_phi",       new TH1F("met_phi",      ";MET #phi; Events", 25, -4,4));
-  ht.addHist("DR_jl",       new TH1F("DR_jl",      ";#DeltaR(j,l); Events", 100, 0.,4.));
+  ht.addHist("lep_phi1",		 new TH1F("lep_phi1",      ";#phi(lepton1) ; Events", 10,-3.2,3.2));
+  ht.addHist("lep_phi2",		 new TH1F("lep_phi2",      ";#phi(lepton2) ; Events", 10,-3.2,3.2));
+  ht.addHist("dphi_dilep",        new TH1F("dphi_dilep",   ";#Delta#phi(l,l);Events", 10, -4,4));
+  ht.addHist("deta_dilep",        new TH1F("deta_dilep",   ";#Delta#eta(l,l);Events", 10, -4,4));
+  ht.addHist("bjet_pt",      new TH1F("bjet_pt",     ";p_{T}(b jet) [GeV]; Events", 15,0,300));
+  ht.addHist("bjet_eta",	 new TH1F("bjet_eta",    ";#eta(b jet) ; Events", 12,-3,3));
+  ht.addHist("met",       new TH1F("met",      ";MET [GeV]; Events", 20,0,300));
+  ht.addHist("met_phi",       new TH1F("met_phi",      ";MET #phi; Events", 10, -4,4));
+  ht.addHist("DR_jl",       new TH1F("DR_jl",      ";#DeltaR(j,l); Events", 12, 0.,4.));
 
 //  ht.addHist("b_matched_jet",  new TH1F("b_matched_jet", ";p_T(b matched jet) [GeV]; Events", 24,0,600));
 //  ht.addHist("c_matched_jet",  new TH1F("c_matched_jet", ";p_T(c matched jet) [GeV]; Events", 24,0,600));
@@ -146,7 +153,7 @@ void RunExYukawa(const TString in_fname,
   //EVENT LOOP
   //select 2mu+>=3 jets events triggered by a single muon trigger
 
-
+/*
   int Ntotal = 0;
   int Ntotal_lepton = 0;
   int Ntotal_after_trig = 0;
@@ -157,7 +164,7 @@ void RunExYukawa(const TString in_fname,
   int N_after_all_selections = 0;
 
   int Ntotal_Z = 0;
-
+*/
   for (Int_t iev=0;iev<nentries;iev++)
     {
       t->GetEntry(iev);
@@ -189,20 +196,16 @@ void RunExYukawa(const TString in_fname,
         selector.hasTriggerBit("HLT_Ele23_Ele12_CaloIdL_TrackIdL_IsoVL_v", ev.triggerBits) ||
         selector.hasTriggerBit("HLT_Ele35_WPTight_Gsf_v", ev.triggerBits) ||
         // mumu triggers
-        selector.hasTriggerBit("HLT_Mu17_TrkIsoVVL_Mu8_TrkIsoVVL_DZ_Mass8_v", ev.triggerBits) ||
+        selector.hasTriggerBit("HLT_Mu17_TrkIsoVVL_Mu8_TrkIsoVVL_DZ_Mass8_v", ev.triggerBits) || 
         selector.hasTriggerBit("HLT_IsoMu27_v", ev.triggerBits)
       );
       }
 
-     Ntotal++;
-
-
-
-
+//     Ntotal++;
 //      cout << "Trigger = "<<hasMTrigger << endl;
 //      if(ev.isData && !hasMTrigger) continue;
       if(!hasMTrigger) continue;
-      Ntotal_after_trig++;
+//      Ntotal_after_trig++;
 
       //select two offline muons
       std::vector<Particle> flaggedleptons = selector.flaggedLeptons(ev);
@@ -211,7 +214,7 @@ void RunExYukawa(const TString in_fname,
       std::vector<Particle> leptons = selector.selLeptons(flaggedleptons,muId,SelectionTool::TIGHT,minLeptonPt,2.4);
 
       if(leptons.size()<2) continue;
-      Ntotal_lepton++;
+//      Ntotal_lepton++;
 
       sort(leptons.begin(),leptons.end(),
 	            [](const Particle& a, const Particle& b){
@@ -221,7 +224,7 @@ void RunExYukawa(const TString in_fname,
 
       if (leptons[0].pt() < 30.) continue;
       if (leptons[1].pt() < 20.) continue;
-      if (leptons[2].pt() > 15.) continue;
+      if (leptons[2].pt() > 20.) continue;
 
 
       int dimuon_event = 0;
@@ -242,8 +245,8 @@ void RunExYukawa(const TString in_fname,
       //select jets
       btvSF.addBTagDecisions(ev);
       if(!ev.isData) btvSF.updateBTagDecisions(ev);
-      std::vector<Jet> allJets = selector.getGoodJets(ev,30.,2.4,leptons,{});
-      bool passJets(allJets.size()>=minJetMultiplicity);
+      std::vector<Jet> allJets = selector.getGoodJets(ev,20.,2.4,leptons,{});
+//      bool passJets(allJets.size()>=minJetMultiplicity);
 
       //met
       TLorentzVector met(0,0,0,0);
@@ -318,33 +321,27 @@ void RunExYukawa(const TString in_fname,
       }
 
 
-      for (size_t in_nlep=0; in_nlep<leptons.size();in_nlep++){
-        ht.fill("lep_pt_bc",          leptons[in_nlep].pt(), evWgt, tags2);
-        ht.fill("lep_eta_bc",     leptons[in_nlep].eta(), evWgt, tags2);
-      }
+
 
       float invariant_mass = (leptons[0]+leptons[1]).M();
-      ht.fill("m_ll_bc_emu",  invariant_mass,        evWgt, tags2);
+      ht.fill("control_m_ll_bc",  invariant_mass,        evWgt, tags2);
 
       float zmass = (leptons[0]+leptons[1]).M();
       if (leptons[0].charge()*leptons[1].charge() < 0){
-        ht.fill("h_Z_mass", zmass,        evWgt, tags2);
-        Ntotal_Z++;
+        ht.fill("control_Z_mass", zmass,        evWgt, tags2);
+        if (zmass > 70. && zmass < 110.){
+          ht.fill("control_2_lep_pt_bc", leptons[0].pt(),evWgt, tags2);
+          ht.fill("control_2_lep_pt_bc", leptons[1].pt(),evWgt, tags2);
+          ht.fill("control_2_lep_eta_bc", leptons[0].eta(),evWgt, tags2);
+          ht.fill("control_2_lep_eta_bc", leptons[1].eta(),evWgt, tags2);
+          for (size_t in_nlep=0; in_nlep<leptons.size();in_nlep++){
+            ht.fill("control_lep_pt_bc", leptons[in_nlep].pt(), evWgt, tags2);
+            ht.fill("control_lep_eta_bc",leptons[in_nlep].eta(), evWgt, tags2);
+          }
+          ht.fill("control_pT_ll_bc",(leptons[0]+leptons[1]).Pt(),evWgt, tags2);
+          ht.fill("control_Y_ll_bc",(leptons[0]+leptons[1]).Eta(),evWgt, tags2);
+        }
       }
-
-      if (leptons[0].charge()*leptons[1].charge() < 0) continue;
-      Ntotal_after_samesign++;
-
-      ht.fill("njets_bc",      allJets.size(), evWgt, tags2);
-      float HT_bc = 0;
-      for(size_t ij=0; ij<allJets.size(); ij++){
-          ht.fill("jet_pt_bc",    allJets[ij].pt(), evWgt, tags2);
-          //cout<<"Jet flavor"<<"  "<<allJets[ij].flavor()<<"  "<<allJets[ij].pt()<<"  "<<allJets[ij].eta()<<"  "<<allJets[ij].Phi()<<endl;
-          HT_bc += allJets[ij].pt();
-      }
-      ht.fill("HT_bc", HT_bc, evWgt, tags2);
-      if(!passJets) continue;
-      Ntotal_after_jet++;
 
       //lepton-b systems
       int num_btags = 0;
@@ -357,50 +354,100 @@ void RunExYukawa(const TString in_fname,
 		      num_btags++;
         }
 
-       if(num_btags < minNum_btags) continue;
-       Ntotal_after_num_btags++;
 
-      if(ev.met_pt < 30.) continue;
-      Ntotal_after_met++;
-      N_after_all_selections++;
+//      if(num_btags < minNum_btags) continue;
+
+//      if(ev.met_pt < 30.) continue;
 
       //sort jets w.r.t. pt
+      /*
       sort(allJets.begin(),allJets.end(),
         [](const Jet& a, const Jet& b){
                 return a.Pt() > b.Pt();
         }
       );
-
+      */
 
       //select gen-level objects
+/*
       std::vector<Particle> gen_leptons=selector.getGenLeptons(ev,20.,2.5);
       std::vector<Particle> gen_photons=selector.getGenPhotons(ev,50.,2.4);
-      std::vector<Jet> gen_jets = selector.getGenJets(ev,20,2.5,gen_leptons,gen_photons);
-
-/*
-            cout<<"Event: "<<iev<<endl;
-            cout<<"Genjets: "<<gen_jets.size()<<endl;
-
-            for (size_t i_gen=0;i_gen<gen_jets.size();i_gen++){
-              cout<<i_gen<<"  "<<gen_jets[i_gen].pt()<<"  "<<gen_jets[i_gen].eta()<<"   "<<gen_jets[i_gen].Phi()<<endl;
-            }
-            */
-
-/*
-            for (int i=0;i<ev.ng;i++){
-              if (abs(ev.g_id[i])>5) continue;
-              cout<<ev.g_id[i]<<"  "<<ev.g_pt[i]<<"  "<<ev.g_eta[i]<<"  "<<ev.g_phi[i]<<endl;
-              TLorentzVector genjet4mom;
-              genjet4mom.SetPtEtaPhiM(ev.g_pt[i],ev.g_eta[i],ev.g_phi[i],ev.g_m[i]);
-            }
+      std::vector<Jet> gen_jets = selector.getGenJets(ev,25,2.5,gen_leptons,gen_photons);
+      cout<<"Event: "<<iev<<endl;
+      cout<<"Genjets: "<<gen_jets.size()<<endl;
+      for (size_t i_gen=0;i_gen<gen_jets.size();i_gen++) cout<<i_gen<<"  "<<gen_jets[i_gen].pt()<<"  "<<gen_jets[i_gen].eta()<<"   "<<gen_jets[i_gen].Phi()<<endl;
+      for (int i=0;i<ev.ng;i++){
+        if (abs(ev.g_id[i])>5) continue;
+        cout<<ev.g_id[i]<<"  "<<ev.g_pt[i]<<"  "<<ev.g_eta[i]<<"  "<<ev.g_phi[i]<<endl;
+        TLorentzVector genjet4mom;
+        genjet4mom.SetPtEtaPhiM(ev.g_pt[i],ev.g_eta[i],ev.g_phi[i],ev.g_m[i]);
+      }
 */
 
 
-     float delta_phi = leptons[0].DeltaPhi(leptons[1]);
+//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+    std::vector<Jet> jets;
+    for(auto &j: allJets) {
 
+      int idx=j.getJetIndex();
+
+      //pileup jet id
+      int jid=ev.j_id[idx];
+      bool passLoosePu((jid>>2)&0x1);
+      if(!passLoosePu) continue;
+
+      //ECAL noise (2017)
+      float emf=ev.j_emf[idx];
+      if(era.Contains("2017") && fabs(j.Eta())>2.650 && fabs(j.Eta())<3.139 && emf>0.55) continue;
+
+      //HEM 15/16 issue (2018)
+      //if(is2018 && j.Eta()>-3.0 && j.Eta()<-1.3 && j.Phi()>-1.57 && j.Phi()<-0.87) continue;
+
+      jets.push_back(j);
+    }
+
+  if (leptons[0].charge()*leptons[1].charge() < 0 && zmass > 70. && zmass < 110.) ht.fill("njets_bc",      jets.size(), evWgt, tags2);
+
+//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+  if (leptons[0].charge()*leptons[1].charge() < 0){
+    if (zmass > 70. && zmass < 110.){
+      for(size_t ij=0; ij<jets.size(); ij++){
+          ht.fill("jet_pt_bc",    jets[ij].pt(), evWgt, tags2);
+          ht.fill("jet_eta_bc",   jets[ij].eta(), evWgt, tags2);
+      }
+    }
+  }
+
+  if (leptons[0].charge()*leptons[1].charge() < 0) continue;
+
+  if(ev.met_pt < 30.) continue;
+
+  float HT = 0;
+  for(size_t ij=0; ij<jets.size(); ij++){
+    ht.fill("jet_pt",    jets[ij].pt(), evWgt, tags2);
+    ht.fill("jet_eta",   jets[ij].eta(), evWgt, tags2);
+    HT += jets[ij].pt();
+    for (size_t ik = 0;ik<leptons.size();ik++) ht.fill("DR_jl",sqrt(pow(leptons[ik].DeltaPhi(jets[ij]),2)+pow(DeltaEta(leptons[ik].eta(),jets[ij].eta()),2)),evWgt,tags2);
+    int idx=jets[ij].getJetIndex();
+    bool passBtag(ev.j_btag[idx]>0);
+    if(!passBtag) continue;
+    float mllb( (leptons[0]+leptons[1]+jets[ij]).M() );//M is the magnitude.
+    ht.fill("mllb",mllb,evWgt,tags2);
+    ht.fill("bjet_pt",jets[ij].pt(),evWgt,tags2);
+    ht.fill("bjet_eta",jets[ij].eta(),evWgt,tags2);
+}
+
+  bool passJets(jets.size()>=minJetMultiplicity);
+  if(!passJets) continue;
+
+  if(num_btags < minNum_btags) continue;
+
+
+/* ORIGINAL CODE
      float HT = 0;
      for(size_t ij=0; ij<allJets.size(); ij++){
          ht.fill("jet_pt",    allJets[ij].pt(), evWgt, tags2);
+         ht.fill("jet_eta",   allJets[ij].eta(), evWgt, tags2);
          //cout<<"Jet flavor"<<"  "<<allJets[ij].flavor()<<"  "<<allJets[ij].pt()<<"  "<<allJets[ij].eta()<<"  "<<allJets[ij].Phi()<<endl;
 	       HT += allJets[ij].pt();
          for (size_t ik = 0;ik<leptons.size();ik++){
@@ -410,13 +457,12 @@ void RunExYukawa(const TString in_fname,
          bool passBtag(ev.j_btag[idx]>0);
          if(!passBtag) continue;
          float mllb( (leptons[0]+leptons[1]+allJets[ij]).M() );//M is the magnitude.
-         std::vector<TString> tags={"inc",leptons[0].charge()>0 ? "plus" : "minus"};
-         //ht.fill("mllb",mllb,evWgt,tags);
+//         std::vector<TString> tags={"inc",leptons[0].charge()>0 ? "plus" : "minus"};
          ht.fill("mllb",mllb,evWgt,tags2);
          ht.fill("bjet_pt",allJets[ij].pt(),evWgt,tags2);
          ht.fill("bjet_eta",allJets[ij].eta(),evWgt,tags2);
      }
-
+*/
      /*
      for(size_t ij=0; ij<allJets.size(); ij++){
        for (int i=0;i<ev.ng;i++){
@@ -431,40 +477,34 @@ void RunExYukawa(const TString in_fname,
      }
      */
 
+     sort(jets.begin(),jets.end(),
+       [](const Jet& a, const Jet& b){
+               return a.Pt() > b.Pt();
+       }
+     );
 
-
-     int num_mu = 0;
-     int num_el = 0;
-     int num_muel = 0;
-
-
-//     if (!ev.isData){
-        for (size_t ind_lep = 0;ind_lep<leptons.size();ind_lep++){
-          if(dimuon_event){
-            num_mu++;
-            ht.fill("q",     leptons[ind_lep].charge(), evWgt, tags2);
-          }
-        }
-//      }
-
-
+     float delta_phi = leptons[0].DeltaPhi(leptons[1]);
 
       ht.fill("nvtx",       ev.nvtx,        evWgt, tags2);
       ht.fill("nvtx_uw",    ev.nvtx,        1., tags2);
-      ht.fill("njets",      allJets.size(), evWgt, tags2);
-      ht.fill("jet_pt1",   allJets[0].pt(), evWgt, tags2);
-      ht.fill("jet_pt2",   allJets[1].pt(), evWgt, tags2);
-      ht.fill("jet_pt3",   allJets[2].pt(), evWgt, tags2);
+      ht.fill("njets",      jets.size(), evWgt, tags2);
+      ht.fill("jet_pt1",   jets[0].pt(), evWgt, tags2);
+      ht.fill("jet_pt2",   jets[1].pt(), evWgt, tags2);
+      ht.fill("jet_pt3",   jets[2].pt(), evWgt, tags2);
       ht.fill("HT", HT, evWgt, tags2);
+
       for (size_t in_nlep=0; in_nlep<leptons.size();in_nlep++){
       	ht.fill("lep_pt",          leptons[in_nlep].pt(), evWgt, tags2);
       	ht.fill("lep_eta",     leptons[in_nlep].eta(), evWgt, tags2);
       }
+
+      ht.fill("lep_2_pt", leptons[0].pt(), evWgt, tags2);
+      ht.fill("lep_2_pt", leptons[1].pt(), evWgt, tags2);
+      ht.fill("lep_2_eta", leptons[0].eta(), evWgt, tags2);
+      ht.fill("lep_2_eta", leptons[1].eta(), evWgt, tags2);
+
       ht.fill("lep_pt1",          leptons[0].pt(), evWgt, tags2);
       ht.fill("lep_pt2",          leptons[1].pt(), evWgt, tags2);
-      ht.fill("nmuons",   num_mu, evWgt, "inc");
-      ht.fill("nelectrons",   num_el, evWgt, "inc");
-      ht.fill("nelmu", num_muel, evWgt, "inc");
       ht.fill("dphi_dilep", delta_phi,evWgt,tags2);
       ht.fill("lep_phi1",leptons[0].phi(),evWgt,tags2);
       ht.fill("lep_phi2",leptons[1].phi(),evWgt,tags2);
@@ -475,28 +515,6 @@ void RunExYukawa(const TString in_fname,
 
     }
 
-  //int nbins_label = 8;
-  //TH1I *h_yields = new TH1I("h_yields","h_yields",nbins_label,-0.5,nbins_label-0.5);
-
-  cout<<endl;
-  cout<<"Notal: "<<Ntotal<<endl;
-  cout<<"Ntotal_after_trigger: "<<Ntotal_after_trig<<"   "<<100.*Ntotal_after_trig/Ntotal<<" %"<<endl;
-  cout<<"Ntotal_after_all_selections: "<<N_after_all_selections<<"   "<<100.*N_after_all_selections/Ntotal<<" %"<<endl;
-/*
-  const char *labels[nbins_label]  = {"Total","Trig","Lepton","Same Sign","jet","b-tag","MET","All"};
-  //const char *labels_Z[nbins_label]  = {"Total","Opp. Sign Lep.","Null","Null","Null","Null","Null","Null"};
-
-  h_yields->SetBinContent(1,Ntotal);
-  h_yields->SetBinContent(2,Ntotal_after_trig);
-  h_yields->SetBinContent(3,Ntotal_lepton);
-  h_yields->SetBinContent(4,Ntotal_after_samesign);
-  h_yields->SetBinContent(5,Ntotal_after_jet);
-  h_yields->SetBinContent(6,Ntotal_after_num_btags);
-  h_yields->SetBinContent(7,Ntotal_after_met);
-  h_yields->SetBinContent(8,N_after_all_selections);
-  for (int i=1;i<=nbins_label;i++) h_yields->GetXaxis()->SetBinLabel(i,labels[i-1]);
-  h_yields->SetDirectory(0);
-*/
   //close input file
   f->Close();
 
@@ -511,7 +529,6 @@ void RunExYukawa(const TString in_fname,
     it.second->SetDirectory(fOut); it.second->Write();
   }
 
-  //h_yields->Write();
   fOut->Close();
 }
 
