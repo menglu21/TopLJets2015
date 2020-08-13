@@ -61,7 +61,7 @@ class Plot(object):
         self.dataH = None
         self.data = None
         self._garbageList = []
-        self.plotformats = ['pdf','png','C','root']#self.plotformats = ['pdf','png']
+        self.plotformats = ['pdf','png']#self.plotformats = ['pdf','png']
         self.savelog = True
         self.doChi2 = False
         self.range=None
