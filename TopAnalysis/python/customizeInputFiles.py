@@ -47,8 +47,8 @@ def customTestInputFiles(process,era,runOnData,runWithAOD):
         else:
             #process.source.fileNames = cms.untracked.vstring('/store/mc/RunIISummer19UL17MiniAOD/DYJetsToEE_M-50_TuneCP5_13TeV-madgraphMLM-pythia8/MINIAODSIM/106X_mc2017_realistic_v6-v2/30000/FB5A928B-75DF-D54E-B930-F1CB916D6930.root')
             #process.source.fileNames = cms.untracked.vstring('/store/mc/RunIISummer19UL17MiniAOD/TTTo2L2Nu_TuneCP5_erdON_13TeV-powheg-pythia8/MINIAODSIM/106X_mc2017_realistic_v6-v2/40000/E8ADD300-0AFF-1245-B18F-606B3A57F581.root')
-            process.source.fileNames = cms.untracked.vstring('/store/mc/RunIIFall17MiniAODv2/TTJets_DiLept_TuneCP5_13TeV-madgraphMLM-pythia8/MINIAODSIM/PU2017_12Apr2018_94X_mc2017_realistic_v14-v1/50000/48981A53-3DA3-E811-8754-AC1F6B1AF186.root')
-#            process.source.fileNames = cms.untracked.vstring('/store/mc/RunIISummer19UL17MiniAOD/CGToBHpm_MH-300_TuneCP5_13TeV_G2HDM-rtc04-rtt06-madgraphMLM-pythia8/MINIAODSIM/106X_mc2017_realistic_v6-v1/20000/05BD3CF0-8CE3-3945-ACA1-0773740C9C35.root')
+             process.source.fileNames = cms.untracked.vstring('/store/mc/RunIISummer19UL17MiniAOD/TTTo2L2Nu_TuneCP5CR1_13TeV-powheg-pythia8/MINIAODSIM/106X_mc2017_realistic_v6-v1/10000/04E43816-D0FA-F346-9308-1481C9C2CA99.root')
+            #            process.source.fileNames = cms.untracked.vstring('/store/mc/RunIISummer19UL17MiniAOD/CGToBHpm_MH-300_TuneCP5_13TeV_G2HDM-rtc04-rtt06-madgraphMLM-pythia8/MINIAODSIM/106X_mc2017_realistic_v6-v1/20000/05BD3CF0-8CE3-3945-ACA1-0773740C9C35.root')
 	    #process.source.fileNames = cms.untracked.vstring(
 # TAToTTQ_MA-200_TuneCP5_13TeV_G2HDM-rtc04
 		#'/store/mc/RunIISummer19UL17MiniAOD/TAToTTQ_MA-200_TuneCP5_13TeV_G2HDM-rtc04-madgraphMLM-pythia8/MINIAODSIM/106X_mc2017_realistic_v6-v1/240000/FC33A962-D05F-D742-9C6D-8639EC6AE7B2.root',
