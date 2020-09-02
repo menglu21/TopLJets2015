@@ -9,7 +9,7 @@ def customizeJetTools(process,jecDB,jecTag,jerDB,jerTag,baseJetCollection,runOnD
 	jecLevels=['L1FastJet','L2Relative','L3Absolute','L2L3Residual']
 	print '[customizeJetTools]',jecDB,jecTag,payload,jecLevels
 
-	#setup the source for JEC 
+	#setup the source for JEC
 	process.load('CondCore.CondDB.CondDB_cfi')
 	from CondCore.CondDB.CondDB_cfi import CondDB
 	process.jec = cms.ESSource("PoolDBESSource",
@@ -18,8 +18,8 @@ def customizeJetTools(process,jecDB,jecTag,jerDB,jerTag,baseJetCollection,runOnD
 				   toGet = cms.VPSet( cms.PSet(record = cms.string('JetCorrectionsRecord'),
 							       tag    = cms.string('JetCorrectorParametersCollection_%s_AK4PFchs'%jecTag),
 							       label  = cms.untracked.string('AK4PFchs')
-							       )						      
-						      ), 
+							       )
+						      ),
 				   connect = cms.string('sqlite_file:%s'%jecDB)
 				   )
 
@@ -33,16 +33,16 @@ def customizeJetTools(process,jecDB,jecTag,jerDB,jerTag,baseJetCollection,runOnD
                                                                 tag = cms.string('JR_%s_PtResolution_AK4PFchs'%jerTag),
                                                                 label = cms.untracked.string('AK4PFchs_pt')
                                                                 ),
-                                                       cms.PSet(record = cms.string('JetResolutionRcd'),
-                                                                tag = cms.string('JR_%s_PhiResolution_AK4PFchs'%jerTag),
-                                                                label = cms.untracked.string('AK4PFchs_phi')
-                                                                ),
+                                                       #cms.PSet(record = cms.string('JetResolutionRcd'),
+                                                    #               tag = cms.string('JR_%s_PhiResolution_AK4PFchs'%jerTag),
+                                                    #            label = cms.untracked.string('AK4PFchs_phi')
+                                                    #            ),
                                                        cms.PSet(record = cms.string('JetResolutionScaleFactorRcd'),
                                                                 tag = cms.string('JR_%s_SF_AK4PFchs'%jerTag),
                                                                 label = cms.untracked.string('AK4PFchs')
                                                                 ),
                                                        )
-                                     )        
+                                     )
         process.jerDBPreference = cms.ESPrefer('PoolDBESSource', 'jerDB')
 
         process.QGPoolDBESSource = cms.ESSource("PoolDBESSource",
@@ -60,7 +60,7 @@ def customizeJetTools(process,jecDB,jecTag,jerDB,jerTag,baseJetCollection,runOnD
         process.QGTagger.srcJets = baseJetCollection
         process.QGTagger.srcVertexCollection = 'offlineSlimmedPrimaryVertices'
         process.QGTagger.useQualityCuts = cms.bool(False)
-        	
+
 	from PhysicsTools.PatAlgos.tools.jetTools import updateJetCollection
 	updateJetCollection(
 		process,
