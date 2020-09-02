@@ -9,15 +9,16 @@ marked with the `##OPTIONAL/##END OPTIONAL` markers.
 If compilation fails for some reason repeat the scram b...
 
 ```
-cmsrel CMSSW_10_6_2
-cd CMSSW_10_6_2/src
+cmsrel CMSSW_10_6_3
+cd CMSSW_10_6_3/src
 cmsenv
 
 #EGM id
-git cms-merge-topic cms-egamma:EgammaPostRecoTools
-git cms-addpkg EgammaAnalysis/ElectronTools
-rm EgammaAnalysis/ElectronTools/data -rf
-git clone git@github.com:cms-data/EgammaAnalysis-ElectronTools.git EgammaAnalysis/ElectronTools/data
+git cms-init
+git clone git@github.com:cms-egamma/EgammaPostRecoTools.git  EgammaUser/EgammaPostRecoTools
+cd  EgammaUser/EgammaPostRecoTools
+git checkout master
+cd -
 scram b -j 8
 
 #B-fragmentation analyzer
@@ -199,7 +200,7 @@ To separately the signal from the stack histogram:
 python scripts/plotter.py -i /eos/user/e/efe/DataAnalysis/ntuples/ -l 41500    -j test/analysis/ExYukawa/samples_2017.json  -o final_plotter.root --signalJson test/analysis/ExYukawa/samples_2017_signal.json
 ```
 
-Once you make plots you can copy it to a web accessible area and there you should also copy https://github.com/efeyazgan/TopLJets2015/blob/106_protonreco/TopAnalysis/test/index.php 
+Once you make plots you can copy it to a web accessible area and there you should also copy https://github.com/efeyazgan/TopLJets2015/blob/106_protonreco/TopAnalysis/test/index.php
 
 Legend sizes are controlled in:
 https://github.com/efeyazgan/TopLJets2015/blob/e745fad072c0ecd1c66b343a87691daaf4dedfe4/TopAnalysis/python/Plot.py#L259
