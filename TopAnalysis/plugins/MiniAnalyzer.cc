@@ -1276,13 +1276,17 @@ bool MiniAnalyzer::isMediumMuon2016ReReco(const reco::Muon & recoMu)
 
 void MiniAnalyzer::beginLuminosityBlock(edm::LuminosityBlock const& iLumi, const edm::EventSetup& iSetup)
 {
-  edm::Handle<GenLumiInfoHeader> gen_header;
-	iLumi.getByToken(genLumiHeaderToken_, gen_header);
-  std::string scanId_ = gen_header->configDescription(); // This is a std::string
-  if (scanId_.length()){
-    scanId_public = scanId_;
-    scanId_.clear();
-  }
+  try{
+    edm::Handle<GenLumiInfoHeader> gen_header;
+	  iLumi.getByToken(genLumiHeaderToken_, gen_header);
+    std::string scanId_ = gen_header->configDescription(); // This is a std::string
+    if (scanId_.length()){
+      scanId_public = scanId_;
+      scanId_.clear();
+    }
+   }
+   catch(...){
+   }
 }
 
 // ------------ method called for each event  ------------
