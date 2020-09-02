@@ -1279,7 +1279,7 @@ void MiniAnalyzer::beginLuminosityBlock(edm::LuminosityBlock const& iLumi, const
   try{
     edm::Handle<GenLumiInfoHeader> gen_header;
 	  iLumi.getByToken(genLumiHeaderToken_, gen_header);
-    std::string scanId_ = gen_header->configDescription(); // This is a std::string
+    std::string scanId_ = gen_header->configDescription(); 
     if (scanId_.length()){
       scanId_public = scanId_;
       scanId_.clear();
