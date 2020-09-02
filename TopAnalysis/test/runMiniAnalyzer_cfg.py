@@ -137,7 +137,8 @@ customizeJetTools(process=process,
 #message logger
 process.load("FWCore.MessageService.MessageLogger_cfi")
 process.MessageLogger.cerr.threshold = ''
-process.maxEvents = cms.untracked.PSet( input = cms.untracked.int32(options.maxEvents) )
+#process.maxEvents = cms.untracked.PSet( input = cms.untracked.int32(options.maxEvents) )
+process.maxEvents = cms.untracked.PSet( input = cms.untracked.int32(1000) )
 process.MessageLogger.cerr.FwkReport.reportEvery = 1000
 
 # set input to process

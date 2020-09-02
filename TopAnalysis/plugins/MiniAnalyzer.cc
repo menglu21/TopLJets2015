@@ -81,6 +81,9 @@
 #include "CondFormats/RunInfo/interface/LHCInfo.h"
 #include "CondFormats/DataRecord/interface/LHCInfoRcd.h"
 
+#include "SimDataFormats/GeneratorProducts/interface/GenLumiInfoHeader.h"
+#include "FWCore/Framework/interface/LuminosityBlock.h"
+
 #include "TLorentzVector.h"
 #include "TH1.h"
 #include "TH1F.h"
@@ -112,10 +115,14 @@ public:
   ~MiniAnalyzer();
   static void fillDescriptions(edm::ConfigurationDescriptions& descriptions);
   virtual void endRun(const edm::Run&,const edm::EventSetup&);
+  string scanId_public;
 private:
   virtual void beginJob() override;
   void genAnalysis(const edm::Event& iEvent, const edm::EventSetup& iSetup);
   void recAnalysis(const edm::Event& iEvent, const edm::EventSetup& iSetup);
+
+  virtual void beginLuminosityBlock(edm::LuminosityBlock const& iLumi, const edm::EventSetup& iSetup) override;//
+
   virtual void analyze(const edm::Event&, const edm::EventSetup&) override;
   virtual void endJob() override;
   float getMiniIsolation(edm::Handle<pat::PackedCandidateCollection> pfcands,
@@ -129,6 +136,9 @@ private:
   // member data
   edm::EDGetTokenT<GenEventInfoProduct> generatorToken_;
   edm::EDGetTokenT<GenEventInfoProduct> generatorevtToken_;
+
+  edm::EDGetTokenT<GenLumiInfoHeader> genLumiHeaderToken_;
+
   edm::EDGetTokenT<LHEEventProduct> generatorlheToken_;
   edm::EDGetTokenT<LHERunInfoProduct> generatorRunInfoToken_;
   edm::EDGetTokenT<std::vector<PileupSummaryInfo> > puToken_;
@@ -194,6 +204,9 @@ private:
 MiniAnalyzer::MiniAnalyzer(const edm::ParameterSet& iConfig) :
   generatorToken_(consumes<GenEventInfoProduct>(edm::InputTag("generator"))),
   generatorevtToken_(consumes<GenEventInfoProduct>(edm::InputTag("generator",""))),
+
+  genLumiHeaderToken_(consumes<GenLumiInfoHeader,edm::InLumi>(edm::InputTag("generator")) ),
+
   generatorlheToken_(consumes<LHEEventProduct>(edm::InputTag("externalLHEProducer",""))),
   generatorRunInfoToken_(consumes<LHERunInfoProduct,edm::InRun>({"externalLHEProducer"})),
   puToken_(consumes<std::vector<PileupSummaryInfo>>(edm::InputTag("slimmedAddPileupInfo"))),
@@ -1261,7 +1274,16 @@ bool MiniAnalyzer::isMediumMuon2016ReReco(const reco::Muon & recoMu)
   return isMedium;
 }
 
-
+void MiniAnalyzer::beginLuminosityBlock(edm::LuminosityBlock const& iLumi, const edm::EventSetup& iSetup)
+{
+  edm::Handle<GenLumiInfoHeader> gen_header;
+	iLumi.getByToken(genLumiHeaderToken_, gen_header);
+  std::string scanId_ = gen_header->configDescription(); // This is a std::string
+  if (scanId_.length()){
+    scanId_public = scanId_;
+    scanId_.clear();
+  }
+}
 
 // ------------ method called for each event  ------------
 void MiniAnalyzer::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetup)
@@ -1299,6 +1321,27 @@ void MiniAnalyzer::analyze(const edm::Event& iEvent, const edm::EventSetup& iSet
   ev_.lumi    = iEvent.luminosityBlock();
   ev_.event   = iEvent.id().event();
   ev_.isData  = iEvent.isRealData();
+  if (scanId_public.length()){
+    std::size_t pos1 = scanId_public.find("MA-")+3;
+    std::size_t pos2 = scanId_public.find("_TuneCP5");
+    std::size_t stlen = pos2-pos1;
+    std::string tmp_str = scanId_public.substr(pos1,stlen);
+    ev_.scan_mass = atoi(tmp_str.c_str());
+    std::size_t pos3 = scanId_public.find("-r")+4;
+    std::size_t pos4 = scanId_public.find("-madgraph");
+    std::size_t stlen2 = pos4-pos3;
+    std::string tmp_str2 = scanId_public.substr(pos3,stlen2);
+    std::string tmp_str3 = tmp_str2.insert(1,".");
+    ev_.scan_rho = stof(tmp_str3);
+    std::size_t pos5 = scanId_public.find("-r")+2;
+    std::string tmp_str4 = scanId_public.substr(pos5,2);
+    int coupling_type = 0;
+    if (!tmp_str4.compare("tu")) coupling_type = 1;
+    if (!tmp_str4.compare("tc")) coupling_type = 2;
+    if (!tmp_str4.compare("tt")) coupling_type = 3;
+    ev_.scan_coup = coupling_type;
+    scanId_public.clear();
+  }
   tree_->Fill();
 }
 

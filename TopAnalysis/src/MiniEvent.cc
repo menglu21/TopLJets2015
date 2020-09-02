@@ -11,6 +11,11 @@ void createMiniEventTree(TTree *t,MiniEvent_t &ev,Int_t njecUncs)
   t->Branch("beamXangle",  &ev.beamXangle,   "beamXangle/F");
   t->Branch("instLumi",    &ev.instLumi,     "instLumi/F");
 
+  t->Branch("scan_mass",  &ev.scan_mass,  "scan_mass/I");
+  t->Branch("scan_rho", &ev.scan_rho,  "scan_rho/F");
+  t->Branch("scan_coup", &ev.scan_coup,  "scan_coup/I");
+
+
   //generator level information
   t->Branch("g_pu",      &ev.g_pu,     "g_pu/I");
   t->Branch("g_putrue",  &ev.g_putrue, "g_putrue/I");
@@ -143,7 +148,7 @@ void createMiniEventTree(TTree *t,MiniEvent_t &ev,Int_t njecUncs)
   t->Branch("j_tau32",    ev.j_tau32,   "j_tau32[nj]/F");
   t->Branch("j_tau21",    ev.j_tau21,   "j_tau21[nj]/F");
   t->Branch("j_deepcsv",  ev.j_deepcsv, "j_deepcsv[nj]/F");
-  t->Branch("j_probc",    ev.j_probc,   "j_probc[nj]/F"); 
+  t->Branch("j_probc",    ev.j_probc,   "j_probc[nj]/F");
   t->Branch("j_probudsg", ev.j_probudsg,"j_probudsg[nj]/F");
   t->Branch("j_probb",    ev.j_probb,   "j_probb[nj]/F");
   t->Branch("j_probbb",   ev.j_probbb,  "j_probbb[nj]/F");
@@ -228,6 +233,10 @@ void attachToMiniEventTree(TTree *t,MiniEvent_t &ev,bool full)
   t->SetBranchAddress("lumi",      &ev.lumi);
   t->SetBranchAddress("beamXangle",  &ev.beamXangle);
   t->SetBranchAddress("instLumi",    &ev.instLumi);
+
+  t->SetBranchAddress("scan_mass", &ev.scan_mass);
+  t->SetBranchAddress("scan_rho", &ev.scan_rho);
+  t->SetBranchAddress("scan_coup", &ev.scan_coup);
 
   //generator level event
   t->SetBranchAddress("g_pu",      &ev.g_pu);
