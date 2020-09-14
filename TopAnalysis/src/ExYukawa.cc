@@ -121,6 +121,15 @@ void RunExYukawa(const TString in_fname,
   ht.addHist("met_phi",       new TH1F("met_phi",      ";MET #phi; Events", 10, -4,4));
   ht.addHist("DR_jl",       new TH1F("DR_jl",      ";#DeltaR(j,l); Events", 12, 0.,4.));
 
+  ht.addHist("hf_csv", new TH1F("hf_csv", "csv; Events", 20.,-0.5,1.5));
+  ht.addHist("hf_deepcsv", new TH1F("hf_deepcsv", "deepcsv; Events", 20.,-0.5,1.5));
+  ht.addHist("hf_probc", new TH1F("hf_probc", "P[charm]; Events", 20.,-0.5,1.5));
+  ht.addHist("hf_probudsg", new TH1F("hf_probudsg", "P[udsg]; Events", 20.,-0.5,1.5));
+  ht.addHist("hf_probb", new TH1F("hf_probb", "P[b]; Events", 20.,-0.5,1.5));
+  ht.addHist("hf_probbb", new TH1F("hf_probbb", "P[bb]; Events", 20.,-0.5,1.5));
+  ht.addHist("hf_CvsL", new TH1F("hf_CvsL", "CvsL; Events", 20.,-0.5,1.5));
+  ht.addHist("hf_CvsB", new TH1F("hf_CvsB", "CvsB; Events", 20.,-0.5,1.5));
+
 //  ht.addHist("b_matched_jet",  new TH1F("b_matched_jet", ";p_T(b matched jet) [GeV]; Events", 24,0,600));
 //  ht.addHist("c_matched_jet",  new TH1F("c_matched_jet", ";p_T(c matched jet) [GeV]; Events", 24,0,600));
 
@@ -196,7 +205,7 @@ void RunExYukawa(const TString in_fname,
         selector.hasTriggerBit("HLT_Ele23_Ele12_CaloIdL_TrackIdL_IsoVL_v", ev.triggerBits) ||
         selector.hasTriggerBit("HLT_Ele35_WPTight_Gsf_v", ev.triggerBits) ||
         // mumu triggers
-        selector.hasTriggerBit("HLT_Mu17_TrkIsoVVL_Mu8_TrkIsoVVL_DZ_Mass8_v", ev.triggerBits) || 
+        selector.hasTriggerBit("HLT_Mu17_TrkIsoVVL_Mu8_TrkIsoVVL_DZ_Mass8_v", ev.triggerBits) ||
         selector.hasTriggerBit("HLT_IsoMu27_v", ev.triggerBits)
       );
       }
@@ -343,11 +352,19 @@ void RunExYukawa(const TString in_fname,
         }
       }
 
-      //lepton-b systems
       int num_btags = 0;
       for(size_t ij=0; ij<allJets.size(); ij++)
         {
           int idx=allJets[ij].getJetIndex();
+          ht.fill("hf_csv",ev.j_csv[idx],evWgt,tags2);
+          ht.fill("hf_deepcsv",ev.j_deepcsv[idx],evWgt,tags2);
+          ht.fill("hf_probc",ev.j_probc[idx],evWgt,tags2);
+          ht.fill("hf_probudsg",ev.j_probudsg[idx],evWgt,tags2);
+          ht.fill("hf_probb",ev.j_probb[idx],evWgt,tags2);
+          ht.fill("hf_probbb",ev.j_probbb[idx],evWgt,tags2);
+          ht.fill("hf_CvsL",ev.j_CvsL[idx],evWgt,tags2);
+          ht.fill("hf_CvsB",ev.j_CvsB[idx],evWgt,tags2);
+
           bool passBtag(ev.j_btag[idx]>0);
           if(!passBtag) continue;
 
