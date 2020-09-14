@@ -36,15 +36,16 @@ if [[ ${ERA} = "2016" ]]; then
     testtag=Data13TeV_2016B_SingleMuon
     testfile=${eosdir}/${testtag}/Chunk_0_ext0.root
 elif [[ ${ERA} = "2017" ]]; then
-    githash=ab05162
-    eosdir=/store/cmst3/group/top/RunIIReReco/${githash}
+    githash=848840ab
+#    githash=ab05162
+    eosdir=/store/cmst3/group/top/RunIIUL/2017/${githash}
 #    githash=ae6e08e
 #    eosdir=/store/cmst3/group/top/RunIIReReco/2017/${githash}
     dataeosdir=${eosdir}
     lumi=41367
     lumiUnc=0.025
-    testtag=MC13TeV_2017_TTJets
-    testfile=/eos/cms/store/cmst3/group/top/RunIIReReco/ab05162/MC13TeV_2017_TTTo2L2Nu_psweights/Chunk_70_ext0.root
+    testtag=MC13TeV_2017_TAToTTQ_MA200_G2HDM_rtc04
+    testfile=/store/cmst3/group/top/RunIIUL/2017/848840ab/MC13TeV_2017_TAToTTQ_MA200_G2HDM_rtc04/Chunk_0_ext0.root
 #  elif [[ ${ERA} = "2017_add_bkgs" ]]; then
 #      githash=ae6e08e
 #      eosdir=/store/cmst3/group/top/RunIIReReco/2017/${githash}
@@ -81,6 +82,8 @@ case $WHAT in
         baseOpt="--genWeights genweights_${githash}.root"
         baseOpt="${baseOpt} -o ${outdir} -q ${queue} --era era${ERA} -m RunExYukawa"
         baseOpt="${baseOpt} --only ${samples}";
+  #echo ${samples};
+  #return;
 	python $CMSSW_BASE/src/TopLJets2015/TopAnalysis/scripts/runLocalAnalysis.py ${baseOpt} -i ${eosdir};
 #        if [ "${eosdir}" != "{dataeosdir}" ]; then
 #	    python $CMSSW_BASE/src/TopLJets2015/TopAnalysis/scripts/runLocalAnalysis.py ${baseOpt} -i ${dataeosdir} --farmappendix data;
