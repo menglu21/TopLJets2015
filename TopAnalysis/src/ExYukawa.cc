@@ -121,14 +121,28 @@ void RunExYukawa(const TString in_fname,
   ht.addHist("met_phi",       new TH1F("met_phi",      ";MET #phi; Events", 10, -4,4));
   ht.addHist("DR_jl",       new TH1F("DR_jl",      ";#DeltaR(j,l); Events", 12, 0.,4.));
 
-  ht.addHist("hf_csv", new TH1F("hf_csv", "csv; Events", 20.,-0.5,1.5));
-  ht.addHist("hf_deepcsv", new TH1F("hf_deepcsv", "deepcsv; Events", 20.,-0.5,1.5));
-  ht.addHist("hf_probc", new TH1F("hf_probc", "P[charm]; Events", 20.,-0.5,1.5));
-  ht.addHist("hf_probudsg", new TH1F("hf_probudsg", "P[udsg]; Events", 20.,-0.5,1.5));
-  ht.addHist("hf_probb", new TH1F("hf_probb", "P[b]; Events", 20.,-0.5,1.5));
-  ht.addHist("hf_probbb", new TH1F("hf_probbb", "P[bb]; Events", 20.,-0.5,1.5));
-  ht.addHist("hf_CvsL", new TH1F("hf_CvsL", "CvsL; Events", 20.,-0.5,1.5));
-  ht.addHist("hf_CvsB", new TH1F("hf_CvsB", "CvsB; Events", 20.,-0.5,1.5));
+  ht.addHist("h_dr_jq",       new TH1F("h_dr_jq",      ";#DeltaR(j,q); Events", 12, 0.,4.));
+
+
+  ht.addHist("hf_csv", new TH1F("hf_csv", ";csv ; Events", 20.,-0.5,1.5));
+  ht.addHist("hf_deepcsv", new TH1F("hf_deepcsv", ";deepcsv ; Events", 20.,-0.5,1.5));
+  ht.addHist("hf_probc", new TH1F("hf_probc", ";P[charm] ; Events", 20.,-0.5,1.5));
+  ht.addHist("hf_probudsg", new TH1F("hf_probudsg", ";P[udsg] ; Events", 20.,-0.5,1.5));
+  ht.addHist("hf_probb", new TH1F("hf_probb", ";P[b] ; Events", 20.,-0.5,1.5));
+  ht.addHist("hf_probbb", new TH1F("hf_probbb", ";P[bb] ; Events", 20.,-0.5,1.5));
+  ht.addHist("hf_CvsL", new TH1F("hf_CvsL", ";CvsL ; Events", 20.,-0.5,1.5));
+  ht.addHist("hf_CvsB", new TH1F("hf_CvsB", ";CvsB ; Events", 20.,-0.5,1.5));
+
+  ht.addHist("hf_CvsL_vs_CvsB", new TH2D("hf_CvsL_vs_CvsB", ";CvsL ; CvsB", 20.,-0.5,1.5, 20.,-0.5,1.5));
+  ht.addHist("hf_CvsL_vs_CvsB_gen_c", new TH2D("hf_CvsL_vs_CvsB_gen_c", ";CvsL ; CvsB", 20.,-0.5,1.5, 20.,-0.5,1.5));
+  ht.addHist("hf_CvsL_vs_CvsB_gen_b", new TH2D("hf_CvsL_vs_CvsB_gen_b", ";CvsL ; CvsB", 20.,-0.5,1.5, 20.,-0.5,1.5));
+  ht.addHist("hf_CvsL_vs_CvsB_gen_lightjet", new TH2D("hf_CvsL_vs_CvsB_gen_lightjet", ";CvsL ; CvsB", 20.,-0.5,1.5, 20.,-0.5,1.5));
+
+
+  ht.addHist("hf_probb_gen_b", new TH1F("hf_probb_b", ";P[b] w/ Matched GEN b ; Events", 20.,-0.5,1.5));
+  ht.addHist("hf_probb_gen_c", new TH1F("hf_probb_c", ";P[c] w/ Matched GEN c ; Events", 20.,-0.5,1.5));
+  ht.addHist("hf_probb_gen_lightjet", new TH1F("hf_probb_gen_lightjet", ";P[udsg] w/ Matched GEN light quarks ; Events", 20.,-0.5,1.5));
+
 
 //  ht.addHist("b_matched_jet",  new TH1F("b_matched_jet", ";p_T(b matched jet) [GeV]; Events", 24,0,600));
 //  ht.addHist("c_matched_jet",  new TH1F("c_matched_jet", ";p_T(c matched jet) [GeV]; Events", 24,0,600));
@@ -364,10 +378,32 @@ void RunExYukawa(const TString in_fname,
           ht.fill("hf_probbb",ev.j_probbb[idx],evWgt,tags2);
           ht.fill("hf_CvsL",ev.j_CvsL[idx],evWgt,tags2);
           ht.fill("hf_CvsB",ev.j_CvsB[idx],evWgt,tags2);
+          ht.fill2D("hf_CvsL_vs_CvsB",ev.j_CvsL[idx],ev.j_CvsB[idx],evWgt,tags2);
+          for (int i=0;i<ev.ng;i++){
+            if (abs(ev.g_id[i]) < 6 || abs(ev.g_id[i]) == 21){
+              TLorentzVector genjet4mom;
+              genjet4mom.SetPtEtaPhiM(ev.g_pt[i],ev.g_eta[i],ev.g_phi[i],ev.g_m[i]);
+              ht.fill("h_dr_jq",allJets[ij].DeltaR(genjet4mom),evWgt,tags2);
+              if (allJets[ij].DeltaR(genjet4mom) < 0.4){
+                if (abs(ev.g_id[i]) == 4){
+                  ht.fill("hf_probc_gen_c",ev.j_probc[idx],evWgt,tags2);
+                  ht.fill("hf_probb_gen_c",ev.j_probc[idx],evWgt,tags2);
+                  ht.fill2D("hf_CvsL_vs_CvsB_gen_c",ev.j_CvsL[idx],ev.j_CvsB[idx],evWgt,tags2);
+                }
+                if (abs(ev.g_id[i]) == 5){
+                  ht.fill("hf_probb_gen_b",ev.j_probb[idx],evWgt,tags2);
+                  ht.fill2D("hf_CvsL_vs_CvsB_gen_b",ev.j_CvsL[idx],ev.j_CvsB[idx],evWgt,tags2);
+                }
+                if (abs(ev.g_id[i]) < 4 || abs(ev.g_id[i]) == 21){
+                  ht.fill("hf_probb_gen_lightjet",ev.j_probudsg[idx],evWgt,tags2);
+                  ht.fill2D("hf_CvsL_vs_CvsB_gen_lightjet",ev.j_CvsL[idx],ev.j_CvsB[idx],evWgt,tags2);
+                }
+              }
+            }
+          }
 
           bool passBtag(ev.j_btag[idx]>0);
           if(!passBtag) continue;
-
 		      num_btags++;
         }
 
