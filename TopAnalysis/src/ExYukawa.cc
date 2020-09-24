@@ -145,9 +145,7 @@ void RunExYukawa(const TString in_fname,
   ht.addHist("hf_probb_gen_c", new TH1F("hf_probb_c", ";P[c] w/ Matched GEN c ; Events", 20.,-0.5,1.5));
   ht.addHist("hf_probb_gen_lightjet", new TH1F("hf_probb_gen_lightjet", ";P[udsg] w/ Matched GEN light quarks ; Events", 20.,-0.5,1.5));
 
-  TH1F *a_test1 = new TH1F("a_test1","a_test1",30,0,60);
-  TH1F *a_test2 = new TH1F("a_test2","a_test2",30,0,60);
-  TH1F *a_test3 = new TH1F("a_test3","a_test3",30,0,60);
+//  TH1F *a_test1 = new TH1F("a_test1","a_test1",30,0,60);//for debugging
 
 //  ht.addHist("b_matched_jet",  new TH1F("b_matched_jet", ";p_T(b matched jet) [GeV]; Events", 24,0,600));
 //  ht.addHist("c_matched_jet",  new TH1F("c_matched_jet", ";p_T(c matched jet) [GeV]; Events", 24,0,600));
@@ -248,23 +246,21 @@ void RunExYukawa(const TString in_fname,
       if(leptons.size()<2) continue;
 //      Ntotal_lepton++;
 
+
       sort(leptons.begin(),leptons.end(),
 	            [](const Particle& a, const Particle& b){
 		          return a.Pt() > b.Pt();
 	           }
       );
 
-
-      //down to this point no fluctuation of events!
-
+/*
       a_test1->Fill(leptons[0].pt());
-      a_test1->SetDirectory(0);
+      a_test1->SetDirectory(0);//
+*/
 
       if (leptons[0].pt() < 30.) continue;
       if (leptons[1].pt() < 20.) continue;
-      if (leptons[2].pt() > 20.) continue;
-
-
+      if (leptons.size() > 2 && leptons[2].pt() > 20.) continue;
 
 
       int dimuon_event = 0;
@@ -392,9 +388,6 @@ void RunExYukawa(const TString in_fname,
 		      num_btags++;
         }
 
-        a_test2->Fill(leptons[0].pt());
-        a_test2->SetDirectory(0);
-
 //      if(num_btags < minNum_btags) continue;
 
 //      if(ev.met_pt < 30.) continue;
@@ -459,9 +452,6 @@ void RunExYukawa(const TString in_fname,
   }
 
   if (leptons[0].charge()*leptons[1].charge() < 0) continue;
-
-  a_test3->Fill(leptons[0].pt());
-  a_test3->SetDirectory(0);
 
   if(ev.met_pt < 30.) continue;
 
@@ -599,9 +589,7 @@ void RunExYukawa(const TString in_fname,
     it.second->SetDirectory(fOut); it.second->Write();
   }
 
-  a_test1->Write();
-  a_test2->Write();
-  a_test3->Write();
+//  a_test1->Write();
 
   fOut->Close();
 }
