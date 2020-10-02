@@ -25,6 +25,7 @@ fi
 #configuration parameters
 queue=tomorrow
 samples=$CMSSW_BASE/src/TopLJets2015/TopAnalysis/test/analysis/ExYukawa/samples_${ERA}.json
+samples_signal=$CMSSW_BASE/src/TopLJets2015/TopAnalysis/test/analysis/ExYukawa/samples_${ERA}_signal.json
 outdir=$CMSSW_BASE/src/TopLJets2015/TopAnalysis/test/analysis/ExYukawa/analysis_${ERA}
 #outdir=/eos/cms/store/group/phys_top/efe/ExYukawa/analysis_${ERA}
 if [[ ${ERA} = "2016" ]]; then
@@ -36,8 +37,9 @@ if [[ ${ERA} = "2016" ]]; then
     testtag=Data13TeV_2016B_SingleMuon
     testfile=${eosdir}/${testtag}/Chunk_0_ext0.root
 elif [[ ${ERA} = "2017" ]]; then
-    githash=848840ab
-#    githash=ab05162
+###    githash=848840ab
+###    githash=ab05162
+    githash=6bfa3f2e
     eosdir=/store/cmst3/group/top/RunIIUL/2017/${githash}
 #    githash=ae6e08e
 #    eosdir=/store/cmst3/group/top/RunIIReReco/2017/${githash}
@@ -45,7 +47,13 @@ elif [[ ${ERA} = "2017" ]]; then
     lumi=41367
     lumiUnc=0.025
     testtag=MC13TeV_2017_TAToTTQ_MA200_G2HDM_rtc04
-    testfile=/store/cmst3/group/top/RunIIUL/2017/848840ab/MC13TeV_2017_TAToTTQ_MA200_G2HDM_rtc04/Chunk_0_ext0.root
+    #testtag=MC13TeV_2017_TTWH
+    #testfile=/store/cmst3/group/top/RunIIReReco/2017/ae6e08e/MC13TeV_2017_TTWH/Chunk_0_ext0.root
+    #testfile=/store/cmst3/group/top/RunIIUL/2017/848840ab/MC13TeV_2017_TAToTTQ_MA200_G2HDM_rtc04/Chunk_0_ext0.root
+    #testfile=/store/cmst3/group/hintt/psilva/6bfa3f2e/TAToTTQ_MA-200_TuneCP5_13TeV_G2HDM-rtc04-madgraphMLM-pythia8/crab_MC13TeV_2017_TAToTTQ_MA200_G2HDM_rtc04/200915_073154/0000/MiniEvents_6.root
+    testfile=/store/cmst3/group/top/RunIIUL/2017/6bfa3f2e/MC13TeV_2017_TAToTTQ_MA200_G2HDM_rtc04/Chunk_0_ext0.root
+    #testfile=/store/cmst3/group/top/RunIIReReco/2017/ae6e08e/MC13TeV_2017_TAToTTQ_MA200_G2HDM_rtc04/Chunk_0_ext0.root
+    #testfile=/store/cmst3/group/top/RunIIReReco/2017/ae6e08e/MC13TeV_2017_TTZZ/Chunk_0_ext0.root
 #  elif [[ ${ERA} = "2017_add_bkgs" ]]; then
 #      githash=ae6e08e
 #      eosdir=/store/cmst3/group/top/RunIIReReco/2017/${githash}
@@ -99,8 +107,53 @@ case $WHAT in
 	;;
 
     PLOT )
-	commonOpts="-i ${outdir} -l ${lumi} --mcUnc ${lumiUnc}"
-	python scripts/plotter.py ${commonOpts} -j ${samples}    -O ${outdir}/plots --saveLog;
+  plotinputdir="/eos/user/e/efe/DataAnalysis/ntuples_and_plots/2oct/"
+  plotoutdir="/eos/user/e/efe/www/exyukawa/2oct_test2"
+  mkdir -p ${plotoutdir}
+  commonOpts="-i ${outdir} -l ${lumi} --mcUnc ${lumiUnc}"
+  plotOpts="-i ${plotinputdir} -l ${lumi} -j ${samples}  -o final_plotter.root --signalJson ${samples_signal} -O ${plotoutdir}"
+  echo ${plotOpts}
+  python scripts/plotter.py ${plotOpts}
+  wget https://raw.githubusercontent.com/efeyazgan/TopLJets2015/106_protonreco/TopAnalysis/test/index.php -P ${plotoutdir}
 	;;
+
+    PLOTANAPERERA )
+  plotinputdir="/eos/user/e/efe/DataAnalysis/ntuples_and_plots/2oct/"
+
+  plots=""
+  for evcat in ee mm emu inc; do
+      plist=(control_Z_mass)
+      for p in ${plist[@]}; do
+          plots="${evcat}_${p},${plots}"
+      done
+  done
+  echo ${plots}
+
+  for era in B C D E; do
+      eralumi=${lumi}
+      if [ "${era}" = "B" ]; then
+          eralumi=`echo ${eralumi}*0.115 | bc`
+      elif [ "${era}" = "C" ]; then
+          eralumi=`echo ${eralumi}*0.233 | bc`
+      elif [ "${era}" = "D" ]; then
+          eralumi=`echo ${eralumi}*0.103 | bc`
+      elif [ "${era}" = "E" ]; then
+          eralumi=`echo ${eralumi}*0.22 | bc`
+#      elif [ "${era}" = "F" ]; then
+#          eralumi=`echo ${eralumi}*0.329 | bc`
+      fi
+      plotoutdir="/eos/user/e/efe/www/exyukawa/2oct"
+      mkdir -p ${plotoutdir}
+      wget https://raw.githubusercontent.com/efeyazgan/TopLJets2015/106_protonreco/TopAnalysis/test/index.php -P ${plotoutdir}
+      plotoutdir=${plotoutdir}/${era}
+      mkdir -p ${plotoutdir}
+      echo ${plotoutdir}
+      wget https://raw.githubusercontent.com/efeyazgan/TopLJets2015/106_protonreco/TopAnalysis/test/index.php -P ${plotoutdir}
+      era_json=$CMSSW_BASE/src/TopLJets2015/TopAnalysis/test/analysis/ExYukawa/samples_2017_${era}.json;
+      echo ${era_json}
+      plotOpts="-i ${plotinputdir} -l ${eralumi} -j ${era_json}  --signalJson ${samples_signal} -O ${plotoutdir}"
+      python $CMSSW_BASE/src/TopLJets2015/TopAnalysis/scripts/plotter.py ${plotOpts} --only ${plots} --strictOnly;
+  done
+  ;;
 
 esac
