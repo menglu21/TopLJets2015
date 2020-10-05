@@ -63,9 +63,8 @@ void RunExYukawa(const TString in_fname,
   TString baseName=gSystem->BaseName(outname);
   TString dirName=gSystem->DirName(outname);
   TFile *fOut=TFile::Open(dirName+"/"+baseName,"RECREATE");
-  TFile *f_tmva=TFile::Open("tree_tmva.root","recreate");
-  TTree t_signal("TreeS","signal");
-  TTree t_bkg("TreeB","background");
+////////  TFile *f_tmva=TFile::Open("tree_tmva.root","recreate");
+//  TTree t_input("TreeInput","TreeInput");
   fOut->cd();
   HistTool ht;
   ht.setNsyst(0);
@@ -232,7 +231,11 @@ void RunExYukawa(const TString in_fname,
 //     Ntotal++;
 //      cout << "Trigger = "<<hasMTrigger << endl;
 //      if(ev.isData && !hasMTrigger) continue;
+
+      hasMTrigger=(true);
       if(!hasMTrigger) continue;
+
+
 //      Ntotal_after_trig++;
 
       //select two offline muons
@@ -475,14 +478,17 @@ void RunExYukawa(const TString in_fname,
 
   if(num_btags < minNum_btags) continue;
 
+  /*
   int jet_index=0;
   int t_event;
-  float CvsL[15],CvsB[15];
-  t_signal.Branch("t_event",&t_event,"t_event/I");
-  t_signal.Branch("jet_index",&jet_index,"jet_index/I");
-  t_signal.Branch("CvsL",CvsL,"CvsL[jet_index]/F");
-  t_signal.Branch("CvsB",CvsB,"CvsB[jet_index]/F");
+  float t_weight,CvsL[15],CvsB[15];
 
+  t_input.Branch("t_event",&t_event,"t_event/I");
+  t_input.Branch("t_weight",&t_weight,"t_weight/F");
+  t_input.Branch("jet_index",&jet_index,"jet_index/I");
+  t_input.Branch("CvsL",CvsL,"CvsL[jet_index]/F");
+  t_input.Branch("CvsB",CvsB,"CvsB[jet_index]/F");
+  */
   for(size_t ij=0; ij<jets.size(); ij++){
     int idx=jets[ij].getJetIndex();
     bool passBtag(ev.j_btag[idx]>0);
@@ -497,10 +503,11 @@ void RunExYukawa(const TString in_fname,
     ht.fill("hf_CvsL",ev.j_CvsL[idx],evWgt,tags2);
     ht.fill("hf_CvsB",ev.j_CvsB[idx],evWgt,tags2);
     ht.fill2D("hf_CvsL_vs_CvsB",ev.j_CvsL[idx],ev.j_CvsB[idx],evWgt,tags2);
-
+    /*
     CvsL[jet_index] = ev.j_CvsL[idx];
     CvsB[jet_index] = ev.j_CvsB[idx];
     jet_index++;
+    */
      for (int i=0;i<ev.ng;i++){
        if (abs(ev.g_id[i]) < 6 || abs(ev.g_id[i]) == 21){
          TLorentzVector genjet4mom;
@@ -524,9 +531,11 @@ void RunExYukawa(const TString in_fname,
        }
      }
    }
+   /*
    t_event = iev;
-   t_signal.Fill();
-
+   t_weight = evWgt;
+   t_input.Fill();
+   */
 
 
 
@@ -571,13 +580,6 @@ void RunExYukawa(const TString in_fname,
     //close input file
     f->Close();
 
-    f_tmva->cd();
-    t_signal.Write();
-    t_bkg.Write();
-    f_tmva->Close();
-
-
-
   //save histos to file
   fOut->cd();
   for (auto& it : ht.getPlots())  {
@@ -589,7 +591,7 @@ void RunExYukawa(const TString in_fname,
     it.second->SetDirectory(fOut); it.second->Write();
   }
 
-//  a_test1->Write();
+//  t_input.Write();
 
   fOut->Close();
 }
