@@ -64,8 +64,10 @@ void RunExYukawa(const TString in_fname,
   TString dirName=gSystem->DirName(outname);
   TFile *fOut=TFile::Open(dirName+"/"+baseName,"RECREATE");
 ////////  TFile *f_tmva=TFile::Open("tree_tmva.root","recreate");
-//  TTree t_input("TreeInput","TreeInput");
   fOut->cd();
+
+
+
   HistTool ht;
   ht.setNsyst(0);
   ht.addHist("control_Z_mass",    new TH1F("control_Z_mass",    ";M(Z) [GeV];Events",40,70,110));
@@ -158,6 +160,24 @@ void RunExYukawa(const TString in_fname,
 
   //INPUT
   MiniEvent_t ev;
+  
+  TTree t_input("TreeInput","TreeInput");
+//  int t_event;
+  float CvsL1,CvsB1;
+  float CvsL2,CvsB2;
+  float CvsL3,CvsB3;
+
+  t_input.Branch("event",&ev.event,"event/I");
+  t_input.Branch("run",&ev.run,"run/i");
+  t_input.Branch("lumi",&ev.lumi,"lumi/i");
+  t_input.Branch("CvsL1",&CvsL1,"CvsL1/F");
+  t_input.Branch("CvsB1",&CvsB1,"CvsB1/F");
+  t_input.Branch("CvsL2",&CvsL2,"CvsL2/F");
+  t_input.Branch("CvsB2",&CvsB2,"CvsB2/F");
+  t_input.Branch("CvsL3",&CvsL3,"CvsL3/F");
+  t_input.Branch("CvsB3",&CvsB3,"CvsB3/F");
+
+
   TFile *f = TFile::Open(in_fname);
   if(f==NULL || f->IsZombie()) {
     cout << "Corrupted or missing file " << in_fname << endl;
@@ -179,15 +199,20 @@ void RunExYukawa(const TString in_fname,
   //EVENT LOOP
   //select 2mu+>=3 jets events triggered by a single muon trigger
 
-/*
+
   int Ntotal = 0;
-  int Ntotal_lepton = 0;
+  int N_after_all_selections = 0;
   int Ntotal_after_trig = 0;
+
+
+
+
+  /*
+  int Ntotal_lepton = 0;
   int Ntotal_after_samesign = 0;
   int Ntotal_after_jet = 0;
   int Ntotal_after_num_btags = 0;
   int Ntotal_after_met = 0;
-  int N_after_all_selections = 0;
 
   int Ntotal_Z = 0;
 */
@@ -215,28 +240,27 @@ void RunExYukawa(const TString in_fname,
 
     //From AN2019_140_v3
         // emu triggers
-        selector.hasTriggerBit("HLT_Mu8_TrkIsoVVL_Ele23_CaloIdL_TrackIdL_IsoVL_DZ_v", ev.triggerBits) || //??
-        selector.hasTriggerBit("HLT_Mu23_TrkIsoVVL_Ele12_CaloIdL_TrackIdL_IsoVL_v", ev.triggerBits) ||
-        selector.hasTriggerBit("HLT_Ele35_WPTight_Gsf", ev.triggerBits) ||
-        selector.hasTriggerBit("HLT_IsoMu27_v", ev.triggerBits) ||
+        //selector.hasTriggerBit("HLT_Mu8_TrkIsoVVL_Ele23_CaloIdL_TrackIdL_IsoVL_DZ_v", ev.triggerBits) || //??
+        //selector.hasTriggerBit("HLT_Mu23_TrkIsoVVL_Ele12_CaloIdL_TrackIdL_IsoVL_v", ev.triggerBits) ||
+        //selector.hasTriggerBit("HLT_Ele35_WPTight_Gsf", ev.triggerBits) ||
+        //selector.hasTriggerBit("HLT_IsoMu27_v", ev.triggerBits) ||
         // ee triggers
-        selector.hasTriggerBit("HLT_Ele23_Ele12_CaloIdL_TrackIdL_IsoVL_v", ev.triggerBits) ||
+        //selector.hasTriggerBit("HLT_Ele23_Ele12_CaloIdL_TrackIdL_IsoVL_v", ev.triggerBits) ||
         selector.hasTriggerBit("HLT_Ele35_WPTight_Gsf_v", ev.triggerBits) ||
         // mumu triggers
-        selector.hasTriggerBit("HLT_Mu17_TrkIsoVVL_Mu8_TrkIsoVVL_DZ_Mass8_v", ev.triggerBits) ||
+        //selector.hasTriggerBit("HLT_Mu17_TrkIsoVVL_Mu8_TrkIsoVVL_DZ_Mass8_v", ev.triggerBits) ||
         selector.hasTriggerBit("HLT_IsoMu27_v", ev.triggerBits)
       );
       }
 
-//     Ntotal++;
+     Ntotal++;
 //      cout << "Trigger = "<<hasMTrigger << endl;
 //      if(ev.isData && !hasMTrigger) continue;
 
-      hasMTrigger=(true);
       if(!hasMTrigger) continue;
 
 
-//      Ntotal_after_trig++;
+      Ntotal_after_trig++;
 
       //select two offline muons
       std::vector<Particle> flaggedleptons = selector.flaggedLeptons(ev);
@@ -478,17 +502,7 @@ void RunExYukawa(const TString in_fname,
 
   if(num_btags < minNum_btags) continue;
 
-  /*
   int jet_index=0;
-  int t_event;
-  float t_weight,CvsL[15],CvsB[15];
-
-  t_input.Branch("t_event",&t_event,"t_event/I");
-  t_input.Branch("t_weight",&t_weight,"t_weight/F");
-  t_input.Branch("jet_index",&jet_index,"jet_index/I");
-  t_input.Branch("CvsL",CvsL,"CvsL[jet_index]/F");
-  t_input.Branch("CvsB",CvsB,"CvsB[jet_index]/F");
-  */
   for(size_t ij=0; ij<jets.size(); ij++){
     int idx=jets[ij].getJetIndex();
     bool passBtag(ev.j_btag[idx]>0);
@@ -503,11 +517,19 @@ void RunExYukawa(const TString in_fname,
     ht.fill("hf_CvsL",ev.j_CvsL[idx],evWgt,tags2);
     ht.fill("hf_CvsB",ev.j_CvsB[idx],evWgt,tags2);
     ht.fill2D("hf_CvsL_vs_CvsB",ev.j_CvsL[idx],ev.j_CvsB[idx],evWgt,tags2);
-    /*
-    CvsL[jet_index] = ev.j_CvsL[idx];
-    CvsB[jet_index] = ev.j_CvsB[idx];
+    if (jet_index==0){
+      CvsL1 = ev.j_CvsL[idx];
+      CvsB1 = ev.j_CvsB[idx];
+    }
+    if (jet_index==1){
+      CvsL2 = ev.j_CvsL[idx];
+      CvsB2 = ev.j_CvsB[idx];
+    }
+    if (jet_index==2){
+      CvsL3 = ev.j_CvsL[idx];
+      CvsB3 = ev.j_CvsB[idx];
+    }
     jet_index++;
-    */
      for (int i=0;i<ev.ng;i++){
        if (abs(ev.g_id[i]) < 6 || abs(ev.g_id[i]) == 21){
          TLorentzVector genjet4mom;
@@ -531,13 +553,10 @@ void RunExYukawa(const TString in_fname,
        }
      }
    }
-   /*
-   t_event = iev;
-   t_weight = evWgt;
+   N_after_all_selections++;
+
+//   t_event = iev;
    t_input.Fill();
-   */
-
-
 
      sort(jets.begin(),jets.end(),
        [](const Jet& a, const Jet& b){
@@ -578,6 +597,12 @@ void RunExYukawa(const TString in_fname,
 
     }
     //close input file
+
+    cout<<endl;
+     cout<<"Notal: "<<Ntotal<<endl;
+     cout<<"Ntotal_after_trigger: "<<Ntotal_after_trig<<"   "<<100.*Ntotal_after_trig/Ntotal<<" %"<<endl;
+     cout<<"Ntotal_after_all_selections: "<<N_after_all_selections<<"   "<<100.*N_after_all_selections/Ntotal<<" %"<<endl;
+
     f->Close();
 
   //save histos to file
@@ -591,7 +616,7 @@ void RunExYukawa(const TString in_fname,
     it.second->SetDirectory(fOut); it.second->Write();
   }
 
-//  t_input.Write();
+  t_input.Write();
 
   fOut->Close();
 }

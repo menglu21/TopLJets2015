@@ -142,7 +142,7 @@ case $WHAT in
 #      elif [ "${era}" = "F" ]; then
 #          eralumi=`echo ${eralumi}*0.329 | bc`
       fi
-      plotoutdir="/eos/user/e/efe/www/exyukawa/2oct"
+      plotoutdir="/eos/user/e/efe/www/exyukawa/5oct_test5"
       mkdir -p ${plotoutdir}
       wget https://raw.githubusercontent.com/efeyazgan/TopLJets2015/106_protonreco/TopAnalysis/test/index.php -P ${plotoutdir}
       plotoutdir=${plotoutdir}/${era}
