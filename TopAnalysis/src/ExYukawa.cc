@@ -160,12 +160,14 @@ void RunExYukawa(const TString in_fname,
 
   //INPUT
   MiniEvent_t ev;
-  
+
   TTree t_input("TreeInput","TreeInput");
 //  int t_event;
   float CvsL1,CvsB1;
   float CvsL2,CvsB2;
   float CvsL3,CvsB3;
+  bool btag1,btag2,btag3;
+
 
   t_input.Branch("event",&ev.event,"event/I");
   t_input.Branch("run",&ev.run,"run/i");
@@ -176,6 +178,9 @@ void RunExYukawa(const TString in_fname,
   t_input.Branch("CvsB2",&CvsB2,"CvsB2/F");
   t_input.Branch("CvsL3",&CvsL3,"CvsL3/F");
   t_input.Branch("CvsB3",&CvsB3,"CvsB3/F");
+  t_input.Branch("btag1",&btag1,"btag1/O");
+  t_input.Branch("btag2",&btag2,"btag2/O");
+  t_input.Branch("btag3",&btag3,"btag3/O");
 
 
   TFile *f = TFile::Open(in_fname);
@@ -503,9 +508,28 @@ void RunExYukawa(const TString in_fname,
   if(num_btags < minNum_btags) continue;
 
   int jet_index=0;
+  btag1=false;
+  btag2=false;
+  btag3=false;
   for(size_t ij=0; ij<jets.size(); ij++){
     int idx=jets[ij].getJetIndex();
     bool passBtag(ev.j_btag[idx]>0);
+    if (jet_index==0){
+      CvsL1 = ev.j_CvsL[idx];
+      CvsB1 = ev.j_CvsB[idx];
+      btag1=passBtag;
+    }
+    if (jet_index==1){
+      CvsL2 = ev.j_CvsL[idx];
+      CvsB2 = ev.j_CvsB[idx];
+      btag2=passBtag;
+    }
+    if (jet_index==2){
+      CvsL3 = ev.j_CvsL[idx];
+      CvsB3 = ev.j_CvsB[idx];
+      btag3=passBtag;
+    }
+    jet_index++;
     if(!passBtag) continue;
 
     ht.fill("hf_csv",ev.j_csv[idx],evWgt,tags2);
@@ -517,19 +541,6 @@ void RunExYukawa(const TString in_fname,
     ht.fill("hf_CvsL",ev.j_CvsL[idx],evWgt,tags2);
     ht.fill("hf_CvsB",ev.j_CvsB[idx],evWgt,tags2);
     ht.fill2D("hf_CvsL_vs_CvsB",ev.j_CvsL[idx],ev.j_CvsB[idx],evWgt,tags2);
-    if (jet_index==0){
-      CvsL1 = ev.j_CvsL[idx];
-      CvsB1 = ev.j_CvsB[idx];
-    }
-    if (jet_index==1){
-      CvsL2 = ev.j_CvsL[idx];
-      CvsB2 = ev.j_CvsB[idx];
-    }
-    if (jet_index==2){
-      CvsL3 = ev.j_CvsL[idx];
-      CvsB3 = ev.j_CvsB[idx];
-    }
-    jet_index++;
      for (int i=0;i<ev.ng;i++){
        if (abs(ev.g_id[i]) < 6 || abs(ev.g_id[i]) == 21){
          TLorentzVector genjet4mom;
