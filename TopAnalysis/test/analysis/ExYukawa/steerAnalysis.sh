@@ -107,18 +107,20 @@ case $WHAT in
 	;;
 
     PLOT )
-  plotinputdir="/eos/user/e/efe/DataAnalysis/ntuples_and_plots/2oct/"
-  plotoutdir="/eos/user/e/efe/www/exyukawa/2oct_test2"
+  plotinputdir="/eos/user/e/efe/DataAnalysis/ntuples_and_plots/Prod_7Oct/"
+  plotoutdir="/eos/user/e/efe/www/exyukawa/7oct_w_tree"
   mkdir -p ${plotoutdir}
+  wget https://raw.githubusercontent.com/efeyazgan/TopLJets2015/106_protonreco/TopAnalysis/test/index.php -P ${plotoutdir}
   commonOpts="-i ${outdir} -l ${lumi} --mcUnc ${lumiUnc}"
-  plotOpts="-i ${plotinputdir} -l ${lumi} -j ${samples}  -o final_plotter.root --signalJson ${samples_signal} -O ${plotoutdir}"
+  #plotOpts="-i ${plotinputdir} -l ${lumi} -j ${samples}  --signalJson ${samples_signal} -O ${plotoutdir}"
+  plotOpts="-i ${plotinputdir} -l ${lumi} -j ${samples} -O ${plotoutdir}"
   echo ${plotOpts}
   python scripts/plotter.py ${plotOpts}
-  wget https://raw.githubusercontent.com/efeyazgan/TopLJets2015/106_protonreco/TopAnalysis/test/index.php -P ${plotoutdir}
 	;;
 
     PLOTANAPERERA )
-  plotinputdir="/eos/user/e/efe/DataAnalysis/ntuples_and_plots/2oct/"
+  #plotinputdir="/eos/user/e/efe/DataAnalysis/ntuples_and_plots/2oct/"
+  plotinputdir="/eos/user/e/efe/DataAnalysis/ntuples_and_plots/Production_5Oct/"
 
   plots=""
   for evcat in ee mm emu inc; do
@@ -142,7 +144,7 @@ case $WHAT in
 #      elif [ "${era}" = "F" ]; then
 #          eralumi=`echo ${eralumi}*0.329 | bc`
       fi
-      plotoutdir="/eos/user/e/efe/www/exyukawa/5oct_test5"
+      plotoutdir="/eos/user/e/efe/www/exyukawa/6oct_test2"
       mkdir -p ${plotoutdir}
       wget https://raw.githubusercontent.com/efeyazgan/TopLJets2015/106_protonreco/TopAnalysis/test/index.php -P ${plotoutdir}
       plotoutdir=${plotoutdir}/${era}

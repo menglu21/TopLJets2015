@@ -530,8 +530,6 @@ void RunExYukawa(const TString in_fname,
       btag3=passBtag;
     }
     jet_index++;
-    if(!passBtag) continue;
-
     ht.fill("hf_csv",ev.j_csv[idx],evWgt,tags2);
     ht.fill("hf_deepcsv",ev.j_deepcsv[idx],evWgt,tags2);
     ht.fill("hf_probc",ev.j_probc[idx],evWgt,tags2);
@@ -563,6 +561,7 @@ void RunExYukawa(const TString in_fname,
          }
        }
      }
+     if(!passBtag) continue;
    }
    N_after_all_selections++;
 
