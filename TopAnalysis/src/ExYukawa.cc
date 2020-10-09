@@ -561,7 +561,6 @@ void RunExYukawa(const TString in_fname,
          }
        }
      }
-     if(!passBtag) continue;
    }
    N_after_all_selections++;
 
