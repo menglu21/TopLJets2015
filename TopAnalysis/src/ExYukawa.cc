@@ -100,6 +100,8 @@ void RunExYukawa(const TString in_fname,
 
   ht.addHist("HT",            new TH1F("HT",           ";H_{T} [GeV];Events",20,0,1000));
   ht.addHist("mllb",          new TH1F("mllb",         ";m(l,b) [GeV];Events",12,0,1000));
+  ht.addHist("signal_mllb",          new TH1F("signal_mllb",         ";m(l,b) [GeV];Events",12,0,1000));
+
 
   ht.addHist("ratevsrun",    new TH1F("ratevsrun",   ";Run number; #sigma [pb]",int(lumiPerRun.size()),0,float(lumiPerRun.size())));
   ht.addHist("nmuons",   new TH1F("nmuons",       ";N(muons);Events",6,-0.5,5.5));
@@ -145,6 +147,10 @@ void RunExYukawa(const TString in_fname,
   ht.addHist("hf_probb_gen_b", new TH1F("hf_probb_b", ";P[b] w/ Matched GEN b ; Events", 20.,-0.5,1.5));
   ht.addHist("hf_probb_gen_c", new TH1F("hf_probb_c", ";P[c] w/ Matched GEN c ; Events", 20.,-0.5,1.5));
   ht.addHist("hf_probb_gen_lightjet", new TH1F("hf_probb_gen_lightjet", ";P[udsg] w/ Matched GEN light quarks ; Events", 20.,-0.5,1.5));
+
+  ht.addHist("h_scan_mass", new TH1F("h_scan_mass",";particle mass (GeV) ; Events", 20., 200,1000));
+  ht.addHist("h_scan_rho", new TH1F("h_scan_rho",";rho ; Events", 10., 0,1));
+  ht.addHist("h_scan_coup", new TH1F("h_scan_coup",";coupling ; Events", 4, 0,4));
 
 //  TH1F *a_test1 = new TH1F("a_test1","a_test1",30,0,60);//for debugging
 
@@ -228,8 +234,6 @@ void RunExYukawa(const TString in_fname,
       //trigger
       bool hasMTrigger(false);
 
-
-
       if(era.Contains("2016")) hasMTrigger=(selector.hasTriggerBit("HLT_IsoMu24_v", ev.triggerBits) );
       if(era.Contains("2017")) {
 	hasMTrigger=(
@@ -261,6 +265,9 @@ void RunExYukawa(const TString in_fname,
      Ntotal++;
 //      cout << "Trigger = "<<hasMTrigger << endl;
 //      if(ev.isData && !hasMTrigger) continue;
+
+      ht.fill("h_scan_mass_bc",ev.scan_mass,1);
+
 
       if(!hasMTrigger) continue;
 
@@ -308,7 +315,6 @@ void RunExYukawa(const TString in_fname,
       if (dimuon_event) tags2.push_back("mm");
       if (dielectron_event) tags2.push_back("ee");
       if (emu_event || mue_event) tags2.push_back("emu");
-
 
       //select jets
       btvSF.addBTagDecisions(ev);
@@ -485,6 +491,11 @@ void RunExYukawa(const TString in_fname,
 
   if (leptons[0].charge()*leptons[1].charge() < 0) continue;
 
+
+  invariant_mass = (leptons[0]+leptons[1]).M();
+  std::vector<TString> tags3={"inc"};
+  tags3.push_back(to_string(ev.scan_mass));
+
   if(ev.met_pt < 30.) continue;
 
   float HT = 0;
@@ -500,6 +511,7 @@ void RunExYukawa(const TString in_fname,
     ht.fill("mllb",mllb,evWgt,tags2);
     ht.fill("bjet_pt",jets[ij].pt(),evWgt,tags2);
     ht.fill("bjet_eta",jets[ij].eta(),evWgt,tags2);
+    ht.fill("signal_mllb", mllb, evWgt, tags3);
 }
 
   bool passJets(jets.size()>=minJetMultiplicity);
@@ -602,6 +614,9 @@ void RunExYukawa(const TString in_fname,
       ht.fill("nbjets",num_btags,evWgt,tags2);
       ht.fill("met",ev.met_pt,evWgt,tags2);
       ht.fill("met_phi",ev.met_phi,evWgt,tags2);
+      ht.fill("h_scan_mass",ev.scan_mass,1);
+      ht.fill("h_scan_rho",ev.scan_rho,evWgt);
+      ht.fill("h_scan_coup",ev.scan_coup,evWgt);
 
 
     }
