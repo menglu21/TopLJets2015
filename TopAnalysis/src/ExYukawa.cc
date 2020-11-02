@@ -152,6 +152,10 @@ void RunExYukawa(const TString in_fname,
   ht.addHist("h_scan_rho", new TH1F("h_scan_rho",";rho ; Events", 10., 0,1));
   ht.addHist("h_scan_coup", new TH1F("h_scan_coup",";coupling ; Events", 4, 0,4));
 
+  ht.addHist("h_m_top_charm", new TH1F("h_m_top_charm",";m(top,charm) ; Events", 100, 0,1000));
+  ht.addHist("h_m_top_charm_x", new TH1F("h_m_top_charm_x",";m(top,charm) ; Events", 100, 0,1000));
+
+
 //  TH1F *a_test1 = new TH1F("a_test1","a_test1",30,0,60);//for debugging
 
 //  ht.addHist("b_matched_jet",  new TH1F("b_matched_jet", ";p_T(b matched jet) [GeV]; Events", 24,0,600));
@@ -172,7 +176,11 @@ void RunExYukawa(const TString in_fname,
   float CvsL1,CvsB1;
   float CvsL2,CvsB2;
   float CvsL3,CvsB3;
-  bool btag1,btag2,btag3;
+  float t_m_lep_charm;
+  float t_m_lep_bottom;
+  float t_HT;
+  float t_dphi_ll;
+  float t_deepcsv;
 
 
   t_input.Branch("event",&ev.event,"event/I");
@@ -184,10 +192,11 @@ void RunExYukawa(const TString in_fname,
   t_input.Branch("CvsB2",&CvsB2,"CvsB2/F");
   t_input.Branch("CvsL3",&CvsL3,"CvsL3/F");
   t_input.Branch("CvsB3",&CvsB3,"CvsB3/F");
-  t_input.Branch("btag1",&btag1,"btag1/O");
-  t_input.Branch("btag2",&btag2,"btag2/O");
-  t_input.Branch("btag3",&btag3,"btag3/O");
-
+  t_input.Branch("t_m_lep_jet1",&t_m_lep_charm,"t_m_lep_jet1/F");
+  t_input.Branch("t_m_lep_bottom",&t_m_lep_bottom,"t_m_lep_bottom/F");
+  t_input.Branch("t_HT",&t_HT,"t_HT/F");
+  t_input.Branch("t_dphi_ll",&t_dphi_ll,"t_dphi_ll/F");
+  t_input.Branch("t_deepcsv",&t_deepcsv,"t_deepcsv/F");
 
   TFile *f = TFile::Open(in_fname);
   if(f==NULL || f->IsZombie()) {
@@ -520,26 +529,27 @@ void RunExYukawa(const TString in_fname,
   if(num_btags < minNum_btags) continue;
 
   int jet_index=0;
-  btag1=false;
-  btag2=false;
-  btag3=false;
   for(size_t ij=0; ij<jets.size(); ij++){
     int idx=jets[ij].getJetIndex();
     bool passBtag(ev.j_btag[idx]>0);
     if (jet_index==0){
       CvsL1 = ev.j_CvsL[idx];
       CvsB1 = ev.j_CvsB[idx];
-      btag1=passBtag;
+      float mlc(((leptons[0]+jets[ij]).M()));
+      t_m_lep_charm = mlc;
+      if (passBtag) t_m_lep_bottom = mlc;
+      if (CvsL1 > 0.5 and CvsB1 > 0.5){
+        ht.fill("h_m_top_charm",mlc,evWgt,tags3);
+        ht.fill("h_m_top_charm_x",mlc,evWgt,tags2);
+      }
     }
     if (jet_index==1){
       CvsL2 = ev.j_CvsL[idx];
       CvsB2 = ev.j_CvsB[idx];
-      btag2=passBtag;
     }
     if (jet_index==2){
       CvsL3 = ev.j_CvsL[idx];
       CvsB3 = ev.j_CvsB[idx];
-      btag3=passBtag;
     }
     jet_index++;
     ht.fill("hf_csv",ev.j_csv[idx],evWgt,tags2);
@@ -551,6 +561,8 @@ void RunExYukawa(const TString in_fname,
     ht.fill("hf_CvsL",ev.j_CvsL[idx],evWgt,tags2);
     ht.fill("hf_CvsB",ev.j_CvsB[idx],evWgt,tags2);
     ht.fill2D("hf_CvsL_vs_CvsB",ev.j_CvsL[idx],ev.j_CvsB[idx],evWgt,tags2);
+    t_deepcsv=ev.j_deepcsv[idx];
+
      for (int i=0;i<ev.ng;i++){
        if (abs(ev.g_id[i]) < 6 || abs(ev.g_id[i]) == 21){
          TLorentzVector genjet4mom;
@@ -594,6 +606,7 @@ void RunExYukawa(const TString in_fname,
       ht.fill("jet_pt2",   jets[1].pt(), evWgt, tags2);
       ht.fill("jet_pt3",   jets[2].pt(), evWgt, tags2);
       ht.fill("HT", HT, evWgt, tags2);
+      t_HT = HT;
 
       for (size_t in_nlep=0; in_nlep<leptons.size();in_nlep++){
       	ht.fill("lep_pt",          leptons[in_nlep].pt(), evWgt, tags2);
@@ -617,7 +630,7 @@ void RunExYukawa(const TString in_fname,
       ht.fill("h_scan_mass",ev.scan_mass,1);
       ht.fill("h_scan_rho",ev.scan_rho,evWgt);
       ht.fill("h_scan_coup",ev.scan_coup,evWgt);
-
+      t_dphi_ll=delta_phi;
 
     }
     //close input file
