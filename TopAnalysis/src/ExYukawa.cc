@@ -20,6 +20,9 @@
 
 #include "TMath.h"
 
+#include <filesystem>
+namespace fs = std::filesystem;
+
 using namespace std;
 float DeltaEta(float eta1, float eta2);
 
@@ -59,6 +62,25 @@ void RunExYukawa(const TString in_fname,
   //CORRECTIONS: B-TAG CALIBRATION
   BTagSFUtil btvSF(era,BTagEntry::OperatingPoint::OP_MEDIUM,"",0);
 
+  //READ Cross section over sum(weight) for the MC sample
+  TString dirin = gSystem->DirName(in_fname);
+  TString baseMC = gSystem->BaseName(dirin);
+  cout<<"Base MC name: "<<baseMC<<endl;
+  TString githashfromdir = gSystem->BaseName(gSystem->DirName(dirin));
+  cout<<"Git hash: "<<githashfromdir<<endl;
+  TFile *norm_file=TFile::Open("data/era2017/genweights_"+githashfromdir+".root");
+  norm_file->cd();
+  TKey *key=norm_file->FindKey(baseMC);
+  if (key==0){
+   cout<<"No such histogram"<<endl;
+   throw 1;	
+  }
+  TH1F *h_norm = (TH1F*)norm_file->Get(baseMC);
+  float norm=h_norm->GetBinContent(1); 
+  cout<<"first bin content of the normalization histogram:  "<<norm<<endl;
+  norm_file->Close();
+  
+
   //PREPARE OUTPUT (BOOK SOME HISTOGRAMS)
   TString baseName=gSystem->BaseName(outname);
   TString dirName=gSystem->DirName(outname);
@@ -66,7 +88,7 @@ void RunExYukawa(const TString in_fname,
 ////////  TFile *f_tmva=TFile::Open("tree_tmva.root","recreate");
   fOut->cd();
 
-
+ 
 
   HistTool ht;
   ht.setNsyst(0);
@@ -181,11 +203,16 @@ void RunExYukawa(const TString in_fname,
   float t_HT;
   float t_dphi_ll;
   float t_deepcsv;
-
+  float t_pt_l1,t_pt_l2,t_eta_l1,t_eta_l2,t_phi_l1,t_phi_l2;
+  float t_pt_j1,t_pt_j2,t_pt_j3,t_eta_j1,t_eta_j2,t_eta_j3;
+  float t_phi_j1,t_phi_j2,t_phi_j3;
+  float t_met;
+  float t_weight;
 
   t_input.Branch("event",&ev.event,"event/I");
   t_input.Branch("run",&ev.run,"run/i");
   t_input.Branch("lumi",&ev.lumi,"lumi/i");
+  t_input.Branch("t_weight",&t_weight,"t_weight/F");
   t_input.Branch("CvsL1",&CvsL1,"CvsL1/F");
   t_input.Branch("CvsB1",&CvsB1,"CvsB1/F");
   t_input.Branch("CvsL2",&CvsL2,"CvsL2/F");
@@ -197,6 +224,24 @@ void RunExYukawa(const TString in_fname,
   t_input.Branch("t_HT",&t_HT,"t_HT/F");
   t_input.Branch("t_dphi_ll",&t_dphi_ll,"t_dphi_ll/F");
   t_input.Branch("t_deepcsv",&t_deepcsv,"t_deepcsv/F");
+
+
+  t_input.Branch("t_pt_l1", &t_pt_l1, "t_pt_l1/F");
+  t_input.Branch("t_pt_l2", &t_pt_l2, "t_pt_l2/F");
+  t_input.Branch("t_eta_l1", &t_eta_l1, "t_eta_l1/F");
+  t_input.Branch("t_eta_l2", &t_eta_l2, "t_eta_l2/F");
+  t_input.Branch("t_phi_l1", &t_phi_l1, "t_phi_l1/F");
+  t_input.Branch("t_phi_l2", &t_phi_l2, "t_phi_l2/F");
+  t_input.Branch("t_pt_j1", &t_pt_j1, "t_pt_j1/F");
+  t_input.Branch("t_pt_j2", &t_pt_j2, "t_pt_j2/F");
+  t_input.Branch("t_pt_j3", &t_pt_j3, "t_pt_j3/F");
+  t_input.Branch("t_eta_j1", &t_eta_j1, "t_eta_j1/F");
+  t_input.Branch("t_eta_j2", &t_eta_j2, "t_eta_j2/F");
+  t_input.Branch("t_eta_j3", &t_eta_j3, "t_eta_j3/F");
+  t_input.Branch("t_phi_j1", &t_phi_j1, "t_phi_j1/F");
+  t_input.Branch("t_phi_j2", &t_phi_j2, "t_phi_j2/F");
+  t_input.Branch("t_phi_j3", &t_phi_j3, "t_phi_j3/F");
+  t_input.Branch("t_met", &t_met, "t_met/F");
 
   TFile *f = TFile::Open(in_fname);
   if(f==NULL || f->IsZombie()) {
@@ -427,8 +472,7 @@ void RunExYukawa(const TString in_fname,
       }
 
       int num_btags = 0;
-      for(size_t ij=0; ij<allJets.size(); ij++)
-        {
+      for(size_t ij=0; ij<allJets.size(); ij++){
           int idx=allJets[ij].getJetIndex();
           bool passBtag(ev.j_btag[idx]>0);
           if(!passBtag) continue;
@@ -500,6 +544,14 @@ void RunExYukawa(const TString in_fname,
 
   if (leptons[0].charge()*leptons[1].charge() < 0) continue;
 
+  t_pt_l1=leptons[0].pt();
+  t_pt_l2=leptons[1].pt();
+  t_eta_l1=leptons[0].eta();
+  t_eta_l2=leptons[1].eta();
+  t_phi_l1=leptons[0].phi();
+  t_phi_l2=leptons[1].phi();
+  t_met=ev.met_pt;
+  t_weight=norm*evWgt;
 
   invariant_mass = (leptons[0]+leptons[1]).M();
   std::vector<TString> tags3={"inc"};
@@ -537,6 +589,9 @@ void RunExYukawa(const TString in_fname,
       CvsB1 = ev.j_CvsB[idx];
       float mlc(((leptons[0]+jets[ij]).M()));
       t_m_lep_charm = mlc;
+      t_pt_j1=jets[ij].pt();
+      t_eta_j1=jets[ij].eta();
+      t_phi_j1=jets[ij].Phi();	
       if (passBtag) t_m_lep_bottom = mlc;
       if (CvsL1 > 0.5 and CvsB1 > 0.5){
         ht.fill("h_m_top_charm",mlc,evWgt,tags3);
@@ -546,10 +601,16 @@ void RunExYukawa(const TString in_fname,
     if (jet_index==1){
       CvsL2 = ev.j_CvsL[idx];
       CvsB2 = ev.j_CvsB[idx];
+      t_pt_j2=jets[ij].pt();
+      t_eta_j2=jets[ij].eta();
+      t_phi_j2=jets[ij].Phi();
     }
     if (jet_index==2){
       CvsL3 = ev.j_CvsL[idx];
       CvsB3 = ev.j_CvsB[idx];
+      t_pt_j3=jets[ij].pt();
+      t_eta_j3=jets[ij].eta();
+      t_phi_j3=jets[ij].Phi();
     }
     jet_index++;
     ht.fill("hf_csv",ev.j_csv[idx],evWgt,tags2);
@@ -562,6 +623,8 @@ void RunExYukawa(const TString in_fname,
     ht.fill("hf_CvsB",ev.j_CvsB[idx],evWgt,tags2);
     ht.fill2D("hf_CvsL_vs_CvsB",ev.j_CvsL[idx],ev.j_CvsB[idx],evWgt,tags2);
     t_deepcsv=ev.j_deepcsv[idx];
+
+    
 
      for (int i=0;i<ev.ng;i++){
        if (abs(ev.g_id[i]) < 6 || abs(ev.g_id[i]) == 21){
