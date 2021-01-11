@@ -193,7 +193,7 @@ void RunExYukawa(const TString in_fname,
   //INPUT
   MiniEvent_t ev;
 
-  const char* treename = "TreeInput"; 
+  const char* treename = "TreeInput";
   const char* tree300 = "Tree300";
   const char* tree350 = "Tree350";
   const char* tree400 = "Tree400";
@@ -261,7 +261,7 @@ void RunExYukawa(const TString in_fname,
   t_input.Branch("t_scan_coup", &t_scan_coup, "t_scan_coup/F");
 
   TTree *t_300 = t_input.CloneTree();
-  t_300->SetName(tree300); 
+  t_300->SetName(tree300);
   TTree *t_350 = t_input.CloneTree();
   t_350->SetName(tree350);
   TTree *t_400 = t_input.CloneTree();
@@ -509,9 +509,10 @@ void RunExYukawa(const TString in_fname,
           if(!passBtag) continue;
 		      num_btags++;
         }
-
+/*
       if(!passJets) continue;
       if(num_btags < minNum_btags) continue;
+*/
 
 //      if(ev.met_pt < 30.) continue;
 
@@ -646,7 +647,7 @@ t_weight=evWgt;
       t_pt_j1=jets[ij].pt();
       t_eta_j1=jets[ij].eta();
       t_phi_j1=jets[ij].Phi();
-      if (ev.scan_mass > 299. && ev.scan_mass < 301.) ht.fill("h_CvsL1_300",CvsL1,1,tags2);	
+      if (ev.scan_mass > 299. && ev.scan_mass < 301.) ht.fill("h_CvsL1_300",CvsL1,1,tags2);
       if (passBtag) t_m_lep_bottom = mlc;
       if (CvsL1 > 0.5 and CvsB1 > 0.5){
         ht.fill("h_m_top_charm",mlc,evWgt,tags3);
@@ -717,7 +718,7 @@ t_weight=evWgt;
 
 //   t_event = iev;
    t_input.Fill();
-   if (baseMC.Contains("scan",TString::kIgnoreCase)){ 
+   if (baseMC.Contains("scan",TString::kIgnoreCase)){
       if (ev.scan_mass > 299. && ev.scan_mass < 301.) t_300->Fill();
       if (ev.scan_mass > 349. && ev.scan_mass < 351.) t_350->Fill();
       if (ev.scan_mass > 399. && ev.scan_mass < 401.) t_400->Fill();
