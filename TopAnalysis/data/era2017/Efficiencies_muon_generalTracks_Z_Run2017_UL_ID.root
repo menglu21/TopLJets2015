@@ -1,0 +1,960 @@
+<!DOCTYPE html>
+<html class="" lang="en">
+<head prefix="og: http://ogp.me/ns#">
+<meta charset="utf-8">
+<link as="style" href="https://gitlab.cern.ch/assets/application-62e4cc014d9d96f9cbf443186289ffd9c41bdfe951565324891dcf38bcca5a51.css" rel="preload">
+<link as="style" href="https://gitlab.cern.ch/assets/highlight/themes/solarized-dark-ad48c46d839b58f8918db7da293d88c31dfb41bc99658f72b391a4680f442bbb.css" rel="preload">
+<link as="font" href="https://gitlab.cern.ch/assets/fontawesome-webfont-2adefcbc041e7d18fcf2d417879dc5a09997aa64d675b7a3c4b6ce33da13f3fe.woff2?v=4.7.0" rel="preload" type="font/woff2">
+
+<meta content="IE=edge" http-equiv="X-UA-Compatible">
+
+<meta content="object" property="og:type">
+<meta content="GitLab" property="og:site_name">
+<meta content="EfficienciesStudies/UL2017/DEN_TrackerMuons/rootfiles/Efficiencies_muon_generalTracks_Z_Run2017_UL_ID.root Â· master Â· cms-muonPOG / MuonReferenceEfficiencies" property="og:title">
+<meta content="GitLab Enterprise Edition" property="og:description">
+<meta content="https://gitlab.cern.ch/assets/gitlab_logo-7ae504fe4f68fdebb3c2034e36621930cd36ea87924c11ff65dbcb8ed50dca58.png" property="og:image">
+<meta content="64" property="og:image:width">
+<meta content="64" property="og:image:height">
+<meta content="https://gitlab.cern.ch/cms-muonPOG/MuonReferenceEfficiencies/-/blob/master/EfficienciesStudies/UL2017/DEN_TrackerMuons/rootfiles/Efficiencies_muon_generalTracks_Z_Run2017_UL_ID.root" property="og:url">
+<meta content="summary" property="twitter:card">
+<meta content="EfficienciesStudies/UL2017/DEN_TrackerMuons/rootfiles/Efficiencies_muon_generalTracks_Z_Run2017_UL_ID.root Â· master Â· cms-muonPOG / MuonReferenceEfficiencies" property="twitter:title">
+<meta content="GitLab Enterprise Edition" property="twitter:description">
+<meta content="https://gitlab.cern.ch/assets/gitlab_logo-7ae504fe4f68fdebb3c2034e36621930cd36ea87924c11ff65dbcb8ed50dca58.png" property="twitter:image">
+
+<title>EfficienciesStudies/UL2017/DEN_TrackerMuons/rootfiles/Efficiencies_muon_generalTracks_Z_Run2017_UL_ID.root Â· master Â· cms-muonPOG / MuonReferenceEfficiencies Â· GitLab</title>
+<meta content="GitLab Enterprise Edition" name="description">
+<link rel="shortcut icon" type="image/png" href="/assets/favicon-7901bd695fb93edb07975966062049829afb56cf11511236e61bcf425070e36e.png" id="favicon" data-original-href="/assets/favicon-7901bd695fb93edb07975966062049829afb56cf11511236e61bcf425070e36e.png" />
+
+<link rel="stylesheet" media="all" href="/assets/application-62e4cc014d9d96f9cbf443186289ffd9c41bdfe951565324891dcf38bcca5a51.css" />
+
+<link rel="stylesheet" media="all" href="/assets/application_utilities-f636133344c99e44738666d9eecff2eb037c36ed05c5cbc2bfacc8dfad2bede2.css" />
+<link rel="stylesheet" media="all" href="/assets/themes/theme_indigo-de5d6083627877d91d7026811b987cc8ef64f626958073109b5dfb8cb510a7b4.css" />
+
+<link rel="stylesheet" media="all" href="/assets/highlight/themes/solarized-dark-ad48c46d839b58f8918db7da293d88c31dfb41bc99658f72b391a4680f442bbb.css" />
+
+
+<script>
+//<![CDATA[
+window.gon={};gon.features={"suggestPipeline":true,"gitlabCiYmlPreview":false};
+//]]>
+</script>
+
+
+
+<script src="/assets/webpack/runtime.4a8e404a.bundle.js" defer="defer"></script>
+<script src="/assets/webpack/main.16fad431.chunk.js" defer="defer"></script>
+<script src="/assets/webpack/commons-globalSearch-pages.admin.abuse_reports-pages.admin.application_settings.ci_cd-pages.admin.gr-bcb9d7d0.e13f2c5e.chunk.js" defer="defer"></script>
+<script src="/assets/webpack/commons-pages.groups.boards-pages.groups.details-pages.groups.show-pages.groups.wikis-pages.projects-f7a29bbf.98904b70.chunk.js" defer="defer"></script>
+<script src="/assets/webpack/commons-pages.admin.application_settings-pages.admin.application_settings.ci_cd-pages.admin.applicat-edd27642.29d837cc.chunk.js" defer="defer"></script>
+<script src="/assets/webpack/commons-pages.groups.epics.index-pages.groups.epics.new-pages.groups.epics.show-pages.groups.iterati-85c41ccb.37c1e60d.chunk.js" defer="defer"></script>
+<script src="/assets/webpack/commons-pages.projects.blame.show-pages.projects.blob.edit-pages.projects.blob.new-pages.projects.bl-c6edf1dd.e3e2e206.chunk.js" defer="defer"></script>
+<script src="/assets/webpack/commons-pages.projects.blob.show-pages.projects.shared.web_ide_link-pages.projects.show-pages.projec-cf300cc3.a895228a.chunk.js" defer="defer"></script>
+<script src="/assets/webpack/pages.projects.blob.show.267e246a.chunk.js" defer="defer"></script>
+
+<script>
+//<![CDATA[
+window.uploads_path = "/cms-muonPOG/MuonReferenceEfficiencies/uploads";
+
+
+
+//]]>
+</script>
+<meta name="csrf-param" content="authenticity_token" />
+<meta name="csrf-token" content="fD4o0pHVPN5gaN1h/USkbr22lF1bLSv3eK5NQFMMFY6BAlWJEJjzmDXWCE9suo0KZhnfFl20ZCXIQr4oKPGm+g==" />
+<meta name="csp-nonce" />
+<meta name="action-cable-url" content="/-/cable" />
+<meta content="width=device-width, initial-scale=1, maximum-scale=1" name="viewport">
+<meta content="#474D57" name="theme-color">
+<link rel="apple-touch-icon" type="image/x-icon" href="/assets/touch-icon-iphone-5a9cee0e8a51212e70b90c87c12f382c428870c0ff67d1eb034d884b78d2dae7.png" />
+<link rel="apple-touch-icon" type="image/x-icon" href="/assets/touch-icon-ipad-a6eec6aeb9da138e507593b464fdac213047e49d3093fc30e90d9a995df83ba3.png" sizes="76x76" />
+<link rel="apple-touch-icon" type="image/x-icon" href="/assets/touch-icon-iphone-retina-72e2aadf86513a56e050e7f0f2355deaa19cc17ed97bbe5147847f2748e5a3e3.png" sizes="120x120" />
+<link rel="apple-touch-icon" type="image/x-icon" href="/assets/touch-icon-ipad-retina-8ebe416f5313483d9c1bc772b5bbe03ecad52a54eba443e5215a22caed2a16a2.png" sizes="152x152" />
+<link color="rgb(226, 67, 41)" href="/assets/logo-d36b5212042cebc89b96df4bf6ac24e43db316143e89926c0db839ff694d2de4.svg" rel="mask-icon">
+<meta content="/assets/msapplication-tile-1196ec67452f618d39cdd85e2e3a542f76574c071051ae7effbfde01710eb17d.png" name="msapplication-TileImage">
+<meta content="#30353E" name="msapplication-TileColor">
+
+
+
+
+</head>
+
+<body class="ui-indigo tab-width-8  gl-browser-firefox gl-platform-mac" data-find-file="/cms-muonPOG/MuonReferenceEfficiencies/-/find_file/master" data-group="cms-muonPOG" data-namespace-id="11641" data-page="projects:blob:show" data-page-type-id="master/EfficienciesStudies/UL2017/DEN_TrackerMuons/rootfiles/Efficiencies_muon_generalTracks_Z_Run2017_UL_ID.root" data-project="MuonReferenceEfficiencies" data-project-id="43306">
+
+<script>
+//<![CDATA[
+gl = window.gl || {};
+gl.client = {"isFirefox":true,"isMac":true};
+
+
+//]]>
+</script>
+
+
+<header class="navbar navbar-gitlab navbar-expand-sm js-navbar" data-qa-selector="navbar">
+<a class="sr-only gl-accessibility" href="#content-body" tabindex="1">Skip to content</a>
+<div class="container-fluid">
+<div class="header-content">
+<div class="title-container">
+<h1 class="title">
+<span class="gl-sr-only">GitLab</span>
+<a title="Dashboard" id="logo" href="/"><svg width="24" height="24" class="tanuki-logo" viewBox="0 0 36 36">
+  <path class="tanuki-shape tanuki-left-ear" fill="#e24329" d="M2 14l9.38 9v-9l-4-12.28c-.205-.632-1.176-.632-1.38 0z"/>
+  <path class="tanuki-shape tanuki-right-ear" fill="#e24329" d="M34 14l-9.38 9v-9l4-12.28c.205-.632 1.176-.632 1.38 0z"/>
+  <path class="tanuki-shape tanuki-nose" fill="#e24329" d="M18,34.38 3,14 33,14 Z"/>
+  <path class="tanuki-shape tanuki-left-eye" fill="#fc6d26" d="M18,34.38 11.38,14 2,14 6,25Z"/>
+  <path class="tanuki-shape tanuki-right-eye" fill="#fc6d26" d="M18,34.38 24.62,14 34,14 30,25Z"/>
+  <path class="tanuki-shape tanuki-left-cheek" fill="#fca326" d="M2 14L.1 20.16c-.18.565 0 1.2.5 1.56l17.42 12.66z"/>
+  <path class="tanuki-shape tanuki-right-cheek" fill="#fca326" d="M34 14l1.9 6.16c.18.565 0 1.2-.5 1.56L18 34.38z"/>
+</svg>
+
+<span class="logo-text d-none d-lg-block gl-ml-3">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 617 169"><path d="M315.26 2.97h-21.8l.1 162.5h88.3v-20.1h-66.5l-.1-142.4M465.89 136.95c-5.5 5.7-14.6 11.4-27 11.4-16.6 0-23.3-8.2-23.3-18.9 0-16.1 11.2-23.8 35-23.8 4.5 0 11.7.5 15.4 1.2v30.1h-.1m-22.6-98.5c-17.6 0-33.8 6.2-46.4 16.7l7.7 13.4c8.9-5.2 19.8-10.4 35.5-10.4 17.9 0 25.8 9.2 25.8 24.6v7.9c-3.5-.7-10.7-1.2-15.1-1.2-38.2 0-57.6 13.4-57.6 41.4 0 25.1 15.4 37.7 38.7 37.7 15.7 0 30.8-7.2 36-18.9l4 15.9h15.4v-83.2c-.1-26.3-11.5-43.9-44-43.9M557.63 149.1c-8.2 0-15.4-1-20.8-3.5V70.5c7.4-6.2 16.6-10.7 28.3-10.7 21.1 0 29.2 14.9 29.2 39 0 34.2-13.1 50.3-36.7 50.3m9.2-110.6c-19.5 0-30 13.3-30 13.3v-21l-.1-27.8h-21.3l.1 158.5c10.7 4.5 25.3 6.9 41.2 6.9 40.7 0 60.3-26 60.3-70.9-.1-35.5-18.2-59-50.2-59M77.9 20.6c19.3 0 31.8 6.4 39.9 12.9l9.4-16.3C114.5 6 97.3 0 78.9 0 32.5 0 0 28.3 0 85.4c0 59.8 35.1 83.1 75.2 83.1 20.1 0 37.2-4.7 48.4-9.4l-.5-63.9V75.1H63.6v20.1h38l.5 48.5c-5 2.5-13.6 4.5-25.3 4.5-32.2 0-53.8-20.3-53.8-63-.1-43.5 22.2-64.6 54.9-64.6M231.43 2.95h-21.3l.1 27.3v94.3c0 26.3 11.4 43.9 43.9 43.9 4.5 0 8.9-.4 13.1-1.2v-19.1c-3.1.5-6.4.7-9.9.7-17.9 0-25.8-9.2-25.8-24.6v-65h35.7v-17.8h-35.7l-.1-38.5M155.96 165.47h21.3v-124h-21.3v124M155.96 24.37h21.3V3.07h-21.3v21.3"/></svg>
+
+</span>
+</a></h1>
+<ul class="list-unstyled navbar-sub-nav">
+<li id="nav-projects-dropdown" class="home dropdown header-projects qa-projects-dropdown" data-track-label="projects_dropdown" data-track-event="click_dropdown"><button data-toggle="dropdown" type="button">
+Projects
+<svg class="s16 caret-down" data-testid="chevron-down-icon"><use xlink:href="/assets/icons-e0a66cb8e6ca64bcdd2a8f111cbd9e94cf727c1bd5939bc71619df5c973fbc87.svg#chevron-down"></use></svg>
+</button>
+<div class="dropdown-menu frequent-items-dropdown-menu">
+<div class="frequent-items-dropdown-container">
+<div class="frequent-items-dropdown-sidebar qa-projects-dropdown-sidebar">
+<ul>
+<li class=""><a class="qa-your-projects-link" href="/dashboard/projects">Your projects
+</a></li><li class=""><a href="/dashboard/projects/starred">Starred projects
+</a></li><li class=""><a href="/explore">Explore projects
+</a></li></ul>
+</div>
+<div class="frequent-items-dropdown-content">
+<div data-project-id="43306" data-project-name="MuonReferenceEfficiencies" data-project-namespace="cms-muonPOG / MuonReferenceEfficiencies" data-project-web-url="/cms-muonPOG/MuonReferenceEfficiencies" data-user-name="efe" id="js-projects-dropdown"></div>
+</div>
+</div>
+
+</div>
+</li><li id="nav-groups-dropdown" class="d-none d-md-block home dropdown header-groups qa-groups-dropdown" data-track-label="groups_dropdown" data-track-event="click_dropdown"><button data-toggle="dropdown" type="button">
+Groups
+<svg class="s16 caret-down" data-testid="chevron-down-icon"><use xlink:href="/assets/icons-e0a66cb8e6ca64bcdd2a8f111cbd9e94cf727c1bd5939bc71619df5c973fbc87.svg#chevron-down"></use></svg>
+</button>
+<div class="dropdown-menu frequent-items-dropdown-menu">
+<div class="frequent-items-dropdown-container">
+<div class="frequent-items-dropdown-sidebar qa-groups-dropdown-sidebar">
+<ul>
+<li class=""><a class="qa-your-groups-link" href="/dashboard/groups">Your groups
+</a></li><li class=""><a href="/explore/groups">Explore groups
+</a></li></ul>
+</div>
+<div class="frequent-items-dropdown-content">
+<div data-user-name="efe" id="js-groups-dropdown"></div>
+</div>
+</div>
+
+</div>
+</li><li id="nav-more-dropdown" class="header-more dropdown" data-track-label="more_dropdown" data-track-event="click_more_link"><a data-qa-selector="more_dropdown" data-toggle="dropdown" href="#">
+More
+<svg class="s16 caret-down" data-testid="chevron-down-icon"><use xlink:href="/assets/icons-e0a66cb8e6ca64bcdd2a8f111cbd9e94cf727c1bd5939bc71619df5c973fbc87.svg#chevron-down"></use></svg>
+</a>
+<div class="dropdown-menu">
+<ul>
+<li class="d-md-none">
+<a class="dashboard-shortcuts-groups" data-qa-selector="groups_link" href="/dashboard/groups">Groups
+</a></li>
+<li class=""><a class="dashboard-shortcuts-activity" data-qa-selector="activity_link" href="/dashboard/activity">Activity
+</a></li><li class=""><a class="dashboard-shortcuts-milestones" data-qa-selector="milestones_link" href="/dashboard/milestones">Milestones
+</a></li><li class=""><a class="dashboard-shortcuts-snippets" data-qa-selector="snippets_link" href="/dashboard/snippets">Snippets
+</a></li><li class="dropdown">
+
+</li>
+</ul>
+</div>
+</li><li class="hidden">
+<a class="dashboard-shortcuts-projects" href="/dashboard/projects">Projects
+</a></li>
+
+</ul>
+
+</div>
+<div class="navbar-collapse collapse">
+<ul class="nav navbar-nav">
+<li class="header-new dropdown" data-track-event="click_dropdown" data-track-label="new_dropdown" data-track-value="">
+<a class="header-new-dropdown-toggle has-tooltip qa-new-menu-toggle" id="js-onboarding-new-project-link" title="New..." ref="tooltip" aria-label="New..." data-toggle="dropdown" data-placement="bottom" data-container="body" data-display="static" href="/projects/new"><svg class="s16" data-testid="plus-square-icon"><use xlink:href="/assets/icons-e0a66cb8e6ca64bcdd2a8f111cbd9e94cf727c1bd5939bc71619df5c973fbc87.svg#plus-square"></use></svg>
+<svg class="s16 caret-down" data-testid="chevron-down-icon"><use xlink:href="/assets/icons-e0a66cb8e6ca64bcdd2a8f111cbd9e94cf727c1bd5939bc71619df5c973fbc87.svg#chevron-down"></use></svg>
+</a><div class="dropdown-menu dropdown-menu-right">
+<ul>
+<li class="dropdown-bold-header">
+This project
+</li>
+<li><a href="/cms-muonPOG/MuonReferenceEfficiencies/-/issues/new">New issue</a></li>
+<li class="divider"></li>
+<li class="dropdown-bold-header">GitLab</li>
+<li><a class="qa-global-new-project-link" href="/projects/new">New project</a></li>
+<li><a href="/groups/new">New group</a></li>
+<li><a class="qa-global-new-snippet-link" href="/-/snippets/new">New snippet</a></li>
+</ul>
+</div>
+</li>
+
+<li class="nav-item d-none d-lg-block m-auto">
+<div class="search search-form" data-track-event="activate_form_input" data-track-label="navbar_search" data-track-value="">
+<form class="form-inline" action="/search" accept-charset="UTF-8" method="get"><input name="utf8" type="hidden" value="&#x2713;" /><div class="search-input-container">
+<div class="search-input-wrap">
+<div class="dropdown" data-url="/search/autocomplete">
+<input type="search" name="search" id="search" placeholder="Search or jump toâ€¦" class="search-input dropdown-menu-toggle no-outline js-search-dashboard-options" spellcheck="false" autocomplete="off" data-issues-path="/dashboard/issues" data-mr-path="/dashboard/merge_requests" data-qa-selector="search_term_field" aria-label="Search or jump toâ€¦" />
+<button class="hidden js-dropdown-search-toggle" data-toggle="dropdown" type="button"></button>
+<div class="dropdown-menu dropdown-select" data-testid="dashboard-search-options">
+<div class="dropdown-content"><ul>
+<li class="dropdown-menu-empty-item">
+<a>
+Loading...
+</a>
+</li>
+</ul>
+</div><div class="dropdown-loading"><div class="gl-spinner-container"><span class="gl-spinner gl-spinner-orange gl-spinner-md gl-mt-7" aria-label="Loading"></span></div></div>
+</div>
+<svg class="s16 search-icon" data-testid="search-icon"><use xlink:href="/assets/icons-e0a66cb8e6ca64bcdd2a8f111cbd9e94cf727c1bd5939bc71619df5c973fbc87.svg#search"></use></svg>
+<svg class="s16 clear-icon js-clear-input" data-testid="close-icon"><use xlink:href="/assets/icons-e0a66cb8e6ca64bcdd2a8f111cbd9e94cf727c1bd5939bc71619df5c973fbc87.svg#close"></use></svg>
+</div>
+</div>
+</div>
+<input type="hidden" name="group_id" id="group_id" value="11641" class="js-search-group-options" data-group-path="cms-muonPOG" data-name="cms-muonPOG" data-issues-path="/groups/cms-muonPOG/-/issues" data-mr-path="/groups/cms-muonPOG/-/merge_requests" />
+<input type="hidden" name="project_id" id="search_project_id" value="43306" class="js-search-project-options" data-project-path="MuonReferenceEfficiencies" data-name="MuonReferenceEfficiencies" data-issues-path="/cms-muonPOG/MuonReferenceEfficiencies/-/issues" data-mr-path="/cms-muonPOG/MuonReferenceEfficiencies/-/merge_requests" data-issues-disabled="false" />
+<input type="hidden" name="scope" id="scope" />
+<input type="hidden" name="search_code" id="search_code" value="true" />
+<input type="hidden" name="snippets" id="snippets" value="false" />
+<input type="hidden" name="repository_ref" id="repository_ref" value="master" />
+<input type="hidden" name="nav_source" id="nav_source" value="navbar" />
+<div class="search-autocomplete-opts hide" data-autocomplete-path="/search/autocomplete" data-autocomplete-project-id="43306" data-autocomplete-project-ref="master"></div>
+</form></div>
+
+</li>
+<li class="nav-item d-inline-block d-lg-none">
+<a title="Search" aria-label="Search" data-toggle="tooltip" data-placement="bottom" data-container="body" href="/search?project_id=43306"><svg class="s16" data-testid="search-icon"><use xlink:href="/assets/icons-e0a66cb8e6ca64bcdd2a8f111cbd9e94cf727c1bd5939bc71619df5c973fbc87.svg#search"></use></svg>
+</a></li>
+<li class="user-counter"><a title="Issues" class="dashboard-shortcuts-issues" aria-label="Issues" data-qa-selector="issues_shortcut_button" data-toggle="tooltip" data-placement="bottom" data-track-label="main_navigation" data-track-event="click_issues_link" data-track-property="navigation" data-container="body" href="/dashboard/issues?assignee_username=efe"><svg class="s16" data-testid="issues-icon"><use xlink:href="/assets/icons-e0a66cb8e6ca64bcdd2a8f111cbd9e94cf727c1bd5939bc71619df5c973fbc87.svg#issues"></use></svg>
+<span class="badge badge-pill green-badge hidden issues-count">
+0
+</span>
+</a></li><li class="user-counter"><a title="Merge requests" class="dashboard-shortcuts-merge_requests" aria-label="Merge requests" data-qa-selector="merge_requests_shortcut_button" data-toggle="tooltip" data-placement="bottom" data-track-label="main_navigation" data-track-event="click_merge_link" data-track-property="navigation" data-container="body" href="/dashboard/merge_requests?assignee_username=efe"><svg class="s16" data-testid="git-merge-icon"><use xlink:href="/assets/icons-e0a66cb8e6ca64bcdd2a8f111cbd9e94cf727c1bd5939bc71619df5c973fbc87.svg#git-merge"></use></svg>
+<span class="badge badge-pill hidden merge-requests-count">
+0
+</span>
+</a></li><li class="user-counter"><a title="To-Do List" aria-label="To-Do List" class="shortcuts-todos" data-qa-selector="todos_shortcut_button" data-toggle="tooltip" data-placement="bottom" data-track-label="main_navigation" data-track-event="click_to_do_link" data-track-property="navigation" data-container="body" href="/dashboard/todos"><svg class="s16" data-testid="todo-done-icon"><use xlink:href="/assets/icons-e0a66cb8e6ca64bcdd2a8f111cbd9e94cf727c1bd5939bc71619df5c973fbc87.svg#todo-done"></use></svg>
+<span class="badge badge-pill js-todos-count todos-count">
+99+
+</span>
+</a></li><li class="nav-item header-help dropdown d-none d-md-block">
+<a class="header-help-dropdown-toggle" data-toggle="dropdown" href="/help"><span class="gl-sr-only">
+Help
+</span>
+<svg class="s16" data-testid="question-icon"><use xlink:href="/assets/icons-e0a66cb8e6ca64bcdd2a8f111cbd9e94cf727c1bd5939bc71619df5c973fbc87.svg#question"></use></svg>
+<svg class="s16 caret-down" data-testid="chevron-down-icon"><use xlink:href="/assets/icons-e0a66cb8e6ca64bcdd2a8f111cbd9e94cf727c1bd5939bc71619df5c973fbc87.svg#chevron-down"></use></svg>
+</a><div class="dropdown-menu dropdown-menu-right">
+<ul>
+
+<li>
+<a href="/help">Help</a>
+</li>
+<li>
+<a href="https://about.gitlab.com/getting-help/">Support</a>
+</li>
+<li>
+<a target="_blank" class="text-nowrap" rel="noopener noreferrer" data-track-event="click_forum" data-track-property="question_menu" href="https://forum.gitlab.com/">Community forum</a>
+
+</li>
+<li>
+<button class="js-shortcuts-modal-trigger" type="button">
+Keyboard shortcuts
+<span aria-hidden class="text-secondary float-right">?</span>
+</button>
+</li>
+<li class="divider"></li>
+<li>
+<a href="https://about.gitlab.com/submit-feedback">Submit feedback</a>
+</li>
+<li>
+
+</li>
+
+</ul>
+
+</div>
+</li>
+<li class="dropdown header-user js-nav-user-dropdown nav-item" data-qa-selector="user_menu" data-track-event="click_dropdown" data-track-label="profile_dropdown" data-track-value="">
+<a class="header-user-dropdown-toggle" data-toggle="dropdown" href="/efe"><img width="23" height="23" class="header-user-avatar qa-user-avatar lazy" alt="Efe Yazgan" data-src="/uploads/-/system/user/avatar/954/avatar.png?width=23" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" />
+
+<svg class="s16 caret-down" data-testid="chevron-down-icon"><use xlink:href="/assets/icons-e0a66cb8e6ca64bcdd2a8f111cbd9e94cf727c1bd5939bc71619df5c973fbc87.svg#chevron-down"></use></svg>
+</a><div class="dropdown-menu dropdown-menu-right">
+<ul>
+<li class="current-user">
+<div class="user-name gl-font-weight-bold">
+Efe Yazgan
+</div>
+@efe
+</li>
+<li class="divider"></li>
+<li>
+<button class="btn menu-item js-set-status-modal-trigger" type="button">
+Set status
+</button>
+</li>
+<li>
+<a class="profile-link" data-user="efe" href="/efe">Profile</a>
+</li>
+<li>
+<a data-qa-selector="settings_link" href="/-/profile">Settings</a>
+</li>
+
+
+<li class="divider d-md-none"></li>
+<li class="d-md-none">
+<a href="/help">Help</a>
+</li>
+<li class="d-md-none">
+<a href="https://about.gitlab.com/getting-help/">Support</a>
+</li>
+<li class="d-md-none">
+<a target="_blank" class="text-nowrap" rel="noopener noreferrer" data-track-event="click_forum" data-track-property="question_menu" href="https://forum.gitlab.com/">Community forum</a>
+
+</li>
+<li class="d-md-none">
+<a href="https://about.gitlab.com/submit-feedback">Submit feedback</a>
+</li>
+<li class="d-md-none">
+
+</li>
+
+<li class="divider"></li>
+<li>
+<a class="sign-out-link" data-qa-selector="sign_out_link" rel="nofollow" data-method="post" href="/users/sign_out">Sign out</a>
+</li>
+</ul>
+
+</div>
+</li>
+</ul>
+</div>
+<button class="navbar-toggler d-block d-sm-none" type="button">
+<span class="sr-only">Toggle navigation</span>
+<svg class="s12 more-icon js-navbar-toggle-right" data-testid="ellipsis_h-icon"><use xlink:href="/assets/icons-e0a66cb8e6ca64bcdd2a8f111cbd9e94cf727c1bd5939bc71619df5c973fbc87.svg#ellipsis_h"></use></svg>
+<svg class="s12 close-icon js-navbar-toggle-left" data-testid="close-icon"><use xlink:href="/assets/icons-e0a66cb8e6ca64bcdd2a8f111cbd9e94cf727c1bd5939bc71619df5c973fbc87.svg#close"></use></svg>
+</button>
+</div>
+</div>
+</header>
+<div class="js-set-status-modal-wrapper" data-current-emoji="" data-current-message="" data-default-emoji="speech_balloon"></div>
+
+<div class="layout-page page-with-contextual-sidebar">
+<div class="nav-sidebar">
+<div class="nav-sidebar-inner-scroll">
+<div class="context-header">
+<a title="MuonReferenceEfficiencies" href="/cms-muonPOG/MuonReferenceEfficiencies"><div class="avatar-container rect-avatar s40 project-avatar">
+<div class="avatar s40 avatar-tile identicon bg5">M</div>
+</div>
+<div class="sidebar-context-title">
+MuonReferenceEfficiencies
+</div>
+</a></div>
+<ul class="sidebar-top-level-items qa-project-sidebar">
+<li class="home"><a class="shortcuts-project rspec-project-link" data-qa-selector="project_link" href="/cms-muonPOG/MuonReferenceEfficiencies"><div class="nav-icon-container">
+<svg class="s16" data-testid="home-icon"><use xlink:href="/assets/icons-e0a66cb8e6ca64bcdd2a8f111cbd9e94cf727c1bd5939bc71619df5c973fbc87.svg#home"></use></svg>
+</div>
+<span class="nav-item-name">
+Project overview
+</span>
+</a><ul class="sidebar-sub-level-items">
+<li class="fly-out-top-item"><a href="/cms-muonPOG/MuonReferenceEfficiencies"><strong class="fly-out-top-item-name">
+Project overview
+</strong>
+</a></li><li class="divider fly-out-top-item"></li>
+<li class=""><a title="Project details" class="shortcuts-project" href="/cms-muonPOG/MuonReferenceEfficiencies"><span>Details</span>
+</a></li><li class=""><a title="Activity" class="shortcuts-project-activity" data-qa-selector="activity_link" href="/cms-muonPOG/MuonReferenceEfficiencies/activity"><span>Activity</span>
+</a></li><li class=""><a title="Releases" class="shortcuts-project-releases" href="/cms-muonPOG/MuonReferenceEfficiencies/-/releases"><span>Releases</span>
+</a></li></ul>
+</li><li class="active"><a class="shortcuts-tree" data-qa-selector="repository_link" href="/cms-muonPOG/MuonReferenceEfficiencies/-/tree/master"><div class="nav-icon-container">
+<svg class="s16" data-testid="doc-text-icon"><use xlink:href="/assets/icons-e0a66cb8e6ca64bcdd2a8f111cbd9e94cf727c1bd5939bc71619df5c973fbc87.svg#doc-text"></use></svg>
+</div>
+<span class="nav-item-name" id="js-onboarding-repo-link">
+Repository
+</span>
+</a><ul class="sidebar-sub-level-items">
+<li class="fly-out-top-item active"><a href="/cms-muonPOG/MuonReferenceEfficiencies/-/tree/master"><strong class="fly-out-top-item-name">
+Repository
+</strong>
+</a></li><li class="divider fly-out-top-item"></li>
+<li class="active"><a href="/cms-muonPOG/MuonReferenceEfficiencies/-/tree/master">Files
+</a></li><li class=""><a id="js-onboarding-commits-link" href="/cms-muonPOG/MuonReferenceEfficiencies/-/commits/master">Commits
+</a></li><li class=""><a data-qa-selector="branches_link" id="js-onboarding-branches-link" href="/cms-muonPOG/MuonReferenceEfficiencies/-/branches">Branches
+</a></li><li class=""><a data-qa-selector="tags_link" href="/cms-muonPOG/MuonReferenceEfficiencies/-/tags">Tags
+</a></li><li class=""><a href="/cms-muonPOG/MuonReferenceEfficiencies/-/graphs/master">Contributors
+</a></li><li class=""><a href="/cms-muonPOG/MuonReferenceEfficiencies/-/network/master">Graph
+</a></li><li class=""><a href="/cms-muonPOG/MuonReferenceEfficiencies/-/compare?from=master&amp;to=master">Compare
+</a></li>
+</ul>
+</li><li class=""><a class="shortcuts-issues qa-issues-item" href="/cms-muonPOG/MuonReferenceEfficiencies/-/issues"><div class="nav-icon-container">
+<svg class="s16" data-testid="issues-icon"><use xlink:href="/assets/icons-e0a66cb8e6ca64bcdd2a8f111cbd9e94cf727c1bd5939bc71619df5c973fbc87.svg#issues"></use></svg>
+</div>
+<span class="nav-item-name" id="js-onboarding-issues-link">
+Issues
+</span>
+<span class="badge badge-pill count issue_counter">
+1
+</span>
+</a><ul class="sidebar-sub-level-items">
+<li class="fly-out-top-item"><a href="/cms-muonPOG/MuonReferenceEfficiencies/-/issues"><strong class="fly-out-top-item-name">
+Issues
+</strong>
+<span class="badge badge-pill count issue_counter fly-out-badge">
+1
+</span>
+</a></li><li class="divider fly-out-top-item"></li>
+<li class=""><a title="Issues" href="/cms-muonPOG/MuonReferenceEfficiencies/-/issues"><span>
+List
+</span>
+</a></li><li class=""><a title="Boards" data-qa-selector="issue_boards_link" href="/cms-muonPOG/MuonReferenceEfficiencies/-/boards"><span>
+Boards
+</span>
+</a></li><li class=""><a title="Labels" class="qa-labels-link" href="/cms-muonPOG/MuonReferenceEfficiencies/-/labels"><span>
+Labels
+</span>
+</a></li><li class=""><a title="Service Desk" href="/cms-muonPOG/MuonReferenceEfficiencies/-/issues/service_desk">Service Desk
+</a></li>
+<li class=""><a title="Milestones" class="qa-milestones-link" href="/cms-muonPOG/MuonReferenceEfficiencies/-/milestones"><span>
+Milestones
+</span>
+</a></li><li class=""><a title="Iterations" href="/cms-muonPOG/MuonReferenceEfficiencies/-/iterations"><span>
+Iterations
+</span>
+</a></li>
+</ul>
+</li><li class=""><a class="shortcuts-merge_requests" data-qa-selector="merge_requests_link" href="/cms-muonPOG/MuonReferenceEfficiencies/-/merge_requests"><div class="nav-icon-container">
+<svg class="s16" data-testid="git-merge-icon"><use xlink:href="/assets/icons-e0a66cb8e6ca64bcdd2a8f111cbd9e94cf727c1bd5939bc71619df5c973fbc87.svg#git-merge"></use></svg>
+</div>
+<span class="nav-item-name" id="js-onboarding-mr-link">
+Merge Requests
+</span>
+<span class="badge badge-pill count merge_counter js-merge-counter">
+2
+</span>
+</a><ul class="sidebar-sub-level-items is-fly-out-only">
+<li class="fly-out-top-item"><a href="/cms-muonPOG/MuonReferenceEfficiencies/-/merge_requests"><strong class="fly-out-top-item-name">
+Merge Requests
+</strong>
+<span class="badge badge-pill count merge_counter js-merge-counter fly-out-badge">
+2
+</span>
+</a></li></ul>
+</li>
+<li class=""><a class="shortcuts-pipelines qa-link-pipelines rspec-link-pipelines" data-qa-selector="ci_cd_link" href="/cms-muonPOG/MuonReferenceEfficiencies/-/pipelines"><div class="nav-icon-container">
+<svg class="s16" data-testid="rocket-icon"><use xlink:href="/assets/icons-e0a66cb8e6ca64bcdd2a8f111cbd9e94cf727c1bd5939bc71619df5c973fbc87.svg#rocket"></use></svg>
+</div>
+<span class="nav-item-name" id="js-onboarding-pipelines-link">
+CI / CD
+</span>
+</a><ul class="sidebar-sub-level-items">
+<li class="fly-out-top-item"><a href="/cms-muonPOG/MuonReferenceEfficiencies/-/pipelines"><strong class="fly-out-top-item-name">
+CI / CD
+</strong>
+</a></li><li class="divider fly-out-top-item"></li>
+<li class=""><a title="Pipelines" class="shortcuts-pipelines" href="/cms-muonPOG/MuonReferenceEfficiencies/-/pipelines"><span>
+Pipelines
+</span>
+</a></li><li class=""><a title="Jobs" class="shortcuts-builds" href="/cms-muonPOG/MuonReferenceEfficiencies/-/jobs"><span>
+Jobs
+</span>
+</a></li><li class=""><a title="Schedules" class="shortcuts-builds" href="/cms-muonPOG/MuonReferenceEfficiencies/-/pipeline_schedules"><span>
+Schedules
+</span>
+</a></li>
+</ul>
+</li>
+<li class=""><a class="shortcuts-operations" data-qa-selector="operations_link" href="/cms-muonPOG/MuonReferenceEfficiencies/-/environments/metrics"><div class="nav-icon-container">
+<svg class="s16" data-testid="cloud-gear-icon"><use xlink:href="/assets/icons-e0a66cb8e6ca64bcdd2a8f111cbd9e94cf727c1bd5939bc71619df5c973fbc87.svg#cloud-gear"></use></svg>
+</div>
+<span class="nav-item-name">
+Operations
+</span>
+</a><ul class="sidebar-sub-level-items">
+<li class="fly-out-top-item"><a href="/cms-muonPOG/MuonReferenceEfficiencies/-/environments/metrics"><strong class="fly-out-top-item-name">
+Operations
+</strong>
+</a></li><li class="divider fly-out-top-item"></li>
+<li class=""><a title="Metrics" class="shortcuts-metrics" data-qa-selector="operations_metrics_link" href="/cms-muonPOG/MuonReferenceEfficiencies/-/metrics"><span>
+Metrics
+</span>
+</a></li>
+<li class=""><a title="Error Tracking" href="/cms-muonPOG/MuonReferenceEfficiencies/-/error_tracking"><span>
+Error Tracking
+</span>
+</a></li><li class=""><a title="Incidents" data-qa-selector="operations_incidents_link" href="/cms-muonPOG/MuonReferenceEfficiencies/-/incidents"><span>
+Incidents
+</span>
+</a></li><li class=""><a title="Environments" class="shortcuts-environments qa-operations-environments-link" href="/cms-muonPOG/MuonReferenceEfficiencies/-/environments"><span>
+Environments
+</span>
+</a></li></ul>
+</li><li class=""><a data-qa-selector="packages_link" href="/cms-muonPOG/MuonReferenceEfficiencies/container_registry"><div class="nav-icon-container">
+<svg class="s16" data-testid="package-icon"><use xlink:href="/assets/icons-e0a66cb8e6ca64bcdd2a8f111cbd9e94cf727c1bd5939bc71619df5c973fbc87.svg#package"></use></svg>
+</div>
+<span class="nav-item-name">
+Packages &amp; Registries
+</span>
+</a><ul class="sidebar-sub-level-items">
+<li class="fly-out-top-item"><a href="/cms-muonPOG/MuonReferenceEfficiencies/container_registry"><strong class="fly-out-top-item-name">
+Packages &amp; Registries
+</strong>
+</a></li><li class="divider fly-out-top-item"></li>
+<li class=""><a class="shortcuts-container-registry" title="Container Registry" href="/cms-muonPOG/MuonReferenceEfficiencies/container_registry"><span>Container Registry</span>
+</a></li></ul>
+</li>
+<li class=""><a data-qa-selector="analytics_anchor" href="/cms-muonPOG/MuonReferenceEfficiencies/-/value_stream_analytics"><div class="nav-icon-container">
+<svg class="s16" data-testid="chart-icon"><use xlink:href="/assets/icons-e0a66cb8e6ca64bcdd2a8f111cbd9e94cf727c1bd5939bc71619df5c973fbc87.svg#chart"></use></svg>
+</div>
+<span class="nav-item-name" data-qa-selector="analytics_link">
+Analytics
+</span>
+</a><ul class="sidebar-sub-level-items" data-qa-selector="analytics_sidebar_submenu">
+<li class="fly-out-top-item"><a href="/cms-muonPOG/MuonReferenceEfficiencies/-/value_stream_analytics"><strong class="fly-out-top-item-name">
+Analytics
+</strong>
+</a></li><li class="divider fly-out-top-item"></li>
+<li class=""><a title="CI / CD" href="/cms-muonPOG/MuonReferenceEfficiencies/-/pipelines/charts"><span>CI / CD</span>
+</a></li><li class=""><a title="Code Review" href="/cms-muonPOG/MuonReferenceEfficiencies/-/analytics/code_reviews"><span>Code Review</span>
+</a></li><li class=""><a title="Merge Request" href="/cms-muonPOG/MuonReferenceEfficiencies/-/analytics/merge_request_analytics"><span>Merge Request</span>
+</a></li><li class=""><a class="shortcuts-repository-charts" title="Repository" href="/cms-muonPOG/MuonReferenceEfficiencies/-/graphs/master/charts"><span>Repository</span>
+</a></li><li class=""><a class="shortcuts-project-cycle-analytics" title="Value Stream" href="/cms-muonPOG/MuonReferenceEfficiencies/-/value_stream_analytics"><span>Value Stream</span>
+</a></li></ul>
+</li>
+<li class=""><a title="Members" class="qa-members-link" id="js-onboarding-members-link" href="/cms-muonPOG/MuonReferenceEfficiencies/-/project_members"><div class="nav-icon-container">
+<svg class="s16" data-testid="users-icon"><use xlink:href="/assets/icons-e0a66cb8e6ca64bcdd2a8f111cbd9e94cf727c1bd5939bc71619df5c973fbc87.svg#users"></use></svg>
+</div>
+<span class="nav-item-name">
+Members
+</span>
+</a><ul class="sidebar-sub-level-items is-fly-out-only">
+<li class="fly-out-top-item"><a href="/cms-muonPOG/MuonReferenceEfficiencies/-/project_members"><strong class="fly-out-top-item-name">
+Members
+</strong>
+</a></li></ul>
+</li>
+<a class="toggle-sidebar-button js-toggle-sidebar qa-toggle-sidebar rspec-toggle-sidebar" role="button" title="Toggle sidebar" type="button">
+<svg class="s16 icon-chevron-double-lg-left" data-testid="chevron-double-lg-left-icon"><use xlink:href="/assets/icons-e0a66cb8e6ca64bcdd2a8f111cbd9e94cf727c1bd5939bc71619df5c973fbc87.svg#chevron-double-lg-left"></use></svg>
+<svg class="s16 icon-chevron-double-lg-right" data-testid="chevron-double-lg-right-icon"><use xlink:href="/assets/icons-e0a66cb8e6ca64bcdd2a8f111cbd9e94cf727c1bd5939bc71619df5c973fbc87.svg#chevron-double-lg-right"></use></svg>
+<span class="collapse-text">Collapse sidebar</span>
+</a>
+<button name="button" type="button" class="close-nav-button"><svg class="s16" data-testid="close-icon"><use xlink:href="/assets/icons-e0a66cb8e6ca64bcdd2a8f111cbd9e94cf727c1bd5939bc71619df5c973fbc87.svg#close"></use></svg>
+<span class="collapse-text">Close sidebar</span>
+</button>
+<li class="hidden">
+<a title="Activity" class="shortcuts-project-activity" href="/cms-muonPOG/MuonReferenceEfficiencies/activity"><span>
+Activity
+</span>
+</a></li>
+<li class="hidden">
+<a title="Network" class="shortcuts-network" href="/cms-muonPOG/MuonReferenceEfficiencies/-/network/master">Graph
+</a></li>
+<li class="hidden">
+<a class="shortcuts-new-issue" href="/cms-muonPOG/MuonReferenceEfficiencies/-/issues/new">Create a new issue
+</a></li>
+<li class="hidden">
+<a title="Jobs" class="shortcuts-builds" href="/cms-muonPOG/MuonReferenceEfficiencies/-/jobs">Jobs
+</a></li>
+<li class="hidden">
+<a title="Commits" class="shortcuts-commits" href="/cms-muonPOG/MuonReferenceEfficiencies/-/commits/master">Commits
+</a></li>
+<li class="hidden">
+<a title="Issue Boards" class="shortcuts-issue-boards" href="/cms-muonPOG/MuonReferenceEfficiencies/-/boards">Issue Boards</a>
+</li>
+</ul>
+</div>
+</div>
+
+<div class="content-wrapper">
+<div class="mobile-overlay"></div>
+
+<div class="alert-wrapper gl-force-block-formatting-context">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<nav class="breadcrumbs container-fluid container-limited" role="navigation">
+<div class="breadcrumbs-container">
+<button name="button" type="button" class="toggle-mobile-nav"><span class="sr-only">Open sidebar</span>
+<svg class="s16" data-testid="hamburger-icon"><use xlink:href="/assets/icons-e0a66cb8e6ca64bcdd2a8f111cbd9e94cf727c1bd5939bc71619df5c973fbc87.svg#hamburger"></use></svg>
+</button><div class="breadcrumbs-links js-title-container" data-qa-selector="breadcrumb_links_content">
+<ul class="list-unstyled breadcrumbs-list js-breadcrumbs-list">
+<li><a class="group-path breadcrumb-item-text js-breadcrumb-item-text " href="/cms-muonPOG"><img class="avatar-tile lazy" width="15" height="15" data-src="/uploads/-/system/group/avatar/11641/MuStations.gif" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" />cms-muonPOG</a><svg class="s8 breadcrumbs-list-angle" data-testid="angle-right-icon"><use xlink:href="/assets/icons-e0a66cb8e6ca64bcdd2a8f111cbd9e94cf727c1bd5939bc71619df5c973fbc87.svg#angle-right"></use></svg></li> <li><a href="/cms-muonPOG/MuonReferenceEfficiencies"><span class="breadcrumb-item-text js-breadcrumb-item-text">MuonReferenceEfficiencies</span></a><svg class="s8 breadcrumbs-list-angle" data-testid="angle-right-icon"><use xlink:href="/assets/icons-e0a66cb8e6ca64bcdd2a8f111cbd9e94cf727c1bd5939bc71619df5c973fbc87.svg#angle-right"></use></svg></li>
+
+<li>
+<h2 class="breadcrumbs-sub-title"><a href="/cms-muonPOG/MuonReferenceEfficiencies/-/blob/master/EfficienciesStudies/UL2017/DEN_TrackerMuons/rootfiles/Efficiencies_muon_generalTracks_Z_Run2017_UL_ID.root">Repository</a></h2>
+</li>
+</ul>
+</div>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"cms-muonPOG","item":"https://gitlab.cern.ch/cms-muonPOG"},{"@type":"ListItem","position":2,"name":"MuonReferenceEfficiencies","item":"https://gitlab.cern.ch/cms-muonPOG/MuonReferenceEfficiencies"},{"@type":"ListItem","position":3,"name":"Repository","item":"https://gitlab.cern.ch/cms-muonPOG/MuonReferenceEfficiencies/-/blob/master/EfficienciesStudies/UL2017/DEN_TrackerMuons/rootfiles/Efficiencies_muon_generalTracks_Z_Run2017_UL_ID.root"}]}
+
+</script>
+
+</div>
+</nav>
+
+</div>
+<div class="container-fluid container-limited ">
+<div class="content" id="content-body" itemscope itemtype="http://schema.org/SoftwareSourceCode">
+<div class="flash-container flash-container-page sticky" data-qa-selector="flash_container">
+</div>
+
+<div class="js-signature-container" data-signatures-path="/cms-muonPOG/MuonReferenceEfficiencies/-/commits/2fee1712c6b9aebb7072eb15f0c73e406e65a259/signatures?limit=1"></div>
+
+<div class="tree-holder" id="tree-holder">
+<div class="nav-block">
+<div class="tree-ref-container">
+<div class="tree-ref-holder">
+<form class="project-refs-form" action="/cms-muonPOG/MuonReferenceEfficiencies/-/refs/switch" accept-charset="UTF-8" method="get"><input name="utf8" type="hidden" value="&#x2713;" /><input type="hidden" name="destination" id="destination" value="blob" />
+<input type="hidden" name="path" id="path" value="EfficienciesStudies/UL2017/DEN_TrackerMuons/rootfiles/Efficiencies_muon_generalTracks_Z_Run2017_UL_ID.root" />
+<div class="dropdown">
+<button class="dropdown-menu-toggle js-project-refs-dropdown qa-branches-select" type="button" data-toggle="dropdown" data-selected="master" data-ref="master" data-refs-url="/cms-muonPOG/MuonReferenceEfficiencies/refs?sort=updated_desc" data-field-name="ref" data-submit-form-on-click="true" data-visit="true"><span class="dropdown-toggle-text ">master</span><i aria-hidden="true" data-hidden="true" class="fa fa-chevron-down"></i></button>
+<div class="dropdown-menu dropdown-menu-paging dropdown-menu-selectable git-revision-dropdown qa-branches-dropdown">
+<div class="dropdown-page-one">
+<div class="dropdown-title gl-display-flex"><span class="gl-ml-auto">Switch branch/tag</span><button class="dropdown-title-button dropdown-menu-close gl-ml-auto" aria-label="Close" type="button"><svg class="s16 dropdown-menu-close-icon" data-testid="close-icon"><use xlink:href="/assets/icons-e0a66cb8e6ca64bcdd2a8f111cbd9e94cf727c1bd5939bc71619df5c973fbc87.svg#close"></use></svg></button></div>
+<div class="dropdown-input"><input type="search" id="" class="dropdown-input-field qa-dropdown-input-field" placeholder="Search branches and tags" autocomplete="off" /><svg class="s16 dropdown-input-search" data-testid="search-icon"><use xlink:href="/assets/icons-e0a66cb8e6ca64bcdd2a8f111cbd9e94cf727c1bd5939bc71619df5c973fbc87.svg#search"></use></svg><svg class="s16 dropdown-input-clear js-dropdown-input-clear" data-testid="close-icon"><use xlink:href="/assets/icons-e0a66cb8e6ca64bcdd2a8f111cbd9e94cf727c1bd5939bc71619df5c973fbc87.svg#close"></use></svg></div>
+<div class="dropdown-content"></div>
+<div class="dropdown-loading"><div class="gl-spinner-container"><span class="gl-spinner gl-spinner-orange gl-spinner-md gl-mt-7" aria-label="Loading"></span></div></div>
+</div>
+</div>
+</div>
+</form>
+</div>
+<ul class="breadcrumb repo-breadcrumb">
+<li class="breadcrumb-item">
+<a href="/cms-muonPOG/MuonReferenceEfficiencies/-/tree/master">MuonReferenceEfficiencies
+</a></li>
+<li class="breadcrumb-item">
+<a href="/cms-muonPOG/MuonReferenceEfficiencies/-/tree/master/EfficienciesStudies">EfficienciesStudies</a>
+</li>
+<li class="breadcrumb-item">
+<a href="/cms-muonPOG/MuonReferenceEfficiencies/-/tree/master/EfficienciesStudies/UL2017">UL2017</a>
+</li>
+<li class="breadcrumb-item">
+<a href="/cms-muonPOG/MuonReferenceEfficiencies/-/tree/master/EfficienciesStudies/UL2017/DEN_TrackerMuons">DEN_TrackerMuons</a>
+</li>
+<li class="breadcrumb-item">
+<a href="/cms-muonPOG/MuonReferenceEfficiencies/-/tree/master/EfficienciesStudies/UL2017/DEN_TrackerMuons/rootfiles">rootfiles</a>
+</li>
+<li class="breadcrumb-item">
+<a href="/cms-muonPOG/MuonReferenceEfficiencies/-/blob/master/EfficienciesStudies/UL2017/DEN_TrackerMuons/rootfiles/Efficiencies_muon_generalTracks_Z_Run2017_UL_ID.root"><strong>Efficiencies_muon_generalTracks_Z_Run...</strong>
+</a></li>
+</ul>
+</div>
+<div class="tree-controls gl-children-ml-sm-3"><a class="gl-button btn shortcuts-find-file" rel="nofollow" href="/cms-muonPOG/MuonReferenceEfficiencies/-/find_file/master">Find file
+</a><a class="gl-button btn" href="/cms-muonPOG/MuonReferenceEfficiencies/-/commits/master/EfficienciesStudies/UL2017/DEN_TrackerMuons/rootfiles/Efficiencies_muon_generalTracks_Z_Run2017_UL_ID.root">History</a><a class="gl-button btn js-data-file-blob-permalink-url" href="/cms-muonPOG/MuonReferenceEfficiencies/-/blob/a99f366ac1b5863f3e7cb10c640b977ab739f6f4/EfficienciesStudies/UL2017/DEN_TrackerMuons/rootfiles/Efficiencies_muon_generalTracks_Z_Run2017_UL_ID.root">Permalink</a></div>
+</div>
+
+<div class="info-well d-none d-sm-block">
+<div class="well-segment">
+<ul class="blob-commit-info">
+<li class="commit flex-row js-toggle-container" id="commit-2fee1712">
+<div class="avatar-cell d-none d-sm-block">
+<a href="mailto:dntaylor@ucdavis.edu"><img alt="Devin Taylor&#39;s avatar" src="/assets/no_avatar-849f9c04a3a0d0cea2424ae97b27447dc64a7dbfae83c036c45b403392f0e8ba.png" class="avatar s40 d-none d-sm-inline-block" title="Devin Taylor" /></a>
+</div>
+<div class="commit-detail flex-list">
+<div class="commit-content" data-qa-selector="commit_content">
+<a class="commit-row-message item-title js-onboarding-commit-item " href="/cms-muonPOG/MuonReferenceEfficiencies/-/commit/2fee1712c6b9aebb7072eb15f0c73e406e65a259">pileup fix</a>
+<span class="commit-row-message d-inline d-sm-none">
+&middot;
+2fee1712
+</span>
+<div class="committer">
+<a class="commit-author-link" href="mailto:dntaylor@ucdavis.edu">Devin Taylor</a> authored <time class="js-timeago" title="Sep 3, 2020 2:15pm" datetime="2020-09-03T12:15:40Z" data-toggle="tooltip" data-placement="bottom" data-container="body">Sep 03, 2020</time>
+</div>
+
+</div>
+<div class="commit-actions flex-row">
+
+<div class="js-commit-pipeline-status" data-endpoint="/cms-muonPOG/MuonReferenceEfficiencies/-/commit/2fee1712c6b9aebb7072eb15f0c73e406e65a259/pipelines?ref=master"></div>
+<div class="commit-sha-group btn-group d-none d-sm-flex">
+<div class="label label-monospace monospace">
+2fee1712
+</div>
+<button class="btn gl-button btn btn-default" data-toggle="tooltip" data-placement="bottom" data-container="body" data-title="Copy commit SHA" data-class="gl-button btn btn-default" data-clipboard-text="2fee1712c6b9aebb7072eb15f0c73e406e65a259" type="button" title="Copy commit SHA" aria-label="Copy commit SHA"><svg class="s16" data-testid="copy-to-clipboard-icon"><use xlink:href="/assets/icons-e0a66cb8e6ca64bcdd2a8f111cbd9e94cf727c1bd5939bc71619df5c973fbc87.svg#copy-to-clipboard"></use></svg></button>
+
+</div>
+</div>
+</div>
+</li>
+
+</ul>
+</div>
+
+
+</div>
+<div class="blob-content-holder" id="blob-content-holder">
+<article class="file-holder">
+<div class="js-file-title file-title-flex-parent">
+<div class="file-header-content">
+<svg class="s16" data-testid="doc-text-icon"><use xlink:href="/assets/icons-e0a66cb8e6ca64bcdd2a8f111cbd9e94cf727c1bd5939bc71619df5c973fbc87.svg#doc-text"></use></svg>
+<strong class="file-title-name gl-word-break-all" data-qa-selector="file_name_content">
+Efficiencies_muon_generalTracks_Z_Run2017_UL_ID.root
+</strong>
+<button class="btn btn-clipboard btn-transparent" data-toggle="tooltip" data-placement="bottom" data-container="body" data-class="btn-clipboard btn-transparent" data-title="Copy file path" data-clipboard-text="{&quot;text&quot;:&quot;EfficienciesStudies/UL2017/DEN_TrackerMuons/rootfiles/Efficiencies_muon_generalTracks_Z_Run2017_UL_ID.root&quot;,&quot;gfm&quot;:&quot;`EfficienciesStudies/UL2017/DEN_TrackerMuons/rootfiles/Efficiencies_muon_generalTracks_Z_Run2017_UL_ID.root`&quot;}" type="button" title="Copy file path" aria-label="Copy file path"><svg class="s16" data-testid="copy-to-clipboard-icon"><use xlink:href="/assets/icons-e0a66cb8e6ca64bcdd2a8f111cbd9e94cf727c1bd5939bc71619df5c973fbc87.svg#copy-to-clipboard"></use></svg></button>
+<small class="mr-1">
+65.3 KB
+</small>
+</div>
+
+<div class="file-actions gl-display-flex gl-flex-fill-1 gl-align-self-start gl-md-justify-content-end"><button name="button" type="submit" class="btn btn-primary ide-edit-button gl-mr-3 btn-inverted js-edit-blob-link-fork-toggler" data-action="edit" data-fork-path="/cms-muonPOG/MuonReferenceEfficiencies/-/forks?continue%5Bnotice%5D=You%27re+not+allowed+to+make+changes+to+this+project+directly.+A+fork+of+this+project+has+been+created+that+you+can+make+changes+in%2C+so+you+can+submit+a+merge+request.&amp;continue%5Bnotice_now%5D=You%27re+not+allowed+to+make+changes+to+this+project+directly.+A+fork+of+this+project+is+being+created+that+you+can+make+changes+in%2C+so+you+can+submit+a+merge+request.&amp;continue%5Bto%5D=%2F-%2Fide%2Fproject%2Fefe%2FMuonReferenceEfficiencies%2Fedit%2Fmaster%2F-%2FEfficienciesStudies%2FUL2017%2FDEN_TrackerMuons%2Frootfiles%2FEfficiencies_muon_generalTracks_Z_Run2017_UL_ID.root&amp;namespace_key=1080">Web IDE</button><div class="btn-group ml-2" role="group">
+
+
+<button name="button" type="submit" class="btn btn-default js-edit-blob-link-fork-toggler" data-action="replace" data-fork-path="/cms-muonPOG/MuonReferenceEfficiencies/-/forks?continue%5Bnotice%5D=You%27re+not+allowed+to+make+changes+to+this+project+directly.+A+fork+of+this+project+has+been+created+that+you+can+make+changes+in%2C+so+you+can+submit+a+merge+request.+Try+to+replace+this+file+again.&amp;continue%5Bnotice_now%5D=You%27re+not+allowed+to+make+changes+to+this+project+directly.+A+fork+of+this+project+is+being+created+that+you+can+make+changes+in%2C+so+you+can+submit+a+merge+request.&amp;continue%5Bto%5D=%2Fcms-muonPOG%2FMuonReferenceEfficiencies%2F-%2Fblob%2Fmaster%2FEfficienciesStudies%2FUL2017%2FDEN_TrackerMuons%2Frootfiles%2FEfficiencies_muon_generalTracks_Z_Run2017_UL_ID.root&amp;namespace_key=1080">Replace</button>
+<button name="button" type="submit" class="btn btn-default js-edit-blob-link-fork-toggler" data-action="delete" data-fork-path="/cms-muonPOG/MuonReferenceEfficiencies/-/forks?continue%5Bnotice%5D=You%27re+not+allowed+to+make+changes+to+this+project+directly.+A+fork+of+this+project+has+been+created+that+you+can+make+changes+in%2C+so+you+can+submit+a+merge+request.+Try+to+delete+this+file+again.&amp;continue%5Bnotice_now%5D=You%27re+not+allowed+to+make+changes+to+this+project+directly.+A+fork+of+this+project+is+being+created+that+you+can+make+changes+in%2C+so+you+can+submit+a+merge+request.&amp;continue%5Bto%5D=%2Fcms-muonPOG%2FMuonReferenceEfficiencies%2F-%2Fblob%2Fmaster%2FEfficienciesStudies%2FUL2017%2FDEN_TrackerMuons%2Frootfiles%2FEfficiencies_muon_generalTracks_Z_Run2017_UL_ID.root&amp;namespace_key=1080">Delete</button>
+</div><div class="btn-group ml-2" role="group">
+
+
+<a download="EfficienciesStudies/UL2017/DEN_TrackerMuons/rootfiles/Efficiencies_muon_generalTracks_Z_Run2017_UL_ID.root" class="btn btn-sm has-tooltip" target="_blank" rel="noopener noreferrer" aria-label="Download" title="Download" data-container="body" href="/cms-muonPOG/MuonReferenceEfficiencies/-/raw/master/EfficienciesStudies/UL2017/DEN_TrackerMuons/rootfiles/Efficiencies_muon_generalTracks_Z_Run2017_UL_ID.root?inline=false"><svg class="s16" data-testid="download-icon"><use xlink:href="/assets/icons-e0a66cb8e6ca64bcdd2a8f111cbd9e94cf727c1bd5939bc71619df5c973fbc87.svg#download"></use></svg></a>
+
+</div></div>
+</div>
+<div class="js-file-fork-suggestion-section file-fork-suggestion hidden">
+<span class="file-fork-suggestion-note">
+You're not allowed to
+<span class="js-file-fork-suggestion-section-action">
+edit
+</span>
+files in this project directly. Please fork this project,
+make your changes there, and submit a merge request.
+</span>
+<a class="js-fork-suggestion-button btn btn-grouped btn-inverted btn-success" rel="nofollow" data-method="post" href="/cms-muonPOG/MuonReferenceEfficiencies/-/blob/master/EfficienciesStudies/UL2017/DEN_TrackerMuons/rootfiles/Efficiencies_muon_generalTracks_Z_Run2017_UL_ID.root">Fork</a>
+<button class="js-cancel-fork-suggestion-button btn btn-grouped" type="button">
+Cancel
+</button>
+</div>
+
+
+
+<div data-blob-data="root  ò2   d  ½   `      Œ   e  Ù  ™ äž\ëÈê½àGb¸¼¾ï                                        È    rf?gÃ V    d    TFile4Efficiencies_muon_generalTracks_Z_Run2017_UL_ID.root 4Efficiencies_muon_generalTracks_Z_Run2017_UL_ID.root  f?gÃf?gÅ  #   Œ   d      åš äž\ëÈê½àGb¸¼¾ï              Y   –f?gÄ o   ,   dTH2F&#39;NUM_HighPtID_DEN_TrackerMuons_abseta_pt&#39;NUM_HighPtID_DEN_TrackerMuons_abseta_ptZLá – xs``ÄÀâÀÀ²Hv1p800Ä00!030p¨û…úÆ{d¦g”xºÄ»¸úÅ‡%&amp;g§ù–æçÇ&#39;&amp;§–$Æ”«h&gt;Ø|F ›Èf`~	dqEEì@ÀÌa6”DvkEbEf1[2ÐÒ ¤
+ã?°-ë§	N¶&gt;gÎÚ|=ÔoŸ––f[z¨(£4¨
+˜Á Èc…‰Ù¿9gí?Cä |$µ0¥pÚaØy*(Î«9O0¤4/5@¡ ¾:¤VAÃ=5L¨·K00 ¹”ÝAb‰C„’p1¨œ%”¶ƒÒ.PÚJûAi„$Ò¡ì9T|Àœœ˜“š–˜\’_T‡Ûí(n&#39;ö@$&gt;ÀüÂÁŸ&lt;BîÀÄ0F#dÀ,34&gt;Ñ\»çZÍ¦M½cwœ¯9ªvû-»‹îsÃæ^ã·;vEüÝñ½NèÙm0ÿ¾]T´ßîŠ×«/5úì6ˆ¬î4j
+°;¸d©ã2)õ=,uÁY‡ì¼¹¸aƒ™]÷ÏþÚKçÙ-; vÝ÷(†ú¤V÷Ÿ^s/ÚÍXã¥ƒ•™]ºb`™k–]÷þi—[&gt;a¨uYÊÃø—Û.é”yQÂË·vÑ/êßœ³n±[°ýÎ5ÝŸê&#39;¯]+Ÿ&amp;a·òH~ðývó’¾‰øÅ·{¶tKOá£Võ­J?3¦ûß´;9ëˆôó·vs¾¥y*&lt;ï·{(›´®è ºzbù,Éù9U‚À)eàÉÉ&amp;ÂIˆoÔÛ×y¤Ù×ªÍ·¯Ý1Ë¾òÿ˜Ùöu©ö5çík¿ÛW&gt;Ü~e_sÔØ¾Îm¿}ÕaU„xèKûšg-öu¶šöUrq/ûZŽcöu^¾öUUâ§ìk&gt;î¶¯3Xb_Yœ‰7Zn_óò‚}·Ž}¥cL ¹8¢  d   ›f?gÄ t   …   dTH2F,NUM_HighPtID_DEN_TrackerMuons_abseta_pt_stat&#39;NUM_HighPtID_DEN_TrackerMuons_abseta_ptZLç › xs``ÎÀâÀÀ²•Hö3p800$20!030pèø…úÆ{d¦g”xºÄ»¸úÅ‡%&amp;g§ù–æçÇ&#39;&amp;§–$Æ”Ä—$–¨©h	ØF ›Èf`~	dqEEì@ÀÌa6”DvkEbEf1[2Ðæ ¤
+ã?°-ë§	N¶&gt;gÎÚ|=ÔoŸ––f[z¨(£4¨
+˜Á Èc…‰Ù¿9gí?Cä |$µ0¥pÚaØy*(Î«9O0¤4/5@¡ ¾:¤VAÃ=5L¨·K00 ¹”ÝAb‰C„’p1¨œ%”¶ƒÒ.PÚJûAi„$Ò¡ì9T|Àœœ˜“š–˜\’_T‡Ûí(n§ö@$&gt;ÀüÂÁŸ&lt;BîÀÄ0F#dÀ,34&gt;Ñ\»%Omlî½Úg·ùÖvÓ³sÙõi¯*¬+µÛsä^óA7tƒìÚ¸šëïŸ,´›{tBA÷m»²P7®ç‚ìVJ;,ýš~C}ñÔ©ñùsžÚµ­¹}§c‚]ò›¥l]Zâv3J6¸¿lÇPï½ñÃž’Mvñ¯6Í&lt;êag¯÷Œ_zé»ê¢WO;Ûÿ`¨w9ÛÐwf©’]§‹FjÙ?;ëŽ¶²RŸvl3c&quot;¶}ÃPŸÔÚ(Å`WW¤¦ôý¡¢]Â…Ý/£[\ìïÊÖ&lt;¹ü†úFgiyFi»iölzÆ`W½|!{LÜ»ƒŸÙ°ÞàFWO,Ÿ%9?§ÊA˜!E&lt;Ù ÁD8	1àzû:4ûZµùöµ;fÙWþ‡Ÿ}]*‡}ÍyAûÚïÅö•wÃì´¯~e_sÔØ¾Îm¿}ÕaU„xèKûšg-öu¶šöUrq/ûZŽcöu^¾öUUâ§ìk&gt;î¶¯3Xb_Yœ‰7Zn_óò‚}·Ž}¥cL }Å  h   ›f?gÄ t   é   dTH2F,NUM_HighPtID_DEN_TrackerMuons_abseta_pt_syst&#39;NUM_HighPtID_DEN_TrackerMuons_abseta_ptZLë › xs``ÎÀâÀÀ²•Hö3p800$20!030pèø…úÆ{d¦g”xºÄ»¸úÅ‡%&amp;g§ù–æçÇ&#39;&amp;§–$Æ”ÄW—¨©h	ØF ›Èf`~	dqEEì@ÀÌa6”DvkEbEf1[2Ðæ ¤
+ã?°-ë§	N¶&gt;gÎÚ|=ÔoŸ––f[z¨(£4¨
+˜Á Èc…‰Ù¿9gí?Cä |$µ0¥pÚaØy*(Î«9O0¤4/5@¡ ¾:¤VAÃ=5L¨·K00 ¹”ÝAb‰C„’p1¨œ%”¶ƒÒ.PÚJûAi„$Ò¡ì9T|Àœœ˜“š–˜\’_T‡Ûí(n§ö@$&gt;ÀüÂÁŸ&lt;BîÀÄ0F#dÀ,34&gt;Ñ\»¹ùsæ4~±Ûåä_¯{q‡Ý…0û;\^2v†vï´E7ÈnÕ[¿&gt;#‹#v—ò&amp;~1ËnmÜº@ÁWWí¶í^eÉ1ÃC}“åæÅæØÍÑç¸),£l×ö/ÍÆ RÂn*÷ŒÔ£]À†
+ìÂ§/ëgô°›¶QwÿâgŒvÉÖ%[|.ì°«~kâ!ÛøU5ƒ]ÐÝ&#39;Gf¯ª²s­Ø±s§]([œ¿Á7»9ó”¹Ê1Ô÷_ÚùmUë»¥ß´úçØÍñ¸7]é«ÝÓ,Þ›W=Ø1ÔÇýûä³qÉj»ƒµ^kZ»uí¦ñÔ±{žl÷èÎâËkþìCWO,Ÿ%9?§ÊA˜!E&lt;Ù ÁD8	1àzû:4ûZµùöµ;fÙWþÿ3Û¾.•Ã¾æ¼ }í÷bûÊ‡»âÁ¯ìkŽÛ×¹í·¯:¬Š}i_ó¬Å¾ÎVÓ¾ªA!îea_ËqÌ¾ÎË×¾ªjBÜã”}ÍÇÝöuKì+‹3âFËík^^°¯ãÖ±¯tÌ€‰c£³kØ  x   ¤f?gÄ ~   Q   dTH2F6NUM_HighPtID_DEN_TrackerMuons_abseta_pt_efficiencyData&#39;NUM_HighPtID_DEN_TrackerMuons_abseta_ptZLñ ¤ xs``]ÀÀâÀÀ²HÎ`àp``Èf`B `f`à0óõ÷ÈLÏ(ñt‰wqõ‹)JLÎN-ò-ÍÏ+ŽOL*N-IŒ/(‰OMKËLÎLÍK®tI,IT&#39;RÐ:&amp;°uŒ@6ÍÀüÈâ‹ŠØ70€€™Ãl. )‰ì8ÖŠÄŠÌb¶e j€’*,ŒÿÀJ´¬Ÿ&amp;8Ùúœ9kóõP¿}ZZšmé¡~ ŒÐ8 *p`6 &amp;fÿæœµÿ‘s`€ð‘ÔÂ”Âi†}`ç© 8¯ä&lt;ÁÒ¼Ô …‚øêZ÷Ô0M jÜ.]ÀÀ€äRv=ˆ%qHrÀÅL r–PÚJ»@iO(í¥f@H†r°dQ|Pò—+&lt;nÊp;½Åéà$²ÁþˆÄ˜_8Øà“GÈ˜æÀh„˜e†Æ&#39;šk÷UÀâÆ/­?vß¦®Œ³úh÷íl‘ÌÍ.s»?U«~?ó;nÝK‡?	=Óí™EËÜÖ&gt;±ûª%7y’´‹=Ó+n3Ó;˜êŸ~Òüsy¹ÝÛã×oc¾d÷5ðPó®¼T»ì+Žä&gt;ÄPKÍñ)ó-G»{&#39;Û&#39;¾¾ÁîqïÆkésí^*(žNŽëÃPJÌò”ûæ×vç¾bëhè¶»$éëQ¸šÁîaŠfíž=ÐD„Ðewà[o$G©ÝÑó±?²vêÚý$pEM Üîý¢LÛ§ TBXvË¤Sëì¦Ûùh7±cý5»=&amp;bå}Ëí«Úy1&#39;j «&#39;–Ï’œŸSåÀÀ Ì2žlŒ`&quot;œ„ðF½}UßMûª=ö5‘¹ö¥gÁÌ¶¯š±Ã¾*LÁ¾fÓRû2	xþ°¯šïe_5!Ó¾æ’}¨&lt;‚ ûª%ÜöU»ïØ×rpÚ—å®@ˆÏé³¯ú*d_«Sf_{!ÞüÚ¾ê~¸}­ØûRöãñüXûªióík¶FÙ—D.†‰c£/§!œ  |   ©f?gÄ ƒ   É   dTH2F;NUM_HighPtID_DEN_TrackerMuons_abseta_pt_efficiencyData_stat&#39;NUM_HighPtID_DEN_TrackerMuons_abseta_ptZLð © xs``]ÊÀâÀÀr˜HÎeàp``(``B `f`à°öõ÷ÈLÏ(ñt‰wqõ‹)JLÎN-ò-ÍÏ+ŽOL*N-IŒ/(‰OMKËLÎLÍK®tIŠ—$–¨©h&#39;ØNF ›Èf`~	dqEEì@ÀÌa6”Dv!kEbEf1[2Ð!5@IÆ`%ZÖOœl}Îœµùz¨ß&gt;--Í¶ôP?PFhP80ƒÇ
+³sÎÚ†È90@øHjaJá´Ã&gt;°óTPœW	rž`Hi^j€BA|uH­‚†{j˜&amp;P5n—.``@r)»ƒÄ‡8$9àb&amp;P9K(m¥] ´&#39;”öƒÒ3 H¤C9Ø²(&gt;¨ù€ËÁ@e¸Þ€âtp:Ù`ÿDâÌ/lðÉ#äLŒs`4BÌ2CãÍµ›\É-Y;ßÔnÉ*5†\{ìší‰L¯³°Û¹ÙwžðStƒìÒOÞ]Î¼Ü®{·Û™„•sí2o,þÕ¶Ùn–ÇšëÅ_1ÔÇÌ˜û*Ì®Ôô™šñ}»«™mûíÚ×=Ó
+ËY€¡ÞxîTæ€&#39;í¼OGÜž¹ñ ŽTUÙ&quot;CI»ÌÉÞ¡Mi§WÃžV?ÏÎóæ¯“²3Ôít¢•ìâ[n—·ìj•Þåóf{?/qS·Ëž¶ß÷^^‚]@gjðÿ¥vä*dWz`¨O3°ðù,Wk×œÌö%òJ–]¦aÎ·¦w}vë¶h±ŸIÿ‰®žX&gt;Kr~N•ƒ 0ÿA
+x²A2‚‰pbÀõöU}7í«VôØ×DæÚ—žY3Û¾jÆûª0ûšMKíË$àÁj_5ßË¾jB¦}Íÿ$û2PyöUK¸í«vß±¯åà´/Ë]ŸÓg_õUÈ¾V§Ì¾,ö(B¼ùµ}ÕýpûZ±%ö¥ìÇâù±öUÓæÛ×l²/‰\ÇF œß  „   ©f?gÄ ƒ   E   dTH2F;NUM_HighPtID_DEN_TrackerMuons_abseta_pt_efficiencyData_syst&#39;NUM_HighPtID_DEN_TrackerMuons_abseta_ptZLø © xs``]ÊÀâÀÀr˜HÎeàp``(``B `f`à°öõ÷ÈLÏ(ñt‰wqõ‹)JLÎN-ò-ÍÏ+ŽOL*N-IŒ/(‰OMKËLÎLÍK®tIŠW—¨©h&#39;ØNF ›Èf`~	dqEEì@ÀÌa6”Dv!kEbEf1[2Ð!5@IÆ`%ZÖOœl}Îœµùz¨ß&gt;--Í¶ôP?PFhP80ƒÇ
+³sÎÚ†È90@øHjaJá´Ã&gt;°óTPœW	rž`Hi^j€BA|uH­‚†{j˜&amp;P5n—.``@r)»ƒÄ‡8$9àb&amp;P9K(m¥] ´&#39;”öƒÒ3 H¤C9Ø²(&gt;¨ù€ËÁ@e¸Þ€âtp:Ù`ÿDâÌ/lðÉ#äLŒs`4BÌ2CãÍµûr(dÍ“:»¯ÂFüšc÷mùš%j»mì~—òçÉ„nÝKM£¤¦“ížGéWùZÙ}•=³ë†£=ÓÑÊ;m_1Õ__¬¸~É&amp;»·s[gÎ²ûê³¦T„g‹Ý÷ó×ääÄPK1ªþ0§Ý½ÝŸÖŸºn÷¸ûƒÞ‰¿•v/Ù3$8y0ÔŸâ›u&quot;ož—Ý¹Üû“¾Ø]=øDtò&gt;»‡®M+œz!†¤ÉîÀ¥ó_»ä_ÚMdúml_bwôÂ—ƒÑvïþÜÂz
+I)˜i·ä­øƒõ&lt;ëíïæSrê³ÛÕ-`kÆl÷Ðò÷Ê¶Y+ÐÕËgIÎÏ©r``æ?HÁO6HF0NBx£Þ¾ªï¦}ÕŠûšÈ\ûÒ3‹`fÛWÍØa_¦`_³i©}™&lt;ØWÍ÷²¯ši_ó?É¾TA€}ÕnûªÝwìk98íËráÞ¶¯šÓg_õUÈ¾V§Ì¾,ö(B}ókûªûáöµbKìKÙ#Äócí«¦Í·¯Ùe_¹&amp;Ž Æ#·  m   ¢f?gÄ |   É   dTH2F4NUM_HighPtID_DEN_TrackerMuons_abseta_pt_efficiencyMC&#39;NUM_HighPtID_DEN_TrackerMuons_abseta_ptZLè ¢ xs``ÇÀâÀÀ²‡HNcàp``Èd`B `f`à0ñõ÷ÈLÏ(ñt‰wqõ‹)JLÎN-ò-ÍÏ+ŽOL*N-IŒ/(‰OMKËLÎLÍK®ôuV&#39;RÐ2&amp;°eŒ@6ÍÀüÈâ‹ŠØ70€€™Ãl. )‰ì4ÖŠÄŠÌb¶e j€’*,ŒÿÀJ´¬Ÿ&amp;8Ùúœ9kóõP¿}ZZšmé¡~ ŒÐ8 *p`6 &amp;fÿæœµÿ‘s`€ð‘ÔÂ”Âi†}`ç© 8¯ä&lt;ÁÒ¼Ô …‚øêZ÷Ô0M jÜ.]ÀÀ€äRv=ˆ%qHrÀÅL r–PÚJ»@iO(í¥f@H†r°dQ|Pò—+&lt;fÊp;½Åéà²ÁþˆÄ˜_8Øà“GÈ˜æÀh„˜e†Æ&#39;šk÷Mñó{ù¤\»ï«¼=ì®ÄM2ºkg÷çãïçkÃÐ²{-»¸&quot;ž§Îî­yÒò†‡í~–gÔ¼±ûÇnpðàÉê_Ìì{»¿ßÔî}Èg7%éåv_Ê+§ˆéÚýY©]z}³.†ú»™b­³¿Ú=|Æ¢¢ïf÷$•ùÉk63»×¬aWg1ýÆPÆZZî&amp;K¥ÝyÃÙOo4Ø]ÔÔá©ï˜fwï”ÌMõ#÷1Ô°Xi°Îó˜ÝÁBGÑËvvG§žQ¿%nwåßµ9&#39;ë0Ô¯ü¥ðÆÎ«ÃnÏ†Ÿ_õíVœlV‰‹M¶;±}Â!eitõÄòY’ósªùRâÀ“’L„“Þ¨·¯q`²¯­Úo_7wµ}õ¦ë0³íkt{íkë…ìëvÌ´¯‘{ŽwU²¯=üß¾n[¶}`3BÜý£}í¹ûº{ì«¯-Gˆû0Ø×&gt;°¯{`g_}úBÜd¾}ísSûºÇí«ËV&quot;ÄMÙ×.í¶¯[Þk_õÍ&amp;Ž nÐ)  u   §f?gÄ    6   dTH2F9NUM_HighPtID_DEN_TrackerMuons_abseta_pt_efficiencyMC_stat&#39;NUM_HighPtID_DEN_TrackerMuons_abseta_ptZLë § xs``]ÌÀâÀÀrHÎfàp``Èc`B `f`à°ôõ÷ÈLÏ(ñt‰wqõ‹)JLÎN-ò-ÍÏ+ŽOL*N-IŒ/(‰OMKËLÎLÍK®ôuŽ/.I,Q&#39;R&#39;ÐF&amp;°Œ@6ÍÀüÈâ‹ŠØ70€€™Ãl. )‰ì&gt;ÖŠÄŠÌb¶e 3j€’*,ŒÿÀJ´¬Ÿ&amp;8Ùúœ9kóõP¿}ZZšmé¡~ ŒÐ8 *p`6 &amp;fÿæœµÿ‘s`€ð‘ÔÂ”Âi†}`ç© 8¯ä&lt;ÁÒ¼Ô …‚øêZ÷Ô0M jÜ.]ÀÀ€äRv=ˆ%qHrÀÅL r–PÚJ»@iO(í¥f@H†r°dQ|Pò—+&lt;zÊp;½ÅéàT²ÁþˆÄ˜_8Øà“GÈ˜æÀh„˜e†Æ&#39;šk75¹‘Ó¦‚Ý¢µ}òÛ•L8~w{¢Ý
+Žö•«—ìA7È®ÞuwÈ/{»þ¼æ–±3ì’ŸV(øÖnú£Ç•k­1Ôgp™?°™]ù›Õvhß´ŽµãéÊ7·ëØê]=C½c€„}Ë´UvÏ¿”ß+dg(øV¦É¾Ý.§mQò95õ–Mìî7¶Í±óü¾¯jCºÖ”?Ì«ÿ¿´+H,â½xµC}B]gñµº »‚•Y¢eMvlI±Ó®«ÙM—2&lt;Ú(‹¡¾lë6ßv]:*s§¹‰ØåþóZÊhÖj·ù}cçî­çÐÕËgIÎÏ©r``æ?H±O6HF0NBx£Þ¾ÆÉ¾¶j¿}ÝÜÕöÕ›®ÃÌ¶¯Ñíµ¯­²¯Û1Ó¾Fî9BÜUÉ¾öðûºmÙö5‚Íq÷öµçzìëNì±¯¾¶!îÃ`_ûLÀ¾î}õéq“ùöµÏMíëÿµ¯.[‰7}d_»´Û¾ny¯}Õ7˜86 #=c  w   §f?gÄ    «   dTH2F9NUM_HighPtID_DEN_TrackerMuons_abseta_pt_efficiencyMC_syst&#39;NUM_HighPtID_DEN_TrackerMuons_abseta_ptZLí § xs``]ÌÀâÀÀrHÎfàp``Èc`B `f`à°ôõ÷ÈLÏ(ñt‰wqõ‹)JLÎN-ò-ÍÏ+ŽOL*N-IŒ/(‰OMKËLÎLÍK®ôuŽ/®,.Q&#39;R&#39;ÐF&amp;°Œ@6ÍÀüÈâ‹ŠØ70€€™Ãl. )‰ì&gt;ÖŠÄŠÌb¶e 3j€’*,ŒÿÀJ´¬Ÿ&amp;8Ùúœ9kóõP¿}ZZšmé¡~ ŒÐ8 *p`6 &amp;fÿæœµÿ‘s`€ð‘ÔÂ”Âi†}`ç© 8¯ä&lt;ÁÒ¼Ô …‚øêZ÷Ô0M jÜ.]ÀÀ€äRv=ˆ%qHrÀÅL r–PÚJ»@iO(í¥f@H†r°dQ|Pò—+&lt;zÊp;½ÅéàT²ÁþˆÄ˜_8Øà“GÈ˜æÀh„˜e†Æ&#39;šk÷õLê«_*œvßEn·=üÿÂžá¤™ç¹wIv·ïnRÐG7ÈîÕ}	Æ­vov®˜Áïãk÷3·lJè–$»¿+tW-õš‡¡þEcËŽïçJíÞ«J¾KXíg÷¥h‘Ë$þ	vÊ7œÔ•1ÇP7!¯²Æä¹ÝÃ»šï“Óíž$=\î^úÞîÕ‹Æfqw0ÔŸÑ‹’6•³;/ey7[ƒÅî¢êÍœÿÂ¢v÷:¦|¨íÀP¿ÿmœèÞû³ì¼™/ãªÞew´ˆ•=gM¦Ýåž¯•knçb¨_®4ÿu{ÃE»u5iNyvË^Î«âóüm··~þ¯®†èê‰å³$ççT900ó¤Ø&#39;$#˜&#39;!¼Qo_ãÀd_[µß¾nîjûêM×afÛ×èöÚ×ÖÙ×í˜i_#÷!îªd_{ø¿}Ý¶lûÁf„¸ûGûÚs=öu&#39;öØW_[Ž÷a°¯}&amp;`_÷ÀÎ¾úô„¸É|ûÚç¦öuÿÚW—­Dˆ›&gt;²¯]Úm_·¼×¾ê›L °Ù%ž  N   Žf?gÄ m    &quot;   dTH2F&amp;NUM_LooseID_DEN_TrackerMuons_abseta_pt&amp;NUM_LooseID_DEN_TrackerMuons_abseta_ptZLØ Ž xs``íb`q``YÁÀ
+$›8¢˜8ÔüB}ã}òó‹S=]â]\ýâCŠ“³S‹|KóóŠã“ŠSKãJˆT4ƒ	l:#Íd30¿²¸À¢&quot;ö `æÀÀ0›HJ&quot;»…µ&quot;±&quot;³˜­FhgPR……ñX‰–õÓ&#39;[Ÿ3gm¾ê·OKK³-=Ô”ÑTÌÆ` ä±ÂÄìßœ³öŸ!r&gt;’Z˜R8íÀÀ°ì&lt;9çU‚œÇ]_R« áž¦	T‡ÛÜÈî 1Þ!BI¸˜	TÎJÛAi(í	¥ý 4Âˆ éÀÀPÅíU`·&#39;&#39;æ¤¦%&amp;—äÕáv{ŠÛÁ‰d…ý‰0¿p°Á&#39;;01ÌÑ0ËO4×®ë±hÞ¾»E__™~w·›ÑÑûæýk^»/U§~Õ²ä¢d7ùGôdïõv³ªÍ3k.]³kxz9nOÍ_»}Öbó:.ýÃPŸê{ÓcoÄO»Æ˜åM
+%ìvé[„?ìPu´[Àô¸Zh24–ºìÔÌóhŠÚ¹ß{•¸ë•…žÀÕ§-lí„SzCcI=³ö³96avÞÏçmxôÔÎÁˆuÛÇœ›vÅœ?ŒJ*!,;•Û&lt;B4vØ¥Ç_´(|kW–s²Ÿå9£ÝEû§ÌÃPï0íeî¤­vù7V–×úØeD+¼¿j·&gt;Îûê¥‰çÑÕËgIÎÏ©r``f=HéO6HF0NBx£Þ¾þrœ}ýú…öõsjíkºafÛ×ßøc_Ÿ2Ñ¾¾ëŠ}^&quot;BüZ}}ãV z&amp;ûºî„ø]ûúYÝöõËÝìëúùâ*íë2Û×ïì´¯»¸ !þ²Ï¾~-#ÐnaûºÜ „øÃûöõ‡Ëìë÷%Û×3þ„‰c£œV   W   “f?gÄ r   #p   dTH2F+NUM_LooseID_DEN_TrackerMuons_abseta_pt_stat&amp;NUM_LooseID_DEN_TrackerMuons_abseta_ptZLÜ “ xs``íg`q``YËÀ
+$Û8â˜8´ýB}ã}òó‹S=]â]\ýâCŠ“³S‹|KóóŠã“ŠSKãJâ‹KKÔˆS´‚ƒ	l#Íd30¿²¸À¢&quot;ö `æÀÀ0›HJ&quot;;ˆµ&quot;±&quot;³˜­FhqPR……ñX‰–õÓ&#39;[Ÿ3gm¾ê·OKK³-=Ô”ÑTÌÆ` ä±ÂÄìßœ³öŸ!r&gt;’Z˜R8íÀÀ°ì&lt;9çU‚œÇ]_R« áž¦	T‡ÛÜÈî 1Þ!BI¸˜	TÎJÛAi(í	¥ý 4Âˆ éÀÀPÅíU`·&#39;&#39;æ¤¦%&amp;—äÕáv{ŠÛÁ)d…ý‰0¿p°Á&#39;;01ÌÑ0ËO4×®|}Ì´Øéev“,jþpü±]eì²ê!ì–Û8I
+1V dÇÝwæZø%»Ê×.çØ%WEhíÚd7mÛîÎÎé0Ô[ë=ù¾xo«]Hø+Ã›×˜ì&lt;TOoÞno×ðí¿ÁÕlvõl_,ÏŠ½&lt;fgxËôéÂ³vò7ünt:eõHÃ%iÎntõ¶¿âôMrÃíÔ&quot;ùîv~³Þ¦÷ë&#39;³]Xñ¥WÇ^ò¡«·SpÛ¼ækT£»¸ÿß9ŠëíL„—œ_÷,Ó®bëòã7cgc¨7ûÓ0‘#\Í.,z‹Ñ×S»€˜%LÅbIvÓÙÖç,L¦Dt]„ù,Éù9U‚À¬)bàÉI3á$Ä€7êíë/ÇÙ×¯_h_?§Ö¾&amp;¡f¶}ý?öõ)íë»®Ø×é%&quot;Ä¯Ù×7nªg²¯ëîAˆßõ±¯ŸÕm_¿ÜÍ¾®Ÿ!þ¨Ò¾~!³}ýÎNûº‹â/ûìë×2í¶¯Ë@ˆ?¼o_¸Ì¾~_²}=ãO˜86 ò£  V   “f?gÄ r   &amp;Ç   dTH2F+NUM_LooseID_DEN_TrackerMuons_abseta_pt_syst&amp;NUM_LooseID_DEN_TrackerMuons_abseta_ptZLÛ “ xs``íg`q``YËÀ
+$Û8â˜8´ýB}ã}òó‹S=]â]\ýâCŠ“³S‹|KóóŠã“ŠSKãJâ‹+‹KÔˆS´‚ƒ	l#Íd30¿²¸À¢&quot;ö `æÀÀ0›HJ&quot;;ˆµ&quot;±&quot;³˜­FhqPR……ñX‰–õÓ&#39;[Ÿ3gm¾ê·OKK³-=Ô”ÑTÌÆ` ä±ÂÄìßœ³öŸ!r&gt;’Z˜R8íÀÀ°ì&lt;9çU‚œÇ]_R« áž¦	T‡ÛÜÈî 1Þ!BI¸˜	TÎJÛAi(í	¥ý 4Âˆ éÀÀPÅíU`·&#39;&#39;æ¤¦%&amp;—äÕáv{ŠÛÁ)d…ý‰0¿p°Á&#39;;01ÌÑ0ËO4×®Nìœçÿ§Ev“9ªÕÖØM2TÑ{&amp;zÑîó/·”$ d7I|Ñ²¸g†vS¸·,tÛiWÁWµÒÎ&lt;»½é{Ôr…1Ô&#39;&gt;ÿ³òÄC»ÚÅ!å§Šúìc¸jO›ØMïrÝUpC½B¥³þ±¼¥v¶ç]w0Zh&#39;ãóÉýîF;S¡æˆÖ´-èêmŸ¶}×Q7Íö½îÄ»¦}ì¬çË&gt;R‘.´ËÞ–6¯çCºz;¦ÀTÞj‹Ûv‰k»/^Ìl´+Õîwâü1ÓîÂ1)y%}uõ*IK¦X©m¶K±ú×ÿç°‘]‚ÖCùmÞ*v‹o}‘o¼átý¸ø,Éù9U‚À¬)bàÉIá$Ä€7êíë/ÇÙ×¯_h_?§Ö¾&amp;¡f¶}ý?öõ)íë»®Ø×é%&quot;Ä¯Ù×7nªg²¯ëîAˆßõ±¯ŸÕm_¿ÜÍ¾®Ÿ!þ¨Ò¾~!³}ýÎNûº‹â/ûìë×2í¶¯Ë@ˆ?¼o_¸Ì¾~_²}=ãO˜86 u™  l   œf?gÄ |   *   dTH2F5NUM_LooseID_DEN_TrackerMuons_abseta_pt_efficiencyData&amp;NUM_LooseID_DEN_TrackerMuons_abseta_ptZLç œ xs``ÁÀâÀÀ²HN`àp``Èd`B `f`à0õõ÷ÉÏ/Nõt‰wqõ‹)JLÎN-ò-ÍÏ+ŽOL*N-IŒ/(‰OMKËLÎLÍK®tI,IT#NÐ2&amp;°eŒ@6ÍÀüÈâ‹ŠØ70€€™Ãl. )‰ì4ÖŠÄŠÌb¶e j€’*,ŒÿÀJ´¬Ÿ&amp;8Ùúœ9kóõP¿}ZZšmé¡~ ŒÐ8 *p`6 &amp;fÿæœµÿ‘s`€ð‘ÔÂ”Âi†`çÉ¡8¯ä&lt;î‚øêZ÷Ô0M :Ün\ÀÀ€äFv=ˆñqHrÀÅL r–PÚJ»@iO(í¥f@H†r°ÛeQÜ^r;—+&lt;RÊp;½Åéà¤²ÁþˆÄ˜_8Øà“GÈ˜æÀh„˜e†Æ&#39;šk×vŽÃå±Ý²ÓJOÏô¶[ùg]œ³ÝÏÜK¦£d7ÑjAè² v3Vž-ˆ]µß®×èX÷ûÃÇìŽ\‹‘Þ~±C}ÒÅ¡E&#39;ßÛ53FœZf—ûâÝ£ºs†v‹v&lt;&#39;¶ÊC½š¥·Ñ³.V;÷ßrÙC.Úéú|8Á_Æk2Çoé†·-èêmÿÕ2ùV.úg&#39;ûwsÏÇ	vŽ‚7þÍ´+j‰X÷^ÿ	ºz;y#…¹?X¿Ú%˜ooïôÆ®äë=ùKß\ì.•ñoÞÚ²C½å‹ºGìr×Ë¦©DØåýç&gt;å,o·öÖ”¼ÍÑèê‰å³$ççT900s¤¬&#39;$#˜&#39;!¼Qo_¿ÞÊ¾¾¸Ç¾&gt;¢È¾úl/ÌlûúíëþGÙ×Ë×Û×Fˆ/úm_oæe_ï|Å¾6õ=B|Ûyûú(gûúûÚí‡â‡÷Ú×çÛ×÷Ø×YÀ£Ç¾þt¢}}s‹}}ÿ?ûÚŸˆÒ¥þø|ûú5&gt;öõK÷Ø×õ¹ÃÌÁF dKž  |   ¡f?gÄ    -‰   dTH2F:NUM_LooseID_DEN_TrackerMuons_abseta_pt_efficiencyData_stat&amp;NUM_LooseID_DEN_TrackerMuons_abseta_ptZLò ¡ xs``ËÀâÀÀ²›HNeàp``Èc`B `f`à°òõ÷ÉÏ/Nõt‰wqõ‹)JLÎN-ò-ÍÏ+ŽOL*N-IŒ/(‰OMKËLÎLÍK®tIŠ—$–¨§h#ØFF ›Èf`~	dqEEì@ÀÌa6”DvkEbEf1[2Ð5@IÆ`%ZÖOœl}Îœµùz¨ß&gt;--Í¶ôP?PFhP80ƒÇ
+³sÎÚ†È90@øHjaJá´Ã°óäPœW	rwA|uH­‚†{j˜&amp;Pn7.``@r#»ƒÄx‡8$9àb&amp;P9K(m¥] ´&#39;”öƒÒ3 H¤C9Øí²(n¯¹Ë³@e¸Þ€âtpúÙ`ÿDâÌ/lðÉ#äLŒs`4BÌ2CãÍµ+Ia›xg»]ßÜ
+½]Ë®Û•ò:IÝc\j·øƒØTŸðd3Ð.´¯niMÂ?»|ÏíO&lt;a²‹¼Ê÷éÅ3»î£¡r¥¿nÀÔÁh;ƒegZ?Ñ²³ór•¾¸¢ÙÎöÁM›IvÅ2»Ó°ü†©ƒÑ¶ß¾0l¨Üo§Ì|}Þ½‡Fv‚w¦jùK]³ó3ÕaúfS£m_.O±ç–¨·“Ø×óÌdº«õL6‡¿í&lt;ìó´0)†©ƒÑvüfò	gMí,=Ýösú¬°Óø!5é˜P]^Î·)rM0u0ÚNóÅ]™þ$;ï{&quot;Áý·ÌíÜÿ‡³„hÛõçoÎcšfSG*Í’œŸSåÀÀ ÌyžlŒb&quot;œ„ðF½}ýz+ûúâûúˆ&quot;ûê³½0³íëgl´¯ûe_/_o_sL!¾è·}½™—}½óûÚÔ÷ñmçíë£œíë3lìk·FˆÞk_ŸWl_ß`_gÑ‚?h_ßÜb_ßÿÏ¾‘ŒìëÏ·¯_ãc_¿t}]Ÿ;L=6 } t  t   ¡f?gÄ    1   dTH2F:NUM_LooseID_DEN_TrackerMuons_abseta_pt_efficiencyData_syst&amp;NUM_LooseID_DEN_TrackerMuons_abseta_ptZLê ¡ xs``ËÀâÀÀ²›HNeàp``Èc`B `f`à°òõ÷ÉÏ/Nõt‰wqõ‹)JLÎN-ò-ÍÏ+ŽOL*N-IŒ/(‰OMKËLÎLÍK®tIŠW—¨§h#ØFF ›Èf`~	dqEEì@ÀÌa6”DvkEbEf1[2Ð5@IÆ`%ZÖOœl}Îœµùz¨ß&gt;--Í¶ôP?PFhP80ƒÇ
+³sÎÚ†È90@øHjaJá´Ã°óäPœW	rwA|uH­‚†{j˜&amp;Pn7.``@r#»ƒÄx‡8$9àb&amp;P9K(m¥] ´&#39;”öƒÒ3 H¤C9Øí²(n¯¹Ë³@e¸Þ€âtpúÙ`ÿDâÌ/lðÉ#äLŒs`4BÌ2CãÍµkQ9µ?lÒ»yG®XÞ×¶[´#$›)òœÝsé‹GÎG7È®ÿpÁµ¹’~vSL«Ré³³ëü¡V&#39;˜¶Òî°ÛÉ…ç1Ô&#39;ì™Õø$0Ë®®1..¥êˆ]–Îå]ßÍYì„k%J­\‚¡^9ê´Æ…ª3vÎV-œsÚìTâ–=±ØÎŒíÑ„ë¾Yèêm?®Ðý&quot;¶ÏöËŸ™ç3¹íæÌRœmn—7½ñô„ 5èêíøsËôÛm²K˜^–&#39;nW¢&#39;ëmstƒÝ%KÓc½ð¸ƒé³Ó|QòØî7£]Úö‘§ìÒƒ5½¶¬±[úoùd£­Ÿ`êH¥Y’ósª9Rà`X4’‰pbÀõöõë­ìë‹{ìë#Šì«ÏöÂœi_?c£}Ýÿ(ûzùzûšcÂñE¿íëÍ¼ìë¯Ø×¦¾Gˆo;o_ål_Ÿac_»ý0Büð^ûú¼bûúž û:‹„øéDûúæûúþöµ?¥Kýñùöõk|ìë—î±¯ës‡©ÇF •%  i   šf?gÄ z   4y   dTH2F3NUM_LooseID_DEN_TrackerMuons_abseta_pt_efficiencyMC&amp;NUM_LooseID_DEN_TrackerMuons_abseta_ptZLæ š xs``ÆÀâÀÀ²…Hö1p800¤30!030pû…úÆûäç§zºÄ»¸úÅ‡%&amp;g§ù–æçÇ&#39;&amp;§–$Æ”Ä§¦¥e&amp;g¦æ%Wú:«§hØ*F ›Èf`~	dqEEì@ÀÌa6”DvkEbEf1[2Ð5@IÆ`%ZÖOœl}Îœµùz¨ß&gt;--Í¶ôP?PFhP80ƒÇ
+³sÎÚ†È90@øHjaJá´Ã°óäPœW	rwA|uH­‚†{j˜&amp;Pn7.``@r#»ƒÄx‡8$9àb&amp;P9K(m¥] ´&#39;”öƒÒ3 H¤C9Øí²(n¯¹Ë¥@e¸Þ€âtpÂÙ`ÿDâÌ/lðÉ#äLŒs`4BÌ2CãÍµ*2Q³qZg—³9ç¤ˆL­]Hãyµ^_»f-Ñg-¡‰0ÎÎ)(ˆ§âãd»ÔØ#6ò÷ì|yªÞùb×tK|Fê‹]•–ªô·ém•jvÞ¯ã}WËØ™®-”ò{d—ÛP¾ò•&lt;ºzÛïÏ®\±ËNáÞ]›VÕ­v¼sæ¥¾˜yÓÎÃâÕ¦œ—1Ô¿VeŽSÑµ­‰È¿s¾ÌŽé¥Ù‹¢(%;g÷(¥—‘ïÐÕÛ	žÉQ¿S«igzÅí·ÕSK;¹ý6š³?(Ø%û±:„¡^5´þÙ«#vŽB,º‡¹ÖÙ™D™1ç‹µ«¿Íªø¿Ä ]=±|–äüœ*A`Îƒ”4ðdƒdá$Ä€7êíëo_³¯?|Ã¾~÷-ûú¬g0³íë÷¯¶¯ŸÕc_?¥Ê¾nªBüÌBûú-ùöõË×Û×ÝØŠ¿YÔ3ß¾þÀCûzõ„øCGûú³±öõ—vÙ×§Aó,0é×?¼`_­Ì¾þÁ#ûú®?õO÷Ú×¿ Ê=¶¯ï¾ÇF 
+Cö  q   Ÿf?gÄ    7â   dTH2F8NUM_LooseID_DEN_TrackerMuons_abseta_pt_efficiencyMC_stat&amp;NUM_LooseID_DEN_TrackerMuons_abseta_ptZLé Ÿ xs``ÍÀâÀÀ²“HNfàp``Èa`B `f`à°ðõ÷ÉÏ/Nõt‰wqõ‹)JLÎN-ò-ÍÏ+ŽOL*N-IŒ/(‰OMKËLÎLÍK®ôuŽ/.I,Q#N#Ð&gt;&amp;°}Œ@6ÍÀüÈâ‹ŠØ70€€™Ãl. )‰ì:ÖŠÄŠÌb¶e +j€’*,ŒÿÀJ´¬Ÿ&amp;8Ùúœ9kóõP¿}ZZšmé¡~ ŒÐ8 *p`6 &amp;fÿæœµÿ‘s`€ð‘ÔÂ”Âi†`çÉ¡8¯ä&lt;î‚øêZ÷Ô0M :Ün\ÀÀ€äFv=ˆñqHrÀÅL r–PÚJ»@iO(í¥f@H†r°ÛeQÜ^r;—+&lt;^Êp;½ÅéàÔ²ÁþˆÄ˜_8Øà“GÈ˜æÀh„˜e†Æ&#39;škç¥ç­¾ªñ£]N¯ê¼iì%îþø}Ç®ÊMêò£i!èÙ9&lt;íkIð±KQŸó²úàL;/Ñku‘ý¿íÓŽ´XûC½*£ù†sâí&lt;»ï-Ý*÷ÂÎäÌ†µì¡+ìr£›¸Ï¹‡®ÞöÛ›Û|ÎÓVØ)¬¾óý¬÷ëÔsZÛ¹—ŸÑøõÈCýk¾î™z†vÂÖœ9_kÇð|1Ã•dV;g)¶P½ztõv&#39;Vüø1ÝÎäñs~Ñz;¹8N‰h#s»dž¯¹Ña¨WáösÚª¿ÒÎá¦áÆÉ»ìL˜æ0¿±«Uì¼ºùFºzbù,Éù9U‚Àœ)nàÉÉ&amp;ÂIˆoÔÛ×ß¾f_ø†}ýî[öõYÏ`fÛ×ï_m_?«Ç¾~J•}ÝT9„ø™…öõ[òíë—¯·¯»±!~³¨g¾}ý‡öõê5ñ‡Žöõgcíë/í²¯OƒæY`Ò¯xÁ¾þZ™}ýƒGöõ]êŸîµ¯”{l_ß}&amp;Ž Û.~  p   Ÿf?gÄ    ;S   dTH2F8NUM_LooseID_DEN_TrackerMuons_abseta_pt_efficiencyMC_syst&amp;NUM_LooseID_DEN_TrackerMuons_abseta_ptZLè Ÿ xs``ÍÀâÀÀ²“HNfàp``Èa`B `f`à°ðõ÷ÉÏ/Nõt‰wqõ‹)JLÎN-ò-ÍÏ+ŽOL*N-IŒ/(‰OMKËLÎLÍK®ôuŽ/®,.Q#N#Ð&gt;&amp;°}Œ@6ÍÀüÈâ‹ŠØ70€€™Ãl. )‰ì:ÖŠÄŠÌb¶e +j€’*,ŒÿÀJ´¬Ÿ&amp;8Ùúœ9kóõP¿}ZZšmé¡~ ŒÐ8 *p`6 &amp;fÿæœµÿ‘s`€ð‘ÔÂ”Âi†`çÉ¡8¯ä&lt;î‚øêZ÷Ô0M :Ün\ÀÀ€äFv=ˆñqHrÀÅL r–PÚJ»@iO(í¥f@H†r°ÛeQÜ^r;—+&lt;^Êp;½ÅéàÔ²ÁþˆÄ˜_8Øà“GÈ˜æÀh„˜e†Æ&#39;škgšcå9‡í–[ø‹»‰ñ¿ì´gÊmÌì®·ËQüäQ‹n»ðñûž&quot;¹vÊI%oXŸ„Ù‰o•›ì”~ÂÎÝ”·èòZvtõ¶«ö=Û‘èúÇŽ?àôÌŽÃ¶¶o$øãÕl?Õª~T[ð
+CýF~Í9mw6ûbf{Z¸ãÊ*Îg¶?”/:¤|Ü‹¡&gt;ãbæÕ¯™loìÚeö’ížù6ïw¼´½¶òÙÝÜxQõ\·¿³ðT²}Çý·eÍ1qÛ&gt;Gô«fÙ1¸„GkO3ÆPÿd±”s¤WŠíL;ñ3?/Ù±°ÍŸÜeçzúVRÌÝ¿èê‰å³$ççT900s¤¸&#39;$#˜&#39;!¼Qo_ûš}ýáöõ»oÙ×g=ƒ™m_¿µ}ý¬ûú)UöuSåâgÚ×oÉ·¯_¾Þ¾îÆV„øÍZ žùöõÚ×«× Ä:Ú×Ÿµ¯¿´Ë¾&gt;šgI¿þáûúkeöõÙ×wýA¨º×¾þPîy°}}÷-˜86 £&#39; d  O   f?gÄ o   &gt;Ã   dTH2F&#39;NUM_MediumID_DEN_TrackerMuons_abseta_pt&#39;NUM_MediumID_DEN_TrackerMuons_abseta_ptZL×  xs``ía`q``YÅÀ
+$[8b˜8ÔýB}ã}SS2Ks=]â]\ýâCŠ“³S‹|KóóŠã“ŠSKãJˆU4Ÿƒ	l&gt;#Íd30¿²¸À¢&quot;ö `æÀÀ0›HJ&quot;»†µ&quot;±&quot;³˜­FhiPR……ñX‰–õÓ&#39;[Ÿ3gm¾ê·OKK³-=Ô”ÑTÌÆ` ä±ÂÄìßœ³öŸ!r&gt;’Z˜R8íÀÀ°ì&lt;9çU‚œÇ]_R« áž¦	T‡ÛÜÈî 1Þ!BI¸˜	TÎJÛAi(í	¥ý 4Âˆ éÀÀPÅíU`·&#39;&#39;æ¤¦%&amp;—äÕáv{ŠÛÁÉd…ý‰0¿p°Á&#39;;01ÌÑ0ËO4×neÎ5¥R/»›U?_‘&gt;h·vB¾–¼„§ÝÝå§Ó«Ð²›þ}¥nþÇ·v‹¶l+-ôs·[&lt;kçÃc[wÛ]k(ŒP?¹C}É%Å.Ñí:¯z!PÝc×¤WrOEù£Ýþ&lt;‘Em0ÔGT§&gt;WñøiWÐ\wëâS»ÄH­GßùCíj,Ì¶Ìu5ÀPï¼eg|ÔýV»°¯Oß	´Wš*t“ÿŽÝ}¥˜òìSê[Îé+¼Vd·›¸¢ë‹¾7³ÝdÛå¢O§Ù=™øñ¹Lòõm¢yá-»ªìæî«™°ï¢]QÒ.ío?í&gt;	ÝúrdÅltõÄòY’ósªYR¾À“’L„“Þ¨·¯žf_÷ÄÔ¾Î?Þ¾Bs:ÌlûºëíëŠõìë”Jì+ÛKâwWÚ×-«´¯k:f_yuBüÐUûºKeöuÓ½í+&quot;Ä÷O°¯{Éh_·u–}ååuñ£®öu7Ú×M¹o_™¡‚_To_w×Ç¾náDûÊ®n˜86 ±¥Ä  ]   •f?gÄ t   B   dTH2F,NUM_MediumID_DEN_TrackerMuons_abseta_pt_stat&#39;NUM_MediumID_DEN_TrackerMuons_abseta_ptZLà • xs``ÈÀâÀÀ²žHv2p800$20!030pèø…úÆû¦¦d–æzºÄ»¸úÅ‡%&amp;g§ù–æçÇ&#39;&amp;§–$Æ”Ä—$–¨©h	ØF ›Èf`~	dqEEì@ÀÌa6”DvkEbEf1[2Ðæ ¤
+ã?°-ë§	N¶&gt;gÎÚ|=ÔoŸ––f[z¨(£4¨
+˜Á Èc…‰Ù¿9gí?Cä |$µ0¥pÚaØyr(Î«9» ¾:¤VAÃ=5L¨·00 ¹‘ÝAb¼C„’p1¨œ%”¶ƒÒ.PÚJûAi„$Ò¡‹Û«ÀnNNÌIMKL.É/ªÃíö·ƒÓÈ
+û `~á`ƒO!w`b˜£2`–Ÿh®Ýõ8yfÙL»UæòÓ¹fØu—ÈŸ ö×n×µCu¶vöèÙU\{öìåF»ÉþÊªö¹ËíJó¶ž®¶[u&lt;Øx‚¯#†úD¶ÿ©·K#ì*O5ßö&gt;n—øâzóô‰Mv3ö3”µyíÅPofR&quot;Æ?§Þ./eÎÂ†v66ßòù*jWiëzÈ.ù7†zƒ]	[Ï­¬²s«Û3iÑ•	v¦ó]¯5ÕÚUïÿ,yî&lt;]ÃôÙ…~
+xÂ]ùÓ.GüÃÉ™Úkí‚Ã¼&#39;:Ïµ›7/ð•²GLŒ¶+Xy.)ÿr·]«½þ®~©n»I±)•A§ìvùu&gt;Ù¶¯¦ŽTš%9?§ÊA˜õ …&lt;Ù ÅD8	1àzû:áiöuOLíëüãí+4§ÃÌ¶¯»þØ¾®XÏ¾N©Ä¾²½!~w¥}Ý²Jûº¦cö•W· Ä]µ¯»Tf_7ÝÛ¾òG B|ÿûº—Œöu[gÙW^^‡?êj_ws¡}Ý”ûö•*ñEõöuw}ìëN´¯ìê†‰c£³/  f   •f?gÄ t   Eo   dTH2F,NUM_MediumID_DEN_TrackerMuons_abseta_pt_syst&#39;NUM_MediumID_DEN_TrackerMuons_abseta_ptZLé • xs``ÈÀâÀÀ²žHv2p800$20!030pèø…úÆû¦¦d–æzºÄ»¸úÅ‡%&amp;g§ù–æçÇ&#39;&amp;§–$Æ”ÄW—¨©h	ØF ›Èf`~	dqEEì@ÀÌa6”DvkEbEf1[2Ðæ ¤
+ã?°-ë§	N¶&gt;gÎÚ|=ÔoŸ––f[z¨(£4¨
+˜Á Èc…‰Ù¿9gí?Cä |$µ0¥pÚaØyr(Î«9» ¾:¤VAÃ=5L¨·00 ¹‘ÝAb¼C„’p1¨œ%”¶ƒÒ.PÚJûAi„$Ò¡‹Û«ÀnNNÌIMKL.É/ªÃíö·ƒÓÈ
+û `~á`ƒO!w`b˜£2`–Ÿh®ÝÂHu¡Ï»Kì&amp;ÅE,è‹¼f·lÞJ&gt;k¾.»K¬Ç*mÄ_£d7ñrñ6óF»IRžGë=³[ðæ±Æáno»Ëêm·àÇPŸ1×y]€Œ†]yÍÅ/WMöÛUgÔþª©W´ÛirèÂxXÁôÙ½óx¸ ñ–]Fýéô ÌvÑeç£¦Ú¹_oŸôsLŒ¶3[/Äñ\´ÏÎ=—»Ðj‹]à®Ã»’ómílWþiÛM	0ÕvMüOY27ž´ëñ–ÜúÃ[Ún‡SLÉ½»Çsþ‡Ÿö,E¨„°ìªù|f.Ì°›,÷ä §a—]†ÑïTh»¹ŸÂ*m6¡«&#39;–Ï’œŸSåÀÀ ÌzB#(€F1NBx£Þ¾Nxš}ÝSû:ÿxû
+Íé0çÙ×]l_W¬g_§Tb_Ù^‚¿»Ò¾nY¥}]Ó1ûÊ«[â‡®Ú×]*³¯›îm_ù#!¾‚}ÝKFûº­³ì+/Ã£Ç¾î¨«}ÝÍ…öuSîÛWf¨ Ô/ª·¯»ëc_·p¢}eW7L r;  q   žf?gÄ ~   HÕ   dTH2F6NUM_MediumID_DEN_TrackerMuons_abseta_pt_efficiencyData&#39;NUM_MediumID_DEN_TrackerMuons_abseta_ptZLê ž xs``ÅÀâÀÀ²ƒHNbàp``Èf`B `f`à0óõ÷MMÉ,Íõt‰wqõ‹)JLÎN-ò-ÍÏ+ŽOL*N-IŒ/(‰OMKËLÎLÍK®tI,IT&#39;RÐ:&amp;°uŒ@6ÍÀüÈâ‹ŠØ70€€™Ãl. )‰ì8ÖŠÄŠÌb¶e j€’*,ŒÿÀJ´¬Ÿ&amp;8Ùúœ9kóõP¿}ZZšmé¡~ ŒÐ8 *p`6 &amp;fÿæœµÿ‘s`€ð‘ÔÂ”Âi†`çÉ¡8¯ä&lt;î‚øêZ÷Ô0M :Ün\ÀÀ€äFv=ˆñqHrÀÅL r–PÚJ»@iO(í¥f@H†r°ÛeQÜ^r;—+&lt;VÊp;½ÅéàÄ²ÁþˆÄ˜_8Øà“GÈ˜æÀh„˜e†Æ&#39;šk·¶òv§¨ˆÝjïo·-lµÛ*wÿ\Äçvw¥olú{ñ ºAv×7¬˜öbšÝ´»7ö;N°[Å·¦bû1»[ëóÿû(ÅP_t&lt;â–Z½ ]»£Ó›,§x»¦É?übwà»÷Ó?ˆ§4Ù…qÍpf4µË_½Š&#39;ì¨]ÂÜc±×TÊírÿ:{ý=š†¤Ì´³ÿ¾T&#39;·m»]ÀÕõB›g¬¶ëZn(nïg·¨rï&amp;ó\õ[somœ¾Ú®Ëª9¸`]¼Ý¤k[?Püa÷$xÇ©-!Aêk—òo^z­ÞnÚ£îµ!¾–v%|§m¬m¯Ú½›«¶ø•ûWtõÄòY’ósª9RÚÀ“’L„“Þ¨·¯™µ×¾Ö&quot;À¾V•Û¾de%ÌlûÚûškJö5ÏìK;ÛâÅGìkƒƒík#¿Ú—iAˆ—vÚ×nÌ³¯tÂ¾¬î-B¼à¢}íïhûÚ+öe^#Ä=
+ìk/¼·¯½èe_¶r=\¼ækŒ}íéËöµ&quot;íËì7ÃÄ±Ñ &quot;Ê#ƒ  t   £f?gÄ ƒ   LF   dTH2F;NUM_MediumID_DEN_TrackerMuons_abseta_pt_efficiencyData_stat&#39;NUM_MediumID_DEN_TrackerMuons_abseta_ptZLè £ xs``ÏÀâÀÀ²—HNgàp``(``B `f`à°öõ÷MMÉ,Íõt‰wqõ‹)JLÎN-ò-ÍÏ+ŽOL*N-IŒ/(‰OMKËLÎLÍK®tIŠ—$–¨©h&#39;ØNF ›Èf`~	dqEEì@ÀÌa6”Dv!kEbEf1[2Ð!5@IÆ`%ZÖOœl}Îœµùz¨ß&gt;--Í¶ôP?PFhP80ƒÇ
+³sÎÚ†È90@øHjaJá´Ã°óäPœW	rwA|uH­‚†{j˜&amp;Pn7.``@r#»ƒÄx‡8$9àb&amp;P9K(m¥] ´&#39;”öƒÒ3 H¤C9Øí²(n¯¹Ëµ@e¸Þ€âtp
+Ù`ÿDâÌ/lðÉ#äLŒs`4BÌ2CãÍµ«óÿ&gt;…ÑnÖ—Ò[–‡Ù5©—›Y?°´Û°FéyÊœtƒì2Žl3éµk¼rhóŸvé1Éë·UØÍqÜ}}½™&gt;†z¿Õ›ï«.¶K›{3RÖ«Ï.ÈvÇ+Vï&quot;»ÎEN¹ß˜‡¡^¹eÁ’l;»É&gt;=`Øh§ËQi»ó©]æÇÿ3ÎØNÆP/ûykFÖ¼~;Ófr«Ù©Y/¸üTa¿]îjƒä÷3¾c¨w:ïõÈ.ìÍ»„åSíì¬Ÿ¸¥ö³›ù÷i˜=†úÈ /þ³ŸÙ¹n}|2ê³]âîóš±ßBìV1ô\Üÿk#ºzbù,Éù9U‚Àœ)ràÉÉ&amp;ÂIˆoÔÛ×ÌÚk_k`_«Êm_²²f¶}m‚‰}Í5%ûšçFö¥mñâ#öµÁÁöµ‘_íË4Ž ÄK;ík7æÙ×N:a_V÷!^pÑ¾öw´}íû²¯âöµÞÛ×^ô²/[¹.^ó5Æ¾öôeûÚ?‘öeö›aâØh &quot;t  v   £f?gÄ ƒ   Oº   dTH2F;NUM_MediumID_DEN_TrackerMuons_abseta_pt_efficiencyData_syst&#39;NUM_MediumID_DEN_TrackerMuons_abseta_ptZLê £ xs``ÏÀâÀÀ²—HNgàp``(``B `f`à°öõ÷MMÉ,Íõt‰wqõ‹)JLÎN-ò-ÍÏ+ŽOL*N-IŒ/(‰OMKËLÎLÍK®tIŠW—¨©h&#39;ØNF ›Èf`~	dqEEì@ÀÌa6”Dv!kEbEf1[2Ð!5@IÆ`%ZÖOœl}Îœµùz¨ß&gt;--Í¶ôP?PFhP80ƒÇ
+³sÎÚ†È90@øHjaJá´Ã°óäPœW	rwA|uH­‚†{j˜&amp;Pn7.``@r#»ƒÄx‡8$9àb&amp;P9K(m¥] ´&#39;”öƒÒ3 H¤C9Øí²(n¯¹Ëµ@e¸Þ€âtp
+Ù`ÿDâÌ/lðÉ#äLŒs`4BÌ2CãÍµ[¹þÃ21ù)v³Ë0ì™½ÕnÓÍÏ&#39;–o¶»ñáüO•UóÑ²ëÕ½\½`Ý2»îç{¥ÚíVÌxfÛÅowãuˆãÅ³Bês¹|Õd]ãÌ3Ó”Þï±kØhµä¾E›Ý¾]®÷/\‚¡&gt;x‹^¡§]öMÃçÂÖÙÅÎ:¸¦eâ;]¾Çä1Ô[Tm¿t_ØÎí¶ÓÛð;ÌvÁ‡ÅfÍ6³[0Ÿk—³í}õ$ô¸ýµkyÚ½ÁÈnRìÑ cm§í_xqëÒÊêË‚æïwcµ›(g’ø­Ú.-ñ¸¿Dk¤Ý›¿²×Îyx£«&#39;–Ï’œŸSåÀÀ Ìy&quot;žlŒ`&quot;œ„ðF½}Í¬½öµöµªÜö%++afÛ×&amp;˜Ø×\S²¯ynd_ÚÙ†/&gt;b_l_ùÕ¾LãB¼´Ó¾vcž}í¤öeuoâíkGÛ×^1°/[ð!îQ`_{á½}íE/û²•ëáâ5_cìkO_¶¯ýi_f¿&amp;Ž “b#=  e   œf?gÄ |   S0   dTH2F4NUM_MediumID_DEN_TrackerMuons_abseta_pt_efficiencyMC&#39;NUM_MediumID_DEN_TrackerMuons_abseta_ptZLà œ xs``ÁÀâÀÀ²HN`àp``Èd`B `f`à0ñõ÷MMÉ,Íõt‰wqõ‹)JLÎN-ò-ÍÏ+ŽOL*N-IŒ/(‰OMKËLÎLÍK®ôuV&#39;RÐ2&amp;°eŒ@6ÍÀüÈâ‹ŠØ70€€™Ãl. )‰ì4ÖŠÄŠÌb¶e j€’*,ŒÿÀJ´¬Ÿ&amp;8Ùúœ9kóõP¿}ZZšmé¡~ ŒÐ8 *p`6 &amp;fÿæœµÿ‘s`€ð‘ÔÂ”Âi†`çÉ¡8¯ä&lt;î‚øêZ÷Ô0M :Ün\ÀÀ€äFv=ˆñqHrÀÅL r–PÚJ»@iO(í¥f@H†r°ÛeQÜ^r;—+&lt;NÊp;½Åéà¤²ÁþˆÄ˜_8Øà“GÈ˜æÀh„˜e†Æ&#39;šk×ä#R&quot;àc7ë…¦ûÌ¥ÿìJ&lt;®OZ7#Ïn…¯×F•ùÙèÙe6¥
+o~e×^u]ÑýÙ+»áÝñev³ãÓÛ&#39;-0ÄPÜ’âSú&quot;Ç®€¹M¥›!Ï.èÍÚ­;¥²ì:d÷ûw~VÄP¯qïnB—Õ[;gÿY‰÷íôZê³íº4ì2ðl1íÃP¯ôÿSÆ1Ž|;§™ß^tþ·S[}òï–{÷í2·ò®Ì	ÂPï=•Á\qa™]¢ótƒ%«&lt;í&lt;k7E}‘¸a×;µaáíš5êSîÈžUfÙfW±nÃ·3;&#39;ÛÅ¦Îí¸-h·ÆêÐÃÂuEèê‰å³$ççT900s¤¬&#39;$#˜&#39;!¼Qo_×âk_dg_wyƒ}Mò˜Ùöumsìë
+ìëåÚW?Ÿ„ŸRg_·šÏ¾îj‘}õu„øFQûº»‹ìë~ñØ×j Ä×Ï±¯³¯—ªß	÷ƒ}]cˆ}Ý7ûzëûZ½ŸõìëÞØ×G&gt;µ¯™ÇF ‰„  n   ¡f?gÄ    V•   dTH2F9NUM_MediumID_DEN_TrackerMuons_abseta_pt_efficiencyMC_stat&#39;NUM_MediumID_DEN_TrackerMuons_abseta_ptZLä ¡ xs``ËÀâÀÀ²›HNeàp``Èc`B `f`à°ôõ÷MMÉ,Íõt‰wqõ‹)JLÎN-ò-ÍÏ+ŽOL*N-IŒ/(‰OMKËLÎLÍK®ôuŽ/.I,Q&#39;R&#39;ÐF&amp;°Œ@6ÍÀüÈâ‹ŠØ70€€™Ãl. )‰ì&gt;ÖŠÄŠÌb¶e 3j€’*,ŒÿÀJ´¬Ÿ&amp;8Ùúœ9kóõP¿}ZZšmé¡~ ŒÐ8 *p`6 &amp;fÿæœµÿ‘s`€ð‘ÔÂ”Âi†`çÉ¡8¯ä&lt;î‚øêZ÷Ô0M :Ün\ÀÀ€äFv=ˆñqHrÀÅL r–PÚJ»@iO(í¥f@H†r°ÛeQÜ^r;—+&lt;bÊp;½Åéàô²ÁþˆÄ˜_8Øà“GÈ˜æÀh„˜e†Æ&#39;šk×ÈqÊx‰ñ&lt;»™ŒËVvŸÑ³+ú«ogk·„s¦o†çJtƒì2ú¤ŠÙ¶kéáÒö·‘·KŽûøvé¤-v3®k®›æÕŒ¡&gt;¨qêÑçU¶v9»ë/;„ªÛ–,+_`×ÞÁù{Ûª&quot;õkT3Ù9m\¤Îî-a§³µõÌ­Ã“ì2\Å¤yc¨W
+ø¸:v¯‹¹€ÜŒßöv*oþâ¶Ë\Â$À²C½—Ïç°hÎv	½f?²·°sŸÆù4Üé•]Ï²Îõù·1Ô§Þ\º½ÿ‘]…ˆ•ÜÛ&gt;»˜¦:…ËíVõi¥2uú «&#39;–Ï’œŸSåÀÀ ÌyžlŒ`&quot;œ„ðF½}]‹¯}]}Ýåö5ÉS`fÛ×µÍ±¯K(°¯;”k_ý|B|J}Ýj&gt;ûº«Eö5Ö×âEíëî.²¯ûÅc_S¨_?Ç¾^0Ì¾^¨~&#39;Üöu!öußdìë­Cìkõ~&quot;ÔL°¯{`_ùÔ¾f~L ¾Ð  s   ¡f?gÄ    Z   dTH2F9NUM_MediumID_DEN_TrackerMuons_abseta_pt_efficiencyMC_syst&#39;NUM_MediumID_DEN_TrackerMuons_abseta_ptZLé ¡ xs``ËÀâÀÀ²›HNeàp``Èc`B `f`à°ôõ÷MMÉ,Íõt‰wqõ‹)JLÎN-ò-ÍÏ+ŽOL*N-IŒ/(‰OMKËLÎLÍK®ôuŽ/®,.Q&#39;R&#39;ÐF&amp;°Œ@6ÍÀüÈâ‹ŠØ70€€™Ãl. )‰ì&gt;ÖŠÄŠÌb¶e 3j€’*,ŒÿÀJ´¬Ÿ&amp;8Ùúœ9kóõP¿}ZZšmé¡~ ŒÐ8 *p`6 &amp;fÿæœµÿ‘s`€ð‘ÔÂ”Âi†`çÉ¡8¯ä&lt;î‚øêZ÷Ô0M :Ün\ÀÀ€äFv=ˆñqHrÀÅL r–PÚJ»@iO(í¥f@H†r°ÛeQÜ^r;—+&lt;bÊp;½Åéàô²ÁþˆÄ˜_8Øà“GÈ˜æÀh„˜e†Æ&#39;škçb²Dëï©{vqšîÎùkg²«µuò¢_v|Gû&gt;†ó¢d&#39;×©ühÉm»ð²ôõGÃ&quot;íDU,·Ûí´Kq|wüÑÚ|õ:/2ž=úlg“¼nmì:;ñæ_t¦Ùm[U•)º]½íŽ}+Œ¼¿ŠÚ~&gt;ùP&#39;éÆÛ7ïg&gt;³ÉŒ²cÛÇªW5m
+†ú«Ä×r¦æÙ~È˜Ûòã¸íëo“èù:Ú&gt;äž»a3ºz;–†s&lt;™¡vbgØÙå
+YìøªÚ#ÏÆ=°³½w_»q–†z®‰œ·îš2Ø)ûÝúýÌ`•íÿ(q«¨J»¬“íÇ&gt;¥£«&#39;–Ï’œŸSåÀÀ ÌyžlŒ`&quot;œ„ðF½}]‹¯}]}Ýåö5Éðà³¯k›c_—P`_w(×¾úù$˜öuSêìëVóÙ×]-²¯±¾Žß(j_ww‘}Ý/ûšB„øú9öõ‚aöõ²@õ;á~°¯k±¯û&amp;c_ob_«÷¡&gt;`‚}ÝÛ ûúÈ§ö5ó#`âØh 8  a   œf?gÄ {   ]v   dTH2F-NUM_MediumPromptID_DEN_TrackerMuons_abseta_pt-NUM_MediumPromptID_DEN_TrackerMuons_abseta_ptZLÝ œ xs``ÁÀâÀÀ²HN`àp``È``B `f`àÐõõ÷MMÉ,Í(ÊÏ-(ñt‰wqõ‹)JLÎN-ò-ÍÏ+ŽOL*N-IŒ/(!M5Ð.&amp;°]Œ@6ÍÀüÈâ‹ŠØ70€€™Ãl. )‰ì2ÖŠÄŠÌb¶e Õ5@IÆ`%ZÖOœl}Îœµùz¨ß&gt;--Í¶ôP?PFhP80ƒÇ
+³sÎÚ†È90@øHjaJá´Ã°óäPœW	rwA|uH­‚†{j˜&amp;Pn7.``@r#»ƒÄx‡8$9àb&amp;P9K(m¥] ´&#39;”öƒÒ3 H¤C·WÝœœ˜“š–˜\’_T‡Ûí(n&#39;ö@$&gt;ÀüÂÁŸ&lt;BîÀÄ0F#dÀ,34&gt;Ñ\»Ëîáb&#39;íöùü[q¡õ„ÝÙD5éíÚöjÌê÷fZ]E7Èn•íI¡
+
+vÛò×5e°O¶ÛSuŸÿöïSvÏŽ]³ôÊÄP?ÑpºÑ4/»–ÙeŒ&quot;VvSåRcf¶Ù]9p*yZË%õùõ/kErìš´Â=VqØ5w¯Òœtßní®;Ì76`¨÷üï·º[f§]ºAkÓì»ú…Éâµzí¶žöÖÜïƒ¡~ò·Súó~Ú-3¹0ó©•¯Ýž÷&#39;–_Ü©l÷ùHþO¾âyêÄüPàá³;ÉñÌ¤rë%»ë5Ÿ¤ˆ±}cË_ß Œ®žX&gt;Kr~N•ƒ 0ëAÊx²A2‚‰pbÀõöµ{/Ú×-òµ¯³}o_yh!Ø×:h_—ln_û®Ü¾êÉ9„øµÇöu.öu9wí«…kâÛìë..³¯«ë±¯:»!¾CÍ¾î~¼}ÝÂÓöUšâ;ÍíëØÚ×ÅM¶¯âÙ‡Ÿ~Í¾nëWûº^7û*Pq„  RiO  l   ¡f?gÄ €   `×   dTH2F2NUM_MediumPromptID_DEN_TrackerMuons_abseta_pt_stat-NUM_MediumPromptID_DEN_TrackerMuons_abseta_ptZLã ¡ xs``ËÀâÀÀ²›HNeàp``Èe`B `f`à0òõ÷MMÉ,Í(ÊÏ-(ñt‰wqõ‹)JLÎN-ò-ÍÏ+ŽOL*N-IŒ/(‰/.I,Ñ%IÐB&amp;°…Œ@6ÍÀüÈâ‹ŠØ70€€™Ãl. )‰ì&lt;ÖŠÄŠÌb¶e ý5@IÆ`%ZÖOœl}Îœµùz¨ß&gt;--Í¶ôP?PFhP80ƒÇ
+³sÎÚ†È90@øHjaJá´Ã°óäPœW	rwA|uH­‚†{j˜&amp;Pn7.``@r#»ƒÄx‡8$9àb&amp;P9K(m¥] ´&#39;”öƒÒ3 H¤C·WÝœœ˜“š–˜\’_T‡Ûí(n§ö@$&gt;ÀüÂÁŸ&lt;BîÀÄ0F#dÀ,34&gt;Ñ\»)•ž+ßMÛf·ÁØqu±¬Ý$&amp;›»Gy—ÙãUžZU‹n]µió‚G{$ì¦ëN)+P°«–¸Pø›ÙnkË®ƒï^db¨OYöûçß+í*trRÎuØ¥åÌsXYb·$,×D]i!†z‹ôBé—ßfØ…Ä]ªc*«·sŠ“àÌ2	²k^ÃÌúåêYõ†«f|Ï|cçñÛåç&#39;¹vÖËx*ŸF5Úµ&lt;hù­{§C}¸«|‘¹]þ¼Ÿ†&lt;Ìgì¢æõ6ô¶[®S3¿Iè†úÂegûCÏÚu˜Êßy ^hWî“¸ÐÝ\Éîðm‹ìöêèê‰å³$ççT900³¤À&#39;$#˜&#39;!¼Qo_»÷¢}Ý&quot;_û:Û÷ö•÷B€}Ý©ƒöuÉæöµïÊí«žœCˆ_{l_×éb_—s×¾ZýöuÛìë..³¯«ë±¯:»¡~‡š}Ýýxûº…§í«&amp;4#ÄwšÛ×°µ¯‹›l_Å³!&gt;ýš}ÝÖ¯öu½nöU â&#39;   ]Œ  w   ¡f?gÄ €   dC   dTH2F2NUM_MediumPromptID_DEN_TrackerMuons_abseta_pt_syst-NUM_MediumPromptID_DEN_TrackerMuons_abseta_ptZLî ¡ xs``ËÀâÀÀ²›HNeàp``Èe`B `f`à0òõ÷MMÉ,Í(ÊÏ-(ñt‰wqõ‹)JLÎN-ò-ÍÏ+ŽOL*N-IŒ/(‰/®,.Ñ%IÐB&amp;°…Œ@6ÍÀüÈâ‹ŠØ70€€™Ãl. )‰ì&lt;ÖŠÄŠÌb¶e ý5@IÆ`%ZÖOœl}Îœµùz¨ß&gt;--Í¶ôP?PFhP80ƒÇ
+³sÎÚ†È90@øHjaJá´Ã°óäPœW	rwA|uH­‚†{j˜&amp;Pn7.``@r#»ƒÄx‡8$9àb&amp;P9K(m¥] ´&#39;”öƒÒ3 H¤C·WÝœœ˜“š–˜\’_T‡Ûí(n§ö@$&gt;ÀüÂÁŸ&lt;BîÀÄ0F#dÀ,34&gt;Ñ\»K›ö”çÇÛ­1®üµbi¨Ýi…{õÿ:cìUW}ÐòÝ »e×ä,NÌ±Û°$JÖ+»Ën×‰wLWîHÙ=³{ÈÓOG0}v½–ùéŒ!év…lGêçF¾±›èÜ5×=sŽÝ%Ó?{ÔÂÔÁh»—‰Gÿ_eWoóóã5¶|»Æ…©?&#39;½Ÿe·âüm&#39;‘^˜:mç¨ù÷;ú»„ËŽ³	:ÚÕ&gt;gò¿w“Ën³Óê#Ì{aê`´Ý¤v^Ûò«vK¬²]©°ÛÓêWxnÍ=»ÏÜ&lt;&quot;BÉ˜îŸ`ó¤ÿÐ
+»ã­SÌVo‰¶».¿)öÑå:{Qßd÷ÿn’0sI¥Y’ósªYRàÀ“’QL„“Þ¨·¯Ý{Ñ¾n‘¯}í{ûÊû@!À¾îÔAûºdsûÚwåöUOÎ!Ä¯=¶¯ët±¯Ë¹k_-ûºm
+öu—Ù×ÕõØW]P¿CÍ¾î~¼}ÝÂÓöUšâ;ÍíëØÚ×ÅM¶¯âÙ‡Ÿ~Í¾nëWûº^7û*Pq„   ­  ~   ªf?gÄ Š   gº   dTH2F&lt;NUM_MediumPromptID_DEN_TrackerMuons_abseta_pt_efficiencyData-NUM_MediumPromptID_DEN_TrackerMuons_abseta_ptZLë ª xs``]ÆÀâÀÀr„HÎcàp``(g`B `f`à°ñõ÷MMÉ,Í(ÊÏ-(ñt‰wqõ‹)JLÎN-ò-ÍÏ+ŽOL*N-IŒ/(‰OMKËLÎLÍK®tI,IÔ%I3Ðj&amp;°ÕŒ@6ÍÀüÈâ‹ŠØ70€€™Ãl. )‰ìPÖŠÄŠÌb¶e Kj€’*,ŒÿÀJ´¬Ÿ&amp;8Ùúœ9kóõP¿}ZZšmé¡~ ŒÐ8 *p`6 &amp;fÿæœµÿ‘s`€ð‘ÔÂ”Âi†`çÉ¡8¯ä&lt;î‚øêZ÷Ô0M :Ün\ÀÀ€äFv=ˆñqHrÀÅL r–PÚJ»@iO(í¥f@HPìƒ‚VÅíU ·s¹Âã¨ ·ÓPœNH@`ÿDâÌ/lðÉ#äLŒs`4BÌ2CãÍµûøÄA$ô©–Ýç}ú¿ýï·ûaïû„ïOŠ½ºfLßÿ¬3èÙ½ú”é#2Íî›óöm®Ý²ûr™w]«È[{–×{kkœ0Ô?÷=·óEÔ»·±[9¹rYí&gt;ßÉxes˜Ýï¨U»Õ/¼ÁP+ð lÛ#F»‡Ê’“+KÍìOõØ}Ž?Äîµ¾iùäo=êO—ÏïÝqRÇîü•c5YÎ§í.Ór8êéc÷ éÚ©¸õ‡ùŒ/¿øbwøMÕâ³vØ]rÙ=?&quot;Á×î·kw6ãZõëªÄmw½Ùkwz¯ðÞi®Ù=ššc®ee/¬|îˆéæBtõÄòY’ósª9RòÀ“’L„“Þ¨·¯ÞUf_³Ï¾fa }á3a˜Ùö5O¿Ù×Ô;Ú×øÙ½6‡‹×J·¯ù¼Ï¾æÉkûâþN„¸«¨}m¶}­L’}‰E
+B&lt;TÂ¾ö·}m–ˆ}É†OqõöµsUík~Û—œ«}Í…3öµeÙ@³œíKTä`ê±Ñ ¤¨%ô  „   ¯f?gÄ    k8   dTH2FANUM_MediumPromptID_DEN_TrackerMuons_abseta_pt_efficiencyData_stat-NUM_MediumPromptID_DEN_TrackerMuons_abseta_ptZLì ¯ xs``]ÍÀâÀÀr’H.fàp``¨a`B `f`àpôõ÷MMÉ,Í(ÊÏ-(ñt‰wqõ‹)JLÎN-ò-ÍÏ+ŽOL*N-IŒ/(‰OMKËLÎLÍK®tIŠ—$–è’dÐ~&amp;°ýŒ@6ÍÀüÈâ‹ŠØ70€€™Ãl. )‰ìZÖŠÄŠÌb¶e sj€’*,ŒÿÀJ´¬Ÿ&amp;8Ùúœ9kóõP¿}ZZšmé¡~ ŒÐ8 *p`6 &amp;fÿæœµÿ‘s`€ð‘ÔÂ”Âi†`çÉ¡8¯ä&lt;î‚øêZ÷Ô0M :Ün\ÀÀ€äFv=ˆñqHrÀÅL r–PÚJ»@iO(í¥f@H†r°ÛeQÜ^r;—+&lt;‚Êp;½ÅéàÔ²ÁþˆÄ˜_8Øà“GÈ˜æÀh„˜e†Æ&#39;šk×¶Ú+K»…Ãþ¯Hë±k›™žµù¥Ýæÿi³+ÞýD7È.MoÂëüƒSíZŸ-Ö¶©µËIä½$Ài·àUVdö¯êƒdú;&quot;¨ÛEPÎxÁlÚžu#È®_þÐ¡J—FõªZÙñ¼1QvŽ¾§nmÛfg(,°ñßÚ&gt;»|ÎVãEÂµêåô&gt;ogž¥±Ãëò&lt;;-õ;Û¸òÙÎ›z÷´îõNÆçwÚc5Ëé	‹¡•Û&lt;‹ãÝknÛMZ&#39;|(&quot;‘C}Ôú3:ÏìŠ?î¾yv—]ª¬«ìÖövëÎ;m½—€®žX&gt;Kr~N•ƒ 0çAŠx²A2‚‰pbÀõöÕ»Êìk¶óÙ×,´/|&amp;3Û¾æé7ûšzGûß û¢×æpñZ‰ãö5Ÿ÷Ù×&lt;ym_Üß‰wµ¯Í¶³¯•I²/±HAˆ‡JØ×^â¶¯Í±/Ùð	!®¾Á¾v®ª}mÂoû’3káâ5ÎØ×–eÍr¶/Q‘ƒ‰c£mA  ‰   ¯f?gÄ    n¼   dTH2FANUM_MediumPromptID_DEN_TrackerMuons_abseta_pt_efficiencyData_syst-NUM_MediumPromptID_DEN_TrackerMuons_abseta_ptZLñ ¯ xs``]ÍÀâÀÀr’H.fàp``¨a`B `f`àpôõ÷MMÉ,Í(ÊÏ-(ñt‰wqõ‹)JLÎN-ò-ÍÏ+ŽOL*N-IŒ/(‰OMKËLÎLÍK®tIŠW—è’dÐ~&amp;°ýŒ@6ÍÀüÈâ‹ŠØ70€€™Ãl. )‰ìZÖŠÄŠÌb¶e sj€’*,ŒÿÀJ´¬Ÿ&amp;8Ùúœ9kóõP¿}ZZšmé¡~ ŒÐ8 *p`6 &amp;fÿæœµÿ‘s`€ð‘ÔÂ”Âi†`çÉ¡8¯ä&lt;î‚øêZ÷Ô0M :Ün\ÀÀ€äFv=ˆñqHrÀÅL r–PÚJ»@iO(í¥f@H†r°ÛeQÜ^r;—+&lt;‚Êp;½ÅéàÔ²ÁþˆÄ˜_8Øà“GÈ˜æÀh„˜e†Æ&#39;šk÷ñà¤©;í&gt;,u\Ðe÷CHZÔrÊb{uÆØƒ&#39;*Þ¡d÷êŽÕnƒ&#39;Wì¾‰¿*˜cd÷åÈ]õ9l®ö,+„¯ˆoÅPÿÜå@‘Šî»·þW¾‡þd²û|«õÍ¿óí~Ëd›.º—‚¡þ–¿ôi†P»‡rÇ¿o÷x²Zäöóuv¯´?%„Tb¨?]¼ÙoÙ…MvçO
+fðÉ%Ø]&lt;ôÔU¯ý‹Ýƒø™+âN¨b¨?ô‡!Yzº¡Ýáín²&amp;…Ù]²Ìiú2«Âî×¯õ{hb¨_»dÆÍ­-v§e+ôw¥ÛÝÿõÁÏèÅe{¡gv§Û· «&#39;–Ï’œŸSåÀÀ ÌyâžlŒ`&quot;œ„ðF½}õ®2ûší|ö5íŸ	ÃÌ¶¯yúÍ¾¦ÞÑ¾Æ7È¾èµ9\¼Vâ¸}Íç}ö5O^Û÷w&quot;Ä]Eík³íìke’ìK,àÑf_*a_{‰Û¾6KÄ¾dÃ&#39;„zõöµsUík~Û—œY¯¹pÆ¾¶,h–³}‰ŠL Íš&amp;E  ˆ   ¨f?gÄ ˆ   rE   dTH2F:NUM_MediumPromptID_DEN_TrackerMuons_abseta_pt_efficiencyMC-NUM_MediumPromptID_DEN_TrackerMuons_abseta_ptZL÷ ¨ xs``]ÂÀâÀÀrˆHÎaàp``(e`B `f`à°òõ÷MMÉ,Í(ÊÏ-(ñt‰wqõ‹)JLÎN-ò-ÍÏ+ŽOL*N-IŒ/(‰OMKËLÎLÍK®ôuÖ%I+Ðb&amp;°ÅŒ@6ÍÀüÈâ‹ŠØ70€€™Ãl. )‰ìLÖŠÄŠÌb¶e ;j€’*,ŒÿÀJ´¬Ÿ&amp;8Ùúœ9kóõP¿}ZZšmé¡~ ŒÐ8 *p`6 &amp;fÿæœµÿ‘s`€ð‘ÔÂ”Âi†`çÉ¡8¯ä&lt;î‚øêZ÷Ô0M :Ün\ÀÀ€äFv=ˆñqHrÀÅL r–PÚJ»@iO(í¥f@H†r°ÛeQÜ^r;—+&lt;fÊp;½Åéàd²ÁþˆÄ˜_8Øà“GÈ˜æÀh„˜e†Æ&#39;šk÷Í÷úOíøvß¶¿YnÿÀÙžáÁ™9û¿jÛýlºßn÷Ì@»×ZÁA:SìÞ»¯e[îl÷ó¡zì[ë»?áêßÏõ„ÀÔÁh»—&gt;¼’Ù^¡vt/}y&quot;ùÓîË&lt;v×zâvïº’S£íîžj=ºÎ®Óî§ü™•ÚvOJ-”&lt;:*íÞ¸MtZ&lt;#¦FÛ¹ÿà|AH³Ýù{ÎM+Ú9í.¶OXÖªÐfw¿ñíÏ…—¡	¦šÁî@­Lîš·¦vÌ
+?~·Ñî«fâ¯mWí.»òEÝäB%„e·J×-·á|»Ýveã=ßÜ°[.¸hžÝ›¥v‡ÏýŠIÍ@WO,Ÿ%9?§ÊA˜ó åFPb&quot;œ„ðF½}í~û:!9ûº„ûò+G`Î³¯“xÄ?ìë¢KíËïÜAˆÛß¶¯ËP±¯+]h_ˆï•°¯›þÞ¾nö&gt;ûJ÷sñÙšöu«ìëŽÍ±¯ü!žSf_w»Ê¾žá„}Õü/q³&quot;ûº}7ìëî„ÙW~ÿ
+ÇF Ð–,:     ­f?gÄ    uÍ   dTH2F?NUM_MediumPromptID_DEN_TrackerMuons_abseta_pt_efficiencyMC_stat-NUM_MediumPromptID_DEN_TrackerMuons_abseta_ptZLë ­ xs``]ÉÀâÀÀrœH.dàp``¨b`B `f`à°÷õ÷MMÉ,Í(ÊÏ-(ñt‰wqõ‹)JLÎN-ò-ÍÏ+ŽOL*N-IŒ/(‰OMKËLÎLÍK®ôuŽ/.I,Ñ%I?Ðv&amp;°íŒ@6ÍÀüÈâ‹ŠØ70€€™Ãl. )‰ìVÖŠÄŠÌb¶e cj€’*,ŒÿÀJ´¬Ÿ&amp;8Ùúœ9kóõP¿}ZZšmé¡~ ŒÐ8 *p`6 &amp;fÿæœµÿ‘s`€ð‘ÔÂ”Âi†`çÉ¡8¯ä&lt;î‚øêZ÷Ô0M :Ün\ÀÀ€äFv=ˆñqHrÀÅL r–PÚJ»@iO(í¥f@H†r°ÛeQÜ^r;—+&lt;zÊp;½Åéà´²ÁþˆÄ˜_8Øà“GÈ˜æÀh„˜e†Æ&#39;šk×ï\ü÷®ÝœýÓ
+²íª&lt;uS2_IÛmKeÞâuLÝ »ü]ó//?±Ð®Cp…ã1Æ—v™S®…Y×æÛ­HI¶ÿt5C}Ø5ÝEååöv…ªÑg?Í’±çnäÍÿxÔnú\›‡ÏÎõ`¨×Ž=a_VPiçnb¯|‰ù–qíÚ=«3wÚ•múÝTâfŒ¡^¹xïÜsÞ:vVq!ûg…Úé¼Oz8ÿŒ]¹NÙž¼)Ï0Ô{ïý¸~­‰]’¹ÇÍgv~3RE¶÷EÚÍúm=áâÖõ©[îˆ:Ùí³«q‹t2²|k—u¼oÃ.3»íÝêÇ¤ó¯¡«&#39;–Ï’œŸSåÀÀ ÌyÂžlŒ`&quot;œ„ðF½}í~û:!9ûº„ûò+G`fÛ×I¼ âöuÑ¥öåwî ÄíoÛ×e¨Ø×•.´¯ƒG§}]¯„}Ýô÷öu³÷ÙWºŸC¨Ÿ­i_÷±Ê¾îØûÊÿâ9eöu·«ìëNØWÍÿ‚7+²¯ÛwÃ¾îN˜}å÷¯0ql4 i˜   ƒ   ­f?gÄ    yN   dTH2F?NUM_MediumPromptID_DEN_TrackerMuons_abseta_pt_efficiencyMC_syst-NUM_MediumPromptID_DEN_TrackerMuons_abseta_ptZLí ­ xs``]ÉÀâÀÀrœH.dàp``¨b`B `f`à°÷õ÷MMÉ,Í(ÊÏ-(ñt‰wqõ‹)JLÎN-ò-ÍÏ+ŽOL*N-IŒ/(‰OMKËLÎLÍK®ôuŽ/®,.Ñ%I?Ðv&amp;°íŒ@6ÍÀüÈâ‹ŠØ70€€™Ãl. )‰ìVÖŠÄŠÌb¶e cj€’*,ŒÿÀJ´¬Ÿ&amp;8Ùúœ9kóõP¿}ZZšmé¡~ ŒÐ8 *p`6 &amp;fÿæœµÿ‘s`€ð‘ÔÂ”Âi†`çÉ¡8¯ä&lt;î‚øêZ÷Ô0M :Ün\ÀÀ€äFv=ˆñqHrÀÅL r–PÚJ»@iO(í¥f@H†r°ÛeQÜ^r;—+&lt;zÊp;½Åéà´²ÁþˆÄ˜_8Øà“GÈ˜æÀh„˜e†Æ&#39;šk÷M^²Èa£Ý7—w¾uÆ%ö—W°ñ0³û!Óïý}Étƒì^sÍØñð´Ý»çi©¼í~^‰ùtHö Ýï),wÏ}]¡þ¥Ã&quot;¦Y|3í&gt;È¬)¦o÷e†KÆòKÒv˜3¯ûœSÄP÷¸Ï2ÿÝv˜ƒö&lt;˜¼ÚîIÑ‰œ	ŸyìÞHj{Ï[Cý™ÛÌ8|°;Q$ÂãžÝÅæÏÊ3ŽÚÝWµ‘Û ñCýÄ¸šhÛ»ƒÕ{ÏOß%iwôÙ„?Oÿ{Ø]W´–’\ˆ¡~ÅÅktVÏ²ÛwNcßI»¥ÕßTƒ2ÛmÜ§77ê7ºzbù,Éù9U‚ÀœN0Ì`M;á$Ä€7êíkðÛ×	ÉÙ×%tØ—_93ß¾Nâÿ°¯‹.µ/¿s!nÛ¾.CÅ¾®t¡}EX B¼WÂ¾nú{ûºÙûì+ÝÏ!ÄgkÚ×}¬²¯;6Ç¾òÿ„xN™}Ýí*ûz†öUó¿ ÄÍŠìëöÝ°¯»f_ùý+L x¼(ç  O   Œf?gÅ k   |Ñ   dTH2F%NUM_SoftID_DEN_TrackerMuons_abseta_pt%NUM_SoftID_DEN_TrackerMuons_abseta_ptZLÛ Œ xs``í``q``YÆÀ
+$8&quot;˜8TýB}ãƒóÓJ&lt;]â]\ýâCŠ“³S‹|KóóŠã“ŠSKãJˆS4›ƒ	l6#Íd30¿²¸À¢&quot;ö `æÀÀ0›HJ&quot;»„µ&quot;±&quot;³˜­FhePR……ñX‰–õÓ&#39;[Ÿ3gm¾ê·OKK³-=Ô”ÑTÌÆ` ä±ÂÄìßœ³öŸ!r&gt;’Z˜R8íÀÀ°ì&lt;9çU‚œÇ]_R« áž¦	T‡ÛÜÈî 1Þ!BI¸˜	TÎJÛAi(í	¥ý 4Âˆ éÀÀPÅíU`·&#39;&#39;æ¤¦%&amp;—äÕáv{ŠÛÁId…ý‰0¿p°Á&#39;;01ÌÑ0ËO4×nö¼Ïì=ìŽs·ÇóÝî°[´®¶è¥0£ÝŽzGA^gtƒì&amp;;%È=½c·Hêú}‘]¿ìZïDßZ=IßnžiôI[˜êÕÌ¸¿¸‰ÙÍŒáQÑîÜh×¨=¥îþ›·v‹¶Fœyôþ†úäVß¯™ñ÷ìZ\ùb.”óÛyû²{ûÛE‰0úl…Æ8B—ÅÚ	ûœÃÛ…{¥Tº×«Ú9¹O}eãjWP¤1ãâG„JË®úmÅú·¾vq’&#39;6ýU³k³äüyu»iýß[ÿÊÀPß”³Í•&#39;c­ÝFŽ-GY)Ú•yÏ‰±¬²;{uâ)FŽ=èê‰å³$ççT900³¤l&#39;$#˜&#39;!¼Qo_?1×¾îõDûú=¿íë÷«ÁÌ¶¯_Èh_oc_éŒ}ýºµñÌ¥öõÝçìë7[Û×ï x`_ï×j_T»UÚ¾þxBÜì†}}Î&amp;ûúíùöõ‡ö&quot;Ä¥ÞØ×ë™ÍV±¯º.^÷ó™}=óKûúm÷íë—Ã‹&quot;˜&lt;2 â?I  U   ‘f?gÅ p   €    dTH2F*NUM_SoftID_DEN_TrackerMuons_abseta_pt_stat%NUM_SoftID_DEN_TrackerMuons_abseta_ptZLÜ ‘ xs``íe`q``YÍÀ
+$[8b˜8´üB}ãƒóÓJ&lt;]â]\ýâCŠ“³S‹|KóóŠã“ŠSKãJâ‹KKT‰R
+´€ƒ	l#Íd30¿²¸À¢&quot;ö `æÀÀ0›HJ&quot;;‡µ&quot;±&quot;³˜­FhoPR……ñX‰–õÓ&#39;[Ÿ3gm¾ê·OKK³-=Ô”ÑTÌÆ` ä±ÂÄìßœ³öŸ!r&gt;’Z˜R8íÀÀ°ì&lt;9çU‚œÇ]_R« áž¦	T‡ÛÜÈî 1Þ!BI¸˜	TÎJÛAi(í	¥ý 4Âˆ éÀÀPÅíU`·&#39;&#39;æ¤¦%&amp;—äÕáv{ŠÛÁéd…ý‰0¿p°Á&#39;;01ÌÑ0ËO4×®3MHái›£ÝŠ:ùõ»¾ÛÕH¾ý÷×»ÑnÆUõ;LŠ;Ð²ËsK¿i¾–ÝnŠÏ]UŸü›vI[ßL{7Û®²àý!«ƒêC2Fwô9Ù5lÊýë6kžßä?—l›ìbL&#39;MÜ]Œ¡^ë±ž`‘²“]xÀz³­eÂvG^)ÚvÚwE)­M
+ÅP¯y1Ç´þ›]ÀaIjªvÊwks&#39;î²³Óÿ\kqöi†ú€÷gþ9‡ŠØ•L[uè«Ñ;g«÷ä»ÙÅnrë.iù¡&gt;ã)[|¥©ž]OÃŸi¥—ÖØ%ôªÏRá³kçüÉo¯!‡®žX&gt;Kr~N•ƒ 0ëA
+x²A2‚‰pbÀõöõsíë^O´¯ßóÛ¾~¿Ìlûú…Œöõñ6öõ—ÎØ×¯[‹Ï\j_ß}Î¾~³µ}ý`©öõ~­öõ@µ[¥íë—!ÄÍnØ×çl²¯ßžo_h/B\ê}½ž)Ðlûú§«áâu?ŸÙ×3¿´¯ßvß¾~9¼(‚É#Ó ¡H»  V   ‘f?gÅ p   ƒu   dTH2F*NUM_SoftID_DEN_TrackerMuons_abseta_pt_syst%NUM_SoftID_DEN_TrackerMuons_abseta_ptZLÝ ‘ xs``íe`q``YÍÀ
+$[8b˜8´üB}ãƒóÓJ&lt;]â]\ýâCŠ“³S‹|KóóŠã“ŠSKãJâ‹+‹KT‰R
+´€ƒ	l#Íd30¿²¸À¢&quot;ö `æÀÀ0›HJ&quot;;‡µ&quot;±&quot;³˜­FhoPR……ñX‰–õÓ&#39;[Ÿ3gm¾ê·OKK³-=Ô”ÑTÌÆ` ä±ÂÄìßœ³öŸ!r&gt;’Z˜R8íÀÀ°ì&lt;9çU‚œÇ]_R« áž¦	T‡ÛÜÈî 1Þ!BI¸˜	TÎJÛAi(í	¥ý 4Âˆ éÀÀPÅíU`·&#39;&#39;æ¤¦%&amp;—äÕáv{ŠÛÁéd…ý‰0¿p°Á&#39;;01ÌÑ0ËO4×®÷úåwÒwüí¼þ_l•sÚn^X}šÐey»—M½Z®¡d×÷®ëäûåvý—îâ1³kÔ{°åÓ¯»é7XDæib¨ŸxBõ›õ^#»‰LWU;l’íêZV&amp;W„®±[xy…Wâ;õ‰×¥E‚lWÙ5Fý(ýyÂ×Î‰I¨î÷[»PÃœc–`¨WïÜêÎvàŸ•Ì}æ©)¬vVs.ˆrÏÎ¶Ë;¸¦vÉÑ.õå[b²9ír¼ç&lt;ìµk‹³þÃil7eËeYMê+Ò^FÅ˜¶[õQ+-ìÿ,»LµÕ“åü^ØIùdÉ+f…®žX&gt;Kr~N•ƒ 0ëA
+x²A2‚‰pbÀõöõsíë^O´¯ßóÛ¾~¿Ìlûú…Œöõñ6öõ—ÎØ×¯[‹Ï\j_ß}Î¾~³µ}ý`©öõ~­öõ@µ[¥íë—!ÄÍnØ×çl²¯ßžo_h/B\ê}½ž)Ðlûú§«áâu?ŸÙ×3¿´¯ßvß¾~9¼(‚É#Ó Úç  e   šf?gÅ z   †Ë   dTH2F4NUM_SoftID_DEN_TrackerMuons_abseta_pt_efficiencyData%NUM_SoftID_DEN_TrackerMuons_abseta_ptZLâ š xs``ÆÀâÀÀ²…Hö1p800¤30!030p˜ø…úÆç§•xºÄ»¸úÅ‡%&amp;g§ù–æçÇ&#39;&amp;§–$Æ”Ä§¦¥e&amp;g¦æ%Wº$–$ª¥	hØ*F ›Èf`~	dqEEì@ÀÌa6”DvkEbEf1[2Ð5@IÆ`%ZÖOœl}Îœµùz¨ß&gt;--Í¶ôP?PFhP80ƒÇ
+³sÎÚ†È90@øHjaJá´Ã°óäPœW	rwA|uH­‚†{j˜&amp;Pn7.``@r#»ƒÄx‡8$9àb&amp;P9K(m¥] ´&#39;”öƒÒ3 H¤C9Øí²(n¯¹Ë§@e¸Þ€âtpÂÙ`ÿDâÌ/lðÉ#äLŒs`4BÌ2CãÍµ›˜þÂ	ûÅvû
+$½-®µ[r};Ûü»]»žx„]žŒnÝ¤?oèôxÛÍâà÷‘`¼k×a¡ìe{‡Ûn©§ž¿ôlEõSì®1û)e7ÅiÙÖYì1vM&gt;_&lt;&#39;âl·l©ÙùI5ê“}ÖýžµÔÁ®•õV×ÌX;oîŠ¿ÛÅN¼­äºð&quot;†zãmšÕ§&amp;Ø¹Íê}÷¶ÁÎÉTÃ©õ¡¦]±héú‹¡0Ô×Š&amp;
+&#39;›™ØU^›±yÎ»¶(%×c³ì¦”*O¿0C}©îÃíFsíVè‡ltÙðÒ.ß°gë§C{ìÎí1ßñ]=±|–äüœ*A`Îƒ”4ðdƒdá$Ä€7êíëÖ.µ¯ÕO²¯×ºn_ß7Ú¾nîjûZßùöõ“íë›#`öuÙ}öµõKíëÕÿÛ×Ïüšo_Û°Ð¾Þd§}ýª„¸j’}íîûzËûúµApñÚ×_ìk«¶Ø×ëï³¯?–‹ßÅa_›l4ç}}^
+L „Ò  i   Ÿf?gÅ    Š0   dTH2F9NUM_SoftID_DEN_TrackerMuons_abseta_pt_efficiencyData_stat%NUM_SoftID_DEN_TrackerMuons_abseta_ptZLá Ÿ xs``ÍÀâÀÀ²“HNfàp``Èa`B `f`à°ôõÎO+ñt‰wqõ‹)JLÎN-ò-ÍÏ+ŽOL*N-IŒ/(‰OMKËLÎLÍK®tIŠ—$–¨¥hØ&gt;F ›Èf`~	dqEEì@ÀÌa6”DvkEbEf1[2Ð5@IÆ`%ZÖOœl}Îœµùz¨ß&gt;--Í¶ôP?PFhP80ƒÇ
+³sÎÚ†È90@øHjaJá´Ã°óäPœW	rwA|uH­‚†{j˜&amp;Pn7.``@r#»ƒÄx‡8$9àb&amp;P9K(m¥] ´&#39;”öƒÒ3 H¤C9Øí²(n¯¹Ë±@e¸Þ€âtpêÙ`ÿDâÌ/lðÉ#äLŒs`4BÌ2CãÍµ«½°d»ã»i¥A]JÎvEûY;ŽÝŒ³›t3„Å„Ý »(Ï„&#39;^ïBíªßþÞ÷ÛØ.dòrßøéKíJM¯ú±^/ÅPï8wªLâ²-v©§c&#39;W¬Zhg“¶WóÐ?=»0Q‹9Kb¨0\ßµ‰e¢ƒ-÷åíìv&quot;¦S7JÆN·ÓÊ×ŸÐs±C½h¶¸iÈÑevRÎåÝ:íòç9,¹,o§ÚU¼	C½eá…ÏTÎÛEGxKÎùegœ6¡yÓ³R»àJë›™Å0ÔsïõÓkç·+þô¯ºðÿT» ‹D£×Gíê—þ½aQKv¸³$ççT900s¤¸&#39;$&#39;0NBx`_·v©}­~’}½Öuûúv¸ÑöusWÛ×úÎ·¯÷˜l_ß“°¯Ëî³¯­_j_¯þß¾~æ„xÐ|ûÚ†…öõ&amp;;íëW• ÄU“ìkw7Ø×[¦Ø×¯‚‹×¾þb_[µÅ¾^Ÿ}ý±\„ø.ûÚd 9oìëóR`âØh ÍEj  m   Ÿf?gÅ    ™   dTH2F9NUM_SoftID_DEN_TrackerMuons_abseta_pt_efficiencyData_syst%NUM_SoftID_DEN_TrackerMuons_abseta_ptZLå Ÿ xs``ÍÀâÀÀ²“HNfàp``Èa`B `f`à°ôõÎO+ñt‰wqõ‹)JLÎN-ò-ÍÏ+ŽOL*N-IŒ/(‰OMKËLÎLÍK®tIŠW—¨¥hØ&gt;F ›Èf`~	dqEEì@ÀÌa6”DvkEbEf1[2Ð5@IÆ`%ZÖOœl}Îœµùz¨ß&gt;--Í¶ôP?PFhP80ƒÇ
+³sÎÚ†È90@øHjaJá´Ã°óäPœW	rwA|uH­‚†{j˜&amp;Pn7.``@r#»ƒÄx‡8$9àb&amp;P9K(m¥] ´&#39;”öƒÒ3 H¤C9Øí²(n¯¹Ë±@e¸Þ€âtpêÙ`ÿDâÌ/lðÉ#äLŒs`4BÌ2CãÍµk~¾ærÏ½@»]Ê»¤&lt;Ì¶[T-æí}»­jºŸCMB7ÈnbDøÖçwÓí&amp;ó:«á,h×ºt]ÂÄ—bv‹/z`„¡~òÆWÊÁ¯ÛMì´fÖúÄn×xwï‹ú?vK?‡éÝªÇPŸtZ±ÞUTÚ®…I;×_ã‰GËÛ¬·Dì¢œ¿˜°/ÀP¯³íxÌ+9;S©†ó¦”Ú9¨›Tºµ+Ê:£—ñvÕu.,.—ŸÛ3îq}kZe×ºïíÁ•Ìgí&amp;Ûö_­8…a~e‘]Ÿö„›vK7|yx­à«]ºhŒL­T¤ÝÙýl§	ò Kr~N•ƒ 0çAŠx²A2‰pbÀõöuk—Ú×ê&#39;Ù×k]·¯o‡m_7wµ}­ï|ûzÉöõÍ0	ûºì&gt;ûÚú¥öõêÿíëgþGˆÍ·¯mXh_o²Ó¾~U	B\5É¾vwƒ}½eŠ}ýÚ ¸xíë/öµU[ìëõ÷Ù×ËEˆïâ°¯M¶šóÆ¾&gt;/&amp;Ž ˜”  ^   ˜f?gÅ x   ‘   dTH2F2NUM_SoftID_DEN_TrackerMuons_abseta_pt_efficiencyMC%NUM_SoftID_DEN_TrackerMuons_abseta_ptZLÝ ˜ xs``ÂÀâÀÀ²‰Hö0p800¤20!030pù…úÆç§•xºÄ»¸úÅ‡%&amp;g§ù–æçÇ&#39;&amp;§–$Æ”Ä§¦¥e&amp;g¦æ%Wú:«¥hØ&quot;F ›Èf`~	dqEEì@ÀÌa6”DvkEbEf1[2Ðþ ¤
+ã?°-ë§	N¶&gt;gÎÚ|=ÔoŸ––f[z¨(£4¨
+˜Á Èc…‰Ù¿9gí?Cä |$µ0¥pÚaØyr(Î«9» ¾:¤VAÃ=5L¨·00 ¹‘ÝAb¼C„’p1¨œ%”¶ƒÒ.PÚJûAi„$Ò¡ìvY·WÜÎå
+Q 2ÜNo@q:8Ù€l°ÿ &quot;ñæ6øär&amp;Æ€90!f™¡ñ‰æÚ•ÅLˆ}ÉðÕn¶ØnïÝÛÝì2xßÜKýb—³MQ÷0×&quot;tƒìRZÖ-É6³ëº{Þ&quot;âæ» ào7évA¶uŸŸ{`¨÷)9l¼]3È®üFD…§Áy;—7›UË„ì¬˜2Êo..ÆP¯þ6S=¢ùº]èC!C6ƒl;Ùãþ«oîc²“}¡s¬ï†z…ƒî¾ú1çìü£ÿ¬8¦c§¸‘ýþ‡vªªüNÏÛ‡¡Þ5»×|U¤²]Þ{MA	;‡%g²&#39;&#39;}°óÏIŠÌ˜³C}üÊH›óêNvÍ,Ò/Fï±‹¼“ Ñ%sÄ®Ê„óéEyèê‰å³$ççT900s¤œ&#39;$#˜&#39;!¼Qo_/}Õ¾Îñ½}}î6ûúã§afÛ×ýñ²¯}+f__ºÎ¾þÊ\¸x=cˆ}í§—öõ%³ìë~Fˆ3gÛ×éN·¯¯¯´¯ô.^÷v“}ïûúÆ‹öõ¯úâçØ×yKÅíë@ˆï»i_»Ý¾¾öÐ=&gt;0ql4 ×i.  m   f?gÅ }   ”d   dTH2F7NUM_SoftID_DEN_TrackerMuons_abseta_pt_efficiencyMC_stat%NUM_SoftID_DEN_TrackerMuons_abseta_ptZLç  xs``ÉÀâÀÀ²HNdàp``Èb`B `f`à0÷õÎO+ñt‰wqõ‹)JLÎN-ò-ÍÏ+ŽOL*N-IŒ/(‰OMKËLÎLÍK®ôuŽ/.I,Q%JÐ6&amp;°mŒ@6ÍÀüÈâ‹ŠØ70€€™Ãl. )‰ì6ÖŠÄŠÌb¶e #j€’*,ŒÿÀJ´¬Ÿ&amp;8Ùúœ9kóõP¿}ZZšmé¡~ ŒÐ8 *p`6 &amp;fÿæœµÿ‘s`€ð‘ÔÂ”Âi†`çÉ¡8¯ä&lt;î‚øêZ÷Ô0M :Ün\ÀÀ€äFv=ˆñqHrÀÅL r–PÚJ»@iO(í¥f@H†r°ÛeQÜ^r;—+&lt;ZÊp;½Åéà´²ÁþˆÄ˜_8Øà“GÈ˜æÀh„˜e†Æ&#39;škW²éÇÓK&#39;ÙÍe&lt;4;¢Ö.©&gt;tiÿ,m»ä£.-·SÑ²Køð³²ü|ž]—Œ–³’t¬]ÀÖM‹V§¬²¸2oá¾3»0Ô{¾þôèÜíive\;§žý_açà)›`RùÎÎüÆƒµªu1Ô+­wT?TnçûxqÞVój;îK%ñësí$]*´×ç?ÆP/û#ºèKße;WÍû-}ìÄãßwH²µŽ|&amp;§‡.v.¿_o;xØ.[ùŸðªÈ‹vv&amp;Î3žkç’~¢¶4ù?†ùql–_dìšüh¯	ZgÖ§`qVÕÏ.ç¸D×¡HtõÄòY’ósª9RØÀ“’L„“†‘ô3Ø×K_µ¯s|o_Ÿ»Í¾þøi˜œ}Ý/ûÚ·böõ¥ëìë¯Ì…‹×3†Ø×~zi__2Ë¾þág„8s¶}îtûúúJûúG?àâuo7Ù×ù^±¯o¼h_ÿª!~þ‡}·$P¼Ð¾þÁ„ø¾›öu±Ûíëk_ ÝãÇF ‘º  o   f?gÅ }   —Ñ   dTH2F7NUM_SoftID_DEN_TrackerMuons_abseta_pt_efficiencyMC_syst%NUM_SoftID_DEN_TrackerMuons_abseta_ptZLé  xs``ÉÀâÀÀ²HNdàp``Èb`B `f`à0÷õÎO+ñt‰wqõ‹)JLÎN-ò-ÍÏ+ŽOL*N-IŒ/(‰OMKËLÎLÍK®ôuŽ/®,.Q%JÐ6&amp;°mŒ@6ÍÀüÈâ‹ŠØ70€€™Ãl. )‰ì6ÖŠÄŠÌb¶e #j€’*,ŒÿÀJ´¬Ÿ&amp;8Ùúœ9kóõP¿}ZZšmé¡~ ŒÐ8 *p`6 &amp;fÿæœµÿ‘s`€ð‘ÔÂ”Âi†`çÉ¡8¯ä&lt;î‚øêZ÷Ô0M :Ün\ÀÀ€äFv=ˆñqHrÀÅL r–PÚJ»@iO(í¥f@H†r°ÛeQÜ^r;—+&lt;ZÊp;½Åéà´²ÁþˆÄ˜_8Øà“GÈ˜æÀh„˜e†Æ&#39;škg5³,ðê6c» é“XßTÙ¹YÊZë«Ù&gt;ÜÙUW…n£Î•MùŠv&amp;ó–]¿b&#39;ygVç:»;vb½¿™W|ÅP/âÖÔî”ûÒÎææ;õÍ¢%vJ}áüÆzì}ìBªô`¨gù±@‚™µÁÎz/ã³uAÛloo¿\¾à¥Ÿí§¾#GbjøÑÕÛ¾	œiæfgx(Å2\ò Gbü‚µ2vbª³¶WòCB—íëþ&lt;½!ogÄ±Fw—…«“ŽË$1;3NãíÏ
+*!,;¡©º6ðÚ™­/_´Pq£VáÿÚç»7Ù¥/ø9ýÜtõÄòY’ósª9RØÀ“’L„“Þ¨·¯—¾j_çøÞ¾&gt;w›}ýñÓ0³íëþxÙ×¾³¯/]g_e.\¼ž1Ä¾öÓKûú’Yöõ?#Ä™³íët§Û××WÚ×?ú¯{»É¾Î÷Š}}ãEûúWýñó?ìë¼%â…öõ Ä÷Ý´¯‹Ýn__ûè˜86 ÓÀ  Q   Žf?gÅ m   ›@   dTH2F&amp;NUM_TightID_DEN_TrackerMuons_abseta_pt&amp;NUM_TightID_DEN_TrackerMuons_abseta_ptZLÛ Ž xs``íb`q``YÁÀ
+$›8¢˜8ÔüB}ãC2Ó3J&lt;]â]\ýâCŠ“³S‹|KóóŠã“ŠSKãJˆT4ƒ	l:#Íd30¿²¸À¢&quot;ö `æÀÀ0›HJ&quot;»…µ&quot;±&quot;³˜­FhgPR……ñX‰–õÓ&#39;[Ÿ3gm¾ê·OKK³-=Ô”ÑTÌÆ` ä±ÂÄìßœ³öŸ!r&gt;’Z˜R8íÀÀ°ì&lt;9çU‚œÇ]_R« áž¦	T‡ÛÜÈî 1Þ!BI¸˜	TÎJÛAi(í	¥ý 4Âˆ éÀÀPÅíU`·&#39;&#39;æ¤¦%&amp;—äÕáv{ŠÛÁ‰d…ý‰0¿p°Á&#39;;01ÌÑ0ËO4×n{.‹sÀ†CvW¥KªVµØ9ÿÏå««Ý©p‹¹¢vtƒì6¸íÑØ·à›Ýa¯rÎŠ[÷íæ[Zë«ïw³»”8#BÄé5†ú–¢{?fDü³[¸å½¿Åÿ•v}Ú‡r{ªí¶JÇÞhø~C}úï÷þk&lt;ìGnI~`—tbO—ìg»e÷Í÷ß…¡&gt;ñ•ã¼ë[åìÊ/;I÷žà·+XUž3»÷´ÝÆÜ€½ìð´Óg·ræ_›-?VÙ­ïˆ¬ãÓ·Û­ª´áóýUvŸ=»&#39;Ä2©ƒÑv«Yx–&gt;¼dwfÓÇ~³Iv·¼›šË¶Ù¸ýšÙ¥­ SG*Í’œŸSåÀÀ ÌzÒžlŒb&quot;œ„ðF½}­n’}õ½eöµqÇí+…×ÁÌ¶¯­N¶¯Î°µ¯õÊ´¯ŒGˆû,²¯ö¾h_»t‡}å]M„¸ÑWûê	ík×´¯\?!.ôÔ¾zó~ûÚ“÷ì+W-ƒ‹×üød_]·Þ¾¶â½}Ef:B|ÛûêIšöµnÖöåûaâØh ‚Áø  V   “f?gÅ r   ž‘   dTH2F+NUM_TightID_DEN_TrackerMuons_abseta_pt_stat&amp;NUM_TightID_DEN_TrackerMuons_abseta_ptZLÛ “ xs``íg`q``YËÀ
+$Û8â˜8´ýB}ãC2Ó3J&lt;]â]\ýâCŠ“³S‹|KóóŠã“ŠSKãJâ‹KKÔˆS´‚ƒ	l#Íd30¿²¸À¢&quot;ö `æÀÀ0›HJ&quot;;ˆµ&quot;±&quot;³˜­FhqPR……ñX‰–õÓ&#39;[Ÿ3gm¾ê·OKK³-=Ô”ÑTÌÆ` ä±ÂÄìßœ³öŸ!r&gt;’Z˜R8íÀÀ°ì&lt;9çU‚œÇ]_R« áž¦	T‡ÛÜÈî 1Þ!BI¸˜	TÎJÛAi(í	¥ý 4Âˆ éÀÀPÅíU`·&#39;&#39;æ¤¦%&amp;—äÕáv{ŠÛÁ)d…ý‰0¿p°Á&#39;;01ÌÑ0ËO4×nÃ\qkáüvsE®ÆNf7å®:»·ä»ƒÂÉŽá»0Ì±›ÊÑ37)Ónµê_¡_ŽvŽÇôeý,ì6®¾íÑ±]ƒ]ýýTß‡Çì¦²IL/+eWqÊÃ/qŸÝÂ%Ì‚S&#39;°c¨Knÿ _nmW È¿»;PÏÎ÷¹þŽªåJvÍë®ð¾º­„¡&gt;Íþ6;k†]†T¿oÖI;ýq×,2ÖØµ‡Í-ÏçÅP_*{LîÚäwv]‹®¦¼˜m—?)îìå»õ¼Kµ&amp;Ôb¨ï­U&gt;µ¢b¯Ý²N«Íºn×5m·ù¹+Îv§­*þ0­@WO,Ÿ%9?§ÊA˜õ E&lt;Ù ÁD8	1àzûZÝ$ûê{ËìkãŽÛW
+¯ƒ™m_[l_ak_ë•i_#Ž÷Yd_í}Ñ¾véûÊ»šq£¯öÕÛ×®9h_¹~.B\è©}õæýöµ&#39;ïÙW®Z¯ùñÉ¾ºn½}mÅ{ûŠÌt„ø¶#öÕ“4íkÝ¬íË÷;ÃÄ±Ñ    X   “f?gÅ r   ¡ç   dTH2F+NUM_TightID_DEN_TrackerMuons_abseta_pt_syst&amp;NUM_TightID_DEN_TrackerMuons_abseta_ptZLÝ “ xs``íg`q``YËÀ
+$Û8â˜8´ýB}ãC2Ó3J&lt;]â]\ýâCŠ“³S‹|KóóŠã“ŠSKãJâ‹+‹KÔˆS´‚ƒ	l#Íd30¿²¸À¢&quot;ö `æÀÀ0›HJ&quot;;ˆµ&quot;±&quot;³˜­FhqPR……ñX‰–õÓ&#39;[Ÿ3gm¾ê·OKK³-=Ô”ÑTÌÆ` ä±ÂÄìßœ³öŸ!r&gt;’Z˜R8íÀÀ°ì&lt;9çU‚œÇ]_R« áž¦	T‡ÛÜÈî 1Þ!BI¸˜	TÎJÛAi(í	¥ý 4Âˆ éÀÀPÅíU`·&#39;&#39;æ¤¦%&amp;—äÕáv{ŠÛÁ)d…ý‰0¿p°Á&#39;;01ÌÑ0ËO4×n¶ý–“/ÓNÙ8±1æm¬²Ý)“HÝèIìv›ÚW¥ö
+¢d·Œí·Þ„mv;ßw·X`7mF„øL	-»Óo¹þ8V`¨OâÙøðè‚|»žã=¼_TÊìZÿÇüq‹žc·bÒŽù9ñýê#§„­×”^j·0R ÊéçN»°¹Íÿ­új·ðÉšÝ*3&gt;a¨:çœ´&quot;åŠ]z÷——°Úe«Š+¯dÌ°[ËòKÆØÂCý²o.·Ô´íV&lt;›m«r…Ãn—Fÿ®Vç»OréL5Žê/9rîôá%vÇNÆØõß±»YvfE1ƒˆ=ß-ßÅŠabèê‰å³$ççT900³¤ˆ&#39;$#˜&#39;!¼Qo_«›d_}o™}mÜqûJáu0³ík«“í«3lík½2í+cÄâ&gt;‹ì«½/Ú×.Ýa_yW!nôÕ¾zÂcûÚ5í+×ÏEˆ=µ¯Þ¼ß¾öä=ûÊUËàâ5?&gt;ÙW×­·¯­xo_‘™ŽßvÄ¾z’¦}­›µ}ù~g˜86 ‘¬š  h   œf?gÅ |   ¥?   dTH2F5NUM_TightID_DEN_TrackerMuons_abseta_pt_efficiencyData&amp;NUM_TightID_DEN_TrackerMuons_abseta_ptZLã œ xs``ÁÀâÀÀ²HN`àp``Èd`B `f`à0õõÉLÏ(ñt‰wqõ‹)JLÎN-ò-ÍÏ+ŽOL*N-IŒ/(‰OMKËLÎLÍK®tI,IT#NÐ2&amp;°eŒ@6ÍÀüÈâ‹ŠØ70€€™Ãl. )‰ì4ÖŠÄŠÌb¶e j€’*,ŒÿÀJ´¬Ÿ&amp;8Ùúœ9kóõP¿}ZZšmé¡~ ŒÐ8 *p`6 &amp;fÿæœµÿ‘s`€ð‘ÔÂ”Âi†`çÉ¡8¯ä&lt;î‚øêZ÷Ô0M :Ün\ÀÀ€äFv=ˆñqHrÀÅL r–PÚJ»@iO(í¥f@H†r°ÛeQÜ^r;—+&lt;RÊp;½Åéà¤²ÁþˆÄ˜_8Øà“GÈ˜æÀh„˜e†Æ&#39;šk÷mÉÿÇ2sVØý&gt;Ý&lt;çÇšÕv?f.c‹˜g÷=àTê#ktƒìÞ_x˜$ßîG‰ïÿé¡;í¾&gt;¨e´ò°göØš&quot;”„¡þY¶ÔÒýâ›ì^¯°ž·èL¬ÝgÝ¥®ÑûËí~˜•O½{CýÍm}2«KºíîsïýùŽ‘ÛîqÈ¦îÎÏì^YK4c¨?¹1æø/vg³9*ú·Ø]ôÝ¶yõµl»{7ú7¬¬ÂPØñ™ëþ¤{vGýÕc”öL¶»˜òÔTYí©ÝO÷Êº)[0Ôo®þ²Î£ü±Ý‡«…TØ=ä÷¯¸^ÖcÏÑâ¼¦Sgºzbù,Éù9U‚Àœ)kàÉÉ&amp;ÂIˆoÔÛ—}´/»åo_­ø×¾xé=˜Ùöåž³íËšWÚWóÚ‡&quot;Äm„íË^ÛWûHÛÿˆ·7´/7¹l_vÁ¾8v-B\~‰}yý&amp;ûê–&quot;ûbý¸xÙ®«öår»ì«¥ºí#Úâþúöe“Tì«¢kíó&#39;DÀÄ±Ñ „À  p   ¡f?gÅ    ¨§   dTH2F:NUM_TightID_DEN_TrackerMuons_abseta_pt_efficiencyData_stat&amp;NUM_TightID_DEN_TrackerMuons_abseta_ptZLæ ¡ xs``ËÀâÀÀ²›HNeàp``Èc`B `f`à°òõÉLÏ(ñt‰wqõ‹)JLÎN-ò-ÍÏ+ŽOL*N-IŒ/(‰OMKËLÎLÍK®tIŠ—$–¨§h#ØFF ›Èf`~	dqEEì@ÀÌa6”DvkEbEf1[2Ð5@IÆ`%ZÖOœl}Îœµùz¨ß&gt;--Í¶ôP?PFhP80ƒÇ
+³sÎÚ†È90@øHjaJá´Ã°óäPœW	rwA|uH­‚†{j˜&amp;Pn7.``@r#»ƒÄx‡8$9àb&amp;P9K(m¥] ´&#39;”öƒÒ3 H¤C9Øí²(n¯¹Ë³@e¸Þ€âtpúÙ`ÿDâÌ/lðÉ#äLŒs`4BÌ2CãÍµ›“£ÓçT˜f·îê×™
+oØµ«oæ7°³ÛÄñÊuê…»èÙÕÅ6¯™yÚnZ˜_ÍU¿£v§•}Žž¶›uKøÔ#­êÓÊîlÜ0Õ×®ñÐéW·M;ìb=™¶&amp;Î±ë³¿^Üä1†z{±Œ°Ø«¢vÑ1ý2ËîÛY5ÜRgº²Ö® }û©¼	×0Ô[œ.Î&lt;_yÞ.4JƒÅtÎJ;3[ímÛy¯Úÿy^|øy9†úh§6]²¶+|ü¿èòívQ1ujlâífÇÅ=}ôC}Q­G`eDÝ„Ý†RÏVûÙ•èj®z&amp;¼Þn‹xÀÚ‰Ñúèê‰å³$ççT900s¤À&#39;$#˜&#39;!¼Qo_öIÐ¾ì–¿}µâ_ûâ¥÷`fÛ—{Î¶/k^i_ÍWh_nˆ·¶/{Ul_í#m_|ü#BÜÞÐ¾Üä²}uØûâØµqù%öåõ›ì«[Šì‹õ[àâe»®Ú—Ëí²¯–ê¶/ŒhCˆûëÛ—MR±¯Š®µÏŸÇF ê‹  q   ¡f?gÅ    ¬   dTH2F:NUM_TightID_DEN_TrackerMuons_abseta_pt_efficiencyData_syst&amp;NUM_TightID_DEN_TrackerMuons_abseta_ptZLç ¡ xs``ËÀâÀÀ²›HNeàp``Èc`B `f`à°òõÉLÏ(ñt‰wqõ‹)JLÎN-ò-ÍÏ+ŽOL*N-IŒ/(‰OMKËLÎLÍK®tIŠW—¨§h#ØFF ›Èf`~	dqEEì@ÀÌa6”DvkEbEf1[2Ð5@IÆ`%ZÖOœl}Îœµùz¨ß&gt;--Í¶ôP?PFhP80ƒÇ
+³sÎÚ†È90@øHjaJá´Ã°óäPœW	rwA|uH­‚†{j˜&amp;Pn7.``@r#»ƒÄx‡8$9àb&amp;P9K(m¥] ´&#39;”öƒÒ3 H¤C9Øí²(n¯¹Ë³@e¸Þ€âtpúÙ`ÿDâÌ/lðÉ#äLŒs`4BÌ2CãÍµûfìoðxÒ#»_W.Ð_Úm÷#;l¶ù,;»oÖkÏ´ê d÷~ŠbËgµÕv?¤¾]ÂPk÷õüÆÒ¬MöÌœœ¿SÕna¨²ø$oº¬ÝëDƒ¼ïñívŸÕ&lt;&gt;K)Ø}ÿù&#39;üÿú(õ7×hšzWÔîÞ‡Ä,Ùé“í&amp;]eJî±{%¥¼z÷RAõ&#39;WÍ^,ôÑÌî¬Cˆ¦†JÝEõŒ}+íîuÌaÝ8ó6†úÃÜ	î?ÿZÙ9ÀžÐ#»Ùî¢W‡ù·U+í~_¸rãYõ›B4EÙÒÌïÝÎÍk÷àÙWÕÆUiöì;ÕeGWO,Ÿ%9?§ÊA˜ó &lt;Ù ÁD8	1àzû²O‚öe·üí«ÿÚ/½3Û¾Üs¶}YóJûj¾BûâpC„¸°}Ù«bûjiûâãâö†öå&amp;—í«Ã.ØÇ®EˆË/±/¯ßd_ÝRd_¬ß/ÛuÕ¾\n—}µT·}aDBÜ_ß¾l’Š}Ut­}þ„˜86 XöC  d   šf?gÅ z   ¯ˆ   dTH2F3NUM_TightID_DEN_TrackerMuons_abseta_pt_efficiencyMC&amp;NUM_TightID_DEN_TrackerMuons_abseta_ptZLá š xs``ÆÀâÀÀ²…Hö1p800¤30!030pû…úÆ‡d¦g”xºÄ»¸úÅ‡%&amp;g§ù–æçÇ&#39;&amp;§–$Æ”Ä§¦¥e&amp;g¦æ%Wú:«§hØ*F ›Èf`~	dqEEì@ÀÌa6”DvkEbEf1[2Ð5@IÆ`%ZÖOœl}Îœµùz¨ß&gt;--Í¶ôP?PFhP80ƒÇ
+³sÎÚ†È90@øHjaJá´Ã°óäPœW	rwA|uH­‚†{j˜&amp;Pn7.``@r#»ƒÄx‡8$9àb&amp;P9K(m¥] ´&#39;”öƒÒ3 H¤C9Øí²(n¯¹Ë¥@e¸Þ€âtpÂÙ`ÿDâÌ/lðÉ#äLŒs`4BÌ2CãÍµû¶`¶Û¦f»oºÿk*ŽÈÚ3ª^bõ¢ÏîÏÂ§¸ÎF7ÈîÕŸŽì3ÖLvïúœ´Ô÷ž°û¹èCäÞ…RvÿÌÛgë­ëÅPÿ¢¸@ùkÜo»÷{Ã¯^)µû¢~x¾ÝŸÅ¿&gt;ûŽ¡þÎß_;ÒÕÙ=´ªÐÛu+Äî‰Ö¼!©v¯Š}ç–c¨?ýôÝ›ß™ŸíÎ9†//²â²»ðÔo!w\¯Ý=ŽÏ¦_1ÄPàÎZçÆwìYÿ°Y•hewäÎü?j³8í®&lt;š¶sÓ;õ«{ï0«™nwàóò¨¬7av+µ&amp;J}y´Þît,«îÅ‰_ÑÕËgIÎÏ©r``æ&lt;HIO6HF0NBx£Þ¾rÓ3ûªg3ík÷ºØWe÷ÃÌ¶¯ÜWn_ÍÒi_yI!~ï‰}uçRûÚçì+t!Ä&#39;ÚWOp±¯]2Å¾²UI\Ñ¾zçdûÚ­-ö•QÇâëÛWwÿ¶¯=Á¾bû=„x³¤}ÕË&quot;ûZ^Kûòn˜86 °Õ)  l   Ÿf?gÅ    ²ì   dTH2F8NUM_TightID_DEN_TrackerMuons_abseta_pt_efficiencyMC_stat&amp;NUM_TightID_DEN_TrackerMuons_abseta_ptZLä Ÿ xs``ÍÀâÀÀ²“HNfàp``Èa`B `f`à°ðõÉLÏ(ñt‰wqõ‹)JLÎN-ò-ÍÏ+ŽOL*N-IŒ/(‰OMKËLÎLÍK®ôuŽ/.I,Q#N#Ð&gt;&amp;°}Œ@6ÍÀüÈâ‹ŠØ70€€™Ãl. )‰ì:ÖŠÄŠÌb¶e +j€’*,ŒÿÀJ´¬Ÿ&amp;8Ùúœ9kóõP¿}ZZšmé¡~ ŒÐ8 *p`6 &amp;fÿæœµÿ‘s`€ð‘ÔÂ”Âi†`çÉ¡8¯ä&lt;î‚øêZ÷Ô0M :Ün\ÀÀ€äFv=ˆñqHrÀÅL r–PÚJ»@iO(í¥f@H†r°ÛeQÜ^r;—+&lt;^Êp;½ÅéàÔ²ÁþˆÄ˜_8Øà“GÈ˜æÀh„˜e†Æ&#39;šk·ðTÒæk“í6­ÐHš_ k×d&amp;À÷ëºÝºIiþ#Ð²ëLìle–´›÷ý¬ÿýÔív…Õ&amp;Éšv;ìmÊYà»ù#†úâ®7õïøuíÚ7yJÊÍòµKÜ˜?=_­×nrâyùy&quot;öê½&gt;žöoíT»ÄïJ“8wý¶sH‹ž›~QÌ®ôýeïDŸãê]:Mõ&lt;•í¢Þù‰ßnguõw×•Kv•ÝSÎ|®ÄPŸ­·ÂL.h©]cÂ½eª½òvI÷\ßµ[dVòˆO†úf§ŠÞ?ÉvsÎÝ°LÛ®ÁÆçÛÏuvJMê…¢«&#39;–Ï’œŸSåÀÀ ÌyâžlŒ`&quot;œ„ðF½}å¦göUÏfÚ×îu±¯Êî‡™m_¹¯Ü¾š¥(þÒ¾ò’BüÞûêÎ¥öµÎÙWéBˆÿN´¯žàb_»dŠ}e«’¸¢}õÎÉöµ[[ì+£àÑc_¹î°}u÷oûÚÙì+¶ßC¨o–´¯zYd_Ëki_ÞíÇF ˆÛÁ  m   Ÿf?gÅ    ¶X   dTH2F8NUM_TightID_DEN_TrackerMuons_abseta_pt_efficiencyMC_syst&amp;NUM_TightID_DEN_TrackerMuons_abseta_ptZLå Ÿ xs``ÍÀâÀÀ²“HNfàp``Èa`B `f`à°ðõÉLÏ(ñt‰wqõ‹)JLÎN-ò-ÍÏ+ŽOL*N-IŒ/(‰OMKËLÎLÍK®ôuŽ/®,.Q#N#Ð&gt;&amp;°}Œ@6ÍÀüÈâ‹ŠØ70€€™Ãl. )‰ì:ÖŠÄŠÌb¶e +j€’*,ŒÿÀJ´¬Ÿ&amp;8Ùúœ9kóõP¿}ZZšmé¡~ ŒÐ8 *p`6 &amp;fÿæœµÿ‘s`€ð‘ÔÂ”Âi†`çÉ¡8¯ä&lt;î‚øêZ÷Ô0M :Ün\ÀÀ€äFv=ˆñqHrÀÅL r–PÚJ»@iO(í¥f@H†r°ÛeQÜ^r;—+&lt;^Êp;½ÅéàÔ²ÁþˆÄ˜_8Øà“GÈ˜æÀh„˜e†Æ&#39;šk÷MÈCúãsv_™k¾ù•´gé¢ýv’ÝïU±¯M@7ÈîÕt&amp;×z‹íÞNkÞ¿âÐ,»ŸKU£ÊoÛý]øÅLÇá†ú&gt;Q^_›îÙ½­0.Œâ±û&quot;]¾ª‡‡×îO×Î”yË1Ôßù yl¶²ºÝCF3ìž¨µìÕ:°Õî•[àrŽuw1ÔŸ¾˜ºý¬ÂE»s¼¢§®qUÙ]¸7SIcy«ÝÝEY“Ó’0ÔÈÿ´h¥üD»ƒª¯‚&lt;82ìŽLþÓ,6¹ÚîÒì²	6ß0Ô/ÛË:e{ò»]ÏÅ|3×ËÛ-•®½kV.e·õü¼™ÇÐÕËgIÎÏ©r``æ&lt;HqO6HF0NBx£Þ¾rÓ3ûªg3ík÷ºØWe÷ÃÌ¶¯ÜWn_ÍÒi_yI!~ï‰}uçRûÚçì+t!Ä&#39;ÚWOp±¯]2Å¾²UI\Ñ¾zçdûÚ­-ö•QÇâëÛWwÿ¶¯=Á¾bû=„x³¤}ÕË&quot;ûZ^Kûòn˜86 ±!¥  `   œf?gÅ u   ¹Å   dTH2F*NUM_TrkHighPtID_DEN_TrackerMuons_abseta_pt*NUM_TrkHighPtID_DEN_TrackerMuons_abseta_ptZLâ œ xs``ÁÀâÀÀ²HN`àp``Hb`B `f`àÐòõ)ÊöÈLÏ(ñt‰wqõò“³S‹|KóóŠã“ŠSKãJHP
+´…ƒ	l#Íd30¿²¸À¢&quot;ö `æÀÀ0›HJ&quot;»‰µ&quot;±&quot;³˜­FhoPR……ñX‰–õÓ&#39;[Ÿ3gm¾ê·OKK³-=Ô”ÑTÌÆ` ä±ÂÄìßœ³öŸ!r&gt;’Z˜R8íÀÀ°ì&lt;çU‚œ&#39;Rš— P_R« áž¦	TÛ¥\Êî ±Ä!BI¸˜	TÎJÛAi(í	¥ý 4Âˆ éÀÀPöŠª@&gt;àNNÌIMKL.É/ªÃíö·ƒ“È
+û `~á`ƒO!w`b˜£2`–Ÿh®Ý&amp;W:lv8Nªýó³;½/eÏz-{»Çk×].m‹nÝÒ¶UŸìT6Ùmã¾öøl—¡Ýj¹èŸ–38í.ž&gt;²zÒ‘&quot;õÍJ“÷”&amp;µ›¼ó÷æ@»ÙìÝz&#39;xØíÕ=¶öÈ¯¥êÓkö»±_°›6UXsZ¬]ø{ßJnQ»{Dõ~†v+ØÅœóµ¼øÆÎŠ)J&quot;&lt;_Ý®†ýfuôÔkê»«E[íÙj7ƒ·•O0ïŽÝM¯]5•mv¯÷7±ôec¨_öýÓO¾ôV»ï¢ÖÙ}¾m·Ž‘?âtQÝ5‹V—µZ&quot;èê‰å³$ççT9003 ¤¬&#39;$#˜&#39;!¼Qo_—zÇ¾.}¦}]^°}MëS˜Ùöu¿Û×9,·¯[¼Ø¾¶xB|ÑSûºœÙöu;Yìkÿ,Fˆ×±Û×M&gt;j_÷ÅÒ¾öÿ„xñDûºe–öõ‘@õðè´¯«ï°¯›g_÷v‰}mÛ„úÀEöu6Ø×‹„Ù×žÈ‡‰c£”ŽM  j   ¡f?gÅ z   ½%   dTH2F/NUM_TrkHighPtID_DEN_TrackerMuons_abseta_pt_stat*NUM_TrkHighPtID_DEN_TrackerMuons_abseta_ptZLç ¡ xs``ËÀâÀÀ²›HNeàp``Hg`B `f`àÐ÷õ)ÊöÈLÏ(ñt‰wqõò“³S‹|KóóŠã“ŠSKãJâ‹KK´ˆW´Šƒ	l#Íd30¿²¸À¢&quot;ö `æÀÀ0›HJ&quot;;Œµ&quot;±&quot;³˜­FhyPR……ñX‰–õÓ&#39;[Ÿ3gm¾ê·OKK³-=Ô”ÑTÌÆ` ä±ÂÄìßœ³öŸ!r&gt;’Z˜R8íÀÀ°ì&lt;çU‚œ&#39;Rš— P_R« áž¦	TÛ¥\Êî ±Ä!BI¸˜	TÎJÛAi(í	¥ý 4Âˆ éÀÀPöŠª@&gt;àNNÌIMKL.É/ªÃíö·ƒÓÈ
+û `~á`ƒO!w`b˜£2`–Ÿh®Ýò©³ÿÏúëf·&gt;U–á}·ž]{®[Ð“=évkJÿV&#39;È„£d×sBÊ#oÊk»¹?üÏ[ÜÈ¶Ë—ç®=¢qÚnRÿÞ©e¼QêKýT?ìþÕa×¦?Ã7÷ÔN»Hÿ©+ÿØU[S·Â!;_žG¹/…™íâ¾×åþi·3Ùwòÿü3«íÂÏ‹Äš©ÜÄ0ßµ“åü5ß£vá&lt;[OØŠÙé;5¼y´­Þ.\þÉéŸ‡Na¨ÏZo!xç™]MŸô†•vUšå&lt;ìª\œÌç+…¡¾IP5§s©Ý”·ÞQÁåZvY÷Ý§„Ü°›³)ymÅ¢èê‰å³$ççT9003 ¤À&#39;$#˜&#39;!¼Qo_—zÇ¾.}¦}]^°}MëS˜Ùöu¿Û×9,·¯[¼Ø¾¶xB|ÑSûºœÙöu;Yìkÿ,Fˆ×±Û×M&gt;j_÷ÅÒ¾öÿ„xñDûºe–öõ‘@õKâõöu3ãìëÞ.±¯m[ƒ\d_·`ƒ}½H˜}í‰|˜86 Ïs»  k   ¡f?gÅ z   À   dTH2F/NUM_TrkHighPtID_DEN_TrackerMuons_abseta_pt_syst*NUM_TrkHighPtID_DEN_TrackerMuons_abseta_ptZLè ¡ xs``ËÀâÀÀ²›HNeàp``Hg`B `f`àÐ÷õ)ÊöÈLÏ(ñt‰wqõò“³S‹|KóóŠã“ŠSKãJâ‹+‹K´ˆW´Šƒ	l#Íd30¿²¸À¢&quot;ö `æÀÀ0›HJ&quot;;Œµ&quot;±&quot;³˜­FhyPR……ñX‰–õÓ&#39;[Ÿ3gm¾ê·OKK³-=Ô”ÑTÌÆ` ä±ÂÄìßœ³öŸ!r&gt;’Z˜R8íÀÀ°ì&lt;çU‚œ&#39;Rš— P_R« áž¦	TÛ¥\Êî ±Ä!BI¸˜	TÎJÛAi(í	¥ý 4Âˆ éÀÀPöŠª@&gt;àNNÌIMKL.É/ªÃíö·ƒÓÈ
+û `~á`ƒO!w`b˜£2`–Ÿh®ÝÌ§œ!E[»í6õ6^3g±;å&gt;!¼á^¥ÝÃg&gt;o?JV d7g¥Ç—oìÖJ·Þÿ·BËn¥N¶clhÝ…E&#39;.Y&#39;ÏÁP_ð±Cï,£]£‹ú¿•³_ÛÍ,šxÝ¶êºÝî*-ï@ÎRõ	Í&gt;Ÿ&gt;Ìo7eéì°üõSí‚¦ôœ(þÒ®1(fGjóqõF›+¹3W]µ3g{w!&amp;8ÊNå±óõ³veö&lt;bU•1Ô·\Ú»ý›k­Ý„ÏŒíªNûí¦.5Ê±Ûîu[ã½{…1Ô/*^õ}³«ŒÝÊ4þõ!:Jvk‚õ\‚tõì®äÆs^ÿ]=±|–äüœ*A`„8ðdƒdá$Ä€7êíëRïØ×¥Ï´¯Ë¶¯i}
+3Û¾nãwû:‡åöu‹Û×/Cˆ/zj_—3Û¾n&#39;‹}íŸÅñ:vûºÉGíë¾XÚ×þŸ‚/žh_·ÌÒ¾ž#¨~)B¼¾Ã¾nfœ}ÝÛ%öµmkâ‹ìël°¯	³¯=‘ÇF Û“     ªf?gÅ „   Ãú   dTH2F9NUM_TrkHighPtID_DEN_TrackerMuons_abseta_pt_efficiencyData*NUM_TrkHighPtID_DEN_TrackerMuons_abseta_ptZLò ª xs``]ÆÀâÀÀr„HÎcàp``(d`B `f`à°ôõ)ÊöÈLÏ(ñt‰wqõò“³S‹|KóóŠã“ŠSKãJâSÓÒ2“3Só’+]Kµˆ×	´”ƒ	l)#Íd30¿²¸À¢&quot;ö `æÀÀ0›HJ&quot;;‘µ&quot;±&quot;³˜­FèŒ ¤
+ã?°-ë§	N¶&gt;gÎÚ|=ÔoŸ––f[z¨(£4¨
+˜Á Èc…‰Ù¿9gí?Cä |$µ0¥pÚaØy*(Î«9O0¤4/5@¡ ¾:¤VAÃ=5L¨·K00 ¹”ÝAb‰C„’p1¨œ%”¶ƒÒ.PÚJûAi„$Ò¡ìYT|Àå
+^ 2ÜNo@q:8!l°ÿ &quot;ñæ6øär&amp;Æ€90!f™¡ñ‰æÚ}Ý’åøŽo£Ý·-½„+Êì¾³Ý7—5²ûº`ìÕòIèÙ½œ|f’“ÝwÓö&#39;&gt;rÙ}©ÛY&quot;\ÙgÏXïZTØ2Cý³½¿ý&#39;í²ûp\ÃÒ–ÿÝ§ÃoN	4ž±ûÙ5QC5KCý-ñ]³t¶Ú=8§)¦_yÞîñÊÝŠ}“ì^Å8ÝkÛ0Cýé&lt;æÓ.³;{{Uò±™v¯[û=œäawçn¿¼4 tÙ(Y~vëAM»Ï·tíÞewøAáÌ%nvï2,¯_nËG¨„°ìæÛÎy%i·¿w±\Å·×v‡•×õûŠM·».:?ðõáÇèê‰å³$ççT900ó¤ä&#39;$#˜&#39;!¼Qo_ÅÓ¾:ÔÊ¾¶}uÖ˜ÙöUYßì«sJíkolµ¯Y´
+!^Ug_ýÌÒ¾ö×ûÚp)„ø´Bû½#öu¶¿íkKþ&quot;Ä§3Ø×,°¯ËJ°¯ð!^.b_4Í¾.)Ë¾VöUþºö5šÕöuõÝöµ®a0õØh ´o&#39;k  ‡   ¯f?gÅ ‰   Çy   dTH2F&gt;NUM_TrkHighPtID_DEN_TrackerMuons_abseta_pt_efficiencyData_stat*NUM_TrkHighPtID_DEN_TrackerMuons_abseta_ptZLõ ¯ xs``]ÍÀâÀÀr’H.fàp``(c`B `f`à°óõ)ÊöÈLÏ(ñt‰wqõò“³S‹|KóóŠã“ŠSKãJâSÓÒ2“3Só’+]&quot;Å%‰%ZÄkÚÌÁÀ¶™Èf²˜_Y\`Qû0s``˜ÍÀ$%‘ÝÉZ‘X‘YÌV£tKPR……ñX‰–õÓ&#39;[Ÿ3gm¾ê·OKK³-=Ô”ÑTÌÆ` ä±ÂÄìßœ³öŸ!r&gt;’Z˜R8íÀÀ°ì&lt;çU‚œ&#39;Rš— P_R« áž¦	TÛ¥\Êî ±Ä!BI¸˜	TÎJÛAi(í	¥ý 4Âˆ éÀÀPö,Šª@&gt;àr…Ç1Pn§7 8œš@6Ø ‘ø ó|ò¹cÀ³ÌÐøDsí¦ÊíNH[i7Á;]}µØ|»—KFñÂvËø—Ùïy=Ý »’kŠ›ÎÙµ§Í=Â÷Õ.ih“þ]»®7&gt;´ËaøØ.6¸PçÀ6»‚åìKûn¶ó1‹{ÖpÝÝ®èÕÑömÐDØbgb÷Ex-ûn;×ÇüL‹2ìTóžyMÝ×cà¡}Œóè„JËNou³ðŽ½vN®é¦wö˜Ù)ÌQ™t¸œÝ. ²tšÁÏõ‡¸¯=ä_c—bž³tµî;&#39;ï¬g§éÚj2Û¶è†ú4·Àœ&quot;³uvÕËÖ^üTf}qj˜êH»)9µaó_Ç£«&#39;–Ï’œŸSåÀÀ ÌâžlŒ`&quot;œ„ðF½}ÿMûêP+ûÚþöÕYg`fÛWe}³¯Î)µ¯½±Õ¾fÑ*„xU}õ3KûÚ_[ìkÃ¥âÓ
+íkôŽØ×Ùþ¶¯-ù‹ŸÎ`_S°À¾.+Á¾v&lt;øì«ÊEìk‚¦Ù×%eÙ×*Ã£Ù¾Ê_×¾F³Ú¾®¾Û¾Ö5f6 pÑ  ‰   ¯f?gÅ ‰   Ë    dTH2F&gt;NUM_TrkHighPtID_DEN_TrackerMuons_abseta_pt_efficiencyData_syst*NUM_TrkHighPtID_DEN_TrackerMuons_abseta_ptZL÷ ¯ xs``]ÍÀâÀÀr’H.fàp``(c`B `f`à°óõ)ÊöÈLÏ(ñt‰wqõò“³S‹|KóóŠã“ŠSKãJâSÓÒ2“3Só’+]&quot;Å•Å%ZÄkÚÌÁÀ¶™Èf²˜_Y\`Qû0s``˜ÍÀ$%‘ÝÉZ‘X‘YÌV£tKPR……ñX‰–õÓ&#39;[Ÿ3gm¾ê·OKK³-=Ô”ÑTÌÆ` ä±ÂÄìßœ³öŸ!r&gt;’Z˜R8íÀÀ°ì&lt;çU‚œ&#39;Rš— P_R« áž¦	TÛ¥\Êî ±Ä!BI¸˜	TÎJÛAi(í	¥ý 4Âˆ éÀÀPö,Šª@&gt;àr…Ç1Pn§7 8œš@6Ø ‘ø ó|ò¹cÀ³ÌÐøDsí¾Æ¿É©4·ûV¼umÉY»¯BµV—ö”Ø}ùà¤}}4 ÆÙ½ÕvÊ¯£Æî;Û®•Aoì¾”ff%î¶gL‰XØð·¡Â²{¶&gt;pÚŸ\S»ÛgäÌ·ût õŸñÆv?Ë—%ÍLÊÇPKhÕÝÙóœíœØ”wÑÔîñ~¥3{žšÙ½
+‘;±xõ.õ§ÓBnngØiwödÊŸ&amp;Ë»v¯ªŸò·¼iwç¬èÊíçí1ÔVÞÆþŸÛîÀ´k7TYÙ&gt;§ºâÇ²vïB.§Ij`¨ŸSrY=AØÅnïeÇÈóÛí½áNYpê®ÝÕs×kê «&#39;–Ï’œŸSåÀÀ ÌâžlŒ`&quot;œ„ðF½}ÿMûêP+ûÚþöÕYg`fÛWe}³¯Î)µ¯½±Õ¾fÑ*„xU}õ3KûÚ_[ìkÃ¥âÓ
+íkôŽØ×Ùþ¶¯-ù‹ŸÎ`_S°À¾.+Á¾vÂ?„x¹ˆ}MÐ4ûº¤,ûZeh&gt;f‰*]ûÍjûºúnûZ×0˜zl4 &quot;¯*Ÿ  x   ¨f?gÅ ‚   Î‰   dTH2F7NUM_TrkHighPtID_DEN_TrackerMuons_abseta_pt_efficiencyMC*NUM_TrkHighPtID_DEN_TrackerMuons_abseta_ptZLí ¨ xs``]ÂÀâÀÀrˆHÎaàp``Èg`B `f`à0÷õ)ÊöÈLÏ(ñt‰wqõò“³S‹|KóóŠã“ŠSKãJâSÓÒ2“3Só’+}µˆ×´’ƒ	l%#Íd30¿²¸À¢&quot;ö `æÀÀ0›HJ&quot;;µ&quot;±&quot;³˜­Fèˆ ¤
+ã?°-ë§	N¶&gt;gÎÚ|=ÔoŸ––f[z¨(£4¨
+˜Á Èc…‰Ù¿9gí?Cä |$µ0¥pÚaØy*(Î«9O0¤4/5@¡ ¾:¤VAÃ=5L¨·K00 ¹”ÝAb‰C„’p1¨œ%”¶ƒÒ.PÚJûAi„$Ò¡ìYT|Àå
+\ 2ÜNo@q:8l°ÿ &quot;ñæ6øär&amp;Æ€90!f™¡ñ‰æÚ}‹”Î49Ô`÷mÒÄ
+ãæö?³nÉó|µûËu³;C×Ý »×-mWfYü±û ¬7×lã»Ÿ»åæY4Úýg«+];í†úWTcNäfÙ½_0—ãš¥·Ý—i¤íþòÿW[xCýÝoOêDXØ=ôŒX]þà¡Ý“ÞÂ[çÇvoì*&amp;›Ž¡þLH®ñLëOvç[Ÿóop±»˜èy¹î¨Ý½µ\ü1ÔL:­òI§Ý¡:á™lÆþvÇ\WÅ-°î¶»øñ”ì,Ch‚Bè²[õ}{ä¶4&gt;»½Öç¢{{ì–ÍÕ2Ývþ•Ýž§¿Š&amp;`ø¡?‹%9?§ÊA˜ÿ å&lt;Ù id&quot;œ„ðF½}õbûš›íëåßÙ×=2`_½9Ù¾VíŠ}½ñûzWñ‹OíkKçÚ×;ì±¯T‡‹×ÕÛ×NŸd_ïÉl__„—Í¶¯=žn_Ÿ˜g_?¹.^ý±Ä¾vH­}ýì©ñoík[Síë³ÖØ×W„‰c£Wp#  |   ­f?gÅ ‡   Ò   dTH2F&lt;NUM_TrkHighPtID_DEN_TrackerMuons_abseta_pt_efficiencyMC_stat*NUM_TrkHighPtID_DEN_TrackerMuons_abseta_ptZLì ­ xs``]ÉÀâÀÀrœH.dàp``(a`B `f`à°ñõ)ÊöÈLÏ(ñt‰wqõò“³S‹|KóóŠã“ŠSKãJâSÓÒ2“3Só’+}ã‹KK´ˆ×´—ƒ	l/#Íd30¿²¸À¢&quot;ö `æÀÀ0›HJ&quot;»’µ&quot;±&quot;³˜­Fè’ ¤
+ã?°-ë§	N¶&gt;gÎÚ|=ÔoŸ––f[z¨(£4¨
+˜Á Èc…‰Ù¿9gí?Cä |$µ0¥pÚaØy*(Î«9O0¤4/5@¡ ¾:¤VAÃ=5L¨·K00 ¹”ÝAb‰C„’p1¨œ%”¶ƒÒ.PÚJûAi„$Ò¡ìYT|Àå
+a 2ÜNo@q:8-l°ÿ &quot;ñæ6øär&amp;Æ€90!f™¡ñ‰æÚÍ8\ñÌ úŽÝ²cŸx
+¯«Ûå„ms1rt´ëôèµhÜn]ãTóˆ*u)»‰7SæþûÎnq/&gt;ß]ëº]IrþãÊ,õY·¼•å¿¶«Ö5aëõ&lt;lç¦·w+Ã\»„™s9BÞa¨wr¼!yÔ#È.xePŽ@q ò_ÝZC¶J;;eÛÃ`¨·Úì)c%`çX4±ø÷
+;Yó“¸4•ì¬¶µzpXæc¨OœwèÚµ£÷ì
+ÿ+œª=ðÙÎa™ù‘y_ìªY7PÃP_¡wÀÍ’³Ú®»EP&gt;6ËÚ.òvÉÄ[Áfv3oõlÞ&lt;]=±|–äüœ*A`þƒ&gt;ðdƒdá$Ä€7êí«3Ø×¼Øl_/ÿÎ¾î!° ûêÍÉöµjWìëÿØ×ë¼Bˆ_|j_[:×¾Þa}}¤:\¼F¨Þ¾vú$ûzOfûú’ „¸l¶}íñtûúÄ&lt;ûúÉupñê%öµÛ@jìëgOEˆ;h_Ûšj_ŸµÆ¾¾ú L øu  „   ­f?gÅ ‡   Õ}   dTH2F&lt;NUM_TrkHighPtID_DEN_TrackerMuons_abseta_pt_efficiencyMC_syst*NUM_TrkHighPtID_DEN_TrackerMuons_abseta_ptZLô ­ xs``]ÉÀâÀÀrœH.dàp``(a`B `f`à°ñõ)ÊöÈLÏ(ñt‰wqõò“³S‹|KóóŠã“ŠSKãJâSÓÒ2“3Só’+}ã‹+‹K´ˆ×´—ƒ	l/#Íd30¿²¸À¢&quot;ö `æÀÀ0›HJ&quot;»’µ&quot;±&quot;³˜­Fè’ ¤
+ã?°-ë§	N¶&gt;gÎÚ|=ÔoŸ––f[z¨(£4¨
+˜Á Èc…‰Ù¿9gí?Cä |$µ0¥pÚaØy*(Î«9O0¤4/5@¡ ¾:¤VAÃ=5L¨·K00 ¹”ÝAb‰C„’p1¨œ%”¶ƒÒ.PÚJûAi„$Ò¡ìYT|Àå
+a 2ÜNo@q:8-l°ÿ &quot;ñæ6øär&amp;Æ€90!f™¡ñ‰æÚ}ýÆÛ:‡a’Ý×;‘ÏÏå³gøªÓÇb÷ç†Û+ß=æÚ½¶3ün`÷~ú$ÑÚv»Ÿ[ž³Ålhµû÷I&#39;Èv3F@Û½Øé-¸dÙo»÷YNNÊm·û²nö¤Éíþ²W+‰îP»»ÎÜ•/l÷Ð¾…ÉñÆ
+»&#39;=†sS.Û½±ÚÌ9OCýwÎ/k¯ÚÏšz ÎÆÃîbbíY³:e»{Ïgì½§Œ¡þ bV·\g‘ÝÁwR“6¹ºÙ3eQ; öÚîâÅLõ¾³;1Ô/ÿx?à½Ë}»§Î­Êàj·ôœßDõ¿v».þ]qG*]=±|–äüœ*A`þƒ&gt;ðdƒdá$Ä€EHúì«3Ø×¼Øl_/ÿÎ¾î!° ûêÍÉöµjWìëÿØ×ë¼Bˆ_|j_[:×¾Þa}}¤:\¼F¨Þ¾vú$ûzOfûú’ „¸l¶}íñtûúÄ&lt;ûúÉupñê%öµÛ@jìëgOEˆ;h_Ûšj_ŸµÆ¾¾ú L YÓ&#39;&gt;  ™   &amp;çf?gÅ @   Ù   dTListStreamerInfoDoubly linked listZLP ç&amp; xÕZÝoW?;öÚ‰½µqâ$mÚÒ¡´iâ$íª&amp;´ŒÇJhWõ¶u¾ÚÌîÎ¬§™qffc»d…„Z	‰Ï&quot;T‘&#39;þÞZ		A€ò /„à¡¼ /å©üÎ™»ã™Í®½ë¶H\kî™½s÷|ÜsÏ9×ø€ò”#+”Qƒrï}„R\ŒË¬YÁYÏö	oD;¢qt—úPÏ£G…þúîW¾„osèõº|»Pze&amp;ÌuþîêËBô1†ªg`fÍÐâ·/Sêç©õŒˆ‹Õ*Gcèé”õçŠº/oðã,®Lùö½?;š~Ñ?;³x/0GŠ2À Óñª}™4Ô/ôCiè¼ÍtŽÅhºS±¼È±+ ¢\wãêX™‘ 0ˆ®6(wíi¨Ÿ=3`Èµ
+
+(âêDäÎ4ˆ.¡5D\{’á!®&amp;I1‡åuºÿ íX«”4 3SÞÌ0Kx_\_Q¹¤¡ƒ-tK€ˆh§ý¼ç\¯[gçîV¤Ôå9Ëº»Ð³WÇR¨{¡Sõ¬Šîx‘ATk¶ŒÖ&quot;õË‚{0›·g(ÜSr&quot;âq+z™Q=ÔWý BÐm\Ý2ñï5„™ôcaæ¾*¼³xÆ—Ï9aD¿ýêÙŸchá&gt; ;éf+;Á~é`£Ãmƒè%êC]NÆ%¢|‘ÇÜ5ç×Kîºî:Þ5Ðï2L›âüê?I¿njyžçò~#žüOeò»L&gt;!õyßAgžøw:M|n£ÃŠL&lt;úãÉ˜D4R\´®Ÿò]kÔñ½{ñT·¼²e–\K/&#39;ïõ™ÙSè}Gù{òýôË&amp;)Âµß5bR~-¤Ü—À‚”XjŽc|47úìÆ­n–Â(0Ë‘^‚ÕÒË®†é¹7ï_üà7·š÷Ü6iêƒxr?lÄõ{BÓ=išÒ°¤ºä–ñ	/Ö«­B„OUt¸müOŒ¨Óˆ™I /‰&quot;Jˆ è˜Í½,§îÛz´œÖü&gt;ƒ«[Ëé«•_%Í 2ì±,Ø¢óª¥{õZÉ
+Îr­ÌtÓ‘R&gt;@2«65}06Oá[‘OáM‘ÏX‚†úŠg¦è¾Ç_b¬èZAWÈ¥p¹U.ûÑcÑMt¸v•xÕ×dþO%#R²“NÁ%è”ê¶è¦ÎÜ«¨mN?ÈOGtÙá£S¸2EíÃÉ»¦¾å˜éF&lt;…Ž†gGq&amp;ŠÎ9ž5Ê•nFØ¶JõÈj«Ùož&gt;›Àà¦‰¤D×1RYˆ½ ÄN¤‰¤yÇuÇ¹ÒMø[À}ô§‰ï%)i¸W1\Ià–îTÄ!&amp;ì3¸fcq³Ú¡û¿ñ÷
+7i´×•&amp;F¤Dž aEâªAƒöù²åºáá],9^xpjîÐ]~ÑNÏÒ?lá†Ø®¿ÊæO·TKƒ(ÌlÇ±ÿƒ÷—HC»M™ýdÀ^2×œplIçF¯Xa9pV&quot;Ÿ—&#39;qýWÇ’/Îà#ƒ¨Ü ÿF»	Ì¹ðiÃ\˜‹æ5%Ä4Ð/Ç&#39;ÓB²gÍ`Á¶C+zøàÔäää„/‡dY–Ì@//›¬©kU}– ¦.4íK&gt;\ööcÖüuÒðtMtèd~&#39;Ã¿èT¢å‡bôU¾ÿdÀaÄ‰zIÀãåòH|‡}ÚÃÒ·Â±óÖ4~C0wêBÓ¾TØs±¢ªBz™4&lt;Åv ã®ÁÝëµÕñ¢™®¾X¯±á^µœêrÄí*TP×ÊŽO5CM?Á
+¯×a| ÅmÂb^¦÷ÀŒ¥S°k{2°1‰K½Ñè*°ŠÐø’Ðx4MãŽ˜Æµé}mÑzÅk·çNfñžÁZ¬ÕkûU«ß0Ýº%KdÅõ£ˆÃªžÄØ¤ãÅqû±!·äê°}Þjópöü`œoM×yÕdW·åeo$¾ÕÆ~Ïx(Ãi¨«&quot;Ø/d}Ê÷&quot;¿&lt; AµùzÅ	W\s®ü #tÃryÑ&lt;…k¯J™Ô¾‹Ö#õ² 1&lt;`cQ®N?Ãb•`¹òbi»nzA†’H8m„¤‘í…æñØ2&quot;¿˜À•Lc/žã­6ü~Ö‡‹‡èD¿AêU!}&gt;=!{¾îI &gt;zô)õsžC1æÝüY?h#èÔM¯¢×C+`ÇìË¸Øzu,äMðeÕª¾@že&quot;™ý{Øž­Û¶°[P÷zˆ‚×ˆ«§á$†Oñà5ÒŒ¦S	ãÜþK©9\ÑáVëzIf…	LâÚ”ØÁxG˜à~ijØ‹ð›Š7IÃÓºp ³ ª÷ÉŸhÅçbEˆwbx÷ãC&amp;N{ˆ~À*²¥;5ð&#39;NcdŒêó¸ ¿¥¦ò6ixú¦LåÙ´VŒØ&lt;Äo;¾ÂÁ†ø`ºíšUÖè€^÷*VpÌoºwƒ$³ìjv»ãÙeÀ ®9x’Ü¹.1ÉÞdj 7qßIùæ !wý9`œiL˜?¬ÿWÅé”ÔƒÉ°è3ds4€Ð×†$.@$/¾£†ùêXw§KŒÅhÝµbŒo1ð&#39;Ž!&gt;UŒ!.U÷`VîFÌý}¸ÏÑ©PE3ˆþ‰þà&gt;ý­•ûÂ7ü`)î_!O/Š¾e|1X!Œ)ÜÝˆ•zA—@&quot;‚Pr`}½óèáÑÝ‰*AáRq©dçñëèÓ­\jêhEq)žÍl;ë„OâõÎ¤®q„MMœyd•=IÃSœÌ¤›‡=lò‡9Êâçi‹ŸG@irþb`gC$1I´¤ÿ8¬£‹g½Œ7dPþÏè!äß*„»Ð£ýÿd0˜²Q®¶ò/û±Ç’”fßo 9«$ôixzVÖeÆ*Øç9¨Ùˆø‘ºØw8»„1«
+¡cl”·—jŽ·ÙÝªT%ƒf;\ ‡7ÜM7Ý0IC	R®’f]bZuK5smo}…w³&amp;RšÛÃ2Õò-1§Æg±%2¤ÄçD¼Cr8Ô‹YQt¥ÍBÖ&lt;sl&lt;á[Êq›—nœ§vË5c~òö90kw“cÛC¹®¨qH3n)eBÉ9Û˜ÞZðù+Pƒ¨åt£ zdcAÛ¶Œ$Ç)ÍDÄ[
+Aôª€&gt;˜lRÀTÍš‹ƒ)ß;†4H3ö@t‡T$’»õq¢5Œ,ÉJ›Ó°Và”yAìÂ•ÃÕ±ô—|ß5ˆ8$X#OÌ»Bü1ËjXæ2ÏXôÈœYyR¼8¢[k&#39;ôÉ&#39;ŽMM{â	}júÄcÇOL²k:ƒk‹€(9 ³4öÐÓaÉçÓs„¨K´FøŒ†)uåøjó9”œM ¯«6	æŸñ+ ÷5¡j~…qÔ5¦
+30¹üHCvƒü@ßE6eaûÿ‚þØúÿÐº!ƒP¦ò³’–×\šWœ+Î&#39;DÞ0”É;ÉlMNxé‡u¤Ø&amp;¼iÜxS?u»4ÁE™Cš‹¦ç0d3]âì•šeÆ&#39;®¤¸y$Y4ÚŽ%ñdm…—ÖŒÉŽõC FÀD`ŒÒR”Ãrçÿr%áÐ6€Úí»SˆIŠ“¡Ÿ‰›Œæwé’DÅ¾´ÅÎXRLû=#\m¢eÒ€zELI&amp;SÆ¦¤|íœåU£åñ¸ÅÀK½†ƒÖŠîÉÚRÙŠâ$?æÝøMöRš‡üÝãm)²¡9¸«ÉÆmbápEXYV^VI¯0f%h]ßh|­{­o—O=œFS”±ÂïN´~;`Å8×“Hsb7þSÖ§ùOØ»¢{ šAt#Žæö´ZD’‚½êAôà½Ø/îJ&amp;Žû‹g¦çiùÖíï£3»˜¢/ì+ý£u4±øZE·ÑV¨uì¶exôÉôþé£sNMßH’m~ûÚñ›”*MŸ—ÿ Gð®^œˆÊD%ƒEIÎ&amp;Ù@	5x­ÜQ.ø¯ôË&amp;P|×¼†°I³…M­«Ó¤f‰Ii§Ð\ÒN¶r‰WË°.MíŸê‰Kê`—¤4&#39;“Þ¶{Æ„ìE$¢¬85\ûmå‰Û-…Œ]VGëm.`â;Ô%4´«6BpñŽ}4c0ÕÑÂzû£…ŸÞÚz‡£Œ^ðè¿˜:ž  #   Íf?gÅ V   åš   dTFile4Efficiencies_muon_generalTracks_Z_Run2017_UL_ID.root    ?  Y   –f?gÄ o   ,   dTH2F&#39;NUM_HighPtID_DEN_TrackerMuons_abseta_pt&#39;NUM_HighPtID_DEN_TrackerMuons_abseta_pt  d   ›f?gÄ t   …   dTH2F,NUM_HighPtID_DEN_TrackerMuons_abseta_pt_stat&#39;NUM_HighPtID_DEN_TrackerMuons_abseta_pt  h   ›f?gÄ t   é   dTH2F,NUM_HighPtID_DEN_TrackerMuons_abseta_pt_syst&#39;NUM_HighPtID_DEN_TrackerMuons_abseta_pt  x   ¤f?gÄ ~   Q   dTH2F6NUM_HighPtID_DEN_TrackerMuons_abseta_pt_efficiencyData&#39;NUM_HighPtID_DEN_TrackerMuons_abseta_pt  |   ©f?gÄ ƒ   É   dTH2F;NUM_HighPtID_DEN_TrackerMuons_abseta_pt_efficiencyData_stat&#39;NUM_HighPtID_DEN_TrackerMuons_abseta_pt  „   ©f?gÄ ƒ   E   dTH2F;NUM_HighPtID_DEN_TrackerMuons_abseta_pt_efficiencyData_syst&#39;NUM_HighPtID_DEN_TrackerMuons_abseta_pt  m   ¢f?gÄ |   É   dTH2F4NUM_HighPtID_DEN_TrackerMuons_abseta_pt_efficiencyMC&#39;NUM_HighPtID_DEN_TrackerMuons_abseta_pt  u   §f?gÄ    6   dTH2F9NUM_HighPtID_DEN_TrackerMuons_abseta_pt_efficiencyMC_stat&#39;NUM_HighPtID_DEN_TrackerMuons_abseta_pt  w   §f?gÄ    «   dTH2F9NUM_HighPtID_DEN_TrackerMuons_abseta_pt_efficiencyMC_syst&#39;NUM_HighPtID_DEN_TrackerMuons_abseta_pt  N   Žf?gÄ m    &quot;   dTH2F&amp;NUM_LooseID_DEN_TrackerMuons_abseta_pt&amp;NUM_LooseID_DEN_TrackerMuons_abseta_pt  W   “f?gÄ r   #p   dTH2F+NUM_LooseID_DEN_TrackerMuons_abseta_pt_stat&amp;NUM_LooseID_DEN_TrackerMuons_abseta_pt  V   “f?gÄ r   &amp;Ç   dTH2F+NUM_LooseID_DEN_TrackerMuons_abseta_pt_syst&amp;NUM_LooseID_DEN_TrackerMuons_abseta_pt  l   œf?gÄ |   *   dTH2F5NUM_LooseID_DEN_TrackerMuons_abseta_pt_efficiencyData&amp;NUM_LooseID_DEN_TrackerMuons_abseta_pt  |   ¡f?gÄ    -‰   dTH2F:NUM_LooseID_DEN_TrackerMuons_abseta_pt_efficiencyData_stat&amp;NUM_LooseID_DEN_TrackerMuons_abseta_pt  t   ¡f?gÄ    1   dTH2F:NUM_LooseID_DEN_TrackerMuons_abseta_pt_efficiencyData_syst&amp;NUM_LooseID_DEN_TrackerMuons_abseta_pt  i   šf?gÄ z   4y   dTH2F3NUM_LooseID_DEN_TrackerMuons_abseta_pt_efficiencyMC&amp;NUM_LooseID_DEN_TrackerMuons_abseta_pt  q   Ÿf?gÄ    7â   dTH2F8NUM_LooseID_DEN_TrackerMuons_abseta_pt_efficiencyMC_stat&amp;NUM_LooseID_DEN_TrackerMuons_abseta_pt  p   Ÿf?gÄ    ;S   dTH2F8NUM_LooseID_DEN_TrackerMuons_abseta_pt_efficiencyMC_syst&amp;NUM_LooseID_DEN_TrackerMuons_abseta_pt  O   f?gÄ o   &gt;Ã   dTH2F&#39;NUM_MediumID_DEN_TrackerMuons_abseta_pt&#39;NUM_MediumID_DEN_TrackerMuons_abseta_pt  ]   •f?gÄ t   B   dTH2F,NUM_MediumID_DEN_TrackerMuons_abseta_pt_stat&#39;NUM_MediumID_DEN_TrackerMuons_abseta_pt  f   •f?gÄ t   Eo   dTH2F,NUM_MediumID_DEN_TrackerMuons_abseta_pt_syst&#39;NUM_MediumID_DEN_TrackerMuons_abseta_pt  q   žf?gÄ ~   HÕ   dTH2F6NUM_MediumID_DEN_TrackerMuons_abseta_pt_efficiencyData&#39;NUM_MediumID_DEN_TrackerMuons_abseta_pt  t   £f?gÄ ƒ   LF   dTH2F;NUM_MediumID_DEN_TrackerMuons_abseta_pt_efficiencyData_stat&#39;NUM_MediumID_DEN_TrackerMuons_abseta_pt  v   £f?gÄ ƒ   Oº   dTH2F;NUM_MediumID_DEN_TrackerMuons_abseta_pt_efficiencyData_syst&#39;NUM_MediumID_DEN_TrackerMuons_abseta_pt  e   œf?gÄ |   S0   dTH2F4NUM_MediumID_DEN_TrackerMuons_abseta_pt_efficiencyMC&#39;NUM_MediumID_DEN_TrackerMuons_abseta_pt  n   ¡f?gÄ    V•   dTH2F9NUM_MediumID_DEN_TrackerMuons_abseta_pt_efficiencyMC_stat&#39;NUM_MediumID_DEN_TrackerMuons_abseta_pt  s   ¡f?gÄ    Z   dTH2F9NUM_MediumID_DEN_TrackerMuons_abseta_pt_efficiencyMC_syst&#39;NUM_MediumID_DEN_TrackerMuons_abseta_pt  a   œf?gÄ {   ]v   dTH2F-NUM_MediumPromptID_DEN_TrackerMuons_abseta_pt-NUM_MediumPromptID_DEN_TrackerMuons_abseta_pt  l   ¡f?gÄ €   `×   dTH2F2NUM_MediumPromptID_DEN_TrackerMuons_abseta_pt_stat-NUM_MediumPromptID_DEN_TrackerMuons_abseta_pt  w   ¡f?gÄ €   dC   dTH2F2NUM_MediumPromptID_DEN_TrackerMuons_abseta_pt_syst-NUM_MediumPromptID_DEN_TrackerMuons_abseta_pt  ~   ªf?gÄ Š   gº   dTH2F&lt;NUM_MediumPromptID_DEN_TrackerMuons_abseta_pt_efficiencyData-NUM_MediumPromptID_DEN_TrackerMuons_abseta_pt  „   ¯f?gÄ    k8   dTH2FANUM_MediumPromptID_DEN_TrackerMuons_abseta_pt_efficiencyData_stat-NUM_MediumPromptID_DEN_TrackerMuons_abseta_pt  ‰   ¯f?gÄ    n¼   dTH2FANUM_MediumPromptID_DEN_TrackerMuons_abseta_pt_efficiencyData_syst-NUM_MediumPromptID_DEN_TrackerMuons_abseta_pt  ˆ   ¨f?gÄ ˆ   rE   dTH2F:NUM_MediumPromptID_DEN_TrackerMuons_abseta_pt_efficiencyMC-NUM_MediumPromptID_DEN_TrackerMuons_abseta_pt     ­f?gÄ    uÍ   dTH2F?NUM_MediumPromptID_DEN_TrackerMuons_abseta_pt_efficiencyMC_stat-NUM_MediumPromptID_DEN_TrackerMuons_abseta_pt  ƒ   ­f?gÄ    yN   dTH2F?NUM_MediumPromptID_DEN_TrackerMuons_abseta_pt_efficiencyMC_syst-NUM_MediumPromptID_DEN_TrackerMuons_abseta_pt  O   Œf?gÅ k   |Ñ   dTH2F%NUM_SoftID_DEN_TrackerMuons_abseta_pt%NUM_SoftID_DEN_TrackerMuons_abseta_pt  U   ‘f?gÅ p   €    dTH2F*NUM_SoftID_DEN_TrackerMuons_abseta_pt_stat%NUM_SoftID_DEN_TrackerMuons_abseta_pt  V   ‘f?gÅ p   ƒu   dTH2F*NUM_SoftID_DEN_TrackerMuons_abseta_pt_syst%NUM_SoftID_DEN_TrackerMuons_abseta_pt  e   šf?gÅ z   †Ë   dTH2F4NUM_SoftID_DEN_TrackerMuons_abseta_pt_efficiencyData%NUM_SoftID_DEN_TrackerMuons_abseta_pt  i   Ÿf?gÅ    Š0   dTH2F9NUM_SoftID_DEN_TrackerMuons_abseta_pt_efficiencyData_stat%NUM_SoftID_DEN_TrackerMuons_abseta_pt  m   Ÿf?gÅ    ™   dTH2F9NUM_SoftID_DEN_TrackerMuons_abseta_pt_efficiencyData_syst%NUM_SoftID_DEN_TrackerMuons_abseta_pt  ^   ˜f?gÅ x   ‘   dTH2F2NUM_SoftID_DEN_TrackerMuons_abseta_pt_efficiencyMC%NUM_SoftID_DEN_TrackerMuons_abseta_pt  m   f?gÅ }   ”d   dTH2F7NUM_SoftID_DEN_TrackerMuons_abseta_pt_efficiencyMC_stat%NUM_SoftID_DEN_TrackerMuons_abseta_pt  o   f?gÅ }   —Ñ   dTH2F7NUM_SoftID_DEN_TrackerMuons_abseta_pt_efficiencyMC_syst%NUM_SoftID_DEN_TrackerMuons_abseta_pt  Q   Žf?gÅ m   ›@   dTH2F&amp;NUM_TightID_DEN_TrackerMuons_abseta_pt&amp;NUM_TightID_DEN_TrackerMuons_abseta_pt  V   “f?gÅ r   ž‘   dTH2F+NUM_TightID_DEN_TrackerMuons_abseta_pt_stat&amp;NUM_TightID_DEN_TrackerMuons_abseta_pt  X   “f?gÅ r   ¡ç   dTH2F+NUM_TightID_DEN_TrackerMuons_abseta_pt_syst&amp;NUM_TightID_DEN_TrackerMuons_abseta_pt  h   œf?gÅ |   ¥?   dTH2F5NUM_TightID_DEN_TrackerMuons_abseta_pt_efficiencyData&amp;NUM_TightID_DEN_TrackerMuons_abseta_pt  p   ¡f?gÅ    ¨§   dTH2F:NUM_TightID_DEN_TrackerMuons_abseta_pt_efficiencyData_stat&amp;NUM_TightID_DEN_TrackerMuons_abseta_pt  q   ¡f?gÅ    ¬   dTH2F:NUM_TightID_DEN_TrackerMuons_abseta_pt_efficiencyData_syst&amp;NUM_TightID_DEN_TrackerMuons_abseta_pt  d   šf?gÅ z   ¯ˆ   dTH2F3NUM_TightID_DEN_TrackerMuons_abseta_pt_efficiencyMC&amp;NUM_TightID_DEN_TrackerMuons_abseta_pt  l   Ÿf?gÅ    ²ì   dTH2F8NUM_TightID_DEN_TrackerMuons_abseta_pt_efficiencyMC_stat&amp;NUM_TightID_DEN_TrackerMuons_abseta_pt  m   Ÿf?gÅ    ¶X   dTH2F8NUM_TightID_DEN_TrackerMuons_abseta_pt_efficiencyMC_syst&amp;NUM_TightID_DEN_TrackerMuons_abseta_pt  `   œf?gÅ u   ¹Å   dTH2F*NUM_TrkHighPtID_DEN_TrackerMuons_abseta_pt*NUM_TrkHighPtID_DEN_TrackerMuons_abseta_pt  j   ¡f?gÅ z   ½%   dTH2F/NUM_TrkHighPtID_DEN_TrackerMuons_abseta_pt_stat*NUM_TrkHighPtID_DEN_TrackerMuons_abseta_pt  k   ¡f?gÅ z   À   dTH2F/NUM_TrkHighPtID_DEN_TrackerMuons_abseta_pt_syst*NUM_TrkHighPtID_DEN_TrackerMuons_abseta_pt     ªf?gÅ „   Ãú   dTH2F9NUM_TrkHighPtID_DEN_TrackerMuons_abseta_pt_efficiencyData*NUM_TrkHighPtID_DEN_TrackerMuons_abseta_pt  ‡   ¯f?gÅ ‰   Çy   dTH2F&gt;NUM_TrkHighPtID_DEN_TrackerMuons_abseta_pt_efficiencyData_stat*NUM_TrkHighPtID_DEN_TrackerMuons_abseta_pt  ‰   ¯f?gÅ ‰   Ë    dTH2F&gt;NUM_TrkHighPtID_DEN_TrackerMuons_abseta_pt_efficiencyData_syst*NUM_TrkHighPtID_DEN_TrackerMuons_abseta_pt  x   ¨f?gÅ ‚   Î‰   dTH2F7NUM_TrkHighPtID_DEN_TrackerMuons_abseta_pt_efficiencyMC*NUM_TrkHighPtID_DEN_TrackerMuons_abseta_pt  |   ­f?gÅ ‡   Ò   dTH2F&lt;NUM_TrkHighPtID_DEN_TrackerMuons_abseta_pt_efficiencyMC_stat*NUM_TrkHighPtID_DEN_TrackerMuons_abseta_pt  „   ­f?gÅ ‡   Õ}   dTH2F&lt;NUM_TrkHighPtID_DEN_TrackerMuons_abseta_pt_efficiencyMC_syst*NUM_TrkHighPtID_DEN_TrackerMuons_abseta_pt   `    
+f?gÅ V  ½   dTFile4Efficiencies_muon_generalTracks_Z_Run2017_UL_ID.root   w5” " data-is-ci-config-file="false" id="js-blob-toggle-graph-preview"></div>
+<div class="blob-viewer" data-path="EfficienciesStudies/UL2017/DEN_TrackerMuons/rootfiles/Efficiencies_muon_generalTracks_Z_Run2017_UL_ID.root" data-type="simple">
+<div class="file-content blob_file blob-no-preview">
+<div class="center render-error">
+<a href="/cms-muonPOG/MuonReferenceEfficiencies/-/raw/master/EfficienciesStudies/UL2017/DEN_TrackerMuons/rootfiles/Efficiencies_muon_generalTracks_Z_Run2017_UL_ID.root"><h1 class="light">
+<svg class="s16" data-testid="download-icon"><use xlink:href="/assets/icons-e0a66cb8e6ca64bcdd2a8f111cbd9e94cf727c1bd5939bc71619df5c973fbc87.svg#download"></use></svg>
+</h1>
+<h4>
+Download (65.3 KB)
+</h4>
+</a></div>
+</div>
+
+</div>
+
+
+</article>
+</div>
+
+<div class="modal" id="modal-upload-blob">
+<div class="modal-dialog modal-lg">
+<div class="modal-content">
+<div class="modal-header">
+<h3 class="page-title">Replace Efficiencies_muon_generalTracks_Z_Run2017_UL_ID.root</h3>
+<button aria-label="Close" class="close" data-dismiss="modal" type="button">
+<span aria-hidden>&times;</span>
+</button>
+</div>
+<div class="modal-body">
+<form class="js-quick-submit js-upload-blob-form" data-method="put" action="/cms-muonPOG/MuonReferenceEfficiencies/-/update/master/EfficienciesStudies/UL2017/DEN_TrackerMuons/rootfiles/Efficiencies_muon_generalTracks_Z_Run2017_UL_ID.root" accept-charset="UTF-8" method="post"><input name="utf8" type="hidden" value="&#x2713;" /><input type="hidden" name="_method" value="put" /><input type="hidden" name="authenticity_token" value="/GTxmWzF0i02/O871HZwuozL5iZSzXgyEZTvKgEOtiABWIzC7Ygda2NCOhVFiFneV2StbVRUN+CheBxCevMFVA==" /><div class="dropzone">
+<div class="dropzone-previews blob-upload-dropzone-previews">
+<p class="dz-message light">
+Attach a file by drag &amp; drop or <a class="markdown-selector" href="#">click to upload</a>
+</p>
+</div>
+</div>
+<br>
+<div class="dropzone-alerts gl-alert gl-alert-danger gl-mb-5 data" style="display:none"></div>
+<div class="form-group row commit_message-group">
+<label class="col-form-label col-sm-2" for="commit_message-2f095359312cd0ba194748b0fbb0f207">Commit message
+</label><div class="col-sm-10">
+<div class="commit-message-container">
+<div class="max-width-marker"></div>
+<textarea name="commit_message" id="commit_message-2f095359312cd0ba194748b0fbb0f207" class="form-control js-commit-message" placeholder="Replace Efficiencies_muon_generalTracks_Z_Run2017_UL_ID.root" required="required" rows="3">
+Replace Efficiencies_muon_generalTracks_Z_Run2017_UL_ID.root</textarea>
+</div>
+</div>
+</div>
+
+<input type="hidden" name="branch_name" id="branch_name" />
+<input type="hidden" name="create_merge_request" id="create_merge_request" value="1" />
+<input type="hidden" name="original_branch" id="original_branch" value="master" class="js-original-branch" />
+
+<div class="form-actions">
+<button name="button" type="button" class="btn gl-button btn-success btn-upload-file" id="submit-all"><div class="spinner spinner-sm gl-mr-2 js-loading-icon hidden"></div>
+Replace file
+</button><a class="btn gl-button btn-cancel" data-dismiss="modal" href="#">Cancel</a>
+<div class="inline gl-ml-3">
+A new branch will be created in your fork and a new merge request will be started.
+</div>
+
+</div>
+</form></div>
+</div>
+</div>
+</div>
+
+</div>
+
+
+</div>
+</div>
+</div>
+</div>
+
+
+<script>
+//<![CDATA[
+if ('loading' in HTMLImageElement.prototype) {
+  document.querySelectorAll('img.lazy').forEach(img => {
+    img.loading = 'lazy';
+    let imgUrl = img.dataset.src;
+    // Only adding width + height for avatars for now
+    if (imgUrl.indexOf('/avatar/') > -1 && imgUrl.indexOf('?') === -1) {
+      const targetWidth = img.getAttribute('width') || img.width;
+      imgUrl += `?width=${targetWidth}`;
+    }
+    img.src = imgUrl;
+    img.removeAttribute('data-src');
+    img.classList.remove('lazy');
+    img.classList.add('js-lazy-loaded', 'qa-js-lazy-loaded');
+  });
+}
+
+//]]>
+</script>
+
+</body>
+</html>
+
