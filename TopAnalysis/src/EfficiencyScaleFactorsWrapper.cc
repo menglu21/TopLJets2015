@@ -10,10 +10,10 @@
 using namespace std;
 
 //
-EfficiencyScaleFactorsWrapper::EfficiencyScaleFactorsWrapper(bool isData,TString era)
+EfficiencyScaleFactorsWrapper::EfficiencyScaleFactorsWrapper(bool isData,TString era,TString eleid)
 {
   if(isData) return;
-  init(era);
+  init(era, eleid);
 }
 
 //
@@ -24,6 +24,7 @@ void EfficiencyScaleFactorsWrapper::init(TString era)
 
   cout << "[EfficiencyScaleFactorsWrapper]" << endl
        << "\tStarting efficiency scale factors for " << era << endl
+       << "\tThe ID of electrons is " << eleid << endl
        << "\tWarnings: no trigger SFs for any object" << endl
        << "\t          uncertainties returned are of statistical nature only" << endl
        << "\tDon't forget to fix these and update these items!" << endl;
@@ -35,8 +36,17 @@ void EfficiencyScaleFactorsWrapper::init(TString era)
     a_idSF=era+"/Fall17V2_2016_Tight_photons.root";
     a_psvSF=era+"/ScalingFactors_80X_Summer16.root";
   }else if(era_==2017){
-    a_recoSF=era+"/egammaEffi.txt_EGM2D_runBCDEF_passingRECO.root";
-    a_idSF=era+"/2017_PhotonsTight.root";
+    if(eleid.Contains("LOOSE"))a_idSF=era+"/egammaEffi.txt_EGM2D_Loose_UL17.root";
+    if(eleid.Contains("MEDIUM"))a_idSF=era+"/egammaEffi.txt_EGM2D_Medium_UL17.root";
+    if(eleid.Contains("TIGHT"))a_idSF=era+"/egammaEffi.txt_EGM2D_Tight_UL17.root";
+    if(eleid.Contains("VETO"))a_idSF=era+"/egammaEffi.txt_EGM2D_Veto_UL17.root";
+    if(eleid.Contains("MVA80ISO"))a_idSF=era+"/egammaEffi.txt_EGM2D_MVA80iso_UL17.root";
+    if(eleid.Contains("MVA80NOISO"))a_idSF=era+"/egammaEffi.txt_EGM2D_MVA80noIso_UL17.root";
+    if(eleid.Contains("MVA90ISO"))a_idSF=era+"/egammaEffi.txt_EGM2D_MVA90iso_UL17.root";
+    if(eleid.Contains("MVA90NOISO"))a_idSF=era+"/egammaEffi.txt_EGM2D_MVA90noIso_UL17.root";
+    a_recoSF=era+"/egammaEffi_ptAbove20.txt_EGM2D_UL2017.root";
+//    a_recoSF=era+"/egammaEffi.txt_EGM2D_runBCDEF_passingRECO.root";
+//    a_idSF=era+"/2017_PhotonsTight.root";
     a_psvSF=era+"/PixelSeed_ScaleFactors_2017.root";
   }
 
