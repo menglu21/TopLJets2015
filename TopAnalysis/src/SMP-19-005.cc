@@ -48,7 +48,7 @@ void RunSMP19005(TString filename,
   double normWgt(normH ? normH->GetBinContent(1) : 1.0);
 
   //efficiency corrections
-  EfficiencyScaleFactorsWrapper effSF(isData,era);
+  EfficiencyScaleFactorsWrapper effSF(isData,era,"TIGHT");
   L1PrefireEfficiencyWrapper l1prefire(isData,era);
 
   //READ TREE FROM FILE

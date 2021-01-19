@@ -50,7 +50,7 @@ void RunTopSummer2019(const TString in_fname,
   std::map<Int_t,Float_t> lumiPerRun=lumi.lumiPerRun();
   
   //CORRECTIONS: LEPTON EFFICIENCIES
-  EfficiencyScaleFactorsWrapper lepEffH(in_fname.Contains("Data13TeV"),era);
+  EfficiencyScaleFactorsWrapper lepEffH(in_fname.Contains("Data13TeV"),era,"TIGHT");
 
   //CORRECTIONS: L1-prefire 
   L1PrefireEfficiencyWrapper l1PrefireWR(in_fname.Contains("Data13TeV"),era);

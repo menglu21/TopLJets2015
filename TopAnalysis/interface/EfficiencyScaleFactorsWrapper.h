@@ -14,7 +14,7 @@ typedef std::pair<float,float> EffCorrection_t;
 class EfficiencyScaleFactorsWrapper
 {
  public:
-  EfficiencyScaleFactorsWrapper(bool isData,TString era);
+  EfficiencyScaleFactorsWrapper(bool isData,TString era, TString eleid);
   EffCorrection_t getMuonSF(float pt,float eta);
   EffCorrection_t getElectronSF(float pt,float eta);
   EffCorrection_t getPhotonSF(float pt,float eta);
@@ -27,7 +27,7 @@ class EfficiencyScaleFactorsWrapper
   ~EfficiencyScaleFactorsWrapper();
 
  private:
-  void init(TString era);
+  void init(TString era, TString eleid);
   int era_;
   std::map<TString,TH2 *> scaleFactorsH_;
   std::map<TString,TH1 *> scaleFactors1DH_;
