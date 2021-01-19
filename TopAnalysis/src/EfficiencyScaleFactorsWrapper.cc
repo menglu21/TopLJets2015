@@ -17,7 +17,7 @@ EfficiencyScaleFactorsWrapper::EfficiencyScaleFactorsWrapper(bool isData,TString
 }
 
 //
-void EfficiencyScaleFactorsWrapper::init(TString era)
+void EfficiencyScaleFactorsWrapper::init(TString era, TString eleid)
 {
   if(era.Contains("era2017")) era_=2017;
   if(era.Contains("era2016")) era_=2016;
