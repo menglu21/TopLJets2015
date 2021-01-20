@@ -88,8 +88,17 @@ void EfficiencyScaleFactorsWrapper::init(TString era, TString eleid)
     e_recoSF=era+"/EGM2D_BtoH_GT20GeV_RecoSF_Legacy2016.root";
     e_idSF=era+"/2016LegacyReReco_ElectronTight_Fall17V2.root";
   }else if(era_==2017){
-    e_recoSF=era+"/egammaEffi.txt_EGM2D_runBCDEF_passingRECO.root";
-    e_idSF=era+"/2017_ElectronTight.root";
+    //e_recoSF=era+"/egammaEffi.txt_EGM2D_runBCDEF_passingRECO.root";
+    e_recoSF=era+"/egammaEffi_ptAbove20.txt_EGM2D_UL2017.root";
+    //e_idSF=era+"/2017_ElectronTight.root";
+    if(eleid.Contains("LOOSE"))e_idSF=era+"/egammaEffi.txt_EGM2D_Loose_UL17.root";
+    if(eleid.Contains("MEDIUM"))e_idSF=era+"/egammaEffi.txt_EGM2D_Medium_UL17.root";
+    if(eleid.Contains("TIGHT"))e_idSF=era+"/egammaEffi.txt_EGM2D_Tight_UL17.root";
+    if(eleid.Contains("VETO"))e_idSF=era+"/egammaEffi.txt_EGM2D_Veto_UL17.root";
+    if(eleid.Contains("MVA80ISO"))e_idSF=era+"/egammaEffi.txt_EGM2D_MVA80iso_UL17.root";
+    if(eleid.Contains("MVA80NOISO"))e_idSF=era+"/egammaEffi.txt_EGM2D_MVA80noIso_UL17.root";
+    if(eleid.Contains("MVA90ISO"))e_idSF=era+"/egammaEffi.txt_EGM2D_MVA90iso_UL17.root";
+    if(eleid.Contains("MVA90NOISO"))e_idSF=era+"/egammaEffi.txt_EGM2D_MVA90noIso_UL17.root";
   }
 
   gSystem->ExpandPathName(e_recoSF);
