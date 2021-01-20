@@ -384,6 +384,7 @@ void RunExYukawa(const TString in_fname,
 */
 
       if (leptons[0].pt() < 30.) continue;
+      if (leptons[0].pt() < 40. && leptons[0].id() == 11) continue;
       if (leptons[1].pt() < 20.) continue;
       if (leptons.size() > 2 && leptons[2].pt() > 20.) continue;
 
