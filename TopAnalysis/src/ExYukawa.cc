@@ -388,7 +388,7 @@ void RunExYukawa(const TString in_fname,
 
       //if(!hasMTrigger) continue;
       //cout<<dimutrig<<dielectrig<<mueltrig<<singmutrig<<singeltrig<<endl;
-      if (dimutrig ==0 && dielectrig == 0 && mueltrig == 0 && singmutrig == 0 && singeltrig == 0) continue;
+      if (ev.isData && dimutrig ==0 && dielectrig == 0 && mueltrig == 0 && singmutrig == 0 && singeltrig == 0) continue;
 
 
       Ntotal_after_trig++;
