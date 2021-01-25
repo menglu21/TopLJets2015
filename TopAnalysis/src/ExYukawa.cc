@@ -319,36 +319,57 @@ void RunExYukawa(const TString in_fname,
       if(iev%1000==0) { printf("\r [%3.0f%%] done", 100.*(float)iev/(float)nentries); fflush(stdout); }
       //trigger
       //bool hasMTrigger(false);
-      int dimutrig = 0;
-      int dielectrig = 0;
-      int mueltrig = 0;
-      int singmutrig = 0;
-      int singeltrig = 0;
-
+      int passtrigger = 0; 
       //if(era.Contains("2016")) hasMTrigger=(selector.hasTriggerBit("HLT_IsoMu24_v", ev.triggerBits) );
       if(era.Contains("2017")) {
         if (baseMC.Contains("DoubleMuon",TString::kIgnoreCase)){
           int a = selector.hasTriggerBit("HLT_Mu17_TrkIsoVVL_Mu8_TrkIsoVVL_DZ_Mass8_v", ev.triggerBits);
           int b = selector.hasTriggerBit("HLT_Mu17_TrkIsoVVL_Mu8_TrkIsoVVL_DZ_Mass3p8_v", ev.triggerBits);
-          if (a || b) dimutrig = 1;
+          if (a || b) passtrigger = 1;
         }
-        if (baseMC.Contains("DoubleEG",TString::kIgnoreCase) && dimutrig == 0){
-          int a = selector.hasTriggerBit("HLT_Ele23_Ele12_CaloIdL_TrackIdL_IsoVL_v", ev.triggerBits);
-          if (a) dielectrig = 1;
+        if (baseMC.Contains("DoubleEG",TString::kIgnoreCase)){
+          int a = selector.hasTriggerBit("HLT_Mu17_TrkIsoVVL_Mu8_TrkIsoVVL_DZ_Mass8_v", ev.triggerBits);
+          int b = selector.hasTriggerBit("HLT_Mu17_TrkIsoVVL_Mu8_TrkIsoVVL_DZ_Mass3p8_v", ev.triggerBits);
+          int c = selector.hasTriggerBit("HLT_Ele23_Ele12_CaloIdL_TrackIdL_IsoVL_v", ev.triggerBits);
+          if (!(a||b) && c)  passtrigger = 1;
         }
-        if (baseMC.Contains("MuonEG",TString::kIgnoreCase) && dimutrig == 0 && dielectrig == 0){
-          int a = selector.hasTriggerBit("HLT_Mu8_TrkIsoVVL_Ele23_CaloIdL_TrackIdL_IsoVL_DZ_v", ev.triggerBits);
-          int b = selector.hasTriggerBit("HLT_Mu23_TrkIsoVVL_Ele12_CaloIdL_TrackIdL_IsoVL_v", ev.triggerBits);
-          if (a || b) mueltrig = 1;
+        if (baseMC.Contains("MuonEG",TString::kIgnoreCase)){
+          int a = selector.hasTriggerBit("HLT_Mu17_TrkIsoVVL_Mu8_TrkIsoVVL_DZ_Mass8_v", ev.triggerBits);
+          int b = selector.hasTriggerBit("HLT_Mu17_TrkIsoVVL_Mu8_TrkIsoVVL_DZ_Mass3p8_v", ev.triggerBits);
+          int c = selector.hasTriggerBit("HLT_Ele23_Ele12_CaloIdL_TrackIdL_IsoVL_v", ev.triggerBits);
+          int d = selector.hasTriggerBit("HLT_Mu8_TrkIsoVVL_Ele23_CaloIdL_TrackIdL_IsoVL_DZ_v", ev.triggerBits);
+          int e = selector.hasTriggerBit("HLT_Mu23_TrkIsoVVL_Ele12_CaloIdL_TrackIdL_IsoVL_v", ev.triggerBits);
+          if (!(a || b || c) && (d || e)) passtrigger = 1;
         }
-        if (baseMC.Contains("SingleMuon",TString::kIgnoreCase) && dimutrig == 0 && dielectrig == 0 && mueltrig == 0){
-          int a = selector.hasTriggerBit("HLT_IsoMu27_v", ev.triggerBits);
-          if (a) singmutrig = 1;
+        if (baseMC.Contains("SingleMuon",TString::kIgnoreCase)){
+          int a = selector.hasTriggerBit("HLT_Mu17_TrkIsoVVL_Mu8_TrkIsoVVL_DZ_Mass8_v", ev.triggerBits);
+          int b = selector.hasTriggerBit("HLT_Mu17_TrkIsoVVL_Mu8_TrkIsoVVL_DZ_Mass3p8_v", ev.triggerBits);
+          int c = selector.hasTriggerBit("HLT_Ele23_Ele12_CaloIdL_TrackIdL_IsoVL_v", ev.triggerBits);
+          int d = selector.hasTriggerBit("HLT_Mu8_TrkIsoVVL_Ele23_CaloIdL_TrackIdL_IsoVL_DZ_v", ev.triggerBits);
+          int e = selector.hasTriggerBit("HLT_Mu23_TrkIsoVVL_Ele12_CaloIdL_TrackIdL_IsoVL_v", ev.triggerBits);
+          int f = selector.hasTriggerBit("HLT_IsoMu27_v", ev.triggerBits);
+          if (!(a||b||c||d||e) && f) passtrigger = 1;
         }
-        if (baseMC.Contains("SingleElectron",TString::kIgnoreCase) && dimutrig == 0 && dielectrig == 0 && mueltrig == 0 && singmutrig == 0){
-          int a = selector.hasTriggerBit("HLT_Ele35_WPTight_Gsf", ev.triggerBits);
-          if (a) singeltrig = 1;
+        if (baseMC.Contains("SingleElectron",TString::kIgnoreCase)){
+          int a = selector.hasTriggerBit("HLT_Mu17_TrkIsoVVL_Mu8_TrkIsoVVL_DZ_Mass8_v", ev.triggerBits);
+          int b = selector.hasTriggerBit("HLT_Mu17_TrkIsoVVL_Mu8_TrkIsoVVL_DZ_Mass3p8_v", ev.triggerBits);
+          int c = selector.hasTriggerBit("HLT_Ele23_Ele12_CaloIdL_TrackIdL_IsoVL_v", ev.triggerBits);
+          int d = selector.hasTriggerBit("HLT_Mu8_TrkIsoVVL_Ele23_CaloIdL_TrackIdL_IsoVL_DZ_v", ev.triggerBits);
+          int e = selector.hasTriggerBit("HLT_Mu23_TrkIsoVVL_Ele12_CaloIdL_TrackIdL_IsoVL_v", ev.triggerBits);
+          int f = selector.hasTriggerBit("HLT_IsoMu27_v", ev.triggerBits);
+          int g = selector.hasTriggerBit("HLT_Ele35_WPTight_Gsf", ev.triggerBits);
+          if (!(a||b||c||d||e||f) && g) passtrigger = 1;
         }
+    if (baseMC.Contains("MC",TString::kIgnoreCase)){
+      int a = selector.hasTriggerBit("HLT_Mu17_TrkIsoVVL_Mu8_TrkIsoVVL_DZ_Mass8_v", ev.triggerBits);
+      int b = selector.hasTriggerBit("HLT_Mu17_TrkIsoVVL_Mu8_TrkIsoVVL_DZ_Mass3p8_v", ev.triggerBits);
+      int c = selector.hasTriggerBit("HLT_Ele23_Ele12_CaloIdL_TrackIdL_IsoVL_v", ev.triggerBits);
+      int d = selector.hasTriggerBit("HLT_Mu8_TrkIsoVVL_Ele23_CaloIdL_TrackIdL_IsoVL_DZ_v", ev.triggerBits);
+          int e = selector.hasTriggerBit("HLT_Mu23_TrkIsoVVL_Ele12_CaloIdL_TrackIdL_IsoVL_v", ev.triggerBits);
+      int f = selector.hasTriggerBit("HLT_IsoMu27_v", ev.triggerBits);
+      int g = selector.hasTriggerBit("HLT_Ele35_WPTight_Gsf", ev.triggerBits);
+      if (a || b || c || d || e || f || g) passtrigger=1;
+    }
 /*
 	hasMTrigger=(
     // previous random selection
@@ -388,7 +409,7 @@ void RunExYukawa(const TString in_fname,
 
       //if(!hasMTrigger) continue;
       //cout<<dimutrig<<dielectrig<<mueltrig<<singmutrig<<singeltrig<<endl;
-      if (ev.isData && dimutrig ==0 && dielectrig == 0 && mueltrig == 0 && singmutrig == 0 && singeltrig == 0) continue;
+      if (!passtrigger) continue;
 
 
       Ntotal_after_trig++;
