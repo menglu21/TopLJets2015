@@ -319,7 +319,7 @@ void RunExYukawa(const TString in_fname,
       if(iev%1000==0) { printf("\r [%3.0f%%] done", 100.*(float)iev/(float)nentries); fflush(stdout); }
       //trigger
       //bool hasMTrigger(false);
-      int passtrigger = 0; 
+      int passtrigger = 0;
       //if(era.Contains("2016")) hasMTrigger=(selector.hasTriggerBit("HLT_IsoMu24_v", ev.triggerBits) );
       if(era.Contains("2017")) {
         if (baseMC.Contains("DoubleMuon",TString::kIgnoreCase)){
@@ -360,15 +360,15 @@ void RunExYukawa(const TString in_fname,
           int g = selector.hasTriggerBit("HLT_Ele35_WPTight_Gsf", ev.triggerBits);
           if (!(a||b||c||d||e||f) && g) passtrigger = 1;
         }
-    if (baseMC.Contains("MC",TString::kIgnoreCase)){
-      int a = selector.hasTriggerBit("HLT_Mu17_TrkIsoVVL_Mu8_TrkIsoVVL_DZ_Mass8_v", ev.triggerBits);
-      int b = selector.hasTriggerBit("HLT_Mu17_TrkIsoVVL_Mu8_TrkIsoVVL_DZ_Mass3p8_v", ev.triggerBits);
-      int c = selector.hasTriggerBit("HLT_Ele23_Ele12_CaloIdL_TrackIdL_IsoVL_v", ev.triggerBits);
-      int d = selector.hasTriggerBit("HLT_Mu8_TrkIsoVVL_Ele23_CaloIdL_TrackIdL_IsoVL_DZ_v", ev.triggerBits);
+        if (baseMC.Contains("MC",TString::kIgnoreCase)){
+          int a = selector.hasTriggerBit("HLT_Mu17_TrkIsoVVL_Mu8_TrkIsoVVL_DZ_Mass8_v", ev.triggerBits);
+          int b = selector.hasTriggerBit("HLT_Mu17_TrkIsoVVL_Mu8_TrkIsoVVL_DZ_Mass3p8_v", ev.triggerBits);
+          int c = selector.hasTriggerBit("HLT_Ele23_Ele12_CaloIdL_TrackIdL_IsoVL_v", ev.triggerBits);
+          int d = selector.hasTriggerBit("HLT_Mu8_TrkIsoVVL_Ele23_CaloIdL_TrackIdL_IsoVL_DZ_v", ev.triggerBits);
           int e = selector.hasTriggerBit("HLT_Mu23_TrkIsoVVL_Ele12_CaloIdL_TrackIdL_IsoVL_v", ev.triggerBits);
-      int f = selector.hasTriggerBit("HLT_IsoMu27_v", ev.triggerBits);
-      int g = selector.hasTriggerBit("HLT_Ele35_WPTight_Gsf", ev.triggerBits);
-      if (a || b || c || d || e || f || g) passtrigger=1;
+          int f = selector.hasTriggerBit("HLT_IsoMu27_v", ev.triggerBits);
+          int g = selector.hasTriggerBit("HLT_Ele35_WPTight_Gsf", ev.triggerBits);
+          if (a || b || c || d || e || f || g) passtrigger=1;
     }
 /*
 	hasMTrigger=(
