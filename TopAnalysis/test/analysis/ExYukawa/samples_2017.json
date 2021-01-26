@@ -1,8 +1,6 @@
 {
 "MC13TeV_2017_TAToTTQ_MA-scan_TuneCP5_13TeV_G2HDM-rtc04" : [1,         0, "/TAToTTQ_MA-scan_TuneCP5_13TeV_G2HDM-rtc04-madgraphMLM-pythia8/RunIISummer19UL17MiniAOD-rp_106X_mc2017_realistic_v6-v1/MINIAODSIM", "", "#DF0101", true, false, 1],
 "MC13TeV_2017_DY50toInf_fxfx"        : [6077.22, 0,  "/DYJetsToLL_M-50_TuneCP5_13TeV-amcatnloFXFX-pythia8/RunIISummer19UL17MiniAOD-106X_mc2017_realistic_v6-v2/MINIAODSIM", "DY", 42, false, false, 1],
-"MC13TeV_2017_WJets_mlm"             : [61526.7, 0,  "/WJetsToLNu_TuneCP5_13TeV-madgraphMLM-pythia8/RunIISummer19UL17MiniAOD-106X_mc2017_realistic_v6-v2/MINIAODSIM", "W", 600,false,false,1],
-"MC13TeV_2017_WJets_mlm"             : [61526.7, 0,  "/WJetsToLNu_TuneCP5_13TeV-madgraphMLM-pythia8/RunIISummer19UL17MiniAOD-106X_mc2017_realistic_v6-v2/MINIAODSIM", "W", 797,false,false,1],
 "MC13TeV_2017_W1Jets_mlm"            : [8873.0, 0, "/W1JetsToLNu_TuneCP5_13TeV-madgraphMLM-pythia8/RunIISummer19UL17MiniAOD-106X_mc2017_realistic_v6-v2/MINIAODSIM", "W1J", 797, false, false, 1],
 "MC13TeV_2017_W2Jets_mlm"            : [2793.0, 0, "/W2JetsToLNu_TuneCP5_13TeV-madgraphMLM-pythia8/RunIISummer19UL17MiniAOD-106X_mc2017_realistic_v6-v2/MINIAODSIM", "W2J", 797, false, false, 1],
 "MC13TeV_2017_W3Jets_mlm"            : [992.5, 0, "/W3JetsToLNu_TuneCP5_13TeV-madgraphMLM-pythia8/RunIISummer19UL17MiniAOD-106X_mc2017_realistic_v6-v2/MINIAODSIM", "W3J", 797, false, false, 1],
