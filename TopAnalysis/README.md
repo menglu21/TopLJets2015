@@ -64,7 +64,7 @@ ERROR: CMSSW_10_6_3 on slc7_amd64_gcc820 is not among supported releases; Use co
 ```
 Do
 ```
- export SCRAM_ARCH= slc7_amd64_gcc700 before cmsenv
+ export SCRAM_ARCH= slc7_amd64_gcc700 
 ```
 before cmsenv and compile before submission.
 
