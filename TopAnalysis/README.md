@@ -58,6 +58,17 @@ The following script helps submitting a list of files described in a json file.
 Partial submission can be made adding "-o csv_list" as an option.
 Adding "-s" will trigger the submission to the grid (otherwise the script only writes down the crab cfg files)
 
+If you receive something like the message below:
+```
+ERROR: CMSSW_10_6_3 on slc7_amd64_gcc820 is not among supported releases; Use config.JobType.allowUndistributedCMSSW = True if you are sure of what you are doing
+```
+Do
+```
+ export SCRAM_ARCH= slc7_amd64_gcc700 before cmsenv
+```
+before cmsenv and compile before submission.
+
+
 ```
 python scripts/submitToGrid.py -j data/era2016/samples.json -c ${CMSSW_BASE}/src/TopLJets2015/TopAnalysis/test/runMiniAnalyzer_cfg.py -w grid_2016 --lumi /afs/cern.ch/cms/CAF/CMSCOMM/COMM_DQM/certification/Collisions16/13TeV/Final/Cert_271036-284044_13TeV_PromptReco_Collisions16_JSON.txt --era era2016
 python scripts/submitToGrid.py -j data/era2017/samples.json -c ${CMSSW_BASE}/src/TopLJets2015/TopAnalysis/test/runMiniAnalyzer_cfg.py --only MC -s
