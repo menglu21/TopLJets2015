@@ -7,7 +7,7 @@ import commands
 creates the crab cfg and submits the job
 """
 def submitProduction(tag,lfnDirBase,dataset,isData,cfg,workDir,lumiMask,era='era2017',submit=False,addParents=False,rawParents=False):
-    
+
     from TopLJets2015.TopAnalysis.EraConfig import getEraConfiguration
     globalTag, jecTag, jecDB, jerTag, jerDB = getEraConfiguration(era=era,isData=bool(isData),dataset=dataset)
 
@@ -28,6 +28,7 @@ def submitProduction(tag,lfnDirBase,dataset,isData,cfg,workDir,lumiMask,era='era
     #config_file.write('config.General.transferLogs=True\n')
     config_file.write('\n')
     config_file.write('config.section_("JobType")\n')
+    config_file.write('config.JobType.allowUndistributedCMSSW = True\n')
     config_file.write('config.JobType.pluginName = "Analysis"\n')
     config_file.write('config.JobType.psetName = "'+cfg+'"\n')
     config_file.write('config.JobType.disableAutomaticOutputCollection = False\n')
@@ -49,7 +50,7 @@ def submitProduction(tag,lfnDirBase,dataset,isData,cfg,workDir,lumiMask,era='era
             config_file.write('config.JobType.pyCfgParams = [\'runOnData=False\',\'era=%s\',\'globalTag=%s\']\n' % (era,globalTag) )
 
     #config_file.write('config.JobType.inputFiles = [\'{0}/{1}\',\'{0}/{2}\',\'{0}/muoncorr_db.txt\',\'{0}/jecUncSources.txt\']\n'.format(cmssw,jecDB,jerDB))
-    
+
     #config_file.write('config.JobType.inputFiles = [\'{0}\',\'{1}\',\'muoncorr_db.txt\',\'jecUncSources.txt\',\'qg_db.db\',\'ctpps_db.db\']\n'.format(jecDB,jerDB))
     config_file.write('config.JobType.inputFiles = [\'{0}\',\'{1}\',\'muoncorr_db.txt\',\'jecUncSources.txt\',\'qg_db.db\']\n'.format(jecDB,jerDB))
     config_file.write('\n')
@@ -59,33 +60,33 @@ def submitProduction(tag,lfnDirBase,dataset,isData,cfg,workDir,lumiMask,era='era
 
     config_file.write('config.Data.useParent = %s\n'% bool(addParents) )
     if addParents:
-        config_file.write('config.Data.ignoreLocality = True\n')    
+        config_file.write('config.Data.ignoreLocality = True\n')
     else:
-        config_file.write('config.Data.ignoreLocality = False\n')    
+        config_file.write('config.Data.ignoreLocality = False\n')
 
-    if isData :         
+    if isData :
         config_file.write('config.Data.lumiMask = \'%s\'\n' %lumiMask)
         if addParents:
             config_file.write('config.Data.splitting = "FileBased"\n')
-            config_file.write('config.Data.unitsPerJob = 1\n')        
+            config_file.write('config.Data.unitsPerJob = 1\n')
         else:
             #config_file.write('config.Data.splitting = "Automatic"\n')
             config_file.write('config.Data.splitting = "LumiBased"\n')
             config_file.write('config.Data.unitsPerJob = 15\n')
-    else : 
+    else :
         config_file.write('config.Data.splitting = "FileBased"\n')
         config_file.write('config.Data.unitsPerJob = 4\n')
-     
+
     config_file.write('config.Data.publication = False\n')
     config_file.write('config.Data.outLFNDirBase = \"%s\"\n' % lfnDirBase)
     config_file.write('\n')
     config_file.write('config.section_("Site")\n')
     config_file.write('config.Site.storageSite = "T2_CH_CERN"\n')
     if addParents:
-        config_file.write('config.Site.whitelist = [\'T2_CH_CERN\']\n')    
+        config_file.write('config.Site.whitelist = [\'T2_CH_CERN\']\n')
 
     config_file.close()
-    
+
     if submit : os.system('alias crab=\'/cvmfs/cms.cern.ch/crab3/crab-env-bootstrap.sh\' && crab submit -c %s' % crabConfigFile )
 
 """
@@ -115,7 +116,7 @@ def main():
 
     githash=commands.getstatusoutput('git log --pretty=format:\'%h\' -n 1')[1]
     lfnDirBase='%s/%s/' % (opt.lfn,githash)
-    
+
     onlyList=[]
     try:
         onlyList=opt.only.split(',')
@@ -124,15 +125,15 @@ def main():
 
     #submit jobs
     os.system("mkdir -p %s" % opt.workDir)
-    for tag,sample in samplesList: 
+    for tag,sample in samplesList:
         submit=False if len(onlyList)>0 else True
         for filtTag in onlyList:
             if filtTag in tag :
                 submit=True
         if not submit : continue
-        if len(sample[2])==0 : 
+        if len(sample[2])==0 :
             print 'Ignoring',tag,'no dataset is set in the json file'
-            continue 
+            continue
         submitProduction(tag=tag,
                          lfnDirBase=lfnDirBase,
                          dataset=sample[2],
