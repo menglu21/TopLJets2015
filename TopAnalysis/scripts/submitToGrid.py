@@ -28,7 +28,7 @@ def submitProduction(tag,lfnDirBase,dataset,isData,cfg,workDir,lumiMask,era='era
     #config_file.write('config.General.transferLogs=True\n')
     config_file.write('\n')
     config_file.write('config.section_("JobType")\n')
-    config_file.write('config.JobType.allowUndistributedCMSSW = True\n')
+    #config_file.write('config.JobType.allowUndistributedCMSSW = True\n')
     config_file.write('config.JobType.pluginName = "Analysis"\n')
     config_file.write('config.JobType.psetName = "'+cfg+'"\n')
     config_file.write('config.JobType.disableAutomaticOutputCollection = False\n')
@@ -51,7 +51,6 @@ def submitProduction(tag,lfnDirBase,dataset,isData,cfg,workDir,lumiMask,era='era
 
     #config_file.write('config.JobType.inputFiles = [\'{0}/{1}\',\'{0}/{2}\',\'{0}/muoncorr_db.txt\',\'{0}/jecUncSources.txt\']\n'.format(cmssw,jecDB,jerDB))
 
-    #config_file.write('config.JobType.inputFiles = [\'{0}\',\'{1}\',\'muoncorr_db.txt\',\'jecUncSources.txt\',\'qg_db.db\',\'ctpps_db.db\']\n'.format(jecDB,jerDB))
     config_file.write('config.JobType.inputFiles = [\'{0}\',\'{1}\',\'muoncorr_db.txt\',\'jecUncSources.txt\',\'qg_db.db\']\n'.format(jecDB,jerDB))
     config_file.write('\n')
     config_file.write('config.section_("Data")\n')

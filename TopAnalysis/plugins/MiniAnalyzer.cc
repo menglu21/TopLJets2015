@@ -916,6 +916,9 @@ void MiniAnalyzer::recAnalysis(const edm::Event& iEvent, const edm::EventSetup& 
 	}
       ev_.nl++;
 
+      //to reduce fakes
+      ev_.l_isGsfCtfScPixChargeConsistent[ev_.nl] = e.isGsfCtfScPixChargeConsistent();
+
       if( corrP4.pt()>20 && passEta && passLooseId ) nrecleptons_++;
     }
 

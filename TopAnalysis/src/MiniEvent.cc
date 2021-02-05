@@ -88,6 +88,7 @@ void createMiniEventTree(TTree *t,MiniEvent_t &ev,Int_t njecUncs)
   t->Branch("l_relIso",           ev.l_relIso,           "l_relIso[nl]/F");
   t->Branch("l_ip3d",             ev.l_ip3d,             "l_ip3d[nl]/F");
   t->Branch("l_ip3dsig",          ev.l_ip3dsig,          "l_ip3dsig[nl]/F");
+  t->Branch("l_isGsfCtfScPixChargeConsistent", ev.l_isGsfCtfScPixChargeConsistent,     "l_isGsfCtfScPixChargeConsistent[nl]/O");
 
   //photons
   t->Branch("ngamma",                   &ev.ngamma,                   "ngamma/I");
@@ -332,6 +333,7 @@ void attachToMiniEventTree(TTree *t,MiniEvent_t &ev,bool full)
   t->SetBranchAddress("l_relIso",           ev.l_relIso);
   t->SetBranchAddress("l_ip3d",             ev.l_ip3d);
   t->SetBranchAddress("l_ip3dsig",          ev.l_ip3dsig);
+  t->SetBranchAddress("l_isGsfCtfScPixChargeConsistent", ev.l_isGsfCtfScPixChargeConsistent);
 
   //photon info
   t->SetBranchAddress("ngamma", &ev.ngamma);
