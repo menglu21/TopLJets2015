@@ -61,10 +61,12 @@ struct MiniEvent_t
   Float_t j_jerUp[200],j_jerDn[200],j_jecUp[30][200],j_jecDn[30][200];
   Float_t j_csv[200],j_deepcsv[200],j_pumva[200],j_emf[200],j_qg[200];
   Float_t j_probc[200],j_probudsg[200],j_probb[200],j_probbb[200],j_CvsL[200],j_CvsB[200];
+  Float_t j_deepjet[200],j_deepjet_probb[200],j_deepjet_probbb[200],j_deepjet_problepb[200];
+  Float_t j_deepjet_probc[200],j_deepjet_probuds[200],j_deepjet_probg[200],j_deepjet_CvsL[200],j_deepjet_CvsB[200];
   Float_t j_c2_00[200],j_c2_02[200],j_c2_05[200],j_c2_10[200],j_c2_20[200];
   Float_t j_zg[200],j_mult[200],j_gaptd[200],j_gawidth[200],j_gathrust[200],j_tau32[200],j_tau21[200];
   Float_t j_vtxmass[200],j_vtx3DVal[200],j_vtx3DSig[200],j_vtxpx[200],j_vtxpy[200],j_vtxpz[200];
-  Bool_t j_btag[200];
+  Bool_t j_btag[200],j_btag_loose[200],j_btag_medium[200],j_btag_tight[200],j_deepjet_btag_loose[200],j_deepjet_btag_medium[200],j_deepjet_btag_tight[200];
   Int_t j_vtxNtracks[200],j_flav[200],j_id[200],j_pid[200],j_hadflav[200],j_g[200];
 
   //met
@@ -79,18 +81,19 @@ struct MiniEvent_t
   Float_t sumPFHt[8],sumPFEn[8],sumPFPz[8],sumPFChHt[8],sumPFChEn[8],sumPFChPz[8];
 
   //CTPPS protons
-  Short_t nfwdtrk,fwdtrk_pot[50],fwdtrk_method[50];
+  Short_t nfwdtrk,fwdtrk_pot[50],fwdtrk_method[50],fwdtrk_recoInfo[50];
   Float_t fwdtrk_thetax[50],fwdtrk_thetay[50],
     fwdtrk_vx[50],fwdtrk_vy[50],fwdtrk_vz[50],
+    fwdtrk_x[50],fwdtrk_y[50],fwdtrk_tx[50],fwdtrk_ty[50],
     fwdtrk_time[50],fwdtrk_timeError[50],
     fwdtrk_chisqnorm[50],fwdtrk_xi[50],fwdtrk_xiError[50],fwdtrk_t[50];
 
   //PPS tracks (needed for low PU run)
-  Short_t nppstrk,ppstrk_pot[50];
+  Short_t nppstrk,ppstrk_pot[50],ppstrk_recoInfo[50];
   Float_t ppstrk_x[50],ppstrk_y[50], ppstrk_xUnc[50],ppstrk_yUnc[50],
     ppstrk_tx[50],ppstrk_ty[50],ppstrk_txUnc[50],ppstrk_tyUnc[50],
-    ppstrk_chisqnorm[50];
-  //ppstrk_t[50],ppstrk_tUnc[50]; // UFSD only (2018)
+    ppstrk_chisqnorm[50],
+    ppstrk_t[50],ppstrk_tUnc[50]; // UFSD only (2018)
 
   //these are crazy variables for the cross check
   Int_t nrawmu;

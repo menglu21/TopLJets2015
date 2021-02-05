@@ -602,10 +602,9 @@ void MiniAnalyzer::recAnalysis(const edm::Event& iEvent, const edm::EventSetup& 
         ev_.ppstrk_txUnc[ev_.nppstrk]     = trk.getTxUnc();
         ev_.ppstrk_tyUnc[ev_.nppstrk]     = trk.getTyUnc();
         ev_.ppstrk_chisqnorm[ev_.nppstrk] = trk.getChiSquaredOverNDF();
-        /* UFSD only (2018)
-        ev_.ppstrk_t[ev_.nppstrk] = trk.getTime();
-        ev_.ppstrk_tUnc[ev_.nppstrk] = trk.getTimeUnc();
-        */
+        ev_.ppstrk_recoInfo[ev_.nppstrk]  = (Short_t) trk.getPixelTrackRecoInfo();
+        ev_.ppstrk_t[ev_.nppstrk]         = trk.getTime();
+        ev_.ppstrk_tUnc[ev_.nppstrk]      = trk.getTimeUnc();
         ev_.nppstrk++;
       }
   }
@@ -623,9 +622,35 @@ void MiniAnalyzer::recAnalysis(const edm::Event& iEvent, const edm::EventSetup& 
           {
             if(!proton.validFit()) continue;
 
-            CTPPSDetId detid( (*(proton.contributingLocalTracks().begin()))->getRPId() );
+            const CTPPSLocalTrackLiteRefVector &trks=proton.contributingLocalTracks();       
+            CTPPSDetId detid( (*(trks.begin()))->getRPId() );
             ev_.fwdtrk_pot[ev_.nfwdtrk]       = 100*detid.arm()+10*detid.station()+detid.rp();
-            ev_.fwdtrk_chisqnorm[ev_.nfwdtrk] = proton.normalizedChi2();
+            ev_.fwdtrk_x[ev_.nfwdtrk]         = (*(trks.begin()))->getX();
+            ev_.fwdtrk_y[ev_.nfwdtrk]         = (*(trks.begin()))->getY();
+            ev_.fwdtrk_tx[ev_.nfwdtrk]        = (*(trks.begin()))->getTx();
+            ev_.fwdtrk_ty[ev_.nfwdtrk]        = (*(trks.begin()))->getTy();
+            ev_.fwdtrk_recoInfo[ev_.nfwdtrk]  = (Short_t)(*(trks.begin()))->getPixelTrackRecoInfo();;
+
+            //special procedure for multiRP (we want the info about the pixel track in 2017)
+            if(proton.method()==reco::ForwardProton::ReconstructionMethod::multiRP) {
+              for(const auto &t:trks) {
+                CTPPSDetId detid( t->getRPId() );
+                unsigned int arm=detid.arm(); // 0 = sector 4-5 ; 1 = sector 5-6     
+                unsigned int sta=detid.station(); // 0 = near pot ; 2 = far pot
+                unsigned int pot=detid.rp();
+                const unsigned short pot_raw_id = 100*arm+10*sta+pot;
+                if(pot_raw_id!=123 && pot_raw_id!=23) continue;
+                ev_.fwdtrk_pot[ev_.nfwdtrk]       = pot_raw_id;
+                ev_.fwdtrk_x[ev_.nfwdtrk]         = t->getX();
+                ev_.fwdtrk_y[ev_.nfwdtrk]         = t->getY();
+                ev_.fwdtrk_tx[ev_.nfwdtrk]        = t->getTx();
+                ev_.fwdtrk_ty[ev_.nfwdtrk]        = t->getTy();
+                ev_.fwdtrk_recoInfo[ev_.nfwdtrk]  = (Short_t) t->getPixelTrackRecoInfo();
+                break;
+              }
+            }
+
+            ev_.fwdtrk_chisqnorm[ev_.nfwdtrk] = proton.normalizedChi2();            
             ev_.fwdtrk_method[ev_.nfwdtrk]    = Short_t(proton.method());
             ev_.fwdtrk_thetax[ev_.nfwdtrk]    = proton.thetaX();
             ev_.fwdtrk_thetay[ev_.nfwdtrk]    = proton.thetaY();
@@ -637,6 +662,7 @@ void MiniAnalyzer::recAnalysis(const edm::Event& iEvent, const edm::EventSetup& 
             ev_.fwdtrk_xi[ev_.nfwdtrk]        = proton.xi();
             ev_.fwdtrk_xiError[ev_.nfwdtrk]   = proton.xiError();
             ev_.fwdtrk_t[ev_.nfwdtrk]         = proton.t();
+
             ev_.nfwdtrk++;
           }
       }
@@ -1028,10 +1054,10 @@ void MiniAnalyzer::recAnalysis(const edm::Event& iEvent, const edm::EventSetup& 
               float dPt = j->pt()-genj_pt;
               jerSF[i] = std::max(float(1.0 + (jerSF[i] - 1.) * dPt / j->pt()),float(0.));
             }
-
-            //make up/down variations relative
-            if(jerSF[0]>0) { jerSF[1]/=jerSF[0]; jerSF[2]/=jerSF[0]; }
           }
+
+          //make up/down variations relative (only after the loop)
+          if(jerSF[0]>0) { jerSF[1]/=jerSF[0]; jerSF[2]/=jerSF[0]; }          
         }
 
       auto corrP4  = j->p4() * jerSF[0];
@@ -1094,15 +1120,33 @@ void MiniAnalyzer::recAnalysis(const edm::Event& iEvent, const edm::EventSetup& 
       ev_.j_qg[ev_.nj]      = j->userFloat("QGTagger:qgLikelihood");
       ev_.j_pumva[ev_.nj]   = j->userFloat("pileupJetId:fullDiscriminant");
       ev_.j_id[ev_.nj]      = j->userInt("pileupJetId:fullId");
+      //DeepCSV
       ev_.j_csv[ev_.nj]     = j->bDiscriminator("pfCombinedInclusiveSecondaryVertexV2BJetTags");
       ev_.j_deepcsv[ev_.nj] = j->bDiscriminator("pfDeepCSVJetTags:probb") + j->bDiscriminator("pfDeepCSVJetTags:probbb");
-      ev_.j_btag[ev_.nj]    = (ev_.j_deepcsv[ev_.nj]>0.4941);
+      ev_.j_btag[ev_.nj]    = (ev_.j_deepcsv[ev_.nj]>0.4506);
+      ev_.j_btag_loose[ev_.nj]    = (ev_.j_deepcsv[ev_.nj]>0.1355);
+      ev_.j_btag_medium[ev_.nj]    = (ev_.j_deepcsv[ev_.nj]>0.4506);
+      ev_.j_btag_tight[ev_.nj]    = (ev_.j_deepcsv[ev_.nj]>0.7738); 
       ev_.j_probc[ev_.nj]   = j->bDiscriminator("pfDeepCSVJetTags:probc");
       ev_.j_probudsg[ev_.nj]= j->bDiscriminator("pfDeepCSVJetTags:probudsg");
       ev_.j_probb[ev_.nj]   = j->bDiscriminator("pfDeepCSVJetTags:probb");
       ev_.j_probbb[ev_.nj]  = j->bDiscriminator("pfDeepCSVJetTags:probbb");
       ev_.j_CvsL[ev_.nj]    = j->bDiscriminator("pfDeepCSVJetTags:probc")/(j->bDiscriminator("pfDeepCSVJetTags:probc")+j->bDiscriminator("pfDeepCSVJetTags:probudsg"));
       ev_.j_CvsB[ev_.nj]    = j->bDiscriminator("pfDeepCSVJetTags:probc")/(j->bDiscriminator("pfDeepCSVJetTags:probc")+j->bDiscriminator("pfDeepCSVJetTags:probb")+j->bDiscriminator("pfDeepCSVJetTags:probbb"));
+      //DeepJet=DeepFlavour
+      ev_.j_deepjet[ev_.nj]               = j->bDiscriminator("pfDeepFlavourJetTags:probb") + j->bDiscriminator("pfDeepFlavourJetTags:probbb") + j->bDiscriminator("pfDeepFlavourJetTags:problepb");
+      ev_.j_deepjet_btag_loose[ev_.nj]    = (ev_.j_deepjet[ev_.nj]>0.0532);
+      ev_.j_deepjet_btag_medium[ev_.nj]   = (ev_.j_deepjet[ev_.nj]>0.3040);
+      ev_.j_deepjet_btag_tight[ev_.nj]    = (ev_.j_deepjet[ev_.nj]>0.7476);
+      ev_.j_deepjet_probb[ev_.nj]         = j->bDiscriminator("pfDeepFlavourJetTags:probb");
+      ev_.j_deepjet_probbb[ev_.nj]        = j->bDiscriminator("pfDeepFlavourJetTags:probbb");
+      ev_.j_deepjet_problepb[ev_.nj]      = j->bDiscriminator("pfDeepFlavourJetTags:problepb");
+      ev_.j_deepjet_probc[ev_.nj]         = j->bDiscriminator("pfDeepFlavourJetTags:probc");
+      ev_.j_deepjet_probuds[ev_.nj]       = j->bDiscriminator("pfDeepFlavourJetTags:probuds");
+      ev_.j_deepjet_probg[ev_.nj]         = j->bDiscriminator("pfDeepFlavourJetTags:probg");
+      ev_.j_deepjet_CvsL[ev_.nj]          = ev_.j_deepjet_probc[ev_.nj]/(ev_.j_deepjet_probc[ev_.nj]+ev_.j_deepjet_probuds[ev_.nj]+ev_.j_deepjet_probg[ev_.nj]);
+      ev_.j_deepjet_CvsB[ev_.nj]          = ev_.j_deepjet_probc[ev_.nj]/(ev_.j_deepjet_probc[ev_.nj]+ev_.j_deepjet_probb[ev_.nj]+ev_.j_deepjet_probbb[ev_.nj]+ev_.j_deepjet_problepb[ev_.nj]);
+      //
       ev_.j_emf[ev_.nj]     = CEMF+NEMF;
 
       //jet shape variables
