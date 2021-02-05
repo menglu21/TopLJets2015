@@ -42,7 +42,7 @@ struct MiniEvent_t
 
   //leptons
   Int_t nl;
-  Bool_t l_isPromptFinalState[50], l_isDirectPromptTauDecayProductFinalState[50];
+  Bool_t l_isPromptFinalState[50], l_isDirectPromptTauDecayProductFinalState[50], l_isGsfCtfScPixChargeConsistent[50];
   Int_t l_id[50],l_charge[50],l_pid[50],l_g[200];
   Float_t l_pt[50],l_eta[50],l_phi[50], l_mass[50], l_highpt[50],
     l_scaleUnc1[50], l_scaleUnc2[50], l_scaleUnc3[50], l_scaleUnc4[50], l_scaleUnc5[50], l_scaleUnc6[50], l_scaleUnc7[50],
