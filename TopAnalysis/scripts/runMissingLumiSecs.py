@@ -14,7 +14,9 @@ def main():
       print 'Base work area is:',WORKAREA
 
       #check if any lumi section is missing
-      jsonF='%s/results/notFinishedLumis.json'%job
+#####      jsonF='%s/results/notFinishedLumis.json'%job
+      jsonF='%s/results/lumisToProcess.json'%job
+      print(jsonF)
       runSel=[]
       try:
             with open(jsonF) as missingLumis :
