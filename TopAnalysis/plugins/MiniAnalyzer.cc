@@ -529,14 +529,22 @@ void MiniAnalyzer::genAnalysis(const edm::Event& iEvent, const edm::EventSetup& 
 void MiniAnalyzer::recAnalysis(const edm::Event& iEvent, const edm::EventSetup& iSetup)
 {
   //VERTICES
+  Int_t nvtx=0;
   edm::Handle<reco::VertexCollection> vertices;
   iEvent.getByToken(vtxToken_, vertices);
   if (vertices->empty()) return; // skip the event if no PV found
   const reco::Vertex &primVtx = vertices->front();
   reco::VertexRef primVtxRef(vertices,0);
-   ev_.nvtx=vertices->size();
+  for(auto vertex = vertices->begin();  vertex != vertices->end(); ++vertex)
+    {
+      if(vertex->isFake()) continue;
+      if(!(vertex->ndof() > 4)) continue;
+      if(fabs(vertex->z()) > 24) continue;
+      if(vertex->position().Rho() > 2) continue;
+      nvtx++;
+    }
+  ev_.nvtx=nvtx;
   if(ev_.nvtx==0) return;
-
   //RHO
   edm::Handle< double > rhoH;
   iEvent.getByToken(rhoToken_,rhoH);
