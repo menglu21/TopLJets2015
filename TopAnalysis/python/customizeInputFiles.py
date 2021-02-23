@@ -22,7 +22,7 @@ def customTestInputFiles(process,era,runOnData,runWithAOD):
                 process.source.fileNames = cms.untracked.vstring('/store/mc/RunIISummer16MiniAODv3/ST_t-channel_antitop_4f_mtop1715_inclusiveDecays_13TeV-powhegV2-madspin-pythia8/MINIAODSIM/PUMoriond17_94X_mcRun2_asymptotic_v3_ext1-v1/120000/16CEB785-3FE6-E811-AAE8-FA163E9D74F8.root')
     elif '2017' in era:
         if runOnData:
-            process.source.fileNames = cms.untracked.vstring('/store/data/Run2017B/DoubleMuon/MINIAOD/31Mar2018-v1/90000/86858092-2437-E811-8DF5-549F3525C380.root')
+            process.source.fileNames = cms.untracked.vstring('/store/data/Run2017F/DoubleMuon/MINIAOD/09Aug2019_UL2017-v1/270000/E6579C3C-A837-6045-AEAF-8957079DF1AE.root')
             if runWithAOD:
                 print 'Adding secondary filenames'
                 process.source.secondaryFileNames = cms.untracked.vstring([
@@ -45,31 +45,7 @@ def customTestInputFiles(process,era,runOnData,runWithAOD):
                     '/store/data/Run2017F/DoubleMuon/RAW/v1/000/305/112/00000/50180243-7EB3-E711-A516-02163E01A4DD.root'
                 ])
         else:
-            #process.source.fileNames = cms.untracked.vstring('/store/mc/RunIISummer19UL17MiniAOD/DYJetsToEE_M-50_TuneCP5_13TeV-madgraphMLM-pythia8/MINIAODSIM/106X_mc2017_realistic_v6-v2/30000/FB5A928B-75DF-D54E-B930-F1CB916D6930.root')
-            #process.source.fileNames = cms.untracked.vstring('/store/mc/RunIISummer19UL17MiniAOD/TTTo2L2Nu_TuneCP5_erdON_13TeV-powheg-pythia8/MINIAODSIM/106X_mc2017_realistic_v6-v2/40000/E8ADD300-0AFF-1245-B18F-606B3A57F581.root')
-             #process.source.fileNames = cms.untracked.vstring('/store/mc/RunIISummer19UL17MiniAOD/TTTo2L2Nu_TuneCP5CR1_13TeV-powheg-pythia8/MINIAODSIM/106X_mc2017_realistic_v6-v1/10000/04E43816-D0FA-F346-9308-1481C9C2CA99.root')
-             process.source.fileNames = cms.untracked.vstring('/store/mc/RunIISummer20UL17MiniAOD/TTTo2L2Nu_TuneCP5_13TeV-powheg-pythia8/MINIAODSIM/106X_mc2017_realistic_v6-v2/00000/1A27AFB1-15B6-664D-8B11-A39AA0FA1F95.root')
-            #            process.source.fileNames = cms.untracked.vstring('/store/mc/RunIISummer19UL17MiniAOD/CGToBHpm_MH-300_TuneCP5_13TeV_G2HDM-rtc04-rtt06-madgraphMLM-pythia8/MINIAODSIM/106X_mc2017_realistic_v6-v1/20000/05BD3CF0-8CE3-3945-ACA1-0773740C9C35.root')
-	    #process.source.fileNames = cms.untracked.vstring(
-# TAToTTQ_MA-200_TuneCP5_13TeV_G2HDM-rtc04
-		#'/store/mc/RunIISummer19UL17MiniAOD/TAToTTQ_MA-200_TuneCP5_13TeV_G2HDM-rtc04-madgraphMLM-pythia8/MINIAODSIM/106X_mc2017_realistic_v6-v1/240000/FC33A962-D05F-D742-9C6D-8639EC6AE7B2.root',
-		#'/store/mc/RunIISummer19UL17MiniAOD/TAToTTQ_MA-200_TuneCP5_13TeV_G2HDM-rtc04-madgraphMLM-pythia8/MINIAODSIM/106X_mc2017_realistic_v6-v1/240000/E4DC354E-C985-7541-9741-0686D657AAE4.root',
-		#'/store/mc/RunIISummer19UL17MiniAOD/TAToTTQ_MA-200_TuneCP5_13TeV_G2HDM-rtc04-madgraphMLM-pythia8/MINIAODSIM/106X_mc2017_realistic_v6-v1/240000/B376BA34-7867-7A40-9B37-D5BF48C3A105.root',
-		#'/store/mc/RunIISummer19UL17MiniAOD/TAToTTQ_MA-200_TuneCP5_13TeV_G2HDM-rtc04-madgraphMLM-pythia8/MINIAODSIM/106X_mc2017_realistic_v6-v1/240000/B1EA091D-6CEA-7241-8F44-3C41BFF7D604.root',
-		#'/store/mc/RunIISummer19UL17MiniAOD/TAToTTQ_MA-200_TuneCP5_13TeV_G2HDM-rtc04-madgraphMLM-pythia8/MINIAODSIM/106X_mc2017_realistic_v6-v1/240000/5582A62F-DCB7-7F44-A580-F4AB576D29AA.root',
-		#'/store/mc/RunIISummer19UL17MiniAOD/TAToTTQ_MA-200_TuneCP5_13TeV_G2HDM-rtc04-madgraphMLM-pythia8/MINIAODSIM/106X_mc2017_realistic_v6-v1/240000/540F50FA-777F-FD49-9F67-2F699C8EC87B.root',
-		#'/store/mc/RunIISummer19UL17MiniAOD/TAToTTQ_MA-200_TuneCP5_13TeV_G2HDM-rtc04-madgraphMLM-pythia8/MINIAODSIM/106X_mc2017_realistic_v6-v1/240000/4E9DD958-E4E1-E54D-BE60-F676EE346DF7.root',
-		#'/store/mc/RunIISummer19UL17MiniAOD/TAToTTQ_MA-200_TuneCP5_13TeV_G2HDM-rtc04-madgraphMLM-pythia8/MINIAODSIM/106X_mc2017_realistic_v6-v1/240000/4B32C334-CFD5-E04A-9317-395CA81B59E5.root',
-                #'/store/mc/RunIISummer19UL17MiniAOD/TAToTTQ_MA-200_TuneCP5_13TeV_G2HDM-rtc04-madgraphMLM-pythia8/MINIAODSIM/106X_mc2017_realistic_v6-v1/240000/DD80867D-3108-4547-B534-662DFDC6C0B8.root',
-                #'/store/mc/RunIISummer19UL17MiniAOD/TAToTTQ_MA-200_TuneCP5_13TeV_G2HDM-rtc04-madgraphMLM-pythia8/MINIAODSIM/106X_mc2017_realistic_v6-v1/240000/FBF330B3-25D3-5A49-A09D-C93B48B25D38.root'
-####################
-# TS0ToTTQ_MS-200_TuneCP5_13TeV_G2HDM-rtc04
-#		'/store/mc/RunIISummer19UL17MiniAOD/TS0ToTTQ_MS-200_TuneCP5_13TeV_G2HDM-rtc04-madgraphMLM-pythia8/MINIAODSIM/106X_mc2017_realistic_v6-v1/240000/F2FBDA10-9C57-A146-AF36-23744470FDDD.root',
-#		'/store/mc/RunIISummer19UL17MiniAOD/TS0ToTTQ_MS-200_TuneCP5_13TeV_G2HDM-rtc04-madgraphMLM-pythia8/MINIAODSIM/106X_mc2017_realistic_v6-v1/240000/56628E60-79AE-3345-878E-EF2F0A117974.root',
-#		'/store/mc/RunIISummer19UL17MiniAOD/TS0ToTTQ_MS-200_TuneCP5_13TeV_G2HDM-rtc04-madgraphMLM-pythia8/MINIAODSIM/106X_mc2017_realistic_v6-v1/240000/4DDA4659-37DC-0349-9488-55DEE0D5A9AA.root',
-#		'/store/mc/RunIISummer19UL17MiniAOD/TS0ToTTQ_MS-200_TuneCP5_13TeV_G2HDM-rtc04-madgraphMLM-pythia8/MINIAODSIM/106X_mc2017_realistic_v6-v1/240000/3AC1827D-F2D9-B540-ACF9-A897C46EDE9C.root',
-#		'/store/mc/RunIISummer19UL17MiniAOD/TS0ToTTQ_MS-200_TuneCP5_13TeV_G2HDM-rtc04-madgraphMLM-pythia8/MINIAODSIM/106X_mc2017_realistic_v6-v1/240000/2457E21F-937C-0C45-A00A-F340FF35470C.root'
-		#)
+            process.source.fileNames = cms.untracked.vstring('/store/mc/RunIISummer19UL17MiniAOD/TTTo2L2Nu_TuneCP5CR1_13TeV-powheg-pythia8/MINIAODSIM/106X_mc2017_realistic_v6-v1/10000/04E43816-D0FA-F346-9308-1481C9C2CA99.root')
     elif '2018' in era:
         if runOnData:
             process.source.fileNames = cms.untracked.vstring('/store/data/Run2018C/SingleMuon/MINIAOD/17Sep2018-v1/00000/AB61FB4F-3A42-4B4F-93E2-78CD7E7CF0A4.root')
@@ -97,3 +73,4 @@ def customTestInputFiles(process,era,runOnData,runWithAOD):
                 ])
         else:
             process.source.fileNames = cms.untracked.vstring('/store/mc/RunIIAutumn18MiniAOD/TTJets_TuneCP5_13TeV-amcatnloFXFX-pythia8/MINIAODSIM/102X_upgrade2018_realistic_v15_ext2-v1/50001/FD88E288-BFD2-F444-AD4C-844482719AA2.root')
+            

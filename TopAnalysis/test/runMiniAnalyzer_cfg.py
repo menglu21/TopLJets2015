@@ -81,7 +81,8 @@ options.parseArguments()
 
 #start process
 from Configuration.StandardSequences.Eras import eras
-process = cms.Process("MiniAnalysis", eras.ctpps_2016)
+#process = cms.Process("MiniAnalysis", eras.ctpps_2016)
+process = cms.Process("MiniAnalysis", eras.Run2_2017)
 
 #get the configuration to apply
 from TopLJets2015.TopAnalysis.EraConfig import getEraConfiguration
@@ -138,8 +139,8 @@ customizeJetTools(process=process,
 process.load("FWCore.MessageService.MessageLogger_cfi")
 process.MessageLogger.cerr.threshold = ''
 #process.maxEvents = cms.untracked.PSet( input = cms.untracked.int32(options.maxEvents) )
-process.maxEvents = cms.untracked.PSet( input = cms.untracked.int32(1000) )
-process.MessageLogger.cerr.FwkReport.reportEvery = 1000
+process.maxEvents = cms.untracked.PSet( input = cms.untracked.int32(2600) )
+process.MessageLogger.cerr.FwkReport.reportEvery = 2000
 
 # set input to process
 process.source = cms.Source("PoolSource",
