@@ -17,14 +17,14 @@ git cms-init
 
 #EGM id
 git cms-merge-topic jainshilpi:ULV1_backport10616_forUsers
-git clone https://github.com/jainshilpi/EgammaPostRecoTools.git -b ULV0 
+git clone https://github.com/jainshilpi/EgammaPostRecoTools.git -b ULV0
 mv EgammaPostRecoTools/python/EgammaPostRecoTools.py RecoEgamma/EgammaTools/python/.
 git clone https://github.com/jainshilpi/EgammaAnalysis-ElectronTools.git -b UL2017SSV2 EgammaAnalysis/ElectronTools/data/
 git cms-addpkg EgammaAnalysis/ElectronTools
 scram b -j 8
 
 #B-fragmentation analyzer
-mkdir TopQuarkAnalysis 
+mkdir TopQuarkAnalysis
 cd TopQuarkAnalysis
 git clone -b 94x https://gitlab.cern.ch/psilva/BFragmentationAnalyzer.git
 scram b -j 8
@@ -72,6 +72,7 @@ before cmsenv and compile before submission.
 
 
 ```
+python scripts/submitToGrid.py -j test/analysis/ExYukawa/samples_UL2017.json -c ${CMSSW_BASE}/src/TopLJets2015/TopAnalysis/test/runMiniAnalyzer_cfg.py --lumi /afs/cern.ch/cms/CAF/CMSCOMM/COMM_DQM/certification/Collisions17/13TeV/Legacy_2017/Cert_294927-306462_13TeV_UL2017_Collisions17_GoldenJSON.txt --era era2017 -s
 python scripts/submitToGrid.py -j data/era2016/samples.json -c ${CMSSW_BASE}/src/TopLJets2015/TopAnalysis/test/runMiniAnalyzer_cfg.py -w grid_2016 --lumi /afs/cern.ch/cms/CAF/CMSCOMM/COMM_DQM/certification/Collisions16/13TeV/Final/Cert_271036-284044_13TeV_PromptReco_Collisions16_JSON.txt --era era2016
 python scripts/submitToGrid.py -j test/analysis/ExYukawa/samples_2017_ttxy.json -c ${CMSSW_BASE}/src/TopLJets2015/TopAnalysis/test/runMiniAnalyzer_cfg.py --only MC -s
 python scripts/submitToGrid.py -j data/era2017/samples.json -c ${CMSSW_BASE}/src/TopLJets2015/TopAnalysis/test/runMiniAnalyzer_cfg.py --only Data -s
@@ -90,6 +91,11 @@ As soon as ntuple production starts to finish, to move from crab output director
 ```
 python scripts/mergeGridOutputs.py -i /store/cmst3/group/top/psilva/ab05162/ -o /store/cmst3/group/top/RunIIReReco/ab05162/
 python scripts/mergeGridOutputs.py -i /store/cmst3/group/top/grid_2016/113427a -o /store/cmst3/group/top/RunIIReReco/113427a_2016
+```
+If condor has a problem, first, do:
+```
+export _CONDOR_SCHEDD_HOST=bigbird15.cern.ch
+export _CONDOR_CREDD_HOST=bigbird15.cern.ch
 ```
 
 ## Luminosity
