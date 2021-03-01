@@ -1,4 +1,5 @@
 {
+"MC13TeV_2017_TAToTTQ_MA-scan_TuneCP5_13TeV_G2HDM-rtc04" : [0.043264,         0, "/TAToTTQ_MA-scan_TuneCP5_13TeV_G2HDM-rtc04-madgraphMLM-pythia8/RunIISummer19UL17MiniAOD-rp_106X_mc2017_realistic_v6-v1/MINIAODSIM", "(~x10) TAToTTQ_rtc04", "#DF0101", true, false, 1],
 "MC13TeV_2017_DY50toInf_fxfx"        : [6077.22, 0,  "/DYJetsToLL_M-50_TuneCP5_13TeV-amcatnloFXFX-pythia8/RunIISummer19UL17MiniAOD-106X_mc2017_realistic_v6-v2/MINIAODSIM", "DY", 42, false, false, 1],
 "MC13TeV_2017_WJets_mlm"             : [61526.7, 0,  "/WJetsToLNu_TuneCP5_13TeV-madgraphMLM-pythia8/RunIISummer19UL17MiniAOD-106X_mc2017_realistic_v6-v2/MINIAODSIM", "Wjets", 600,false,false,1],
 "MC13TeV_2017_TTTo2L2Nu"             : [88.29, 0,     "/TTTo2L2Nu_TuneCP5_13TeV-powheg-pythia8/RunIISummer19UL17MiniAOD-106X_mc2017_realistic_v6-v2/MINIAODSIM", "t#bar{t}", 920, true, false, 1],
