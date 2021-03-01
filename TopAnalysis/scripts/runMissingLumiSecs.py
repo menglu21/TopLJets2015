@@ -14,8 +14,7 @@ def main():
       print 'Base work area is:',WORKAREA
 
       #check if any lumi section is missing
-#####      jsonF='%s/results/notFinishedLumis.json'%job
-      jsonF='%s/results/lumisToProcess.json'%job
+      jsonF='%s/results/notFinishedLumis.json'%job
       print(jsonF)
       runSel=[]
       try:
@@ -23,22 +22,22 @@ def main():
                   data = json.load(missingLumis)
                   runSel=[int(x) for x in data.keys()]
       except:
-            sys.exit(0) 
+            sys.exit(0)
       if len(runSel)==0 : sys.exit(0)
 
       print 'Starting',job
       print '\t %d runs with missing lumi sections'%len(runSel)
-      cfg=job.replace('crab_','')+'_cfg.py'      
+      cfg=job.replace('crab_','')+'_cfg.py'
       newWorkArea='%s_new'%WORKAREA
       newCfg='%s/%s'%(newWorkArea,os.path.basename(cfg.replace('_cfg','_ext_cfg')))
       os.system('mkdir -p %s'%newWorkArea)
       newCfgFile=open(newCfg,'w')
       lumiMaskSet=False
       for line in open(cfg,'r'):
-            newLine=line      
+            newLine=line
             if 'workArea' in newLine      : newLine='config.General.workArea = \"%s\"\n'%newWorkArea
             if 'requestName' in newLine   : newLine=newLine[:-2]+"_ext\"\n"
-            if 'lumiMask' in newLine      : 
+            if 'lumiMask' in newLine      :
                   newLine='config.Data.lumiMask = \"%s\"\n'%os.path.abspath(jsonF)
                   lumiMaskSet=True
             if 'unitsPerJob' in newLine   : newLine='config.Data.unitsPerJob = 5\n'
@@ -51,9 +50,11 @@ def main():
 
       newCfgFile.close()
       print '\t new cfg to process missing lumis @',newCfg
-         
+
+      #print('crab submit -c %s' % newCfg)
       os.system('crab submit -c %s' % newCfg)
       print '\t jobs have been submitted'
+
 
 if __name__ == "__main__":
     main()

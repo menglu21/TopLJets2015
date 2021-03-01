@@ -211,10 +211,10 @@ analysis = cms.EDAnalyzer("MiniAnalyzer",
                           ctppsLocalTracks       = cms.InputTag('ctppsLocalTrackLiteProducer'),
                           tagRecoProtons         = cms.InputTag('ctppsProtons:singleRP'),
                           tagMultiRecoProtons    = cms.InputTag('ctppsProtons:multiRP'),
-                          genPhotonsToken        = cms.InputTag('particleLevel:photons'),
-                          genLeptonsToken        = cms.InputTag('particleLevel:leptons'),
-                          genJetsToken           = cms.InputTag('particleLevel:jets'),
-                          genMetsToken           = cms.InputTag('particleLevel:mets'),
-                          genParticlesToken      = cms.InputTag('packedGenParticles'),
-                          particleLevelToken     = cms.InputTag('particleLevel')
+#                          genPhotonsToken        = cms.InputTag('particleLevel:photons'),
+#                          genLeptonsToken        = cms.InputTag('particleLevel:leptons'),
+#                          genJetsToken           = cms.InputTag('particleLevel:jets'),
+#                          genMetsToken           = cms.InputTag('particleLevel:mets'),
+#                          genParticlesToken      = cms.InputTag('packedGenParticles'),
+#                          particleLevelToken     = cms.InputTag('particleLevel')
 )
