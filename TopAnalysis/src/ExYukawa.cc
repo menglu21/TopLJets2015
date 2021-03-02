@@ -302,9 +302,6 @@ void RunExYukawa(const TString in_fname,
   int N_after_all_selections = 0;
   int Ntotal_after_trig = 0;
 
-
-
-
   /*
   int Ntotal_lepton = 0;
   int Ntotal_after_samesign = 0;
@@ -319,90 +316,72 @@ void RunExYukawa(const TString in_fname,
       t->GetEntry(iev);
       if(iev%1000==0) { printf("\r [%3.0f%%] done", 100.*(float)iev/(float)nentries); fflush(stdout); }
       //trigger
-      //bool hasMTrigger(false);
-      int passtrigger = 0;
-      //if(era.Contains("2016")) hasMTrigger=(selector.hasTriggerBit("HLT_IsoMu24_v", ev.triggerBits) );
+      int passtrigger_ee = 0;
+      int passtrigger_mm = 0;
+      int passtrigger_em = 0;
       if(era.Contains("2017")) {
         if (baseMC.Contains("DoubleMuon",TString::kIgnoreCase)){
           int a = selector.hasTriggerBit("HLT_Mu17_TrkIsoVVL_Mu8_TrkIsoVVL_DZ_Mass8_v", ev.triggerBits);
-          int b = selector.hasTriggerBit("HLT_Mu17_TrkIsoVVL_Mu8_TrkIsoVVL_DZ_Mass3p8_v", ev.triggerBits);
-          if (a || b) passtrigger = 1;
-        }
-        if (baseMC.Contains("DoubleEG",TString::kIgnoreCase)){
-          int a = selector.hasTriggerBit("HLT_Mu17_TrkIsoVVL_Mu8_TrkIsoVVL_DZ_Mass8_v", ev.triggerBits);
-          int b = selector.hasTriggerBit("HLT_Mu17_TrkIsoVVL_Mu8_TrkIsoVVL_DZ_Mass3p8_v", ev.triggerBits);
-          int c = selector.hasTriggerBit("HLT_Ele23_Ele12_CaloIdL_TrackIdL_IsoVL_v", ev.triggerBits);
-	  int d = selector.hasTriggerBit("HLT_Ele35_WPTight_Gsf", ev.triggerBits);
-          if (!(a||b) && (c ||d))  passtrigger = 1;
-        }
-        if (baseMC.Contains("MuonEG",TString::kIgnoreCase)){
-          int a = selector.hasTriggerBit("HLT_Mu17_TrkIsoVVL_Mu8_TrkIsoVVL_DZ_Mass8_v", ev.triggerBits);
-          int b = selector.hasTriggerBit("HLT_Mu17_TrkIsoVVL_Mu8_TrkIsoVVL_DZ_Mass3p8_v", ev.triggerBits);
-          int c = selector.hasTriggerBit("HLT_Ele23_Ele12_CaloIdL_TrackIdL_IsoVL_v", ev.triggerBits);
-          int d = selector.hasTriggerBit("HLT_Mu8_TrkIsoVVL_Ele23_CaloIdL_TrackIdL_IsoVL_DZ_v", ev.triggerBits);
-          int e = selector.hasTriggerBit("HLT_Mu23_TrkIsoVVL_Ele12_CaloIdL_TrackIdL_IsoVL_v", ev.triggerBits);
-	  int f = selector.hasTriggerBit("HLT_Ele35_WPTight_Gsf", ev.triggerBits);
-          if (!(a || b || c || f) && (d || e)) passtrigger = 1;
+          int b =0;
+          if(ev.run < 299330){ b = selector.hasTriggerBit("HLT_Mu17_TrkIsoVVL_Mu8_TrkIsoVVL_DZ_v", ev.triggerBits);}
+          if(ev.run > 299330){ b = selector.hasTriggerBit("HLT_Mu17_TrkIsoVVL_Mu8_TrkIsoVVL_DZ_Mass3p8_v", ev.triggerBits);}
+          if (a || b) passtrigger_mm = 1;
         }
         if (baseMC.Contains("SingleMuon",TString::kIgnoreCase)){
           int a = selector.hasTriggerBit("HLT_Mu17_TrkIsoVVL_Mu8_TrkIsoVVL_DZ_Mass8_v", ev.triggerBits);
-          int b = selector.hasTriggerBit("HLT_Mu17_TrkIsoVVL_Mu8_TrkIsoVVL_DZ_Mass3p8_v", ev.triggerBits);
-          int c = selector.hasTriggerBit("HLT_Ele23_Ele12_CaloIdL_TrackIdL_IsoVL_v", ev.triggerBits);
-          int d = selector.hasTriggerBit("HLT_Mu8_TrkIsoVVL_Ele23_CaloIdL_TrackIdL_IsoVL_DZ_v", ev.triggerBits);
+          int b=0;
+          if(ev.run < 299330) {b = selector.hasTriggerBit("HLT_Mu17_TrkIsoVVL_Mu8_TrkIsoVVL_DZ_v", ev.triggerBits);}
+          if(ev.run > 299330) {b = selector.hasTriggerBit("HLT_Mu17_TrkIsoVVL_Mu8_TrkIsoVVL_DZ_Mass3p8_v", ev.triggerBits);}
+          int c = selector.hasTriggerBit("HLT_Mu8_TrkIsoVVL_Ele23_CaloIdL_TrackIdL_IsoVL_DZ_v", ev.triggerBits);
+          int d = selector.hasTriggerBit("HLT_Mu12_TrkIsoVVL_Ele23_CaloIdL_TrackIdL_IsoVL_DZ_v", ev.triggerBits);
           int e = selector.hasTriggerBit("HLT_Mu23_TrkIsoVVL_Ele12_CaloIdL_TrackIdL_IsoVL_v", ev.triggerBits);
-	  int g = selector.hasTriggerBit("HLT_Ele35_WPTight_Gsf", ev.triggerBits);
-          int f = selector.hasTriggerBit("HLT_IsoMu27_v", ev.triggerBits);
-          if (!(a||b||c||d||e||g) && f) passtrigger = 1;
+          int f = selector.hasTriggerBit("HLT_Mu23_TrkIsoVVL_Ele12_CaloIdL_TrackIdL_IsoVL_DZ_v", ev.triggerBits);
+          int g = selector.hasTriggerBit("HLT_IsoMu27_v", ev.triggerBits);
+          if (!(a||b) && g) passtrigger_mm = 1;
+          if (!(c||d||e||f) && g) passtrigger_em = 1;
         }
-/*        if (baseMC.Contains("SingleElectron",TString::kIgnoreCase)){
-          int a = selector.hasTriggerBit("HLT_Mu17_TrkIsoVVL_Mu8_TrkIsoVVL_DZ_Mass8_v", ev.triggerBits);
-          int b = selector.hasTriggerBit("HLT_Mu17_TrkIsoVVL_Mu8_TrkIsoVVL_DZ_Mass3p8_v", ev.triggerBits);
-          int c = selector.hasTriggerBit("HLT_Ele23_Ele12_CaloIdL_TrackIdL_IsoVL_v", ev.triggerBits);
-          int d = selector.hasTriggerBit("HLT_Mu8_TrkIsoVVL_Ele23_CaloIdL_TrackIdL_IsoVL_DZ_v", ev.triggerBits);
+        if (baseMC.Contains("DoubleEG",TString::kIgnoreCase)){
+          int a = selector.hasTriggerBit("HLT_Ele23_Ele12_CaloIdL_TrackIdL_IsoVL_v", ev.triggerBits);
+          int b = selector.hasTriggerBit("HLT_Ele23_Ele12_CaloIdL_TrackIdL_IsoVL_DZ_v ", ev.triggerBits);
+          if (a||b) passtrigger_ee = 1;
+        }
+        if (baseMC.Contains("SingleElectron",TString::kIgnoreCase)){
+          int a = selector.hasTriggerBit("HLT_Ele23_Ele12_CaloIdL_TrackIdL_IsoVL_v", ev.triggerBits);
+          int b = selector.hasTriggerBit("HLT_Ele23_Ele12_CaloIdL_TrackIdL_IsoVL_DZ_v ", ev.triggerBits);
+          int c = selector.hasTriggerBit("HLT_Mu8_TrkIsoVVL_Ele23_CaloIdL_TrackIdL_IsoVL_DZ_v", ev.triggerBits);
+          int d = selector.hasTriggerBit("HLT_Mu12_TrkIsoVVL_Ele23_CaloIdL_TrackIdL_IsoVL_DZ_v", ev.triggerBits);
           int e = selector.hasTriggerBit("HLT_Mu23_TrkIsoVVL_Ele12_CaloIdL_TrackIdL_IsoVL_v", ev.triggerBits);
-          int f = selector.hasTriggerBit("HLT_IsoMu27_v", ev.triggerBits);
-          int g = selector.hasTriggerBit("HLT_Ele35_WPTight_Gsf", ev.triggerBits);
-          if (!(a||b||c||d||e||f) && g) passtrigger = 1;
-        }*/
+          int f = selector.hasTriggerBit("HLT_Mu23_TrkIsoVVL_Ele12_CaloIdL_TrackIdL_IsoVL_DZ_v", ev.triggerBits);
+          int g = selector.hasTriggerBit("HLT_Ele32_WPTight_Gsf_L1DoubleEG_v", ev.triggerBits);
+          int h = selector.hasTriggerBit("HLT_Ele35_WPTight_Gsf_v", ev.triggerBits);
+          if (!(a||b) && (g||h)) passtrigger_ee = 1;
+          if (!(c||d||e||f) && (g||h)) passtrigger_em = 1;
+        }
+        if (baseMC.Contains("MuonEG",TString::kIgnoreCase)){
+          int a = selector.hasTriggerBit("HLT_Mu8_TrkIsoVVL_Ele23_CaloIdL_TrackIdL_IsoVL_DZ_v", ev.triggerBits);
+          int b = selector.hasTriggerBit("HLT_Mu12_TrkIsoVVL_Ele23_CaloIdL_TrackIdL_IsoVL_DZ_v", ev.triggerBits);
+          int c = selector.hasTriggerBit("HLT_Mu23_TrkIsoVVL_Ele12_CaloIdL_TrackIdL_IsoVL_v", ev.triggerBits);
+          int d = selector.hasTriggerBit("HLT_Mu23_TrkIsoVVL_Ele12_CaloIdL_TrackIdL_IsoVL_DZ_v", ev.triggerBits);
+          if (a || b || c || d) passtrigger_em = 1;
+        }
         if (baseMC.Contains("MC",TString::kIgnoreCase)){
           int a = selector.hasTriggerBit("HLT_Mu17_TrkIsoVVL_Mu8_TrkIsoVVL_DZ_Mass8_v", ev.triggerBits);
           int b = selector.hasTriggerBit("HLT_Mu17_TrkIsoVVL_Mu8_TrkIsoVVL_DZ_Mass3p8_v", ev.triggerBits);
-          int c = selector.hasTriggerBit("HLT_Ele23_Ele12_CaloIdL_TrackIdL_IsoVL_v", ev.triggerBits);
-          int d = selector.hasTriggerBit("HLT_Mu8_TrkIsoVVL_Ele23_CaloIdL_TrackIdL_IsoVL_DZ_v", ev.triggerBits);
-          int e = selector.hasTriggerBit("HLT_Mu23_TrkIsoVVL_Ele12_CaloIdL_TrackIdL_IsoVL_v", ev.triggerBits);
-          int f = selector.hasTriggerBit("HLT_IsoMu27_v", ev.triggerBits);
-          int g = selector.hasTriggerBit("HLT_Ele35_WPTight_Gsf", ev.triggerBits);
-          if (a || b || c || d || e || f || g) passtrigger=1;
-    }
-/*
-	hasMTrigger=(
-    // previous random selection
-    //    selector.hasTriggerBit("HLT_IsoMu24_v", ev.triggerBits) ||
-    //			  selector.hasTriggerBit("HLT_Mu50_v", ev.triggerBits) ||
-    //			  selector.hasTriggerBit("HLT_Mu17_TrkIsoVVL_Mu8_TrkIsoVVL_DZ_Mass8_v", ev.triggerBits) ||
-    //			  selector.hasTriggerBit("HLT_Mu17_TrkIsoVVL_Mu8_TrkIsoVVL_DZ_Mass3p8_v", ev.triggerBits) ||
-    //    selector.hasTriggerBit("HLT_Ele35_WPTight_Gsf_v", ev.triggerBits) ||
-    //    selector.hasTriggerBit("HLT_Ele32_WPTight_Gsf_L1DoubleEG_v", ev.triggerBits) ||
-    //    selector.hasTriggerBit("HLT_Ele23_Ele12_CaloIdL_TrackIdL_IsoVL_v", ev.triggerBits) || // OK
-    //    selector.hasTriggerBit("HLT_Photon200_v", ev.triggerBits)
-
-    //From AN2019_140_v3
-
-        // emu triggers
-        selector.hasTriggerBit("HLT_Mu8_TrkIsoVVL_Ele23_CaloIdL_TrackIdL_IsoVL_DZ_v", ev.triggerBits) || //??
-        selector.hasTriggerBit("HLT_Mu23_TrkIsoVVL_Ele12_CaloIdL_TrackIdL_IsoVL_v", ev.triggerBits) ||
-        selector.hasTriggerBit("HLT_Ele35_WPTight_Gsf", ev.triggerBits) ||
-        selector.hasTriggerBit("HLT_IsoMu27_v", ev.triggerBits) ||
-        // ee triggers
-        selector.hasTriggerBit("HLT_Ele23_Ele12_CaloIdL_TrackIdL_IsoVL_v", ev.triggerBits) ||
-        selector.hasTriggerBit("HLT_Ele35_WPTight_Gsf_v", ev.triggerBits) || //latest one used
-        // mumu triggers
-        selector.hasTriggerBit("HLT_Mu17_TrkIsoVVL_Mu8_TrkIsoVVL_DZ_Mass8_v", ev.triggerBits) ||
-        selector.hasTriggerBit("HLT_IsoMu27_v", ev.triggerBits) //latest one used
-
-      );
-      */
-      }
+          int c = selector.hasTriggerBit("HLT_Mu17_TrkIsoVVL_Mu8_TrkIsoVVL_DZ_v", ev.triggerBits);
+          int d = selector.hasTriggerBit("HLT_IsoMu27_v", ev.triggerBits);
+          int e = selector.hasTriggerBit("HLT_Ele23_Ele12_CaloIdL_TrackIdL_IsoVL_v", ev.triggerBits);
+          int f = selector.hasTriggerBit("HLT_Ele23_Ele12_CaloIdL_TrackIdL_IsoVL_DZ_v ", ev.triggerBits);
+          int g = selector.hasTriggerBit("HLT_Ele32_WPTight_Gsf_L1DoubleEG_v", ev.triggerBits);
+          int h = selector.hasTriggerBit("HLT_Ele35_WPTight_Gsf_v", ev.triggerBits);
+          int i = selector.hasTriggerBit("HLT_Mu8_TrkIsoVVL_Ele23_CaloIdL_TrackIdL_IsoVL_DZ_v", ev.triggerBits);
+          int j = selector.hasTriggerBit("HLT_Mu12_TrkIsoVVL_Ele23_CaloIdL_TrackIdL_IsoVL_DZ_v", ev.triggerBits);
+          int k = selector.hasTriggerBit("HLT_Mu23_TrkIsoVVL_Ele12_CaloIdL_TrackIdL_IsoVL_v", ev.triggerBits);
+          int l = selector.hasTriggerBit("HLT_Mu23_TrkIsoVVL_Ele12_CaloIdL_TrackIdL_IsoVL_DZ_v", ev.triggerBits);
+          if (a||b||c||d) passtrigger_mm = 1;
+          if (e||f||g||h) passtrigger_ee = 1;
+          if (d||g||h||i||j||k||l) passtrigger_em = 1;
+        }
+     }
 
      Ntotal++;
 //      cout << "Trigger = "<<hasMTrigger << endl;
@@ -413,10 +392,10 @@ void RunExYukawa(const TString in_fname,
 
       //if(!hasMTrigger) continue;
       //cout<<dimutrig<<dielectrig<<mueltrig<<singmutrig<<singeltrig<<endl;
-      if (!passtrigger) continue;
+     // if (!passtrigger) continue;
 
 
-      Ntotal_after_trig++;
+      //Ntotal_after_trig++;
 
       //select two offline muons
       std::vector<Particle> flaggedleptons = selector.flaggedLeptons(ev);
@@ -451,10 +430,38 @@ void RunExYukawa(const TString in_fname,
       int dielectron_event = 0;
       int emu_event = 0;
       int mue_event = 0;
-      if (leptons[0].id() == 11 && leptons[1].id() == 11) dielectron_event = 1;
-      if (leptons[0].id() == 13 && leptons[1].id() == 13) dimuon_event = 1;
-      if (leptons[0].id() == 11 && leptons[1].id() == 13) emu_event = 1;
-      if (leptons[0].id() == 13 && leptons[1].id() == 11) mue_event = 1;
+//      if (leptons[0].id() == 11 && leptons[1].id() == 11) dielectron_event = 1;
+//      if (leptons[0].id() == 13 && leptons[1].id() == 13) dimuon_event = 1;
+//      if (leptons[0].id() == 11 && leptons[1].id() == 13) emu_event = 1;
+//      if (leptons[0].id() == 13 && leptons[1].id() == 11) mue_event = 1;
+      if (baseMC.Contains("DoubleMuon",TString::kIgnoreCase)){
+                if (!((leptons[0].id() == 13 && leptons[1].id() == 13) && passtrigger_mm)) continue;
+                dimuon_event=1;
+        }
+        if (baseMC.Contains("DoubleEG",TString::kIgnoreCase)){
+                if (!((leptons[0].id() == 11 && leptons[1].id() == 11) && passtrigger_ee)) continue;
+                dielectron_event = 1;
+        }
+        if (baseMC.Contains("MuonEG",TString::kIgnoreCase)){
+                if (!((leptons[0].id()+leptons[1].id())==24 && passtrigger_em)) continue;
+                if (leptons[0].id() == 11 && leptons[1].id() == 13) emu_event = 1;
+                if (leptons[0].id() == 13 && leptons[1].id() == 11) mue_event = 1;
+        }
+        if (baseMC.Contains("SingleElectron",TString::kIgnoreCase)){
+                if (!(((leptons[0].id() == 11 && leptons[1].id() == 11) && passtrigger_ee) || ((leptons[0].id()+leptons[1].id())==24 && passtrigger_em))) continue;
+                if ((leptons[0].id()+leptons[1].id())==24) emu_event = 1;
+                else dielectron_event = 1;
+        }
+        if (baseMC.Contains("SingleMuon",TString::kIgnoreCase)){
+                if (!(((leptons[0].id() == 13 && leptons[1].id() == 13) && passtrigger_mm) || ((leptons[0].id()+leptons[1].id())==24 && passtrigger_em))) continue;
+                if ((leptons[0].id()+leptons[1].id())==24) emu_event = 1;
+                else dimuon_event = 1;
+        }
+        if (baseMC.Contains("MC",TString::kIgnoreCase)){
+                if ((leptons[0].id() == 11 && leptons[1].id() == 11) && passtrigger_ee) dielectron_event = 1;
+                if ((leptons[0].id() == 13 && leptons[1].id() == 13) && passtrigger_mm) dimuon_event = 1;
+                if (((leptons[0].id() + leptons[1].id()) == 24) && passtrigger_em) emu_event = 1;
+        }
 
       std::vector<TString> tags2={"inc"};
       if (dimuon_event) tags2.push_back("mm");
