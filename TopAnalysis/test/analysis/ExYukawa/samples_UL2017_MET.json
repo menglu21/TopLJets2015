@@ -1,0 +1,8 @@
+{
+  "Data13TeV_2017A_MET"     : [1,       1, "/MET/Run2017A-09Aug2019_UL2017_rsb-v1/MINIAOD", "Data", 1, false, false, 0],
+  "Data13TeV_2017B_MET"     : [1,       1, "/MET/Run2017B-09Aug2019_UL2017_rsb-v1/MINIAOD", "Data", 1, false, false, 0],
+  "Data13TeV_2017C_MET"     : [1,       1, "/MET/Run2017C-09Aug2019_UL2017_rsb-v1/MINIAOD", "Data", 1, false, false, 0],
+  "Data13TeV_2017D_MET"     : [1,       1, "/MET/Run2017D-09Aug2019_UL2017_rsb-v1/MINIAOD", "Data", 1, false, false, 0],
+  "Data13TeV_2017E_MET"     : [1,       1, "/MET/Run2017E-09Aug2019_UL2017_rsb-v1/MINIAOD", "Data", 1, false, false, 0],
+  "Data13TeV_2017F_MET"     : [1,       1, "/MET/Run2017F-09Aug2019_UL2017_rsb-v1/MINIAOD", "Data", 1, false, false, 0]
+}

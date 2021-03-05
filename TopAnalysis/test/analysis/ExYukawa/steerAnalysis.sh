@@ -109,8 +109,8 @@ case $WHAT in
 	;;
 
     PLOT )
-  plotinputdir="/eos/user/e/efe/DataAnalysis/ntuples_and_plots/Prod_7Oct/"
-  plotoutdir="/eos/user/e/efe/www/exyukawa/7oct_w_tree"
+  plotinputdir="/eos/user/e/efe/DataAnalysis/ntuples_and_plots/1Mars/"
+  plotoutdir="/eos/user/e/efe/www/exyukawa/1mars"
   mkdir -p ${plotoutdir}
   wget https://raw.githubusercontent.com/efeyazgan/TopLJets2015/106_protonreco/TopAnalysis/test/index.php -P ${plotoutdir}
   commonOpts="-i ${outdir} -l ${lumi} --mcUnc ${lumiUnc}"
