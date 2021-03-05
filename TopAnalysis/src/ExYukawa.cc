@@ -124,6 +124,8 @@ void RunExYukawa(const TString in_fname,
 
 
   ht.addHist("ratevsrun",    new TH1F("ratevsrun",   ";Run number; #sigma [pb]",int(lumiPerRun.size()),0,float(lumiPerRun.size())));
+  ht.addHist("ratevsrun_bc",    new TH1F("ratevsrun_bc",   ";Run number; #sigma [pb]",int(lumiPerRun.size()),0,float(lumiPerRun.size())));
+
   ht.addHist("nmuons",   new TH1F("nmuons",       ";N(muons);Events",6,-0.5,5.5));
   ht.addHist("nelectrons",   new TH1F("nelectrons",       ";N(electrons);Events",6,-0.5,5.5));
   ht.addHist("nelmu",   new TH1F("nelmu",       ";N(elmu);Events",6,-0.5,5.5));
@@ -187,6 +189,7 @@ void RunExYukawa(const TString in_fname,
   for(auto key : lumiPerRun) {
     i++;
     ht.getPlots()["ratevsrun"]->GetXaxis()->SetBinLabel(i,Form("%d",key.first));
+    ht.getPlots()["ratevsrun_bc"]->GetXaxis()->SetBinLabel(i,Form("%d",key.first));
   }
 
 
@@ -387,6 +390,10 @@ void RunExYukawa(const TString in_fname,
 //      cout << "Trigger = "<<hasMTrigger << endl;
 //      if(ev.isData && !hasMTrigger) continue;
 
+
+
+
+
       ht.fill("h_scan_mass_bc",ev.scan_mass,1);
 
 
@@ -424,6 +431,18 @@ void RunExYukawa(const TString in_fname,
       //if (leptons[0].pt() < 40. && leptons[0].id() == 11) continue;
       if (leptons[1].pt() < 20.) continue;
       if (leptons.size() > 2 && leptons[2].pt() > 20.) continue;
+
+      if(ev.isData){
+        std::map<Int_t,Float_t>::iterator rIt=lumiPerRun.find(ev.run);
+        if(rIt!=lumiPerRun.end()){
+          int runBin=std::distance(lumiPerRun.begin(),rIt);
+          float lumi=1./rIt->second;
+          ht.fill("ratevsrun_bc",runBin,lumi,"test");
+        }else{
+          cout << "[Warning] Unable to find run=" << ev.run << endl;
+        }
+      }
+
 
 
       int dimuon_event = 0;
