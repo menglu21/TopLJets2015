@@ -1,0 +1,34 @@
+------------MC13TeV_2017_TAToTTQ_MA-scan_TuneCP5_13TeV_G2HDM-rtc04--------------
+* ee_compare_ctag1.Total: 266.287589338 2.MC: 62.0696239884 3.Loose: 167.009292311 4.Medium: 117.978512045 5.Tight: 48.4813807592 Efficiency: 29.0%
+* ee_compare_ctag_c1.Total: 0.0 2.MC: 62.0696239884 3.Loose: 55.9035676978 4.Medium: 40.8414426449 5.Tight: 15.4265064259 Efficiency: 27.6%
+* ee_compare_ctag_b1.Total: 0.0 2.MC: 114.373886165 3.Loose: 36.7401762674 4.Medium: 34.9597661762 5.Tight: 28.5924477683 Efficiency: 77.8%
+* ee_compare_ctag_udsg1.Total: 0.0 2.MC: 89.8478256336 3.Loose: 74.3667773748 4.Medium: 42.1776631543 5.Tight: 4.46247262749 Efficiency: 6.0%
+* emu_compare_ctag1.Total: 760.584041872 2.MC: 177.137104895 3.Loose: 476.59289416 4.Medium: 338.646023733 5.Tight: 138.586871967 Efficiency: 29.1%
+* emu_compare_ctag_c1.Total: 0.0 2.MC: 177.137104895 3.Loose: 159.319714999 4.Medium: 117.353854979 5.Tight: 44.7253313629 Efficiency: 28.1%
+* emu_compare_ctag_b1.Total: 0.0 2.MC: 326.093686659 3.Loose: 104.665376574 4.Medium: 99.3937797973 5.Tight: 81.3612270027 Efficiency: 77.7%
+* emu_compare_ctag_udsg1.Total: 0.0 2.MC: 257.310911512 3.Loose: 212.622224034 4.Medium: 121.906448714 5.Tight: 12.4999360094 Efficiency: 5.9%
+* mm_compare_ctag1.Total: 546.208849169 2.MC: 127.079526668 3.Loose: 341.463651153 4.Medium: 243.062891913 5.Tight: 99.0797703364 Efficiency: 29.0%
+* mm_compare_ctag_c1.Total: 0.0 2.MC: 127.079526668 3.Loose: 114.121847371 4.Medium: 84.0500989726 5.Tight: 32.0308323865 Efficiency: 28.1%
+* mm_compare_ctag_b1.Total: 0.0 2.MC: 233.869975161 3.Loose: 74.6223193202 4.Medium: 71.0699067014 5.Tight: 58.2036182738 Efficiency: 78.0%
+* mm_compare_ctag_udsg1.Total: 0.0 2.MC: 185.307551207 3.Loose: 152.727950968 4.Medium: 87.9432298656 5.Tight: 8.84461199142 Efficiency: 5.8%
+* inc_compare_ctag1.Total: 1573.36334941 2.MC: 366.278465011 3.Loose: 985.172702139 4.Medium: 699.691134845 5.Tight: 286.144569239 Efficiency: 29.0%
+* inc_compare_ctag_c1.Total: 0.0 2.MC: 366.278465011 3.Loose: 329.339466083 4.Medium: 242.243580852 5.Tight: 92.1828801345 Efficiency: 28.0%
+* inc_compare_ctag_b1.Total: 0.0 2.MC: 674.331762351 3.Loose: 216.027066604 4.Medium: 205.42307038 5.Tight: 168.157431415 Efficiency: 77.8%
+* inc_compare_ctag_udsg1.Total: 0.0 2.MC: 532.439219609 3.Loose: 439.697545001 4.Medium: 252.024985258 5.Tight: 25.8070225878 Efficiency: 5.9%
+------------Total------------
+* ee_compare_ctag1.Total: 266.287589338 2.MC: 62.0696239884 3.Loose: 167.009292311 4.Medium: 117.978512045 5.Tight: 48.4813807592 Efficiency: 29.0%
+* ee_compare_ctag_c1.Total: 0.0 2.MC: 62.0696239884 3.Loose: 55.9035676978 4.Medium: 40.8414426449 5.Tight: 15.4265064259 Efficiency: 27.6%
+* ee_compare_ctag_b1.Total: 0.0 2.MC: 114.373886165 3.Loose: 36.7401762674 4.Medium: 34.9597661762 5.Tight: 28.5924477683 Efficiency: 77.8%
+* ee_compare_ctag_udsg1.Total: 0.0 2.MC: 89.8478256336 3.Loose: 74.3667773748 4.Medium: 42.1776631543 5.Tight: 4.46247262749 Efficiency: 6.0%
+* emu_compare_ctag1.Total: 760.584041872 2.MC: 177.137104895 3.Loose: 476.59289416 4.Medium: 338.646023733 5.Tight: 138.586871967 Efficiency: 29.1%
+* emu_compare_ctag_c1.Total: 0.0 2.MC: 177.137104895 3.Loose: 159.319714999 4.Medium: 117.353854979 5.Tight: 44.7253313629 Efficiency: 28.1%
+* emu_compare_ctag_b1.Total: 0.0 2.MC: 326.093686659 3.Loose: 104.665376574 4.Medium: 99.3937797973 5.Tight: 81.3612270027 Efficiency: 77.7%
+* emu_compare_ctag_udsg1.Total: 0.0 2.MC: 257.310911512 3.Loose: 212.622224034 4.Medium: 121.906448714 5.Tight: 12.4999360094 Efficiency: 5.9%
+* mm_compare_ctag1.Total: 546.208849169 2.MC: 127.079526668 3.Loose: 341.463651153 4.Medium: 243.062891913 5.Tight: 99.0797703364 Efficiency: 29.0%
+* mm_compare_ctag_c1.Total: 0.0 2.MC: 127.079526668 3.Loose: 114.121847371 4.Medium: 84.0500989726 5.Tight: 32.0308323865 Efficiency: 28.1%
+* mm_compare_ctag_b1.Total: 0.0 2.MC: 233.869975161 3.Loose: 74.6223193202 4.Medium: 71.0699067014 5.Tight: 58.2036182738 Efficiency: 78.0%
+* mm_compare_ctag_udsg1.Total: 0.0 2.MC: 185.307551207 3.Loose: 152.727950968 4.Medium: 87.9432298656 5.Tight: 8.84461199142 Efficiency: 5.8%
+* inc_compare_ctag1.Total: 1573.36334941 2.MC: 366.278465011 3.Loose: 985.172702139 4.Medium: 699.691134845 5.Tight: 286.144569239 Efficiency: 29.0%
+* inc_compare_ctag_c1.Total: 0.0 2.MC: 366.278465011 3.Loose: 329.339466083 4.Medium: 242.243580852 5.Tight: 92.1828801345 Efficiency: 28.0%
+* inc_compare_ctag_b1.Total: 0.0 2.MC: 674.331762351 3.Loose: 216.027066604 4.Medium: 205.42307038 5.Tight: 168.157431415 Efficiency: 77.8%
+* inc_compare_ctag_udsg1.Total: 0.0 2.MC: 532.439219609 3.Loose: 439.697545001 4.Medium: 252.024985258 5.Tight: 25.8070225878 Efficiency: 5.9%

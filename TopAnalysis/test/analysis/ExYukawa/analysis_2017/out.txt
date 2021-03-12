@@ -1,0 +1,604 @@
+---------------------------MC13TeV_2017_DY50toInf_fxfx---------------------------
+Cross section = 6077.22
+Expected number = 252204630.0
+weight = 252204630.0
+2: N_after_lep = 0.157990693435  0.0%
+3: N_after_lep1 = 0.1494567185  0.0%
+4: N_after_lep2 = 0.1494567185  0.0%
+5: N_after_lep3 = 0.149438318243  0.0%
+6: N_after_samesign = 0.00024330426038  0.0%
+7: N_after_jet = 1.11239783402e-05  0.0%
+8: N_after_all = 1.11239783402e-05  0.0%
+------------Control----------
+2: control_n_after_lep = 0.157734574139 100.0%
+3: control_n_after_lep1 = 0.149210106116 94.596%
+4: control_n_after_lep2 = 0.149210106116 94.596%
+5: control_n_after_lep3 = 0.149195004458 94.586%
+---------------------------MC13TeV_2017_WJets_mlm---------------------------
+Cross section = 61526.7
+Expected number = 2553358050.0
+weight = 2553358050.0
+2: N_after_lep = 2.04950086058e-06  0.0%
+3: N_after_lep1 = 1.75269526181e-06  0.0%
+4: N_after_lep2 = 1.75269526181e-06  0.0%
+5: N_after_lep3 = 1.74203411163e-06  0.0%
+6: N_after_samesign = 6.60809636344e-07  0.0%
+7: N_after_jet = 2.38391734797e-07  0.0%
+8: N_after_all = 2.38391734797e-07  0.0%
+------------Control----------
+2: control_n_after_lep = 1.26076157958e-06 100.0%
+3: control_n_after_lep1 = 1.09188570718e-06 86.605%
+4: control_n_after_lep2 = 1.09188570718e-06 86.605%
+5: control_n_after_lep3 = 1.081224557e-06 85.76%
+---------------------------MC13TeV_2017_TTTo2L2Nu---------------------------
+Cross section = 88.29
+Expected number = 3664035.0
+weight = 3664035.0
+2: N_after_lep = 0.158426976763  0.0%
+3: N_after_lep1 = 0.154363629408  0.0%
+4: N_after_lep2 = 0.154363629408  0.0%
+5: N_after_lep3 = 0.15376190102  0.0%
+6: N_after_samesign = 0.00108862342768  0.0%
+7: N_after_jet = 0.000446295296342  0.0%
+8: N_after_all = 0.000446295296342  0.0%
+------------Control----------
+2: control_n_after_lep = 0.157133768604 100.0%
+3: control_n_after_lep1 = 0.153130931547 97.453%
+4: control_n_after_lep2 = 0.153130931547 97.453%
+5: control_n_after_lep3 = 0.15267328039 97.161%
+---------------------------MC13TeV_2017_TTToSemiLeptonic---------------------------
+Cross section = 365.34
+Expected number = 15161610.0
+weight = 15161610.0
+2: N_after_lep = 0.00125124454462  0.0%
+3: N_after_lep1 = 0.00116947201309  0.0%
+4: N_after_lep2 = 0.00116947201309  0.0%
+5: N_after_lep3 = 0.00116034667599  0.0%
+6: N_after_samesign = 0.00055262205467  0.0%
+7: N_after_jet = 0.000380502523853  0.0%
+8: N_after_all = 0.000380502523853  0.0%
+------------Control----------
+2: control_n_after_lep = 0.000655222048636 100.0%
+3: control_n_after_lep1 = 0.000612730199464 93.515%
+4: control_n_after_lep2 = 0.000612730199464 93.515%
+5: control_n_after_lep3 = 0.000607724585166 92.751%
+---------------------------MC13TeV_2017_TTGJets---------------------------
+Cross section = 4.078
+Expected number = 169237.0
+weight = 169237.0
+2: N_after_lep = 0.0193430662039  0.0%
+3: N_after_lep1 = 0.0189107354963  0.0%
+4: N_after_lep2 = 0.0189107354963  0.0%
+5: N_after_lep3 = 0.0185064881225  0.0%
+6: N_after_samesign = 0.00123744527809  0.0%
+7: N_after_jet = 0.00100685025609  0.0%
+8: N_after_all = 0.00100685025609  0.0%
+------------Control----------
+2: control_n_after_lep = 0.0179377361201 100.0%
+3: control_n_after_lep1 = 0.017536765663 97.765%
+4: control_n_after_lep2 = 0.017536765663 97.765%
+5: control_n_after_lep3 = 0.0172690445906 96.272%
+---------------------------MC13TeV_2017_TTGamma_Dilept---------------------------
+Cross section = 0.6343
+Expected number = 26323.45
+weight = 26323.45
+------------Control----------
+---------------------------MC13TeV_2017_tW---------------------------
+Cross section = 35.85
+Expected number = 1487775.0
+weight = 1487775.0
+2: N_after_lep = 0.0348344968515  0.0%
+3: N_after_lep1 = 0.0340535995783  0.0%
+4: N_after_lep2 = 0.0340535995783  0.0%
+5: N_after_lep3 = 0.0339592336095  0.0%
+6: N_after_samesign = 0.000515344154337  0.0%
+7: N_after_jet = 0.000210956237879  0.0%
+8: N_after_all = 0.000210956237879  0.0%
+------------Control----------
+2: control_n_after_lep = 0.034266576462 100.0%
+3: control_n_after_lep1 = 0.0335142788826 97.805%
+4: control_n_after_lep2 = 0.0335142788826 97.805%
+5: control_n_after_lep3 = 0.0334438917926 97.599%
+---------------------------MC13TeV_2017_tbarW---------------------------
+Cross section = 35.85
+Expected number = 1487775.0
+weight = 1487775.0
+2: N_after_lep = 0.0329769954551  0.0%
+3: N_after_lep1 = 0.0321773437317  0.0%
+4: N_after_lep2 = 0.0321773437317  0.0%
+5: N_after_lep3 = 0.032096185023  0.0%
+6: N_after_samesign = 0.000469740127301  0.0%
+7: N_after_jet = 0.000197205030418  0.0%
+8: N_after_all = 0.000197205030418  0.0%
+------------Control----------
+2: control_n_after_lep = 0.0324562559836 100.0%
+3: control_n_after_lep1 = 0.0316844701301 97.622%
+4: control_n_after_lep2 = 0.0316844701301 97.622%
+5: control_n_after_lep3 = 0.0316264445428 97.443%
+---------------------------MC13TeV_2017_t_tch---------------------------
+Cross section = 119.7
+Expected number = 4967550.0
+weight = 4967550.0
+2: N_after_lep = 0.00027007429162  0.0%
+3: N_after_lep1 = 0.000245479059231  0.0%
+4: N_after_lep2 = 0.000245479059231  0.0%
+5: N_after_lep3 = 0.000244224254857  0.0%
+6: N_after_samesign = 8.03366865512e-05  0.0%
+7: N_after_jet = 1.38173128335e-05  0.0%
+8: N_after_all = 1.38173128335e-05  0.0%
+------------Control----------
+2: control_n_after_lep = 0.000183203914276 100.0%
+3: control_n_after_lep1 = 0.000164642200616 89.868%
+4: control_n_after_lep2 = 0.000164642200616 89.868%
+5: control_n_after_lep3 = 0.000163887549206 89.456%
+---------------------------MC13TeV_2017_tbar_tch---------------------------
+Cross section = 119.7
+Expected number = 4967550.0
+weight = 4967550.0
+2: N_after_lep = 0.000275482256257  0.0%
+3: N_after_lep1 = 0.000247791744187  0.0%
+4: N_after_lep2 = 0.000247791744187  0.0%
+5: N_after_lep3 = 0.000246857125603  0.0%
+6: N_after_samesign = 8.66741884238e-05  0.0%
+7: N_after_jet = 1.4169903352e-05  0.0%
+8: N_after_all = 1.4169903352e-05  0.0%
+------------Control----------
+2: control_n_after_lep = 0.000177780129889 100.0%
+3: control_n_after_lep1 = 0.000160802879691 90.45%
+4: control_n_after_lep2 = 0.000160802879691 90.45%
+5: control_n_after_lep3 = 0.000160182942636 90.102%
+---------------------------MC13TeV_2017_t_sch---------------------------
+Cross section = 3.74
+Expected number = 155210.0
+weight = 155210.0
+2: N_after_lep = 0.00111621784527  0.0%
+3: N_after_lep1 = 0.00101668415118  0.0%
+4: N_after_lep2 = 0.00101668415118  0.0%
+5: N_after_lep3 = 0.00100738978654  0.0%
+6: N_after_samesign = 0.000510135102559  0.0%
+7: N_after_jet = 7.06765007408e-05  0.0%
+8: N_after_all = 7.06765007408e-05  0.0%
+------------Control----------
+2: control_n_after_lep = 0.000555664883905 100.0%
+3: control_n_after_lep1 = 0.000503235350152 90.565%
+4: control_n_after_lep2 = 0.000503235350152 90.565%
+5: control_n_after_lep3 = 0.000497254762195 89.488%
+---------------------------MC13TeV_2017_ZZ---------------------------
+Cross section = 0.5644
+Expected number = 23422.6
+weight = 23422.6
+2: N_after_lep = 0.0410947613418  0.0%
+3: N_after_lep1 = 0.0405759476125  0.0%
+4: N_after_lep2 = 0.0405759476125  0.0%
+5: N_after_lep3 = 0.0383530668914  0.0%
+6: N_after_samesign = 0.00062159250956  0.0%
+7: N_after_jet = 7.93857034296e-05  0.0%
+8: N_after_all = 7.93857034296e-05  0.0%
+------------Control----------
+2: control_n_after_lep = 0.0396208539605 100.0%
+3: control_n_after_lep1 = 0.0391287840903 98.758%
+4: control_n_after_lep2 = 0.0391287840903 98.758%
+5: control_n_after_lep3 = 0.0377315320075 95.231%
+---------------------------MC13TeV_2017_WZ---------------------------
+Cross section = 47.13
+Expected number = 1955895.0
+weight = 1955895.0
+2: N_after_lep = 0.0237936466001  0.0%
+3: N_after_lep1 = 0.0234517888166  0.0%
+4: N_after_lep2 = 0.0234517888166  0.0%
+5: N_after_lep3 = 0.0208667744882  0.0%
+6: N_after_samesign = 0.00169334316161  0.0%
+7: N_after_jet = 0.000127825091113  0.0%
+8: N_after_all = 0.000127825091113  0.0%
+------------Control----------
+2: control_n_after_lep = 0.0212108734995 100.0%
+3: control_n_after_lep1 = 0.0209357938729 98.703%
+4: control_n_after_lep2 = 0.0209357938729 98.703%
+5: control_n_after_lep3 = 0.0191734822001 90.395%
+---------------------------MC13TeV_2017_WW---------------------------
+Cross section = 12.178
+Expected number = 505387.0
+weight = 505387.0
+2: N_after_lep = 0.0132365243044  0.0%
+3: N_after_lep1 = 0.012627359014  0.0%
+4: N_after_lep2 = 0.012627359014  0.0%
+5: N_after_lep3 = 0.0126225110143  0.0%
+6: N_after_samesign = 5.62169016121e-05  0.0%
+7: N_after_jet = 6.14896100615e-06  0.0%
+8: N_after_all = 6.14896100615e-06  0.0%
+------------Control----------
+2: control_n_after_lep = 0.0131760016084 100.0%
+3: control_n_after_lep1 = 0.0125691725407 95.394%
+4: control_n_after_lep2 = 0.0125691725407 95.394%
+5: control_n_after_lep3 = 0.0125662928913 95.373%
+---------------------------MC13TeV_2017_QCDEM_50to80---------------------------
+Cross section = 2890800
+Expected number = 1.199682e+11
+weight = 1.199682e+11
+------------Control----------
+---------------------------MC13TeV_2017_QCDEM_80to120---------------------------
+Cross section = 350000
+Expected number = 14525000000.0
+weight = 14525000000.0
+------------Control----------
+---------------------------MC13TeV_2017_QCDEM_120to170---------------------------
+Cross section = 62964
+Expected number = 2613006000.0
+weight = 2613006000.0
+2: N_after_lep = 2.74110135479e-07  0.0%
+3: N_after_lep1 = 1.7925293605e-07  0.0%
+4: N_after_lep2 = 1.7925293605e-07  0.0%
+5: N_after_lep3 = 1.7925293605e-07  0.0%
+6: N_after_samesign = 8.95342893159e-08  0.0%
+7: N_after_jet = 8.95342893159e-08  0.0%
+8: N_after_all = 8.95342893159e-08  0.0%
+------------Control----------
+2: control_n_after_lep = 1.84575839057e-07 100.0%
+3: control_n_after_lep1 = 8.97186396287e-08 48.608%
+4: control_n_after_lep2 = 8.97186396287e-08 48.608%
+5: control_n_after_lep3 = 8.97186396287e-08 48.608%
+---------------------------MC13TeV_2017_QCDEM_170to300---------------------------
+Cross section = 18810
+Expected number = 780615000.0
+weight = 780615000.0
+------------Control----------
+---------------------------MC13TeV_2017_QCDEM_300toInf---------------------------
+Cross section = 1350
+Expected number = 56025000.0
+weight = 56025000.0
+2: N_after_lep = 3.76628349841e-06  0.0%
+3: N_after_lep1 = 3.44431737176e-06  0.0%
+4: N_after_lep2 = 3.44431737176e-06  0.0%
+5: N_after_lep3 = 3.44431737176e-06  0.0%
+6: N_after_samesign = 2.98515061559e-07  0.0%
+7: N_after_jet = 2.98515061559e-07  0.0%
+8: N_after_all = 2.98515061559e-07  0.0%
+------------Control----------
+2: control_n_after_lep = 3.46776846527e-06 100.0%
+3: control_n_after_lep1 = 3.14580233862e-06 90.715%
+4: control_n_after_lep2 = 3.14580233862e-06 90.715%
+5: control_n_after_lep3 = 3.14580233862e-06 90.715%
+---------------------------MC13TeV_2017_ttHToNonbb_M125---------------------------
+Cross section = 0.5638
+Expected number = 23397.7
+weight = 23397.7
+------------Control----------
+---------------------------Data13TeV_2017B_SingleMuon---------------------------
+2: N_after_lep = 409178.0  0.613%
+3: N_after_lep1 = 393893.0  0.59%
+4: N_after_lep2 = 393893.0  0.59%
+5: N_after_lep3 = 393789.0  0.59%
+6: N_after_samesign = 1131.0  0.002%
+7: N_after_jet = 218.0  0.0%
+8: N_after_all = 218.0  0.0%
+------------Control----------
+2: control_n_after_lep = 407893.0 100.0%
+3: control_n_after_lep1 = 392743.0 96.286%
+4: control_n_after_lep2 = 392743.0 96.286%
+5: control_n_after_lep3 = 392658.0 96.265%
+---------------------------Data13TeV_2017C_SingleMuon---------------------------
+2: N_after_lep = 551626.0  0.445%
+3: N_after_lep1 = 531264.0  0.428%
+4: N_after_lep2 = 531264.0  0.428%
+5: N_after_lep3 = 531217.0  0.428%
+6: N_after_samesign = 867.0  0.001%
+7: N_after_jet = 180.0  0.0%
+8: N_after_all = 180.0  0.0%
+------------Control----------
+2: control_n_after_lep = 550647.0 100.0%
+3: control_n_after_lep1 = 530385.0 96.32%
+4: control_n_after_lep2 = 530385.0 96.32%
+5: control_n_after_lep3 = 530350.0 96.314%
+---------------------------Data13TeV_2017D_SingleMuon---------------------------
+2: N_after_lep = 180579.0  0.418%
+3: N_after_lep1 = 173910.0  0.402%
+4: N_after_lep2 = 173910.0  0.402%
+5: N_after_lep3 = 173894.0  0.402%
+6: N_after_samesign = 280.0  0.001%
+7: N_after_jet = 66.0  0.0%
+8: N_after_all = 66.0  0.0%
+------------Control----------
+2: control_n_after_lep = 180261.0 100.0%
+3: control_n_after_lep1 = 173626.0 96.319%
+4: control_n_after_lep2 = 173626.0 96.319%
+5: control_n_after_lep3 = 173614.0 96.313%
+---------------------------Data13TeV_2017E_SingleMuon---------------------------
+2: N_after_lep = 494113.0  0.46%
+3: N_after_lep1 = 475736.0  0.443%
+4: N_after_lep2 = 475736.0  0.443%
+5: N_after_lep3 = 475703.0  0.443%
+6: N_after_samesign = 975.0  0.001%
+7: N_after_jet = 188.0  0.0%
+8: N_after_all = 188.0  0.0%
+------------Control----------
+2: control_n_after_lep = 493013.0 100.0%
+3: control_n_after_lep1 = 474749.0 96.295%
+4: control_n_after_lep2 = 474749.0 96.295%
+5: control_n_after_lep3 = 474728.0 96.291%
+---------------------------Data13TeV_2017F_SingleMuon---------------------------
+2: N_after_lep = 1133488.0  0.619%
+3: N_after_lep1 = 1094949.0  0.598%
+4: N_after_lep2 = 1094949.0  0.598%
+5: N_after_lep3 = 1094855.0  0.598%
+6: N_after_samesign = 2074.0  0.001%
+7: N_after_jet = 411.0  0.0%
+8: N_after_all = 411.0  0.0%
+------------Control----------
+2: control_n_after_lep = 1131135.0 100.0%
+3: control_n_after_lep1 = 1092847.0 96.615%
+4: control_n_after_lep2 = 1092847.0 96.615%
+5: control_n_after_lep3 = 1092781.0 96.609%
+---------------------------Data13TeV_2017B_SingleElectron---------------------------
+------------Control----------
+---------------------------Data13TeV_2017C_SingleElectron---------------------------
+------------Control----------
+---------------------------Data13TeV_2017D_SingleElectron---------------------------
+------------Control----------
+---------------------------Data13TeV_2017E_SingleElectron---------------------------
+------------Control----------
+---------------------------Data13TeV_2017F_SingleElectron---------------------------
+------------Control----------
+---------------------------Data13TeV_2017B_DoubleMuon---------------------------
+2: N_after_lep = 3026587.0  41.334%
+3: N_after_lep1 = 2813935.0  38.43%
+4: N_after_lep2 = 2813935.0  38.43%
+5: N_after_lep3 = 2812868.0  38.415%
+6: N_after_samesign = 1722.0  0.024%
+7: N_after_jet = 418.0  0.006%
+8: N_after_all = 418.0  0.006%
+------------Control----------
+2: control_n_after_lep = 3023863.0 100.0%
+3: control_n_after_lep1 = 2811919.0 92.991%
+4: control_n_after_lep2 = 2811919.0 92.991%
+5: control_n_after_lep3 = 2811146.0 92.965%
+---------------------------Data13TeV_2017C_DoubleMuon---------------------------
+2: N_after_lep = 6349875.0  32.281%
+3: N_after_lep1 = 5896044.0  29.974%
+4: N_after_lep2 = 5896044.0  29.974%
+5: N_after_lep3 = 5893690.0  29.962%
+6: N_after_samesign = 4852.0  0.025%
+7: N_after_jet = 1007.0  0.005%
+8: N_after_all = 1007.0  0.005%
+------------Control----------
+2: control_n_after_lep = 6342224.0 100.0%
+3: control_n_after_lep1 = 5890491.0 92.877%
+4: control_n_after_lep2 = 5890491.0 92.877%
+5: control_n_after_lep3 = 5888838.0 92.851%
+---------------------------Data13TeV_2017D_DoubleMuon---------------------------
+2: N_after_lep = 2826451.0  30.68%
+3: N_after_lep1 = 2623756.0  28.48%
+4: N_after_lep2 = 2623756.0  28.48%
+5: N_after_lep3 = 2622616.0  28.467%
+6: N_after_samesign = 2145.0  0.023%
+7: N_after_jet = 475.0  0.005%
+8: N_after_all = 475.0  0.005%
+------------Control----------
+2: control_n_after_lep = 2823029.0 100.0%
+3: control_n_after_lep1 = 2621251.0 92.852%
+4: control_n_after_lep2 = 2621251.0 92.852%
+5: control_n_after_lep3 = 2620471.0 92.825%
+---------------------------Data13TeV_2017E_DoubleMuon---------------------------
+2: N_after_lep = 6060009.0  31.031%
+3: N_after_lep1 = 5628496.0  28.822%
+4: N_after_lep2 = 5628496.0  28.822%
+5: N_after_lep3 = 5625980.0  28.809%
+6: N_after_samesign = 5926.0  0.03%
+7: N_after_jet = 1210.0  0.006%
+8: N_after_all = 1210.0  0.006%
+------------Control----------
+2: control_n_after_lep = 6050422.0 100.0%
+3: control_n_after_lep1 = 5621803.0 92.916%
+4: control_n_after_lep2 = 5621803.0 92.916%
+5: control_n_after_lep3 = 5620054.0 92.887%
+---------------------------Data13TeV_2017F_DoubleMuon---------------------------
+2: N_after_lep = 8192199.0  31.003%
+3: N_after_lep1 = 7617581.0  28.828%
+4: N_after_lep2 = 7617581.0  28.828%
+5: N_after_lep3 = 7614118.0  28.815%
+6: N_after_samesign = 8289.0  0.031%
+7: N_after_jet = 1792.0  0.007%
+8: N_after_all = 1792.0  0.007%
+------------Control----------
+2: control_n_after_lep = 8178882.0 100.0%
+3: control_n_after_lep1 = 7608280.0 93.023%
+4: control_n_after_lep2 = 7608280.0 93.023%
+5: control_n_after_lep3 = 7605829.0 92.994%
+---------------------------Data13TeV_2017B_DoubleEG---------------------------
+2: N_after_lep = 1362186.0  12.867%
+3: N_after_lep1 = 1301301.0  12.292%
+4: N_after_lep2 = 1301301.0  12.292%
+5: N_after_lep3 = 1300775.0  12.287%
+6: N_after_samesign = 9728.0  0.092%
+7: N_after_jet = 574.0  0.005%
+8: N_after_all = 574.0  0.005%
+------------Control----------
+2: control_n_after_lep = 1351894.0 100.0%
+3: control_n_after_lep1 = 1291405.0 95.526%
+4: control_n_after_lep2 = 1291405.0 95.526%
+5: control_n_after_lep3 = 1291047.0 95.499%
+---------------------------Data13TeV_2017C_DoubleEG---------------------------
+2: N_after_lep = 3163421.0  18.991%
+3: N_after_lep1 = 3015542.0  18.103%
+4: N_after_lep2 = 3015542.0  18.103%
+5: N_after_lep3 = 3014399.0  18.096%
+6: N_after_samesign = 20617.0  0.124%
+7: N_after_jet = 1188.0  0.007%
+8: N_after_all = 1188.0  0.007%
+------------Control----------
+2: control_n_after_lep = 3141484.0 100.0%
+3: control_n_after_lep1 = 2994590.0 95.324%
+4: control_n_after_lep2 = 2994590.0 95.324%
+5: control_n_after_lep3 = 2993782.0 95.298%
+---------------------------Data13TeV_2017D_DoubleEG---------------------------
+2: N_after_lep = 1429534.0  25.83%
+3: N_after_lep1 = 1362276.0  24.614%
+4: N_after_lep2 = 1362276.0  24.614%
+5: N_after_lep3 = 1361789.0  24.606%
+6: N_after_samesign = 8582.0  0.155%
+7: N_after_jet = 528.0  0.01%
+8: N_after_all = 528.0  0.01%
+------------Control----------
+2: control_n_after_lep = 1420427.0 100.0%
+3: control_n_after_lep1 = 1353562.0 95.293%
+4: control_n_after_lep2 = 1353562.0 95.293%
+5: control_n_after_lep3 = 1353207.0 95.268%
+---------------------------Data13TeV_2017E_DoubleEG---------------------------
+2: N_after_lep = 2864185.0  23.989%
+3: N_after_lep1 = 2743231.0  22.976%
+4: N_after_lep2 = 2743231.0  22.976%
+5: N_after_lep3 = 2742189.0  22.967%
+6: N_after_samesign = 18614.0  0.156%
+7: N_after_jet = 1312.0  0.011%
+8: N_after_all = 1312.0  0.011%
+------------Control----------
+2: control_n_after_lep = 2844452.0 100.0%
+3: control_n_after_lep1 = 2724314.0 95.776%
+4: control_n_after_lep2 = 2724314.0 95.776%
+5: control_n_after_lep3 = 2723575.0 95.75%
+---------------------------Data13TeV_2017F_DoubleEG---------------------------
+2: N_after_lep = 3457666.0  21.259%
+3: N_after_lep1 = 3327633.0  20.46%
+4: N_after_lep2 = 3327633.0  20.46%
+5: N_after_lep3 = 3326293.0  20.451%
+6: N_after_samesign = 25123.0  0.154%
+7: N_after_jet = 1777.0  0.011%
+8: N_after_all = 1777.0  0.011%
+------------Control----------
+2: control_n_after_lep = 3431214.0 100.0%
+3: control_n_after_lep1 = 3302145.0 96.238%
+4: control_n_after_lep2 = 3302145.0 96.238%
+5: control_n_after_lep3 = 3301170.0 96.21%
+---------------------------Data13TeV_2017B_MuonEG---------------------------
+2: N_after_lep = 40832.0  1.71%
+3: N_after_lep1 = 38165.0  1.599%
+4: N_after_lep2 = 38165.0  1.599%
+5: N_after_lep3 = 38034.0  1.593%
+6: N_after_samesign = 1503.0  0.063%
+7: N_after_jet = 336.0  0.014%
+8: N_after_all = 336.0  0.014%
+------------Control----------
+2: control_n_after_lep = 39099.0 100.0%
+3: control_n_after_lep1 = 36626.0 93.675%
+4: control_n_after_lep2 = 36626.0 93.675%
+5: control_n_after_lep3 = 36531.0 93.432%
+---------------------------Data13TeV_2017C_MuonEG---------------------------
+2: N_after_lep = 105162.0  1.068%
+3: N_after_lep1 = 93992.0  0.954%
+4: N_after_lep2 = 93992.0  0.954%
+5: N_after_lep3 = 93787.0  0.952%
+6: N_after_samesign = 4425.0  0.045%
+7: N_after_jet = 935.0  0.009%
+8: N_after_all = 935.0  0.009%
+------------Control----------
+2: control_n_after_lep = 99694.0 100.0%
+3: control_n_after_lep1 = 89509.0 89.784%
+4: control_n_after_lep2 = 89509.0 89.784%
+5: control_n_after_lep3 = 89362.0 89.636%
+---------------------------Data13TeV_2017D_MuonEG---------------------------
+2: N_after_lep = 46507.0  1.145%
+3: N_after_lep1 = 41565.0  1.023%
+4: N_after_lep2 = 41565.0  1.023%
+5: N_after_lep3 = 41494.0  1.022%
+6: N_after_samesign = 1944.0  0.048%
+7: N_after_jet = 389.0  0.01%
+8: N_after_all = 389.0  0.01%
+------------Control----------
+2: control_n_after_lep = 44091.0 100.0%
+3: control_n_after_lep1 = 39597.0 89.807%
+4: control_n_after_lep2 = 39597.0 89.807%
+5: control_n_after_lep3 = 39550.0 89.701%
+---------------------------Data13TeV_2017E_MuonEG---------------------------
+2: N_after_lep = 100374.0  1.187%
+3: N_after_lep1 = 89487.0  1.058%
+4: N_after_lep2 = 89487.0  1.058%
+5: N_after_lep3 = 89249.0  1.055%
+6: N_after_samesign = 4721.0  0.056%
+7: N_after_jet = 1077.0  0.013%
+8: N_after_all = 1077.0  0.013%
+------------Control----------
+2: control_n_after_lep = 94461.0 100.0%
+3: control_n_after_lep1 = 84690.0 89.656%
+4: control_n_after_lep2 = 84690.0 89.656%
+5: control_n_after_lep3 = 84528.0 89.485%
+---------------------------Data13TeV_2017F_MuonEG---------------------------
+2: N_after_lep = 134097.0  1.173%
+3: N_after_lep1 = 120165.0  1.051%
+4: N_after_lep2 = 120165.0  1.051%
+5: N_after_lep3 = 119727.0  1.047%
+6: N_after_samesign = 6694.0  0.059%
+7: N_after_jet = 1517.0  0.013%
+8: N_after_all = 1517.0  0.013%
+------------Control----------
+2: control_n_after_lep = 125715.0 100.0%
+3: control_n_after_lep1 = 113361.0 90.173%
+4: control_n_after_lep2 = 113361.0 90.173%
+5: control_n_after_lep3 = 113033.0 89.912%
+---------------------------MC13TeV_2017_TTZToLLNuNu---------------------------
+Cross section = 0.2432
+Expected number = 10092.8
+weight = 10092.8
+2: N_after_lep = 0.128198913182  0.0%
+3: N_after_lep1 = 0.127021834138  0.0%
+4: N_after_lep2 = 0.127021834138  0.0%
+5: N_after_lep3 = 0.101207987522  0.0%
+6: N_after_samesign = 0.0140241756599  0.0%
+7: N_after_jet = 0.0123458375019  0.0%
+8: N_after_all = 0.0123458375019  0.0%
+------------Control----------
+2: control_n_after_lep = 0.106057682657 100.0%
+3: control_n_after_lep1 = 0.105164077948 99.157%
+4: control_n_after_lep2 = 0.105164077948 99.157%
+5: control_n_after_lep3 = 0.0871837690938 82.204%
+---------------------------MC13TeV_2017_TTWJetsToLNu---------------------------
+Cross section = 0.2198
+Expected number = 9121.7
+weight = 9121.7
+2: N_after_lep = 0.099276819732  0.0%
+3: N_after_lep1 = 0.0975709280465  0.0%
+4: N_after_lep2 = 0.0975709280465  0.0%
+5: N_after_lep3 = 0.0899012864102  0.0%
+6: N_after_samesign = 0.0404571938561  0.0%
+7: N_after_jet = 0.0335506302654  0.0%
+8: N_after_all = 0.0335506302654  0.0%
+------------Control----------
+2: control_n_after_lep = 0.0555377752753 100.0%
+3: control_n_after_lep1 = 0.0545315608615 98.188%
+4: control_n_after_lep2 = 0.0545315608615 98.188%
+5: control_n_after_lep3 = 0.0494441644987 89.028%
+---------------------------MC13TeV_2017_tZq_ll---------------------------
+Cross section = 0.07358
+Expected number = 3053.57
+weight = 3053.57
+2: N_after_lep = 0.257773103425  0.0%
+3: N_after_lep1 = 0.255679366644  0.0%
+4: N_after_lep2 = 0.255679366644  0.0%
+5: N_after_lep3 = 0.222130344482  0.0%
+6: N_after_samesign = 0.0203266625904  0.0%
+7: N_after_jet = 0.00933745019574  0.0%
+8: N_after_all = 0.00933745019574  0.0%
+------------Control----------
+2: control_n_after_lep = 0.22693117545 100.0%
+3: control_n_after_lep1 = 0.225412776694 99.331%
+4: control_n_after_lep2 = 0.225412776694 99.331%
+5: control_n_after_lep3 = 0.201803566189 88.927%
+--------Data/MC-------
+2:  Data: 41928069.0    MC: 40615819.3263  MC/Data =  96.8702358467%
+3:  Data: 39382921.0    MC: 38442637.1973  MC/Data =  97.6124579415%
+4:  Data: 39382921.0    MC: 38442637.1973  MC/Data =  97.6124579415%
+5:  Data: 39366466.0    MC: 38429740.8927  MC/Data =  97.6204998759%
+6:  Data: 130212.0    MC: 82179.2576579  MC/Data =  63.1118926504%
+7:  Data: 15598.0    MC: 12710.9496298  MC/Data =  81.4908938952%
+8:  Data: 15598.0    MC: 12710.9496298  MC/Data =  81.4908938952%
+---------Data/MC(Ratio compared to Number after lep selec)------
+2:  Data: 100.0%     MC: 100.0%  MC/Data =  100.0%
+3:  Data: 93.9297276009%     MC: 94.6494194502%  MC/Data =  100.766202424%
+4:  Data: 93.9297276009%     MC: 94.6494194502%  MC/Data =  100.766202424%
+5:  Data: 93.8904818154%     MC: 94.6176675249%  MC/Data =  100.774504183%
+6:  Data: 0.310560450566%     MC: 0.202333127882%  MC/Data =  65.1509641726%
+7:  Data: 0.03720180865%     MC: 0.0312955637498%  MC/Data =  84.1237694766%
+8:  Data: 0.03720180865%     MC: 0.0312955637498%  MC/Data =  84.1237694766%
+---------Control--------
+0:  Data: 41773900.0    MC: 40526490.4678  MC/Data =  97.0139021441%
+1:  Data: 39247893.0    MC: 38357173.1817  MC/Data =  97.7305283158%
+2:  Data: 39247893.0    MC: 38357173.1817  MC/Data =  97.7305283158%
+3:  Data: 39236254.0    MC: 38347559.346  MC/Data =  97.735016564%

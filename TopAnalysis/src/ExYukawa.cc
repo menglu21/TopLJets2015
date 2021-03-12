@@ -24,7 +24,7 @@
 
 using namespace std;
 float DeltaEta(float eta1, float eta2);
-
+bool passCtag(int WP, Float_t CvsL, Float_t CvsB);
 //
 void RunExYukawa(const TString in_fname,
                       TString outname,
@@ -47,6 +47,9 @@ void RunExYukawa(const TString in_fname,
   float minLeptonPt( isLowPUrun ? 20. : 20);
   size_t minJetMultiplicity(3);
   int minNum_btags = 2;
+  int minNum_ctags = 1;
+  //WP for ctagging
+  float ctag_WP = 2; //1:Loose, 2:Medium, 3:Tight 
 
   //CORRECTIONS: LUMINOSITY+PILEUP
   LumiTools lumi(era,genPU);
@@ -177,7 +180,16 @@ void RunExYukawa(const TString in_fname,
   ht.addHist("h_m_top_charm", new TH1F("h_m_top_charm",";m(top,charm) ; Events", 100, 0,1000));
   ht.addHist("h_m_top_charm_x", new TH1F("h_m_top_charm_x",";m(top,charm) ; Events", 100, 0,1000));
 
+  ht.addHist("n_after_selection", new TH1F("n_after_selection", ";Selections ; Events", 9,0,9));
+  ht.addHist("control_n_after_selection", new TH1F("control_n_after_selection", ";Selections ; Events",9,0,9));
 
+  ht.addHist("compare_tagging_result", new TH1F("compare_tagging_result", ";Method ; Events", 5,0,5));
+  ht.addHist("compare_btag", new TH1F("compare_btag", "; ; Events",0,0,5));
+  ht.addHist("compare_ctag", new TH1F("compare_ctag", "; ; Events", 6,-2,4));
+  ht.addHist("compare_ctag_udsg", new TH1F("compare_ctag_udsg", "; ; Events", 6,-2,4));
+  ht.addHist("compare_ctag_b", new TH1F("compare_ctag_b", " ; ; Events", 6, -2, 4 ));
+  ht.addHist("compare_ctag_c", new TH1F("compare_ctag_c", " ; ; Events", 6, -2, 4 ));
+  ht.addHist("compare_2b1ctag", new TH1F("compare_2b1ctag", "; ; Events",11,0,11));
 //  TH1F *a_test1 = new TH1F("a_test1","a_test1",30,0,60);//for debugging
 
 //  ht.addHist("b_matched_jet",  new TH1F("b_matched_jet", ";p_T(b matched jet) [GeV]; Events", 24,0,600));
@@ -297,12 +309,22 @@ void RunExYukawa(const TString in_fname,
   //select 2mu+>=3 jets events triggered by a single muon trigger
 
 
-  int Ntotal = 0;
-  int N_after_all_selections = 0;
-  int Ntotal_after_trig = 0;
+  float Ntotal = 0.;
+  float N_after_all_selections = 0.;
+  float Ntotal_after_trig = 0.;
+  float Ntotal_lepnum = 0.;
+  float Ntotal_lep1_pt = 0.;
+  float Ntotal_lep2_pt = 0.;
+  float Ntotal_lep3_pt = 0.;
+  float Ntotal_samesign = 0.;
+  float Ntotal_njet = 0.;
+  float Ntotal_b = 0.;
+  float Ntotal_c = 0.;  
 
-
-
+  float control_n_lep = 0.;
+  float control_n_lep1 = 0.;
+  float control_n_lep2 = 0.;
+  float control_n_lep3 = 0.;
 
   /*
   int Ntotal_lepton = 0;
@@ -403,7 +425,11 @@ void RunExYukawa(const TString in_fname,
       */
       }
 
-     Ntotal++;
+      float weight = 1.0;
+      weight = (ev.g_nw>0 ? ev.g_w[0] : 1.0);//Counting weights
+
+      Ntotal+=weight;
+
 //      cout << "Trigger = "<<hasMTrigger << endl;
 //      if(ev.isData && !hasMTrigger) continue;
 
@@ -415,7 +441,7 @@ void RunExYukawa(const TString in_fname,
       if (!passtrigger) continue;
 
 
-      Ntotal_after_trig++;
+      Ntotal_after_trig+=weight;
 
       //select two offline muons
       std::vector<Particle> flaggedleptons = selector.flaggedLeptons(ev);
@@ -434,6 +460,93 @@ void RunExYukawa(const TString in_fname,
 		          return a.Pt() > b.Pt();
 	           }
       );
+ 
+      btvSF.addBTagDecisions(ev);
+      if(!ev.isData) btvSF.updateBTagDecisions(ev);
+      std::vector<Jet> allJets = selector.getGoodJets(ev,20.,2.4,leptons,{});
+      bool passJets(allJets.size()>=minJetMultiplicity);
+
+      int dimuon_event = 0;
+      int dielectron_event = 0;
+      int emu_event = 0;
+      int mue_event = 0;
+      if (leptons[0].id() == 11 && leptons[1].id() == 11) dielectron_event = 1;
+      if (leptons[0].id() == 13 && leptons[1].id() == 13) dimuon_event = 1;
+      if (leptons[0].id() == 11 && leptons[1].id() == 13) emu_event = 1;
+      if (leptons[0].id() == 13 && leptons[1].id() == 11) mue_event = 1;
+
+      std::vector<TString> tags2={"inc"};
+      if (dimuon_event) tags2.push_back("mm");
+      if (dielectron_event) tags2.push_back("ee");
+      if (emu_event || mue_event) tags2.push_back("emu");
+
+      float evWgt(1.0);
+
+      if(ev.isData){
+        std::map<Int_t,Float_t>::iterator rIt=lumiPerRun.find(ev.run);
+        if(rIt!=lumiPerRun.end()){
+          int runBin=std::distance(lumiPerRun.begin(),rIt);
+          float lumi=1./rIt->second;
+          ht.fill("ratevsrun",runBin,lumi,tags2);
+        }else{
+          cout << "[Warning] Unable to find run=" << ev.run << endl;
+        }
+      }
+
+      if (!ev.isData) {
+        float normWgt(normH? normH->GetBinContent(1) : 1.0);
+        TString period = lumi.assignRunPeriod();
+        double puWgt(lumi.pileupWeight(ev.g_pu,period)[0]);
+        float muonSF = 1.;
+        float electronSF = 1.;
+        float emuSF = 1.;
+        float dilepton_trig_SF = 1.;
+        if (dimuon_event == 1){
+          EffCorrection_t muon1SF = lepEffH.getMuonSF(leptons[0].pt(),leptons[0].eta());
+          EffCorrection_t muon2SF = lepEffH.getMuonSF(leptons[1].pt(),leptons[1].eta());
+          muonSF = muon1SF.first*muon2SF.first;
+          EffCorrection_t dimuon_pt_trig_factor = lepEffH.getMuMuPtSF(leptons[0].pt(),leptons[1].pt());
+          EffCorrection_t dimuon_eta_trig_factor = lepEffH.getMuMuEtaSF(abs(leptons[0].eta()),abs(leptons[1].eta()));
+          dilepton_trig_SF = dimuon_pt_trig_factor.first*dimuon_eta_trig_factor.first;
+        }
+        if (dielectron_event == 1){
+          EffCorrection_t electron1SF = lepEffH.getElectronSF(leptons[0].pt(),leptons[0].eta());
+          EffCorrection_t electron2SF = lepEffH.getElectronSF(leptons[1].pt(),leptons[1].eta());
+          electronSF = electron1SF.first*electron2SF.first;
+          EffCorrection_t dielectron_pt_trig_factor = lepEffH.getEEPtSF(leptons[0].pt(),leptons[1].pt());
+          EffCorrection_t dielectron_eta_trig_factor = lepEffH.getEEEtaSF(abs(leptons[0].eta()),abs(leptons[1].eta()));
+          dilepton_trig_SF = dielectron_pt_trig_factor.first*dielectron_eta_trig_factor.first;
+        }
+        if (emu_event == 1){
+          EffCorrection_t electron1SF = lepEffH.getElectronSF(leptons[0].pt(),leptons[0].eta());
+          EffCorrection_t muon2SF = lepEffH.getMuonSF(leptons[1].pt(),leptons[1].eta());
+          emuSF = electron1SF.first*muon2SF.first;
+          EffCorrection_t emu_pt_trig_factor = lepEffH.getEMuPtSF(leptons[0].pt(),leptons[1].pt());
+          EffCorrection_t emu_eta_trig_factor = lepEffH.getEMuEtaSF(abs(leptons[0].eta()),abs(leptons[1].eta()));
+          dilepton_trig_SF = emu_pt_trig_factor.first*emu_eta_trig_factor.first;
+        }
+        if (mue_event == 1){
+          EffCorrection_t muon1SF = lepEffH.getMuonSF(leptons[0].pt(),leptons[0].eta());
+          EffCorrection_t electron2SF = lepEffH.getElectronSF(leptons[1].pt(),leptons[1].eta());
+          emuSF = muon1SF.first*electron2SF.first;
+          EffCorrection_t emu_pt_trig_factor = lepEffH.getEMuPtSF(leptons[0].pt(),leptons[1].pt());
+          EffCorrection_t emu_eta_trig_factor = lepEffH.getEMuEtaSF(abs(leptons[0].eta()),abs(leptons[1].eta()));
+          dilepton_trig_SF = emu_pt_trig_factor.first*emu_eta_trig_factor.first;
+        }
+        EffCorrection_t l1prefireProb=l1PrefireWR.getCorrection(allJets,{});
+        float leptonSF = muonSF*electronSF*emuSF;
+
+        evWgt  = normWgt*puWgt*l1prefireProb.first*leptonSF*dilepton_trig_SF;
+        t_normWgt = normWgt;
+        evWgt *= (ev.g_nw>0 ? ev.g_w[0] : 1.0);//generator weights
+      }
+      ht.fill("n_after_selection", 1,evWgt, tags2);
+      Ntotal_lepnum+=evWgt;
+      if (leptons[0].charge()*leptons[1].charge()<0){
+         ht.fill("control_n_after_selection", 1, evWgt, tags2);
+         control_n_lep+=evWgt;
+      }
+
 
 /*
       a_test1->Fill(leptons[0].pt());
@@ -442,10 +555,34 @@ void RunExYukawa(const TString in_fname,
 
       if (leptons[0].pt() < 30.) continue;
       //if (leptons[0].pt() < 40. && leptons[0].id() == 11) continue;
+      Ntotal_lep1_pt+=evWgt;
+      ht.fill("n_after_selection", 2,evWgt, tags2);
+      if (leptons[0].charge()*leptons[1].charge()<0){
+         ht.fill("control_n_after_selection", 2, evWgt, tags2);
+         control_n_lep1+=evWgt;
+      }
+
+
       if (leptons[1].pt() < 20.) continue;
+      Ntotal_lep2_pt+=evWgt;
+      ht.fill("n_after_selection", 3,evWgt, tags2);
+      if (leptons[0].charge()*leptons[1].charge()<0){
+         ht.fill("control_n_after_selection", 3, evWgt, tags2);
+         control_n_lep2+=evWgt;
+      }
+
+
       if (leptons.size() > 2 && leptons[2].pt() > 20.) continue;
+      Ntotal_lep3_pt+=evWgt;
+      ht.fill("n_after_selection", 4,evWgt, tags2);
+      if (leptons[0].charge()*leptons[1].charge()<0){
+         ht.fill("control_n_after_selection", 4, evWgt, tags2);
+         control_n_lep3+=evWgt;
+      }
 
 
+
+/*
       int dimuon_event = 0;
       int dielectron_event = 0;
       int emu_event = 0;
@@ -465,11 +602,13 @@ void RunExYukawa(const TString in_fname,
       if(!ev.isData) btvSF.updateBTagDecisions(ev);
       std::vector<Jet> allJets = selector.getGoodJets(ev,20.,2.4,leptons,{});
       bool passJets(allJets.size()>=minJetMultiplicity);
+*/
 
       //met
       TLorentzVector met(0,0,0,0);
       met.SetPtEtaPhiM(ev.met_pt,0,ev.met_phi,0.);
 
+/*
       //event weight
       float evWgt(1.0);
 
@@ -539,7 +678,7 @@ void RunExYukawa(const TString in_fname,
 
 
       //if (evWgt < 0.) continue;
-
+*/
       float invariant_mass = (leptons[0]+leptons[1]).M();
       ht.fill("control_m_ll_bc",  invariant_mass,        evWgt, tags2);
 
@@ -560,13 +699,51 @@ void RunExYukawa(const TString in_fname,
         }
       }
 
+//////////////////////////
+//Counting btag and ctag//
+//////////////////////////
+/*
+//Comparsion - MC sample
+      int num_MC_btags = 0;
+      int num_MC_ctags = 0;
+      for(size_t ij=0; ij<allJets.size(); ij++){
+        int idx=allJets[ij].getJetIndex();
+        if(fabs(ev.j_pid[idx])==5) {num_MC_btags++; ht.fill("compare_btag",1,evWgt, tags2);}
+        if(fabs(ev.j_pid[idx])==4) {num_MC_ctags++; ht.fill("compare_ctag",1,evWgt, tags2);}
+      }
+//Method 1 - Counting the number of btag and ctag first and put the cut on it.  
       int num_btags = 0;
+      int num_ctags = 0;
       for(size_t ij=0; ij<allJets.size(); ij++){
           int idx=allJets[ij].getJetIndex();
           bool passBtag(ev.j_btag[idx]>0);
-          if(!passBtag) continue;
-		      num_btags++;
+          if(passBtag) {num_btags++; ht.fill("compare_btag",2,evWgt,tags2);}
+          if(passCtag(ctag_WP,ev.j_CvsL[idx],ev.j_CvsB[idx])) {num_ctags++; ht.fill("compare_ctag",2,evWgt,tags2);}
+       }
+//Method 2 - Demand that the events need to have 2b1c tag.
+      bool pass_2b1ctag = 0;
+      if( num_btags>2 && num_ctags>0) pass_2b1ctag=1;
+      if( num_btags==2){
+        for(size_t ij=0; ij<allJets.size(); ij++){
+          int idx=allJets[ij].getJetIndex();
+          if(passCtag(ctag_WP,ev.j_CvsL[idx],ev.j_CvsB[idx])){
+            if(!(ev.j_btag[idx]>0)) pass_2b1ctag=1;
+          }
         }
+      }       
+// - genParton and tagging
+      int num_matching_btags = 0;
+      int num_matching_ctags = 0;
+      for(size_t ij=0; ij<allJets.size(); ij++){
+        int idx=allJets[ij].getJetIndex();
+        if(fabs(ev.j_pid[idx])==5 && ev.j_btag[idx]>0) {num_matching_btags++; ht.fill("compare_btag",3,evWgt,tags2);}
+        if(fabs(ev.j_pid[idx])==4 && passCtag(ctag_WP,ev.j_CvsL[idx].ev.j_CvsB[idx])) {num_matching_ctags++; ht.fill("compare_ctag",3,evWgt,tags2);}
+      }
+      if(!(num_MC_btags < minNum_btags || num_MC_ctags < minNum_ctags)) ht.fill("compare_2b1ctag",1,evWgt,tags2);
+      if(pass_2b1ctag) ht.fill("compare_2b1ctag",2,evWgt,tags2);
+      if(!(num_matching_btags < minNum_btags || num_matching_btags < minNum_ctags)) ht.fill("compare_2b1ctag",3,evWgt,tags2);
+*/
+//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 /*
       if(!passJets) continue;
       if(num_btags < minNum_btags) continue;
@@ -635,6 +812,9 @@ void RunExYukawa(const TString in_fname,
 
 
   if (leptons[0].charge()*leptons[1].charge() < 0) continue;
+  Ntotal_samesign+=evWgt;
+  ht.fill("n_after_selection", 5,evWgt, tags2);
+
 
   invariant_mass = (leptons[0]+leptons[1]).M();
   std::vector<TString> tags3={"inc"};
@@ -645,6 +825,88 @@ void RunExYukawa(const TString in_fname,
  // if(ev.met_pt < 30.) continue;
 
   if (jets.size() < 3) continue;
+  Ntotal_njet+=evWgt;
+  ht.fill("n_after_selection", 6,evWgt, tags2);
+ 
+//////////////////////////
+//Counting btag and ctag//
+//////////////////////////
+
+//Comparsion - MC sample
+      int num_MC_btags = 0;
+      int num_MC_ctags = 0;
+      for(size_t ij=0; ij<allJets.size(); ij++){
+        int idx=allJets[ij].getJetIndex();
+        if(fabs(ev.j_pid[idx])==5) {num_MC_btags++; ht.fill("compare_btag",1,evWgt, tags2); ht.fill("compare_ctag_b",0,evWgt,tags2); ht.fill("compare_ctag",-1,evWgt,tags2);}
+        else if(fabs(ev.j_pid[idx])==4) {num_MC_ctags++; ht.fill("compare_ctag",0,evWgt, tags2); ht.fill("compare_ctag",-1,evWgt,tags2); ht.fill("compare_ctag_c",0,evWgt,tags2);}
+        else if(fabs(ev.j_pid[idx])<4||fabs(ev.j_pid[idx])==21||fabs(ev.j_pid[idx])==9) {ht.fill("compare_ctag_udsg",0,evWgt,tags2); ht.fill("compare_ctag", -1,evWgt,tags2);}
+      }
+//Method 1 - Counting the number of btag and ctag first and put the cut on it.
+      int num_btags = 0;
+      int num_ctags = 0;
+      for(size_t ij=0; ij<allJets.size(); ij++){
+          int idx=allJets[ij].getJetIndex();
+          bool passBtag(ev.j_btag[idx]>0);
+          if(passBtag) {num_btags++; ht.fill("compare_btag",2,evWgt,tags2);}
+       }
+//Method 2 - Demand taht the events need to have 2b1c tag
+      bool pass_2b1ctag = 0;
+      if( num_btags>2 && num_ctags>0) pass_2b1ctag=1;
+      if( num_btags==2){
+        for(size_t ij=0; ij<allJets.size(); ij++){
+          int idx=allJets[ij].getJetIndex();
+          if(passCtag(ctag_WP,ev.j_CvsL[idx],ev.j_CvsB[idx])){
+            if(!(ev.j_btag[idx]>0)) pass_2b1ctag=1;
+          }
+        }
+      }
+//Matching - genParton and tagging
+      int num_matching_btags = 0;
+      int num_matching_ctags = 0;
+      for(size_t ij=0; ij<allJets.size(); ij++){
+        int idx=allJets[ij].getJetIndex();
+        if(fabs(ev.j_pid[idx])==5 && ev.j_btag[idx]>0) {num_matching_btags++; ht.fill("compare_btag",3,evWgt,tags2);}
+      }
+      if(!(num_MC_btags < minNum_btags || num_MC_ctags < minNum_ctags)){
+        ht.fill("compare_2b1ctag",1,evWgt,tags2);
+        ht.fill("compare_tagging_result",1,evWgt,tags2);
+      }
+   //   if(pass_2b1ctag) ht.fill("compare_2b1ctag",2,evWgt,tags2);
+      if(!(num_matching_btags < minNum_btags || num_matching_ctags < minNum_ctags)) ht.fill("compare_2b1ctag",7,evWgt,tags2);
+
+//Compare the result of different WP of C tagging
+  for(int i =1; i<4; i++){
+    for(size_t ij=0; ij<allJets.size(); ij++){
+      int idx=allJets[ij].getJetIndex();
+      if(passCtag(i,ev.j_CvsL[idx],ev.j_CvsB[idx])){
+        ht.fill("compare_ctag",i,evWgt,tags2);
+        if(fabs(ev.j_pid[idx])==5) {ht.fill("compare_ctag_b",i,evWgt,tags2);}
+        else if(fabs(ev.j_pid[idx])==4) {ht.fill("compare_ctag_c",i,evWgt, tags2);}        
+        else if(fabs(ev.j_pid[idx])<4||fabs(ev.j_pid[idx])==21||fabs(ev.j_pid[idx])==9) ht.fill("compare_ctag_udsg",i,evWgt,tags2);
+
+      }    
+    }
+  }
+ 
+  if (num_btags<minNum_btags) continue;
+  Ntotal_b+=evWgt;
+  ht.fill("n_after_selection", 7,evWgt, tags2);
+  if (!(num_ctags<minNum_ctags)){
+    ht.fill("compare_tagging_result",2,evWgt,tags2);
+    ht.fill("compare_2b1ctag",4,evWgt,tags2);
+    if(!(num_MC_btags < minNum_btags || num_MC_ctags < minNum_ctags)) ht.fill("compare_2b1ctag",5,evWgt,tags2);
+    if(pass_2b1ctag) ht.fill("compare_2b1ctag",6,evWgt,tags2);
+  }
+
+  if (!pass_2b1ctag) continue;
+  Ntotal_c+=evWgt;
+  ht.fill("n_after_selection", 8,evWgt, tags2);
+  ht.fill("compare_tagging_result",3,evWgt,tags2);
+  ht.fill("compare_2b1ctag",2,evWgt,tags2);
+  if(!(num_MC_btags < minNum_btags || num_MC_ctags < minNum_ctags)) ht.fill("compare_2b1ctag",3,evWgt,tags2);
+  if(!(num_matching_btags < minNum_btags || num_matching_ctags < minNum_ctags)) ht.fill("compare_2b1ctag",8,evWgt,tags2);
+
+
 
   float HT = 0;
   for(size_t ij=0; ij<jets.size(); ij++){
@@ -770,7 +1032,9 @@ t_weight=evWgt;
        }
      }
    }
-   N_after_all_selections++;
+
+   N_after_all_selections+=evWgt;
+
 
 
 
@@ -836,10 +1100,17 @@ t_weight=evWgt;
     }
     //close input file
 
-    cout<<endl;
+     cout<<endl;
      cout<<"Notal: "<<Ntotal<<endl;
      cout<<"Ntotal_after_trigger: "<<Ntotal_after_trig<<"   "<<100.*Ntotal_after_trig/Ntotal<<" %"<<endl;
-     cout<<"Ntotal_after_all_selections: "<<N_after_all_selections<<"   "<<100.*N_after_all_selections/Ntotal<<" %"<<endl;
+     cout<<"Ntotal_after_lep_selections: "<<Ntotal_lepnum<<"   "<<100.*Ntotal_lepnum/Ntotal<<" %"<<endl;
+     cout<<"Ntotal_after_lep1_selections: "<<Ntotal_lep1_pt<<"   "<<100.*Ntotal_lep1_pt/Ntotal<<" %"<<endl;
+     cout<<"Ntotal_after_lep2_selections: "<<Ntotal_lep2_pt<<"   "<<100.*Ntotal_lep2_pt/Ntotal<<" %"<<endl;
+     cout<<"Ntotal_after_lep3_selections: "<<Ntotal_lep3_pt<<"   "<<100.*Ntotal_lep3_pt/Ntotal<<" %"<<endl;
+     cout<<"Ntotal_after_samesign_selections: "<<Ntotal_samesign<<"   "<<100.*Ntotal_samesign/Ntotal<<" %"<<endl;
+     cout<<"Ntotal_after_jetnum_selections: "<<Ntotal_njet<<"   "<<100.*Ntotal_njet/Ntotal<<" %"<<endl;
+     cout<<"Ntotal_after_btag: "<<Ntotal_b<<"   "<<100.*Ntotal_b/Ntotal<<" %"<<endl;
+     cout<<"Ntotal_after_ctag: "<<Ntotal_c<<"   "<<100.*Ntotal_c/Ntotal<<" %"<<endl;
 
     f->Close();
 
@@ -853,6 +1124,38 @@ t_weight=evWgt;
     if(it.second->GetEntries()==0) continue;
     it.second->SetDirectory(fOut); it.second->Write();
   }
+  TBranch* b1 = t_input.Branch("Ntotal", &Ntotal, "Ntotal/F");
+  TBranch* b2 = t_input.Branch("N_after_trig", &Ntotal_after_trig, "N_after_trigger/F");
+  TBranch* b3 = t_input.Branch("N_after_lep_selec", &Ntotal_lepnum, "N_after_lep_selection/F");
+  TBranch* b4 = t_input.Branch("N_after_lep1_selec", &Ntotal_lep1_pt, "N_after_lep1_selection/F");
+  TBranch* b5 = t_input.Branch("N_after_lep2_selec", &Ntotal_lep2_pt, "N_after_lep2_selection/F");
+  TBranch* b6 = t_input.Branch("N_after_lep3_selec", &Ntotal_lep3_pt, "N_after_lep3_selection/F");
+  TBranch* b7 = t_input.Branch("N_after_ss", &Ntotal_samesign, "N_after_samesign/F");
+  TBranch* b8 = t_input.Branch("N_after_jet_selec", &Ntotal_njet, "N_after_jet_selection/F");
+  TBranch* b9 = t_input.Branch("N_after_btag_selec", &Ntotal_b, "N_after_btag_selection/F");
+  TBranch* b9_1= t_input.Branch("N_after_ctag_selec", &Ntotal_c, "N_after_ctag_selection/F");
+
+  b1->Fill();
+  b2->Fill();
+  b3->Fill();
+  b4->Fill();
+  b5->Fill();
+  b6->Fill();
+  b7->Fill();
+  b8->Fill();
+  b9->Fill();
+  b9_1->Fill();
+
+  TBranch* b10 = t_input.Branch("control_n_lep", &control_n_lep, "control_n_lep/F");
+  TBranch* b11 = t_input.Branch("control_n_lep1", &control_n_lep1, "control_n_lep1/F");
+  TBranch* b12 = t_input.Branch("control_n_lep2", &control_n_lep2, "control_n_lep2/F");
+  TBranch* b13 = t_input.Branch("control_n_lep3", &control_n_lep3, "control_n_lep3/F");
+
+  b10->Fill();
+  b11->Fill();
+  b12->Fill();
+  b13->Fill();
+
 
   t_input.Write();
   if (baseMC.Contains("scan",TString::kIgnoreCase)){
@@ -868,8 +1171,23 @@ t_weight=evWgt;
 
 }
 
+bool passCtag(int WP, Float_t CvsL, Float_t CvsB)
+{
+ //DeepJet
+ //if(WP == 1) return(CvsL>0.03 && CvsB>0.4);
+ //if(WP == 2) return(CvsL>0.085 && CvsB > 0.34);
+ //if(WP == 3) return(CvsL>0.52 && CvsB > 0.05);
+ //DeepCSV
+  if(WP == 1) return(CvsL>0.04 && CvsB>0.345);
+  if(WP == 2) return(CvsL>0.144 && CvsB>0.29);
+  if(WP == 3) return(CvsL>0.73 && CvsB>0.10);
+  return 0;
+}
+
 float DeltaEta(float eta1, float eta2)
 {
   float deta = eta2 - eta1;
   return deta;
 }
+
+
