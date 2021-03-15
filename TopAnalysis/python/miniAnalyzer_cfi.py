@@ -55,7 +55,16 @@ ANALYSISTRIGGERLISTS={
         'HLT_PFJetFwd320_v',
         'HLT_PFJetFwd400_v',
         'HLT_PFJetFwd450_v',
-        'HLT_PFJetFwd500_v'
+        'HLT_PFJetFwd500_v',
+        'HLT_PFMET120_PFMHT120_IDTight_v',
+        'HLT_PFMET200_HBHE_BeamHaloCleaned_v',
+        'HLT_PFMETTypeOne200_HBHE_BeamHaloCleaned_v',
+        'HLT_PFMETNoMu120_PFMHTNoMu120_IDTight_v',
+        'HLT_PFMET120_PFMHT120_IDTight_PFHT60_v',
+        'HLT_PFMETNoMu120_PFMHTNoMu120_IDTight_PFHT60_v',
+        'HLT_PFHT500_PFMET100_PFMHT100_IDTight_v',
+        'HLT_PFHT700_PFMET85_PFMHT85_IDTight_v',
+        'HLT_PFHT800_PFMET75_PFMHT75_IDTight_v'
     ],
     2017:['HLT_Ele32_WPTight_Gsf_v',
           'HLT_Ele32_WPTight_Gsf_L1DoubleEG_v',
@@ -115,7 +124,12 @@ ANALYSISTRIGGERLISTS={
           'HLT_HIEle15_WPLoose_Gsf_v1',
           'HLT_HIEle20_WPLoose_Gsf_v1',
           'HLT_HIPhoton50_HoverELoose_v1',
-          'HLT_HIPhoton60_HoverELoose_v1'
+          'HLT_HIPhoton60_HoverELoose_v1',
+          'HLT_PFMET120_PFMHT120_IDTight_v',
+          'HLT_PFHT700_PFMET85_PFMHT85_IDTight_v',
+          'HLT_PFHT800_PFMET75_PFMHT75_IDTight_v',
+          'HLT_PFMET250_HBHECleaned_v',
+          'HLT_PFHT500_PFMET100_PFMHT100_IDTight_v'
       ],
     2016:['HLT_Ele32_eta2p1_WPTight_Gsf_v',
           'HLT_IsoMu24_v',
@@ -169,7 +183,13 @@ ANALYSISTRIGGERLISTS={
           'HLT_PFJet320_v',
           'HLT_PFJet400_v',
           'HLT_PFJet450_v',
-          'HLT_PFJet500_v'
+          'HLT_PFJet500_v',
+          'HLT_MET200_v',
+          'HLT_PFMET120_PFMHT120_IDTight_v',
+          'HLT_PFHTPFMET170_HBHECleaned_v',
+          'HLT_PFMET300_v',
+          'HLT_PFHT300_PFMET110_v',
+          'HLT_PFMETNoMu120_PFMHTNoMu120_IDTight_v'
       ]
 }
 
