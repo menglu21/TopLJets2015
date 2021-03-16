@@ -25,7 +25,9 @@
 using namespace std;
 float DeltaEta(float eta1, float eta2);
 bool passCtag(int WP, Float_t CvsL, Float_t CvsB);
-//
+bool passCtag_DeepJet(int WP, Float_t CvsL, Float_t CvsB);
+bool passBtag(int WP, bool btag_loose, bool btag_medium,bool btag_tight);
+
 void RunExYukawa(const TString in_fname,
                       TString outname,
                       TH1F *normH,
@@ -183,13 +185,27 @@ void RunExYukawa(const TString in_fname,
   ht.addHist("n_after_selection", new TH1F("n_after_selection", ";Selections ; Events", 9,0,9));
   ht.addHist("control_n_after_selection", new TH1F("control_n_after_selection", ";Selections ; Events",9,0,9));
 
-  ht.addHist("compare_tagging_result", new TH1F("compare_tagging_result", ";Method ; Events", 5,0,5));
-  ht.addHist("compare_btag", new TH1F("compare_btag", "; ; Events",0,0,5));
+  ht.addHist("compare_btag", new TH1F("compare_btag", "; ; Events", 6,-2,4));
+  ht.addHist("compare_btag_udsg", new TH1F("compare_btag_udsg", "; ; Events", 6,-2,4));
+  ht.addHist("compare_btag_b", new TH1F("compare_btag_b", " ; ; Events", 6, -2, 4 ));
+  ht.addHist("compare_btag_c", new TH1F("compare_btag_c", " ; ; Events", 6, -2, 4 ));
+
+  ht.addHist("compare_DeepJetbtag", new TH1F("compare_DeepJetbtag", "; ; Events", 6,-2,4));
+  ht.addHist("compare_DeepJetbtag_udsg", new TH1F("compare_DeepJetbtag_udsg", "; ; Events", 6,-2,4));
+  ht.addHist("compare_DeepJetbtag_b", new TH1F("compare_DeepJetbtag_b", " ; ; Events", 6, -2, 4 ));
+  ht.addHist("compare_DeepJetbtag_c", new TH1F("compare_DeepJetbtag_c", " ; ; Events", 6, -2, 4 ));
+
   ht.addHist("compare_ctag", new TH1F("compare_ctag", "; ; Events", 6,-2,4));
   ht.addHist("compare_ctag_udsg", new TH1F("compare_ctag_udsg", "; ; Events", 6,-2,4));
   ht.addHist("compare_ctag_b", new TH1F("compare_ctag_b", " ; ; Events", 6, -2, 4 ));
   ht.addHist("compare_ctag_c", new TH1F("compare_ctag_c", " ; ; Events", 6, -2, 4 ));
-  ht.addHist("compare_2b1ctag", new TH1F("compare_2b1ctag", "; ; Events",11,0,11));
+
+  ht.addHist("compare_DeepJetctag", new TH1F("compare_DeepJetctag", "; ; Events", 6,-2,4));
+  ht.addHist("compare_DeepJetctag_udsg", new TH1F("compare_DeepJetctag_udsg", "; ; Events", 6,-2,4));
+  ht.addHist("compare_DeepJetctag_b", new TH1F("compare_DeepJetctag_b", " ; ; Events", 6, -2, 4 ));
+  ht.addHist("compare_DeepJetctag_c", new TH1F("compare_DeepJetctag_c", " ; ; Events", 6, -2, 4 ));
+
+
 //  TH1F *a_test1 = new TH1F("a_test1","a_test1",30,0,60);//for debugging
 
 //  ht.addHist("b_matched_jet",  new TH1F("b_matched_jet", ";p_T(b matched jet) [GeV]; Events", 24,0,600));
@@ -249,7 +265,6 @@ void RunExYukawa(const TString in_fname,
   t_input.Branch("t_HT",&t_HT,"t_HT/F");
   t_input.Branch("t_dphi_ll",&t_dphi_ll,"t_dphi_ll/F");
   t_input.Branch("t_deepcsv",&t_deepcsv,"t_deepcsv/F");
-
 
   t_input.Branch("t_pt_l1", &t_pt_l1, "t_pt_l1/F");
   t_input.Branch("t_pt_l2", &t_pt_l2, "t_pt_l2/F");
@@ -320,6 +335,7 @@ void RunExYukawa(const TString in_fname,
   float Ntotal_njet = 0.;
   float Ntotal_b = 0.;
   float Ntotal_c = 0.;  
+  float Ntotal_DeepJetc = 0.;
 
   float control_n_lep = 0.;
   float control_n_lep1 = 0.;
@@ -837,18 +853,50 @@ void RunExYukawa(const TString in_fname,
       int num_MC_ctags = 0;
       for(size_t ij=0; ij<allJets.size(); ij++){
         int idx=allJets[ij].getJetIndex();
-        if(fabs(ev.j_pid[idx])==5) {num_MC_btags++; ht.fill("compare_btag",1,evWgt, tags2); ht.fill("compare_ctag_b",0,evWgt,tags2); ht.fill("compare_ctag",-1,evWgt,tags2);}
-        else if(fabs(ev.j_pid[idx])==4) {num_MC_ctags++; ht.fill("compare_ctag",0,evWgt, tags2); ht.fill("compare_ctag",-1,evWgt,tags2); ht.fill("compare_ctag_c",0,evWgt,tags2);}
-        else if(fabs(ev.j_pid[idx])<4||fabs(ev.j_pid[idx])==21||fabs(ev.j_pid[idx])==9) {ht.fill("compare_ctag_udsg",0,evWgt,tags2); ht.fill("compare_ctag", -1,evWgt,tags2);}
+        if(fabs(ev.j_pid[idx])==5) {
+          num_MC_btags++; 
+          ht.fill("compare_btag",0,evWgt, tags2);
+          ht.fill("compare_ctag",0,evWgt, tags2); 
+          ht.fill("compare_btag_b",0,evWgt,tags2); 
+          ht.fill("compare_ctag_b",0,evWgt,tags2);
+          ht.fill("compare_DeepJetbtag",0,evWgt, tags2);
+          ht.fill("compare_DeepJetctag",0,evWgt, tags2);
+          ht.fill("compare_DeepJetbtag_b",0,evWgt,tags2);
+          ht.fill("compare_DeepJetctag_b",0,evWgt,tags2);
+
+        }
+        else if(fabs(ev.j_pid[idx])==4) {
+          num_MC_ctags++;
+          ht.fill("compare_btag",0,evWgt, tags2); 
+          ht.fill("compare_ctag",0,evWgt,tags2);
+          ht.fill("compare_btag_c",0,evWgt,tags2);
+          ht.fill("compare_ctag_c",0,evWgt,tags2);
+          ht.fill("compare_DeepJetbtag",0,evWgt, tags2);
+          ht.fill("compare_DeepJetctag",0,evWgt, tags2);
+          ht.fill("compare_DeepJetbtag_c",0,evWgt,tags2);
+          ht.fill("compare_DeepJetctag_c",0,evWgt,tags2);
+
+        }
+        else if(fabs(ev.j_pid[idx])<4||fabs(ev.j_pid[idx])==21||fabs(ev.j_pid[idx])==9){
+          ht.fill("compare_btag",0,evWgt,tags2);
+          ht.fill("compare_ctag",0,evWgt,tags2);
+          ht.fill("compare_btag_udsg",0,evWgt,tags2);
+          ht.fill("compare_ctag_udsg",0,evWgt,tags2);
+          ht.fill("compare_DeepJetbtag",0,evWgt, tags2);
+          ht.fill("compare_DeepJetctag",0,evWgt, tags2);
+          ht.fill("compare_DeepJetbtag_udsg",0,evWgt,tags2);
+          ht.fill("compare_DeepJetctag_udsg",0,evWgt,tags2);
+        }
       }
 //Method 1 - Counting the number of btag and ctag first and put the cut on it.
       int num_btags = 0;
       int num_ctags = 0;
       for(size_t ij=0; ij<allJets.size(); ij++){
           int idx=allJets[ij].getJetIndex();
-          bool passBtag(ev.j_btag[idx]>0);
-          if(passBtag) {num_btags++; ht.fill("compare_btag",2,evWgt,tags2);}
-       }
+          bool passbtag(ev.j_btag[idx]>0);
+          if(passbtag) num_btags++;
+          if(passCtag(ctag_WP,ev.j_CvsL[idx],ev.j_CvsB[idx])) num_ctags++;
+      }
 //Method 2 - Demand taht the events need to have 2b1c tag
       bool pass_2b1ctag = 0;
       if( num_btags>2 && num_ctags>0) pass_2b1ctag=1;
@@ -860,6 +908,7 @@ void RunExYukawa(const TString in_fname,
           }
         }
       }
+/*
 //Matching - genParton and tagging
       int num_matching_btags = 0;
       int num_matching_ctags = 0;
@@ -873,18 +922,40 @@ void RunExYukawa(const TString in_fname,
       }
    //   if(pass_2b1ctag) ht.fill("compare_2b1ctag",2,evWgt,tags2);
       if(!(num_matching_btags < minNum_btags || num_matching_ctags < minNum_ctags)) ht.fill("compare_2b1ctag",7,evWgt,tags2);
-
-//Compare the result of different WP of C tagging
+*/
+//Compare the result of different WP of B and C tagging 
   for(int i =1; i<4; i++){
     for(size_t ij=0; ij<allJets.size(); ij++){
       int idx=allJets[ij].getJetIndex();
+      //DeepCSV - CTag
       if(passCtag(i,ev.j_CvsL[idx],ev.j_CvsB[idx])){
         ht.fill("compare_ctag",i,evWgt,tags2);
-        if(fabs(ev.j_pid[idx])==5) {ht.fill("compare_ctag_b",i,evWgt,tags2);}
-        else if(fabs(ev.j_pid[idx])==4) {ht.fill("compare_ctag_c",i,evWgt, tags2);}        
+        if(fabs(ev.j_pid[idx])==5) ht.fill("compare_ctag_b",i,evWgt,tags2);
+        else if(fabs(ev.j_pid[idx])==4) ht.fill("compare_ctag_c",i,evWgt, tags2);        
         else if(fabs(ev.j_pid[idx])<4||fabs(ev.j_pid[idx])==21||fabs(ev.j_pid[idx])==9) ht.fill("compare_ctag_udsg",i,evWgt,tags2);
-
-      }    
+      } 
+      //DeepJet - CTag
+      if(passCtag_DeepJet(i,ev.j_deepjet_CvsL[idx],ev.j_deepjet_CvsB[idx])){
+        Ntotal_DeepJetc+=evWgt;
+        ht.fill("compare_DeepJetctag",i,evWgt,tags2);
+        if(fabs(ev.j_pid[idx])==5) {ht.fill("compare_DeepJetctag_b",i,evWgt,tags2);}
+        else if(fabs(ev.j_pid[idx])==4) {ht.fill("compare_DeepJetctag_c",i,evWgt, tags2);}
+        else if(fabs(ev.j_pid[idx])<4||fabs(ev.j_pid[idx])==21||fabs(ev.j_pid[idx])==9) ht.fill("compare_DeepJetctag_udsg",i,evWgt,tags2);
+      }
+      //DeepCSV - BTag
+      if(passBtag(i,ev.j_btag_loose[idx],ev.j_btag_medium[idx],ev.j_btag_tight[idx])){
+        ht.fill("compare_btag",i,evWgt,tags2);
+        if(fabs(ev.j_pid[idx])==5) ht.fill("compare_btag_b",i,evWgt,tags2);
+        else if(fabs(ev.j_pid[idx])==4) ht.fill("compare_btag_c",i,evWgt, tags2); 
+        else if(fabs(ev.j_pid[idx])<4||fabs(ev.j_pid[idx])==21||fabs(ev.j_pid[idx])==9) ht.fill("compare_btag_udsg",i,evWgt,tags2);
+      }
+      //DeepJet - BTag
+      if(passBtag(i,ev.j_deepjet_btag_loose[idx],ev.j_deepjet_btag_medium[idx],ev.j_deepjet_btag_tight[idx])){
+        ht.fill("compare_DeepJetbtag",i,evWgt,tags2);
+        if(fabs(ev.j_pid[idx])==5) ht.fill("compare_DeepJetbtag_b",i,evWgt,tags2);
+        else if(fabs(ev.j_pid[idx])==4) ht.fill("compare_DeepJetbtag_c",i,evWgt, tags2);
+        else if(fabs(ev.j_pid[idx])<4||fabs(ev.j_pid[idx])==21||fabs(ev.j_pid[idx])==9) ht.fill("compare_DeepJetbtag_udsg",i,evWgt,tags2);
+      }
     }
   }
  
@@ -893,20 +964,12 @@ void RunExYukawa(const TString in_fname,
   ht.fill("n_after_selection", 7,evWgt, tags2);
   if (!(num_ctags<minNum_ctags)){
     ht.fill("compare_tagging_result",2,evWgt,tags2);
-    ht.fill("compare_2b1ctag",4,evWgt,tags2);
-    if(!(num_MC_btags < minNum_btags || num_MC_ctags < minNum_ctags)) ht.fill("compare_2b1ctag",5,evWgt,tags2);
-    if(pass_2b1ctag) ht.fill("compare_2b1ctag",6,evWgt,tags2);
   }
 
   if (!pass_2b1ctag) continue;
   Ntotal_c+=evWgt;
   ht.fill("n_after_selection", 8,evWgt, tags2);
   ht.fill("compare_tagging_result",3,evWgt,tags2);
-  ht.fill("compare_2b1ctag",2,evWgt,tags2);
-  if(!(num_MC_btags < minNum_btags || num_MC_ctags < minNum_ctags)) ht.fill("compare_2b1ctag",3,evWgt,tags2);
-  if(!(num_matching_btags < minNum_btags || num_matching_ctags < minNum_ctags)) ht.fill("compare_2b1ctag",8,evWgt,tags2);
-
-
 
   float HT = 0;
   for(size_t ij=0; ij<jets.size(); ij++){
@@ -1111,6 +1174,8 @@ t_weight=evWgt;
      cout<<"Ntotal_after_jetnum_selections: "<<Ntotal_njet<<"   "<<100.*Ntotal_njet/Ntotal<<" %"<<endl;
      cout<<"Ntotal_after_btag: "<<Ntotal_b<<"   "<<100.*Ntotal_b/Ntotal<<" %"<<endl;
      cout<<"Ntotal_after_ctag: "<<Ntotal_c<<"   "<<100.*Ntotal_c/Ntotal<<" %"<<endl;
+     cout<<"Ntotal_after_DeepJetctag: "<<Ntotal_DeepJetc<<"   "<<100.*Ntotal_DeepJetc/Ntotal<<" %"<<endl;
+
 
     f->Close();
 
@@ -1181,6 +1246,22 @@ bool passCtag(int WP, Float_t CvsL, Float_t CvsB)
   if(WP == 1) return(CvsL>0.04 && CvsB>0.345);
   if(WP == 2) return(CvsL>0.144 && CvsB>0.29);
   if(WP == 3) return(CvsL>0.73 && CvsB>0.10);
+  return 0;
+}
+
+bool passCtag_DeepJet(int WP, Float_t CvsL, Float_t CvsB)
+{
+  if(WP == 1) return(CvsL>0.03 && CvsB>0.4);
+  if(WP == 2) return(CvsL>0.085 && CvsB > 0.34);
+  if(WP == 3) return(CvsL>0.52 && CvsB > 0.05);
+  return 0;
+}
+
+bool passBtag(int WP, bool btag_loose, bool btag_medium,bool btag_tight)
+{
+  if(WP==1) return btag_loose;
+  if(WP==2) return btag_medium;
+  if(WP==3) return btag_tight;
   return 0;
 }
 
