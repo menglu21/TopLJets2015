@@ -100,6 +100,7 @@ void RunExYukawa(const TString in_fname,
   ht.addHist("control_2_lep_pt_bc", new TH1F("control_2_lep_pt_bc", ";p_{T}(l) [GeV]; Events", 30,0,600));
   ht.addHist("control_2_lep_eta_bc",new TH1F("control_2_lep_eta_bc",";#eta(lepton) ; Events", 10,-2.5,2.5));
 
+
   ht.addHist("nvtx",         new TH1F("nvtx",        ";Vertex multiplicity;Events",35,0,140));
 
   ht.addHist("njets_bc",        new TH1F("njets_bc",       ";Jet multiplicity;Events",12,0.5,12.5));
@@ -168,6 +169,21 @@ void RunExYukawa(const TString in_fname,
 
   ht.addHist("h_CvsL1_300", new TH1F("h_CvsL1_300", ";CvsL1 300 GeV ; Events", 20.,-0.5,1.5));
 
+  ht.addHist("h_deepjet", new TH1F("h_deepjet", ";deepjet ; Events", 20.,-0.5,1.5));
+  ht.addHist("h_deepjet_btag_loose", new TH1F("h_deepjet_btag_loose", ";deep jet btag loose ; Events", 2,-0.5,1.5));
+  ht.addHist("h_deepjet_btag_medium", new TH1F("h_deepjet_btag_medium", ";deep jet btag medium ; Events", 2,-0.5,1.5));
+  ht.addHist("h_deepjet_btag_tight", new TH1F("h_deepjet_btag_tight", ";deep jet btag tight ; Events", 2,-0.5,1.5));
+  ht.addHist("h_deepjet_probb", new TH1F("h_deepjet_probb", ";deepjet probb ; Events", 20.,-0.5,1.5));
+  ht.addHist("h_deepjet_probbb", new TH1F("h_deepjet_probbb", ";deepjet probbb ; Events", 20.,-0.5,1.5));
+  ht.addHist("h_deepjet_problepb", new TH1F("h_deepjet_problepb", ";deepjet problepb ; Events", 20.,-0.5,1.5));
+  ht.addHist("h_deepjet_probc", new TH1F("h_deepjet_probc", ";deepjet probc ; Events", 20.,-0.5,1.5));
+  ht.addHist("h_deepjet_probuds", new TH1F("h_deepjet_probuds", ";deepjet probuds ; Events", 20.,-0.5,1.5));
+  ht.addHist("h_deepjet_probg", new TH1F("h_deepjet_probg", ";deepjet probg ; Events", 20.,-0.5,1.5));
+  ht.addHist("h_deepjet_CvsL", new TH1F("h_deepjet_CvsL", ";deepjet CvsL ; Events", 20.,-0.5,1.5));
+  ht.addHist("h_deepjet_CvsB", new TH1F("h_deepjet_CvsB", ";deepjet CvsB ; Events", 20.,-0.5,1.5));
+
+
+
   ht.addHist("hf_probb_gen_b", new TH1F("hf_probb_b", ";P[b] w/ Matched GEN b ; Events", 20.,-0.5,1.5));
   ht.addHist("hf_probb_gen_c", new TH1F("hf_probb_c", ";P[c] w/ Matched GEN c ; Events", 20.,-0.5,1.5));
   ht.addHist("hf_probb_gen_lightjet", new TH1F("hf_probb_gen_lightjet", ";P[udsg] w/ Matched GEN light quarks ; Events", 20.,-0.5,1.5));
@@ -178,6 +194,8 @@ void RunExYukawa(const TString in_fname,
 
   ht.addHist("h_m_top_charm", new TH1F("h_m_top_charm",";m(top,charm) ; Events", 100, 0,1000));
   ht.addHist("h_m_top_charm_x", new TH1F("h_m_top_charm_x",";m(top,charm) ; Events", 100, 0,1000));
+
+  ht.addHist("m_ll",		new TH1F("m_ll",   ";M(l+,l-) [GeV] ; Events", 50,0,600));
 
 
 //  TH1F *a_test1 = new TH1F("a_test1","a_test1",30,0,60);//for debugging
@@ -215,6 +233,7 @@ void RunExYukawa(const TString in_fname,
   float t_HT;
   float t_dphi_ll;
   float t_deepcsv;
+  float t_deepjet;
   float t_pt_l1,t_pt_l2,t_eta_l1,t_eta_l2,t_phi_l1,t_phi_l2;
   float t_pt_j1,t_pt_j2,t_pt_j3,t_eta_j1,t_eta_j2,t_eta_j3;
   float t_phi_j1,t_phi_j2,t_phi_j3;
@@ -241,6 +260,7 @@ void RunExYukawa(const TString in_fname,
   t_input.Branch("t_HT",&t_HT,"t_HT/F");
   t_input.Branch("t_dphi_ll",&t_dphi_ll,"t_dphi_ll/F");
   t_input.Branch("t_deepcsv",&t_deepcsv,"t_deepcsv/F");
+  t_input.Branch("t_deepjet",&t_deepjet,"t_deepjet/F");
 
 
   t_input.Branch("t_pt_l1", &t_pt_l1, "t_pt_l1/F");
@@ -709,9 +729,9 @@ t_scan_coup=ev.scan_coup;
 t_weight=evWgt;
 
 //  bool passJets(jets.size()>=minJetMultiplicity);
- // if(!passJets) continue;
 
- // if(num_btags < minNum_btags) continue;
+ if(!passJets) continue;//not in recent previous tests. 
+ if(num_btags < minNum_btags) continue;//not in recent previous tests.
 
  sort(jets.begin(),jets.end(),
    [](const Jet& a, const Jet& b){
@@ -764,6 +784,21 @@ t_weight=evWgt;
     ht.fill("hf_CvsB",ev.j_CvsB[idx],evWgt,tags2);
     ht.fill2D("hf_CvsL_vs_CvsB",ev.j_CvsL[idx],ev.j_CvsB[idx],evWgt,tags2);
     t_deepcsv=ev.j_deepcsv[idx];
+
+    ht.fill("h_deepjet",ev.j_deepjet[idx],evWgt,tags2);
+    ht.fill("h_deepjet_btag_loose",ev.j_deepjet_btag_loose[idx],evWgt,tags2);
+    ht.fill("h_deepjet_btag_medium",ev.j_deepjet_btag_medium[idx],evWgt,tags2);
+    ht.fill("h_deepjet_btag_tight",ev.j_deepjet_btag_tight[idx],evWgt,tags2);
+    ht.fill("h_deepjet_probb",ev.j_deepjet_probb[idx],evWgt,tags2);
+    ht.fill("h_deepjet_probbb",ev.j_deepjet_probbb[idx],evWgt,tags2);
+    ht.fill("h_deepjet_problepb",ev.j_deepjet_problepb[idx],evWgt,tags2);
+    ht.fill("h_deepjet_probc",ev.j_deepjet_probc[idx],evWgt,tags2);
+    ht.fill("h_deepjet_probuds",ev.j_deepjet_probuds[idx],evWgt,tags2);
+    ht.fill("h_deepjet_probg",ev.j_deepjet_probg[idx],evWgt,tags2);
+    ht.fill("h_deepjet_CvsL",ev.j_deepjet_CvsL[idx],evWgt,tags2);
+    ht.fill("h_deepjet_CvsB",ev.j_deepjet_CvsB[idx],evWgt,tags2);
+    t_deepjet=ev.j_deepjet[idx];
+
 
 
 
@@ -851,7 +886,7 @@ t_weight=evWgt;
       ht.fill("h_scan_mass",ev.scan_mass,1);
       ht.fill("h_scan_rho",ev.scan_rho,evWgt);
       ht.fill("h_scan_coup",ev.scan_coup,evWgt);
-
+      ht.fill("m_ll",(leptons[0]+leptons[1]).M(),evWgt,tags2);
 /*
       t_HT = HT;
       t_dphi_ll=delta_phi;
