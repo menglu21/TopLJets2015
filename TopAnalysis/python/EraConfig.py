@@ -21,7 +21,7 @@ def getEraConfiguration(era,isData,dataset=None):
         }
     muonFiles   = {
         'era2016':'RoccoR2016.txt',
-        'era2017':'RoccoR2017.txt',#to be updated?
+        'era2017':'RoccoR2017UL.txt',#https://gitlab.cern.ch/akhukhun/roccor
         'era2018':'RoccoR2018.txt'
         }
     globalTag = globalTags[era][isData]
