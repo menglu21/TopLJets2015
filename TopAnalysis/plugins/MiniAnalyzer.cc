@@ -1097,11 +1097,11 @@ void MiniAnalyzer::recAnalysis(const edm::Event& iEvent, const edm::EventSetup& 
       }
       else if(abs(j->eta())<3.0) {
         looseJetID = (NHF<0.98 && NEMF>0.01 && NumNeutralParticles>2);
-        tightLepVeto =  (NEMF>0.01 && NEMF<0.99 && NumNeutralParticle>1);//UL17
+        tightLepVeto =  (NEMF>0.01 && NEMF<0.99 && NumNeutralParticles>1);//UL17
       }
       else {
         looseJetID = (NEMF<0.90 && NumNeutralParticles>10);
-        tightLepVeto = (NEMF<0.90 && NHF>0.2 && NumNeutralParticle>10);//UL17
+        tightLepVeto = (NEMF<0.90 && NHF>0.2 && NumNeutralParticles>10);//UL17
       }
 
       if(jetIdToUse_=="tightLepVeto") { if(!tightLepVeto) continue; }
