@@ -5,6 +5,7 @@
 #include "TopLJets2015/TopAnalysis/interface/PhotonAnalyzers.h"
 //#include "TopLJets2015/TopAnalysis/interface/TopSummer2019.h"
 #include "TopLJets2015/TopAnalysis/interface/ExYukawa.h"
+#include "TopLJets2015/TopAnalysis/interface/ChargeFlip.h"
 
 #include "TH1F.h"
 #include "TFile.h"
@@ -96,6 +97,9 @@ int main(int argc, char* argv[])
   //check method to run
   if(method=="RunExYukawa") {
     RunExYukawa(in,out,normH,puH,era,debug);
+  }
+  else if(method=="RunChargeFlip"){
+    RunChargeFlip(in,out,normH,puH,era,debug);
   }
   else if(method=="PhotonTrigEff::RunPhotonTrigEff") {
     RunPhotonTrigEff(in,out,normH,puH,era,debug);
