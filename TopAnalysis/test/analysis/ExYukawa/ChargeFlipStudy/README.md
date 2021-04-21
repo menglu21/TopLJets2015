@@ -22,6 +22,7 @@ cd test/analysis/ExYukawa/ChargeFlipStudy
 There are several method to analysis. Please edit the plot directory in the run\_all\_CF.sh. And also edit the plotdir in following command.
 
 ```
+## CF_FitMethod.py is trying to use Roofit to diagrams in each kinematic region. But it seems to break with low statistics.
 # Analysis Z mass distribution
 python Zmassdistribution.py [plotdir]
 
