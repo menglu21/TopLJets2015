@@ -35,7 +35,7 @@ jsonfile.close()
 
 # Basic Set Up
 pt_region = np.array(( 20.0, 50.0, 100.0, 200., 300.)) # It will actually include overflow events ( Already in the root file )
-eta_region = np.array((0.0, 0.8, 1.5, 2.4))
+eta_region = np.array((0.0, 0.8, 1.479, 2.4))
 pt_bins = len(pt_region)-1
 eta_bins = len(eta_region)-1
 channel = ['MC_oc','MC_ss','data_oc','data_ss']
