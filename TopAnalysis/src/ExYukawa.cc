@@ -670,17 +670,21 @@ void RunExYukawa(const TString in_fname,
 
   if (leptons[0].charge()*leptons[1].charge() < 0 && zmass > 70. && zmass < 110. && jets.size()>0) ht.fill("njets_bc",      jets.size(), evWgt, tags2);
 
-//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-  if (leptons[0].charge()*leptons[1].charge() < 0){
-    if (zmass > 70. && zmass < 110.){
-      for(size_t ij=0; ij<jets.size(); ij++){
-          ht.fill("jet_pt_bc",    jets[ij].pt(), evWgt, tags2);
-          ht.fill("jet_eta_bc",   jets[ij].eta(), evWgt, tags2);
-      }
-    }
-  }
+        //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+        if (leptons[0].charge()*leptons[1].charge() < 0){
+            if (zmass > 70. && zmass < 110.){
+                for(size_t ij=0; ij<jets.size(); ij++){
+                    ht.fill("jet_pt_bc",    jets[ij].pt(), evWgt, tags2);
+                    ht.fill("jet_eta_bc",   jets[ij].eta(), evWgt, tags2);
+                }
+            }
+        }
 
-
+// note that in productions prior and including githash  29490641, the index of isGsfCtfScPixChargeConsistent is +1 w.r.t. the ones below
+  if (dielectron_event && (!ev.l_isGsfCtfScPixChargeConsistent[0] || !ev.l_isGsfCtfScPixChargeConsistent[1])) continue;
+  if (emu_event && !ev.l_isGsfCtfScPixChargeConsistent[0]) continue;
+  if (mue_event && !ev.l_isGsfCtfScPixChargeConsistent[1]) continue;
+        
   if (leptons[0].charge()*leptons[1].charge() < 0) continue;
 
   invariant_mass = (leptons[0]+leptons[1]).M();
