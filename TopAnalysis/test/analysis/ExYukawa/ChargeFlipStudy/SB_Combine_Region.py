@@ -7,13 +7,14 @@ import numpy as np
 import math
 import argparse
 
+
 ##########
 # Parser #
 ##########
 
 parser = argparse.ArgumentParser(description = "Charge Flip Rate")
 parser.add_argument('plotdir',type=str)
-parser.add_argument('Covariance',type=bool)
+parser.add_argument('Covariance',type=int)
 args = parser.parse_args()
 
 #################
@@ -21,7 +22,8 @@ args = parser.parse_args()
 #################
 
 plotdir = args.plotdir # Change to your own directory
-Covariance = args.Covariance   # Consider the covariance of the uncertainty of Pij or not
+Covariance =  (args.Covariance==1)   # Consider the covariance of the uncertainty of Pij or not.
+
 
 # Root file directory
 workdir = os.getcwd()
@@ -53,7 +55,7 @@ for s ,desc in samplesList:
   weight = desc[0]*41.5*1000
   for ff in Allfile:
     if s in ff:
-#      print(ff)
+      print(ff)
       try:
         inf = ROOT.TFile.Open(os.path.join(targetdir+ff))
         t = inf.Get("TreeInput")
