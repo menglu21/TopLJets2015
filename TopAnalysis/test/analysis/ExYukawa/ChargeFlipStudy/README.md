@@ -1,5 +1,7 @@
 # Charge Flip Rate Study
 
+To package the code, I made some modification to my code. It is still tested locally.
+
 ## Produce Analysis Files
 
 To produce the root files used to analysis the charge flip rate, please run the following code.
