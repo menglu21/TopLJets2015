@@ -1,5 +1,7 @@
 # Charge Flip Rate Study
 
+To package the code, I made some modification to my code. It is still tested locally.
+
 ## Produce Analysis Files
 
 To produce the root files used to analysis the charge flip rate, please run the following code.
@@ -34,5 +36,8 @@ python SB_seperateModel.py [plotdir] [1 or 0]
 
 # If you just want to run all of them
 sh run_all_CF.sh
+
+## CF_FitMethod.py is trying to use Roofit to diagrams in each kinematic region. 
+## But it seems to break with low statistics.
 ```
 
