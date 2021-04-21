@@ -105,6 +105,7 @@ void RunExYukawa(const TString in_fname,
   ht.addHist("control_2_lep_pt_bc", new TH1F("control_2_lep_pt_bc", ";p_{T}(l) [GeV]; Events", 30,0,600));
   ht.addHist("control_2_lep_eta_bc",new TH1F("control_2_lep_eta_bc",";#eta(lepton) ; Events", 10,-2.5,2.5));
 
+
   ht.addHist("nvtx",         new TH1F("nvtx",        ";Vertex multiplicity;Events",35,0,140));
 
   ht.addHist("njets_bc",        new TH1F("njets_bc",       ";Jet multiplicity;Events",12,0.5,12.5));
@@ -129,6 +130,8 @@ void RunExYukawa(const TString in_fname,
 
 
   ht.addHist("ratevsrun",    new TH1F("ratevsrun",   ";Run number; #sigma [pb]",int(lumiPerRun.size()),0,float(lumiPerRun.size())));
+  ht.addHist("ratevsrun_bc",    new TH1F("ratevsrun_bc",   ";Run number; #sigma [pb]",int(lumiPerRun.size()),0,float(lumiPerRun.size())));
+
   ht.addHist("nmuons",   new TH1F("nmuons",       ";N(muons);Events",6,-0.5,5.5));
   ht.addHist("nelectrons",   new TH1F("nelectrons",       ";N(electrons);Events",6,-0.5,5.5));
   ht.addHist("nelmu",   new TH1F("nelmu",       ";N(elmu);Events",6,-0.5,5.5));
@@ -171,6 +174,21 @@ void RunExYukawa(const TString in_fname,
 
   ht.addHist("h_CvsL1_300", new TH1F("h_CvsL1_300", ";CvsL1 300 GeV ; Events", 20.,-0.5,1.5));
 
+  ht.addHist("h_deepjet", new TH1F("h_deepjet", ";deepjet ; Events", 20.,-0.5,1.5));
+  ht.addHist("h_deepjet_btag_loose", new TH1F("h_deepjet_btag_loose", ";deep jet btag loose ; Events", 2,-0.5,1.5));
+  ht.addHist("h_deepjet_btag_medium", new TH1F("h_deepjet_btag_medium", ";deep jet btag medium ; Events", 2,-0.5,1.5));
+  ht.addHist("h_deepjet_btag_tight", new TH1F("h_deepjet_btag_tight", ";deep jet btag tight ; Events", 2,-0.5,1.5));
+  ht.addHist("h_deepjet_probb", new TH1F("h_deepjet_probb", ";deepjet probb ; Events", 20.,-0.5,1.5));
+  ht.addHist("h_deepjet_probbb", new TH1F("h_deepjet_probbb", ";deepjet probbb ; Events", 20.,-0.5,1.5));
+  ht.addHist("h_deepjet_problepb", new TH1F("h_deepjet_problepb", ";deepjet problepb ; Events", 20.,-0.5,1.5));
+  ht.addHist("h_deepjet_probc", new TH1F("h_deepjet_probc", ";deepjet probc ; Events", 20.,-0.5,1.5));
+  ht.addHist("h_deepjet_probuds", new TH1F("h_deepjet_probuds", ";deepjet probuds ; Events", 20.,-0.5,1.5));
+  ht.addHist("h_deepjet_probg", new TH1F("h_deepjet_probg", ";deepjet probg ; Events", 20.,-0.5,1.5));
+  ht.addHist("h_deepjet_CvsL", new TH1F("h_deepjet_CvsL", ";deepjet CvsL ; Events", 20.,-0.5,1.5));
+  ht.addHist("h_deepjet_CvsB", new TH1F("h_deepjet_CvsB", ";deepjet CvsB ; Events", 20.,-0.5,1.5));
+
+
+
   ht.addHist("hf_probb_gen_b", new TH1F("hf_probb_b", ";P[b] w/ Matched GEN b ; Events", 20.,-0.5,1.5));
   ht.addHist("hf_probb_gen_c", new TH1F("hf_probb_c", ";P[c] w/ Matched GEN c ; Events", 20.,-0.5,1.5));
   ht.addHist("hf_probb_gen_lightjet", new TH1F("hf_probb_gen_lightjet", ";P[udsg] w/ Matched GEN light quarks ; Events", 20.,-0.5,1.5));
@@ -182,28 +200,7 @@ void RunExYukawa(const TString in_fname,
   ht.addHist("h_m_top_charm", new TH1F("h_m_top_charm",";m(top,charm) ; Events", 100, 0,1000));
   ht.addHist("h_m_top_charm_x", new TH1F("h_m_top_charm_x",";m(top,charm) ; Events", 100, 0,1000));
 
-  ht.addHist("n_after_selection", new TH1F("n_after_selection", ";Selections ; Events", 9,0,9));
-  ht.addHist("control_n_after_selection", new TH1F("control_n_after_selection", ";Selections ; Events",9,0,9));
-
-  ht.addHist("compare_btag", new TH1F("compare_btag", "; ; Events", 6,-2,4));
-  ht.addHist("compare_btag_udsg", new TH1F("compare_btag_udsg", "; ; Events", 6,-2,4));
-  ht.addHist("compare_btag_b", new TH1F("compare_btag_b", " ; ; Events", 6, -2, 4 ));
-  ht.addHist("compare_btag_c", new TH1F("compare_btag_c", " ; ; Events", 6, -2, 4 ));
-
-  ht.addHist("compare_DeepJetbtag", new TH1F("compare_DeepJetbtag", "; ; Events", 6,-2,4));
-  ht.addHist("compare_DeepJetbtag_udsg", new TH1F("compare_DeepJetbtag_udsg", "; ; Events", 6,-2,4));
-  ht.addHist("compare_DeepJetbtag_b", new TH1F("compare_DeepJetbtag_b", " ; ; Events", 6, -2, 4 ));
-  ht.addHist("compare_DeepJetbtag_c", new TH1F("compare_DeepJetbtag_c", " ; ; Events", 6, -2, 4 ));
-
-  ht.addHist("compare_ctag", new TH1F("compare_ctag", "; ; Events", 6,-2,4));
-  ht.addHist("compare_ctag_udsg", new TH1F("compare_ctag_udsg", "; ; Events", 6,-2,4));
-  ht.addHist("compare_ctag_b", new TH1F("compare_ctag_b", " ; ; Events", 6, -2, 4 ));
-  ht.addHist("compare_ctag_c", new TH1F("compare_ctag_c", " ; ; Events", 6, -2, 4 ));
-
-  ht.addHist("compare_DeepJetctag", new TH1F("compare_DeepJetctag", "; ; Events", 6,-2,4));
-  ht.addHist("compare_DeepJetctag_udsg", new TH1F("compare_DeepJetctag_udsg", "; ; Events", 6,-2,4));
-  ht.addHist("compare_DeepJetctag_b", new TH1F("compare_DeepJetctag_b", " ; ; Events", 6, -2, 4 ));
-  ht.addHist("compare_DeepJetctag_c", new TH1F("compare_DeepJetctag_c", " ; ; Events", 6, -2, 4 ));
+  ht.addHist("m_ll",		new TH1F("m_ll",   ";M(l+,l-) [GeV] ; Events", 50,0,600));
 
 
 //  TH1F *a_test1 = new TH1F("a_test1","a_test1",30,0,60);//for debugging
@@ -215,6 +212,7 @@ void RunExYukawa(const TString in_fname,
   for(auto key : lumiPerRun) {
     i++;
     ht.getPlots()["ratevsrun"]->GetXaxis()->SetBinLabel(i,Form("%d",key.first));
+    ht.getPlots()["ratevsrun_bc"]->GetXaxis()->SetBinLabel(i,Form("%d",key.first));
   }
 
 
@@ -240,6 +238,7 @@ void RunExYukawa(const TString in_fname,
   float t_HT;
   float t_dphi_ll;
   float t_deepcsv;
+  float t_deepjet;
   float t_pt_l1,t_pt_l2,t_eta_l1,t_eta_l2,t_phi_l1,t_phi_l2;
   float t_pt_j1,t_pt_j2,t_pt_j3,t_eta_j1,t_eta_j2,t_eta_j3;
   float t_phi_j1,t_phi_j2,t_phi_j3;
@@ -254,6 +253,7 @@ void RunExYukawa(const TString in_fname,
   t_input.Branch("t_normWgt",&t_normWgt,"t_normWgt/F");
   t_input.Branch("t_norm",&t_norm,"t_norm/F");
 
+
   t_input.Branch("CvsL1",&CvsL1,"CvsL1/F");
   t_input.Branch("CvsB1",&CvsB1,"CvsB1/F");
   t_input.Branch("CvsL2",&CvsL2,"CvsL2/F");
@@ -265,6 +265,7 @@ void RunExYukawa(const TString in_fname,
   t_input.Branch("t_HT",&t_HT,"t_HT/F");
   t_input.Branch("t_dphi_ll",&t_dphi_ll,"t_dphi_ll/F");
   t_input.Branch("t_deepcsv",&t_deepcsv,"t_deepcsv/F");
+  t_input.Branch("t_deepjet",&t_deepjet,"t_deepjet/F");
 
   t_input.Branch("t_pt_l1", &t_pt_l1, "t_pt_l1/F");
   t_input.Branch("t_pt_l2", &t_pt_l2, "t_pt_l2/F");
@@ -324,23 +325,9 @@ void RunExYukawa(const TString in_fname,
   //select 2mu+>=3 jets events triggered by a single muon trigger
 
 
-  float Ntotal = 0.;
-  float N_after_all_selections = 0.;
-  float Ntotal_after_trig = 0.;
-  float Ntotal_lepnum = 0.;
-  float Ntotal_lep1_pt = 0.;
-  float Ntotal_lep2_pt = 0.;
-  float Ntotal_lep3_pt = 0.;
-  float Ntotal_samesign = 0.;
-  float Ntotal_njet = 0.;
-  float Ntotal_b = 0.;
-  float Ntotal_c = 0.;  
-  float Ntotal_DeepJetc = 0.;
-
-  float control_n_lep = 0.;
-  float control_n_lep1 = 0.;
-  float control_n_lep2 = 0.;
-  float control_n_lep3 = 0.;
+  int Ntotal = 0;
+  int N_after_all_selections = 0;
+  int Ntotal_after_trig = 0;
 
   /*
   int Ntotal_lepton = 0;
@@ -356,90 +343,72 @@ void RunExYukawa(const TString in_fname,
       t->GetEntry(iev);
       if(iev%1000==0) { printf("\r [%3.0f%%] done", 100.*(float)iev/(float)nentries); fflush(stdout); }
       //trigger
-      //bool hasMTrigger(false);
-      int passtrigger = 0;
-      //if(era.Contains("2016")) hasMTrigger=(selector.hasTriggerBit("HLT_IsoMu24_v", ev.triggerBits) );
+      int passtrigger_ee = 0;
+      int passtrigger_mm = 0;
+      int passtrigger_em = 0;
       if(era.Contains("2017")) {
         if (baseMC.Contains("DoubleMuon",TString::kIgnoreCase)){
           int a = selector.hasTriggerBit("HLT_Mu17_TrkIsoVVL_Mu8_TrkIsoVVL_DZ_Mass8_v", ev.triggerBits);
-          int b = selector.hasTriggerBit("HLT_Mu17_TrkIsoVVL_Mu8_TrkIsoVVL_DZ_Mass3p8_v", ev.triggerBits);
-          if (a || b) passtrigger = 1;
-        }
-        if (baseMC.Contains("DoubleEG",TString::kIgnoreCase)){
-          int a = selector.hasTriggerBit("HLT_Mu17_TrkIsoVVL_Mu8_TrkIsoVVL_DZ_Mass8_v", ev.triggerBits);
-          int b = selector.hasTriggerBit("HLT_Mu17_TrkIsoVVL_Mu8_TrkIsoVVL_DZ_Mass3p8_v", ev.triggerBits);
-          int c = selector.hasTriggerBit("HLT_Ele23_Ele12_CaloIdL_TrackIdL_IsoVL_v", ev.triggerBits);
-	  int d = selector.hasTriggerBit("HLT_Ele35_WPTight_Gsf", ev.triggerBits);
-          if (!(a||b) && (c ||d))  passtrigger = 1;
-        }
-        if (baseMC.Contains("MuonEG",TString::kIgnoreCase)){
-          int a = selector.hasTriggerBit("HLT_Mu17_TrkIsoVVL_Mu8_TrkIsoVVL_DZ_Mass8_v", ev.triggerBits);
-          int b = selector.hasTriggerBit("HLT_Mu17_TrkIsoVVL_Mu8_TrkIsoVVL_DZ_Mass3p8_v", ev.triggerBits);
-          int c = selector.hasTriggerBit("HLT_Ele23_Ele12_CaloIdL_TrackIdL_IsoVL_v", ev.triggerBits);
-          int d = selector.hasTriggerBit("HLT_Mu8_TrkIsoVVL_Ele23_CaloIdL_TrackIdL_IsoVL_DZ_v", ev.triggerBits);
-          int e = selector.hasTriggerBit("HLT_Mu23_TrkIsoVVL_Ele12_CaloIdL_TrackIdL_IsoVL_v", ev.triggerBits);
-	  int f = selector.hasTriggerBit("HLT_Ele35_WPTight_Gsf", ev.triggerBits);
-          if (!(a || b || c || f) && (d || e)) passtrigger = 1;
+          int b =0;
+          if(ev.run < 299330){ b = selector.hasTriggerBit("HLT_Mu17_TrkIsoVVL_Mu8_TrkIsoVVL_DZ_v", ev.triggerBits);}
+          if(ev.run > 299330){ b = selector.hasTriggerBit("HLT_Mu17_TrkIsoVVL_Mu8_TrkIsoVVL_DZ_Mass3p8_v", ev.triggerBits);}
+          if (a || b) passtrigger_mm = 1;
         }
         if (baseMC.Contains("SingleMuon",TString::kIgnoreCase)){
           int a = selector.hasTriggerBit("HLT_Mu17_TrkIsoVVL_Mu8_TrkIsoVVL_DZ_Mass8_v", ev.triggerBits);
-          int b = selector.hasTriggerBit("HLT_Mu17_TrkIsoVVL_Mu8_TrkIsoVVL_DZ_Mass3p8_v", ev.triggerBits);
-          int c = selector.hasTriggerBit("HLT_Ele23_Ele12_CaloIdL_TrackIdL_IsoVL_v", ev.triggerBits);
-          int d = selector.hasTriggerBit("HLT_Mu8_TrkIsoVVL_Ele23_CaloIdL_TrackIdL_IsoVL_DZ_v", ev.triggerBits);
+          int b=0;
+          if(ev.run < 299330) {b = selector.hasTriggerBit("HLT_Mu17_TrkIsoVVL_Mu8_TrkIsoVVL_DZ_v", ev.triggerBits);}
+          if(ev.run > 299330) {b = selector.hasTriggerBit("HLT_Mu17_TrkIsoVVL_Mu8_TrkIsoVVL_DZ_Mass3p8_v", ev.triggerBits);}
+          int c = selector.hasTriggerBit("HLT_Mu8_TrkIsoVVL_Ele23_CaloIdL_TrackIdL_IsoVL_DZ_v", ev.triggerBits);
+          int d = selector.hasTriggerBit("HLT_Mu12_TrkIsoVVL_Ele23_CaloIdL_TrackIdL_IsoVL_DZ_v", ev.triggerBits);
           int e = selector.hasTriggerBit("HLT_Mu23_TrkIsoVVL_Ele12_CaloIdL_TrackIdL_IsoVL_v", ev.triggerBits);
-	  int g = selector.hasTriggerBit("HLT_Ele35_WPTight_Gsf", ev.triggerBits);
-          int f = selector.hasTriggerBit("HLT_IsoMu27_v", ev.triggerBits);
-          if (!(a||b||c||d||e||g) && f) passtrigger = 1;
+          int f = selector.hasTriggerBit("HLT_Mu23_TrkIsoVVL_Ele12_CaloIdL_TrackIdL_IsoVL_DZ_v", ev.triggerBits);
+          int g = selector.hasTriggerBit("HLT_IsoMu27_v", ev.triggerBits);
+          if (!(a||b) && g) passtrigger_mm = 1;
+          if (!(c||d||e||f) && g) passtrigger_em = 1;
         }
-/*        if (baseMC.Contains("SingleElectron",TString::kIgnoreCase)){
-          int a = selector.hasTriggerBit("HLT_Mu17_TrkIsoVVL_Mu8_TrkIsoVVL_DZ_Mass8_v", ev.triggerBits);
-          int b = selector.hasTriggerBit("HLT_Mu17_TrkIsoVVL_Mu8_TrkIsoVVL_DZ_Mass3p8_v", ev.triggerBits);
-          int c = selector.hasTriggerBit("HLT_Ele23_Ele12_CaloIdL_TrackIdL_IsoVL_v", ev.triggerBits);
-          int d = selector.hasTriggerBit("HLT_Mu8_TrkIsoVVL_Ele23_CaloIdL_TrackIdL_IsoVL_DZ_v", ev.triggerBits);
+        if (baseMC.Contains("DoubleEG",TString::kIgnoreCase)){
+          int a = selector.hasTriggerBit("HLT_Ele23_Ele12_CaloIdL_TrackIdL_IsoVL_v", ev.triggerBits);
+          int b = selector.hasTriggerBit("HLT_Ele23_Ele12_CaloIdL_TrackIdL_IsoVL_DZ_v ", ev.triggerBits);
+          if (a||b) passtrigger_ee = 1;
+        }
+        if (baseMC.Contains("SingleElectron",TString::kIgnoreCase)){
+          int a = selector.hasTriggerBit("HLT_Ele23_Ele12_CaloIdL_TrackIdL_IsoVL_v", ev.triggerBits);
+          int b = selector.hasTriggerBit("HLT_Ele23_Ele12_CaloIdL_TrackIdL_IsoVL_DZ_v ", ev.triggerBits);
+          int c = selector.hasTriggerBit("HLT_Mu8_TrkIsoVVL_Ele23_CaloIdL_TrackIdL_IsoVL_DZ_v", ev.triggerBits);
+          int d = selector.hasTriggerBit("HLT_Mu12_TrkIsoVVL_Ele23_CaloIdL_TrackIdL_IsoVL_DZ_v", ev.triggerBits);
           int e = selector.hasTriggerBit("HLT_Mu23_TrkIsoVVL_Ele12_CaloIdL_TrackIdL_IsoVL_v", ev.triggerBits);
-          int f = selector.hasTriggerBit("HLT_IsoMu27_v", ev.triggerBits);
-          int g = selector.hasTriggerBit("HLT_Ele35_WPTight_Gsf", ev.triggerBits);
-          if (!(a||b||c||d||e||f) && g) passtrigger = 1;
-        }*/
+          int f = selector.hasTriggerBit("HLT_Mu23_TrkIsoVVL_Ele12_CaloIdL_TrackIdL_IsoVL_DZ_v", ev.triggerBits);
+          int g = selector.hasTriggerBit("HLT_Ele32_WPTight_Gsf_L1DoubleEG_v", ev.triggerBits);
+          int h = selector.hasTriggerBit("HLT_Ele35_WPTight_Gsf_v", ev.triggerBits);
+          if (!(a||b) && (g||h)) passtrigger_ee = 1;
+          if (!(c||d||e||f) && (g||h)) passtrigger_em = 1;
+        }
+        if (baseMC.Contains("MuonEG",TString::kIgnoreCase)){
+          int a = selector.hasTriggerBit("HLT_Mu8_TrkIsoVVL_Ele23_CaloIdL_TrackIdL_IsoVL_DZ_v", ev.triggerBits);
+          int b = selector.hasTriggerBit("HLT_Mu12_TrkIsoVVL_Ele23_CaloIdL_TrackIdL_IsoVL_DZ_v", ev.triggerBits);
+          int c = selector.hasTriggerBit("HLT_Mu23_TrkIsoVVL_Ele12_CaloIdL_TrackIdL_IsoVL_v", ev.triggerBits);
+          int d = selector.hasTriggerBit("HLT_Mu23_TrkIsoVVL_Ele12_CaloIdL_TrackIdL_IsoVL_DZ_v", ev.triggerBits);
+          if (a || b || c || d) passtrigger_em = 1;
+        }
         if (baseMC.Contains("MC",TString::kIgnoreCase)){
           int a = selector.hasTriggerBit("HLT_Mu17_TrkIsoVVL_Mu8_TrkIsoVVL_DZ_Mass8_v", ev.triggerBits);
           int b = selector.hasTriggerBit("HLT_Mu17_TrkIsoVVL_Mu8_TrkIsoVVL_DZ_Mass3p8_v", ev.triggerBits);
-          int c = selector.hasTriggerBit("HLT_Ele23_Ele12_CaloIdL_TrackIdL_IsoVL_v", ev.triggerBits);
-          int d = selector.hasTriggerBit("HLT_Mu8_TrkIsoVVL_Ele23_CaloIdL_TrackIdL_IsoVL_DZ_v", ev.triggerBits);
-          int e = selector.hasTriggerBit("HLT_Mu23_TrkIsoVVL_Ele12_CaloIdL_TrackIdL_IsoVL_v", ev.triggerBits);
-          int f = selector.hasTriggerBit("HLT_IsoMu27_v", ev.triggerBits);
-          int g = selector.hasTriggerBit("HLT_Ele35_WPTight_Gsf", ev.triggerBits);
-          if (a || b || c || d || e || f || g) passtrigger=1;
-    }
-/*
-	hasMTrigger=(
-    // previous random selection
-    //    selector.hasTriggerBit("HLT_IsoMu24_v", ev.triggerBits) ||
-    //			  selector.hasTriggerBit("HLT_Mu50_v", ev.triggerBits) ||
-    //			  selector.hasTriggerBit("HLT_Mu17_TrkIsoVVL_Mu8_TrkIsoVVL_DZ_Mass8_v", ev.triggerBits) ||
-    //			  selector.hasTriggerBit("HLT_Mu17_TrkIsoVVL_Mu8_TrkIsoVVL_DZ_Mass3p8_v", ev.triggerBits) ||
-    //    selector.hasTriggerBit("HLT_Ele35_WPTight_Gsf_v", ev.triggerBits) ||
-    //    selector.hasTriggerBit("HLT_Ele32_WPTight_Gsf_L1DoubleEG_v", ev.triggerBits) ||
-    //    selector.hasTriggerBit("HLT_Ele23_Ele12_CaloIdL_TrackIdL_IsoVL_v", ev.triggerBits) || // OK
-    //    selector.hasTriggerBit("HLT_Photon200_v", ev.triggerBits)
-
-    //From AN2019_140_v3
-
-        // emu triggers
-        selector.hasTriggerBit("HLT_Mu8_TrkIsoVVL_Ele23_CaloIdL_TrackIdL_IsoVL_DZ_v", ev.triggerBits) || //??
-        selector.hasTriggerBit("HLT_Mu23_TrkIsoVVL_Ele12_CaloIdL_TrackIdL_IsoVL_v", ev.triggerBits) ||
-        selector.hasTriggerBit("HLT_Ele35_WPTight_Gsf", ev.triggerBits) ||
-        selector.hasTriggerBit("HLT_IsoMu27_v", ev.triggerBits) ||
-        // ee triggers
-        selector.hasTriggerBit("HLT_Ele23_Ele12_CaloIdL_TrackIdL_IsoVL_v", ev.triggerBits) ||
-        selector.hasTriggerBit("HLT_Ele35_WPTight_Gsf_v", ev.triggerBits) || //latest one used
-        // mumu triggers
-        selector.hasTriggerBit("HLT_Mu17_TrkIsoVVL_Mu8_TrkIsoVVL_DZ_Mass8_v", ev.triggerBits) ||
-        selector.hasTriggerBit("HLT_IsoMu27_v", ev.triggerBits) //latest one used
-
-      );
-      */
-      }
+          int c = selector.hasTriggerBit("HLT_Mu17_TrkIsoVVL_Mu8_TrkIsoVVL_DZ_v", ev.triggerBits);
+          int d = selector.hasTriggerBit("HLT_IsoMu27_v", ev.triggerBits);
+          int e = selector.hasTriggerBit("HLT_Ele23_Ele12_CaloIdL_TrackIdL_IsoVL_v", ev.triggerBits);
+          int f = selector.hasTriggerBit("HLT_Ele23_Ele12_CaloIdL_TrackIdL_IsoVL_DZ_v ", ev.triggerBits);
+          int g = selector.hasTriggerBit("HLT_Ele32_WPTight_Gsf_L1DoubleEG_v", ev.triggerBits);
+          int h = selector.hasTriggerBit("HLT_Ele35_WPTight_Gsf_v", ev.triggerBits);
+          int i = selector.hasTriggerBit("HLT_Mu8_TrkIsoVVL_Ele23_CaloIdL_TrackIdL_IsoVL_DZ_v", ev.triggerBits);
+          int j = selector.hasTriggerBit("HLT_Mu12_TrkIsoVVL_Ele23_CaloIdL_TrackIdL_IsoVL_DZ_v", ev.triggerBits);
+          int k = selector.hasTriggerBit("HLT_Mu23_TrkIsoVVL_Ele12_CaloIdL_TrackIdL_IsoVL_v", ev.triggerBits);
+          int l = selector.hasTriggerBit("HLT_Mu23_TrkIsoVVL_Ele12_CaloIdL_TrackIdL_IsoVL_DZ_v", ev.triggerBits);
+          if (a||b||c||d) passtrigger_mm = 1;
+          if (e||f||g||h) passtrigger_ee = 1;
+          if (d||g||h||i||j||k||l) passtrigger_em = 1;
+        }
+     }
 
       float weight = 1.0;
       weight = (ev.g_nw>0 ? ev.g_w[0] : 1.0);//Counting weights
@@ -449,15 +418,19 @@ void RunExYukawa(const TString in_fname,
 //      cout << "Trigger = "<<hasMTrigger << endl;
 //      if(ev.isData && !hasMTrigger) continue;
 
+
+
+
+
       ht.fill("h_scan_mass_bc",ev.scan_mass,1);
 
 
       //if(!hasMTrigger) continue;
       //cout<<dimutrig<<dielectrig<<mueltrig<<singmutrig<<singeltrig<<endl;
-      if (!passtrigger) continue;
+     // if (!passtrigger) continue;
 
 
-      Ntotal_after_trig+=weight;
+      //Ntotal_after_trig++;
 
       //select two offline muons
       std::vector<Particle> flaggedleptons = selector.flaggedLeptons(ev);
@@ -596,6 +569,18 @@ void RunExYukawa(const TString in_fname,
          control_n_lep3+=evWgt;
       }
 
+      if(ev.isData){
+        std::map<Int_t,Float_t>::iterator rIt=lumiPerRun.find(ev.run);
+        if(rIt!=lumiPerRun.end()){
+          int runBin=std::distance(lumiPerRun.begin(),rIt);
+          float lumi=1./rIt->second;
+          ht.fill("ratevsrun_bc",runBin,lumi,"test");
+        }else{
+          cout << "[Warning] Unable to find run=" << ev.run << endl;
+        }
+      }
+
+
 
 
 /*
@@ -603,10 +588,38 @@ void RunExYukawa(const TString in_fname,
       int dielectron_event = 0;
       int emu_event = 0;
       int mue_event = 0;
-      if (leptons[0].id() == 11 && leptons[1].id() == 11) dielectron_event = 1;
-      if (leptons[0].id() == 13 && leptons[1].id() == 13) dimuon_event = 1;
-      if (leptons[0].id() == 11 && leptons[1].id() == 13) emu_event = 1;
-      if (leptons[0].id() == 13 && leptons[1].id() == 11) mue_event = 1;
+//      if (leptons[0].id() == 11 && leptons[1].id() == 11) dielectron_event = 1;
+//      if (leptons[0].id() == 13 && leptons[1].id() == 13) dimuon_event = 1;
+//      if (leptons[0].id() == 11 && leptons[1].id() == 13) emu_event = 1;
+//      if (leptons[0].id() == 13 && leptons[1].id() == 11) mue_event = 1;
+      if (baseMC.Contains("DoubleMuon",TString::kIgnoreCase)){
+                if (!((leptons[0].id() == 13 && leptons[1].id() == 13) && passtrigger_mm)) continue;
+                dimuon_event=1;
+        }
+        if (baseMC.Contains("DoubleEG",TString::kIgnoreCase)){
+                if (!((leptons[0].id() == 11 && leptons[1].id() == 11) && passtrigger_ee)) continue;
+                dielectron_event = 1;
+        }
+        if (baseMC.Contains("MuonEG",TString::kIgnoreCase)){
+                if (!((leptons[0].id()+leptons[1].id())==24 && passtrigger_em)) continue;
+                if (leptons[0].id() == 11 && leptons[1].id() == 13) emu_event = 1;
+                if (leptons[0].id() == 13 && leptons[1].id() == 11) mue_event = 1;
+        }
+        if (baseMC.Contains("SingleElectron",TString::kIgnoreCase)){
+                if (!(((leptons[0].id() == 11 && leptons[1].id() == 11) && passtrigger_ee) || ((leptons[0].id()+leptons[1].id())==24 && passtrigger_em))) continue;
+                if ((leptons[0].id()+leptons[1].id())==24) emu_event = 1;
+                else dielectron_event = 1;
+        }
+        if (baseMC.Contains("SingleMuon",TString::kIgnoreCase)){
+                if (!(((leptons[0].id() == 13 && leptons[1].id() == 13) && passtrigger_mm) || ((leptons[0].id()+leptons[1].id())==24 && passtrigger_em))) continue;
+                if ((leptons[0].id()+leptons[1].id())==24) emu_event = 1;
+                else dimuon_event = 1;
+        }
+        if (baseMC.Contains("MC",TString::kIgnoreCase)){
+                if ((leptons[0].id() == 11 && leptons[1].id() == 11) && passtrigger_ee) dielectron_event = 1;
+                if ((leptons[0].id() == 13 && leptons[1].id() == 13) && passtrigger_mm) dimuon_event = 1;
+                if (((leptons[0].id() + leptons[1].id()) == 24) && passtrigger_em) emu_event = 1;
+        }
 
       std::vector<TString> tags2={"inc"};
       if (dimuon_event) tags2.push_back("mm");
@@ -816,17 +829,21 @@ void RunExYukawa(const TString in_fname,
 
   if (leptons[0].charge()*leptons[1].charge() < 0 && zmass > 70. && zmass < 110. && jets.size()>0) ht.fill("njets_bc",      jets.size(), evWgt, tags2);
 
-//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-  if (leptons[0].charge()*leptons[1].charge() < 0){
-    if (zmass > 70. && zmass < 110.){
-      for(size_t ij=0; ij<jets.size(); ij++){
-          ht.fill("jet_pt_bc",    jets[ij].pt(), evWgt, tags2);
-          ht.fill("jet_eta_bc",   jets[ij].eta(), evWgt, tags2);
-      }
-    }
-  }
+        //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+        if (leptons[0].charge()*leptons[1].charge() < 0){
+            if (zmass > 70. && zmass < 110.){
+                for(size_t ij=0; ij<jets.size(); ij++){
+                    ht.fill("jet_pt_bc",    jets[ij].pt(), evWgt, tags2);
+                    ht.fill("jet_eta_bc",   jets[ij].eta(), evWgt, tags2);
+                }
+            }
+        }
 
-
+// note that in productions prior and including githash  29490641, the index of isGsfCtfScPixChargeConsistent is +1 w.r.t. the ones below
+  if (dielectron_event && (!ev.l_isGsfCtfScPixChargeConsistent[0] || !ev.l_isGsfCtfScPixChargeConsistent[1])) continue;
+  if (emu_event && !ev.l_isGsfCtfScPixChargeConsistent[0]) continue;
+  if (mue_event && !ev.l_isGsfCtfScPixChargeConsistent[1]) continue;
+        
   if (leptons[0].charge()*leptons[1].charge() < 0) continue;
   Ntotal_samesign+=evWgt;
   ht.fill("n_after_selection", 5,evWgt, tags2);
@@ -1007,9 +1024,9 @@ t_scan_coup=ev.scan_coup;
 t_weight=evWgt;
 
 //  bool passJets(jets.size()>=minJetMultiplicity);
- // if(!passJets) continue;
 
- // if(num_btags < minNum_btags) continue;
+ if(!passJets) continue;//not in recent previous tests. 
+ if(num_btags < minNum_btags) continue;//not in recent previous tests.
 
  sort(jets.begin(),jets.end(),
    [](const Jet& a, const Jet& b){
@@ -1062,6 +1079,21 @@ t_weight=evWgt;
     ht.fill("hf_CvsB",ev.j_CvsB[idx],evWgt,tags2);
     ht.fill2D("hf_CvsL_vs_CvsB",ev.j_CvsL[idx],ev.j_CvsB[idx],evWgt,tags2);
     t_deepcsv=ev.j_deepcsv[idx];
+
+    ht.fill("h_deepjet",ev.j_deepjet[idx],evWgt,tags2);
+    ht.fill("h_deepjet_btag_loose",ev.j_deepjet_btag_loose[idx],evWgt,tags2);
+    ht.fill("h_deepjet_btag_medium",ev.j_deepjet_btag_medium[idx],evWgt,tags2);
+    ht.fill("h_deepjet_btag_tight",ev.j_deepjet_btag_tight[idx],evWgt,tags2);
+    ht.fill("h_deepjet_probb",ev.j_deepjet_probb[idx],evWgt,tags2);
+    ht.fill("h_deepjet_probbb",ev.j_deepjet_probbb[idx],evWgt,tags2);
+    ht.fill("h_deepjet_problepb",ev.j_deepjet_problepb[idx],evWgt,tags2);
+    ht.fill("h_deepjet_probc",ev.j_deepjet_probc[idx],evWgt,tags2);
+    ht.fill("h_deepjet_probuds",ev.j_deepjet_probuds[idx],evWgt,tags2);
+    ht.fill("h_deepjet_probg",ev.j_deepjet_probg[idx],evWgt,tags2);
+    ht.fill("h_deepjet_CvsL",ev.j_deepjet_CvsL[idx],evWgt,tags2);
+    ht.fill("h_deepjet_CvsB",ev.j_deepjet_CvsB[idx],evWgt,tags2);
+    t_deepjet=ev.j_deepjet[idx];
+
 
 
 
@@ -1151,7 +1183,7 @@ t_weight=evWgt;
       ht.fill("h_scan_mass",ev.scan_mass,1);
       ht.fill("h_scan_rho",ev.scan_rho,evWgt);
       ht.fill("h_scan_coup",ev.scan_coup,evWgt);
-
+      ht.fill("m_ll",(leptons[0]+leptons[1]).M(),evWgt,tags2);
 /*
       t_HT = HT;
       t_dphi_ll=delta_phi;

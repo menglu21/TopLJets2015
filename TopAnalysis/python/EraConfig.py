@@ -5,23 +5,23 @@ def getEraConfiguration(era,isData,dataset=None):
     """ defines global tags, JEC/R corrections, etc. depending on the era """
 
     globalTags = {
-        'era2016':('102X_mc2016_asymptotic_v8',       '102X_dataRun2_v13'),
-        'era2017':('102X_mc2017_realistic_v8',       '102X_dataRun2_v13'),
-        'era2018':('102X_upgrade2018_realistic_v21', '102X_dataRun2_Prompt_v16')
+        'era2016':('102X_mc2016_asymptotic_v8',       '102X_dataRun2_v13'),#to be updated from https://twiki.cern.ch/twiki/bin/view/CMS/PdmV#Analysis_Recipe 
+        'era2017':('106X_mc2017_realistic_v8',       '106X_dataRun2_v32'),
+        'era2018':('106X_upgrade2018_realistic_v15_L1v1', '106X_dataRun2_v32')
         }
     jecFiles    = {
-        'era2016':('Summer16_07Aug2017_V11_MC', 'Summer16_07Aug2017All_V11_DATA', 'Summer16_07Aug2017_V11_MC_UncertaintySources_AK4PFchs'),
+        'era2016':('Summer16_07Aug2017_V11_MC', 'Summer16_07Aug2017All_V11_DATA', 'Summer16_07Aug2017_V11_MC_UncertaintySources_AK4PFchs'),#to be updated
         'era2017':('Summer19UL17_V5_MC',        'Summer19UL17_RunBCDEF_V5_DATA',  'Summer19UL17_V5_MC_UncertaintySources_AK4PFchs'),
-        'era2018':('Autumn18_V19_MC',           'Autumn18_RunABCD_V19_DATA',      'Autumn18_V19_MC_UncertaintySources_AK4PFchs')
+        'era2018':('Autumn18_V19_MC',           'Autumn18_RunABCD_V19_DATA',      'Autumn18_V19_MC_UncertaintySources_AK4PFchs')#to be updated
         }
     jerFiles    = {
-        'era2016':('Summer16_25nsV1_MC',   'Summer16_25nsV1_DATA'),
+        'era2016':('Summer16_25nsV1_MC',   'Summer16_25nsV1_DATA'),#to be updated
         'era2017':('Summer19UL17_JRV2_MC', 'Summer19UL17_JRV2_DATA'),
-        'era2018':('Autumn18_V7b_MC',      'Autumn18_V7b_DATA'),
+        'era2018':('Autumn18_V7b_MC',      'Autumn18_V7b_DATA'),#to be updated
         }
     muonFiles   = {
         'era2016':'RoccoR2016.txt',
-        'era2017':'RoccoR2017.txt',
+        'era2017':'RoccoR2017UL.txt',#https://gitlab.cern.ch/akhukhun/roccor
         'era2018':'RoccoR2018.txt'
         }
     globalTag = globalTags[era][isData]
@@ -37,7 +37,7 @@ def getEraConfiguration(era,isData,dataset=None):
 
     #customize based on dataset
     if dataset:
-        if isData and '2018D' in dataset:
+        if isData and '2018D' in dataset:#to be updated?
             globalTag='102X_dataRun2_Prompt_v14'
             print '[Warn] Global tag has been overriden to',globalTag,'for',dataset,'in EraConfig.py'
 

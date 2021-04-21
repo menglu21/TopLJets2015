@@ -39,8 +39,10 @@ if [[ ${ERA} = "2016" ]]; then
 elif [[ ${ERA} = "2017" ]]; then
 ###    githash=848840ab
 ###    githash=ab05162
-    githash=6bfa3f2e
-    eosdir=/store/cmst3/group/top/RunIIUL/2017/${githash}
+    #githash=6bfa3f2e
+    #eosdir=/store/cmst3/group/top/RunIIUL/2017/${githash}
+    githash=a02ce4df
+    eosdir=/store/group/phys_top/efe/ntuples_${githash}_all
 #    githash=ae6e08e
 #    eosdir=/store/cmst3/group/top/RunIIReReco/2017/${githash}
     dataeosdir=${eosdir}
@@ -107,8 +109,8 @@ case $WHAT in
 	;;
 
     PLOT )
-  plotinputdir="/eos/user/e/efe/DataAnalysis/ntuples_and_plots/Prod_7Oct/"
-  plotoutdir="/eos/user/e/efe/www/exyukawa/7oct_w_tree"
+  plotinputdir="/eos/user/e/efe/DataAnalysis/ntuples_and_plots/1Mars/"
+  plotoutdir="/eos/user/e/efe/www/exyukawa/1mars"
   mkdir -p ${plotoutdir}
   wget https://raw.githubusercontent.com/efeyazgan/TopLJets2015/106_protonreco/TopAnalysis/test/index.php -P ${plotoutdir}
   commonOpts="-i ${outdir} -l ${lumi} --mcUnc ${lumiUnc}"

@@ -338,6 +338,128 @@ std::vector<Particle> SelectionTool::selLeptons(std::vector<Particle> &leptons,i
   return selLeptons;
 }
 
+// select good muon, these muon are same with those in function SelectionTool::selLeptons
+std::vector<Particle> SelectionTool::selGoodMuons(std::vector<Particle> &leptons,int muQualBit,double minPt, double maxEta,std::vector<Particle> veto){
+  std::vector<Particle> selGoodMuons;
+  for(size_t i =0; i<leptons.size(); i++)
+    {
+      //check quality flag
+      if(leptons[i].id()==11 ) continue;
+      if(leptons[i].id()==13 && !leptons[i].hasQualityFlag(muQualBit) ) continue;
+
+      //check kinematics
+      if(leptons[i].pt()<minPt || fabs(leptons[i].eta())>maxEta) continue;
+
+      //check if this lepton should be vetoed by request
+      bool skipThisLepton(false);
+      for(auto &vetoL : veto){
+        if(vetoL.originalReference()!=leptons[i].originalReference()) continue;
+        skipThisLepton=true;
+        break;
+      }
+      if(skipThisLepton) continue;
+
+
+      //lepton is selected
+      selGoodMuons.push_back(leptons[i]);
+    }
+
+  //all done here
+  return selGoodMuons;
+}
+
+// select fakeable muons, cut-based tight ID + iso ~ (0.2, 0.4)
+std::vector<Particle> SelectionTool::selFakeable_Muons(MiniEvent_t &ev, std::vector<Particle> &leptons,int muQualBit,double minPt, double maxEta,std::vector<Particle> veto){
+  std::vector<Particle> selFakeable_Muons;
+  for(size_t i =0; i<leptons.size(); i++)
+    {
+      //check quality flag
+      if(leptons[i].id()==11 ) continue;
+      if(leptons[i].id()==13 && !leptons[i].hasQualityFlag(muQualBit) ) continue;
+      if(ev.l_relIso[leptons[i].originalReference()]<0.2 || ev.l_relIso[leptons[i].originalReference()]>0.4) continue;
+
+      //check kinematics
+      if(leptons[i].pt()<minPt || fabs(leptons[i].eta())>maxEta) continue;
+
+      //check if this lepton should be vetoed by request
+      bool skipThisLepton(false);
+      for(auto &vetoL : veto){
+        if(vetoL.originalReference()!=leptons[i].originalReference()) continue;
+        skipThisLepton=true;
+        break;
+      }
+      if(skipThisLepton) continue;
+
+
+      //lepton is selected
+      selFakeable_Muons.push_back(leptons[i]);
+    }
+
+  //all done here
+  return selFakeable_Muons;
+}
+
+// select good electrons, these electrons are same with those in function SelectionTool::selLeptons
+std::vector<Particle> SelectionTool::selGoodElectrons(std::vector<Particle> &leptons,int eleQualBit,double minPt, double maxEta,std::vector<Particle> veto){
+  std::vector<Particle> selGoodElectrons;
+  for(size_t i =0; i<leptons.size(); i++)
+    {
+      //check quality flag
+      if(leptons[i].id()==11 && !leptons[i].hasQualityFlag(eleQualBit) ) continue;
+      if(leptons[i].id()==13 ) continue;
+
+      //check kinematics
+      if(leptons[i].pt()<minPt || fabs(leptons[i].eta())>maxEta) continue;
+
+      //check if this lepton should be vetoed by request
+      bool skipThisLepton(false);
+      for(auto &vetoL : veto){
+        if(vetoL.originalReference()!=leptons[i].originalReference()) continue;
+        skipThisLepton=true;
+        break;
+      }
+      if(skipThisLepton) continue;
+
+
+      //lepton is selected
+      selGoodElectrons.push_back(leptons[i]);
+    }
+
+  //all done here
+  return selGoodElectrons;
+}
+
+
+// select fakeable electrons, veto + inverted loose
+std::vector<Particle> SelectionTool::selFakeable_Electrons(std::vector<Particle> &leptons,int eleQualBit1,int eleQualBit2,double minPt, double maxEta,std::vector<Particle> veto){
+  std::vector<Particle> selFakeable_Electrons;
+  for(size_t i =0; i<leptons.size(); i++)
+    {
+      //check quality flag
+      if(leptons[i].id()==11 && (!leptons[i].hasQualityFlag(eleQualBit1) || leptons[i].hasQualityFlag(eleQualBit2) )) continue;
+      if(leptons[i].id()==13 ) continue;
+
+      //check kinematics
+      if(leptons[i].pt()<minPt || fabs(leptons[i].eta())>maxEta) continue;
+
+      //check if this lepton should be vetoed by request
+      bool skipThisLepton(false);
+      for(auto &vetoL : veto){
+        if(vetoL.originalReference()!=leptons[i].originalReference()) continue;
+        skipThisLepton=true;
+        break;
+      }
+      if(skipThisLepton) continue;
+
+
+      //lepton is selected
+      selFakeable_Electrons.push_back(leptons[i]);
+    }
+
+  //all done here
+  return selFakeable_Electrons;
+}
+
 //
 std::vector<Particle> SelectionTool::flaggedPhotons(MiniEvent_t &ev)
 {
