@@ -12,7 +12,7 @@
 
 using namespace std;
 
-//
+///
 void printHelp()
 {
   cout << "analysisWrapper options are:" << endl
