@@ -12,7 +12,6 @@
 "MC13TeV_2017_t_tch"                 : [119.7, 0,   "/ST_t-channel_top_5f_InclusiveDecays_TuneCP5_13TeV-powheg-pythia8/RunIISummer19UL17MiniAODv2-106X_mc2017_realistic_v9-v1/MINIAODSIM", "Single top", 416, true, false, 1],
 "MC13TeV_2017_tbar_tch"              : [119.7, 0,   "/ST_t-channel_antitop_5f_InclusiveDecays_TuneCP5_13TeV-powheg-pythia8/RunIISummer19UL17MiniAODv2-106X_mc2017_realistic_v9-v1/MINIAODSIM", "Single top", 416, true, false, 1],
 "MC13TeV_2017_t_sch"                 : [3.74, 0,    "/ST_s-channel_4f_leptonDecays_TuneCP5_13TeV-amcatnlo-pythia8/RunIISummer19UL17MiniAODv2-106X_mc2017_realistic_v9-v1/MINIAODSIM", "Single top", 416, true, false, 1],
-
 "MC13TeV_2017_ZZ"                    : [0.5644, 0,  "/ZZ_TuneCP5_13TeV-pythia8/RunIISummer20UL17MiniAODv2-106X_mc2017_realistic_v9-v1/MINIAODSIM", "Diboson", 400, false, false, 1],
 "MC13TeV_2017_WZ"                    : [47.13, 0,   "/WZ_TuneCP5_13TeV-pythia8/RunIISummer20UL17MiniAODv2-106X_mc2017_realistic_v9-v1/MINIAODSIM", "Diboson", 400, false, false, 1],
 "MC13TeV_2017_WW"                    : [12.178, 0,  "/WW_TuneCP5_13TeV-pythia8/RunIISummer20UL17MiniAODv2-106X_mc2017_realistic_v9-v1/MINIAODSIM", "Diboson", 400, false, false, 1],
