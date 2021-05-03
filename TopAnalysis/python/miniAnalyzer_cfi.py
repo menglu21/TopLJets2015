@@ -120,9 +120,11 @@ analysis = cms.EDAnalyzer("MiniAnalyzer",
                                                                'Flag_EcalDeadCellTriggerPrimitiveFilter',
                                                                'Flag_goodVertices',
                                                                'Flag_eeBadScFilter',
-                                                               #'Flag_globalTightHalo2016Filter',
-                                                               'Flag_globalSuperTightHalo2016Filter'),
-                          #badChCandFilter        = cms.InputTag('Flag_BadChargedCandidateFilter'),#not recommended yet
+                                                               #'Flag_globalTightHalo2016Filter',//
+                                                               'Flag_globalSuperTightHalo2016Filter',
+                                                               'Flag_BadPFMuonFilter'
+                                                               ),
+                          badChCandFilter        = cms.InputTag('Flag_BadChargedCandidateFilter'),#not recommended yet
                           badPFMuonFilter        = cms.InputTag('BadPFMuonFilter'),
                           mets                   = cms.InputTag('slimmedMETsModifiedMET'),
                           pfCands                = cms.InputTag('packedPFCandidates'),
