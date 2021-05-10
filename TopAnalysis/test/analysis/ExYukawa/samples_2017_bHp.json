@@ -1,0 +1,4 @@
+{
+"MC13TeV_2017_CGToBHpm_MH-300_TuneCP5_13TeV_G2HDM-rtc04-rtt06": [5.37, 0, "/CGToBHpm_MH-300_TuneCP5_13TeV_G2HDM-rtc04-rtt06-madgraphMLM-pythia8/RunIISummer19UL17MiniAODv2-106X_mc2017_realistic_v9-v1/MINIAODSIM", "CGToBHpm_MH-300_rtc04-rtt06", "#DF0101", true, false, 1], 
+"MC13TeV_2017_BGToTHpm_MH-300_TuneCP5_13TeV_G2HDM-rtc04-rtt06": [0.2067, 0, "/BGToTHpm_MH-300_TuneCP5_13TeV_G2HDM-rtc04-rtt06-madgraphMLM-pythia8/RunIISummer19UL17MiniAODv2-106X_mc2017_realistic_v9-v1/MINIAODSIM", "BGToTHpm_MH-300_rtc04-rtt06", "#DF0101", true, false, 1]
+}
