@@ -196,7 +196,8 @@ void RunExYukawa(const TString in_fname,
   ht.addHist("h_m_top_charm_x", new TH1F("h_m_top_charm_x",";m(top,charm) ; Events", 100, 0,1000));
 
   ht.addHist("m_ll",		new TH1F("m_ll",   ";M(l+,l-) [GeV] ; Events", 50,0,600));
-
+  ht.addHist("h_flags", new TH1F("h_flags",   ";Flag ; Events", 10,-0.5,9.5));
+  ht.addHist("h_hadflav", new TH1F("h_hadflav",  ";Flavour ; Events", 6, -0.5,5.5));
 
 //  TH1F *a_test1 = new TH1F("a_test1","a_test1",30,0,60);//for debugging
 
@@ -240,17 +241,18 @@ void RunExYukawa(const TString in_fname,
     float t_met;
     float t_weight, t_normWgt, t_norm;
     float t_scan_mass, t_scan_rho, t_scan_coup;
+/*
     int Flag_HBHENoiseFilter;
     int Flag_HBHENoiseIsoFilter;
     int Flag_EcalDeadCellTriggerPrimitiveFilter;
     int Flag_goodVertices;
     int Flag_eeBadScFilter;
     int Flag_globalSuperTightHalo2016Filter;
-    int Flag_BadChargedCandidateFilter;//Not recommended yet.
+    //int Flag_BadChargedCandidateFilter;//Not recommended yet.
     //ecalBadCalibReducedMINIAODFilter --> recommended but not ready yet.
     //For this miniaod needs to be re-run but the recipe is note ready yet.
     int Flag_BadPFMuonFilter;
-    
+*/    
     
     t_input.Branch("event",&ev.event,"event/I");
     t_input.Branch("run",&ev.run,"run/i");
@@ -419,7 +421,7 @@ void RunExYukawa(const TString in_fname,
 //      cout << "Trigger = "<<hasMTrigger << endl;
 //      if(ev.isData && !hasMTrigger) continue;
 
-
+/*
         Flag_HBHENoiseFilter=(ev.met_filterBits)&0x1;
         Flag_HBHENoiseIsoFilter=(ev.met_filterBits>>1)&0x1;
         Flag_EcalDeadCellTriggerPrimitiveFilter=(ev.met_filterBits>>2)&0x1;
@@ -430,8 +432,10 @@ void RunExYukawa(const TString in_fname,
        // Flag_BadChargedCandidateFilter=.....;//Not recommended yet
        // ecalBadCalibReducedMINIAODFilter // suggested but miniaod needs to be re-run. BUT NOT USABLE WITH UL YET! https://twiki.cern.ch/twiki/bin/viewauth/CMS/MissingETOptionalFiltersRun2#How_to_run_ecal_BadCalibReducedM  
 
+        ht.fill("h_flags",Flag_eeBadScFilter,1);      
+     
         if (!(Flag_HBHENoiseFilter && Flag_HBHENoiseIsoFilter && Flag_EcalDeadCellTriggerPrimitiveFilter && Flag_goodVertices && Flag_globalSuperTightHalo2016Filter && Flag_BadPFMuonFilter)) continue;
-
+*/
 
       ht.fill("h_scan_mass_bc",ev.scan_mass,1);
 
@@ -769,6 +773,7 @@ t_weight=evWgt;
   for(size_t ij=0; ij<jets.size(); ij++){
     int idx=jets[ij].getJetIndex();
     bool passBtag(ev.j_btag[idx]>0);
+    ht.fill("h_hadflav",abs(ev.j_hadflav[idx]),1);
     if (jet_index==0){
       CvsL1 = ev.j_CvsL[idx];
       CvsB1 = ev.j_CvsB[idx];
