@@ -241,7 +241,7 @@ void RunExYukawa(const TString in_fname,
     float t_met;
     float t_weight, t_normWgt, t_norm;
     float t_scan_mass, t_scan_rho, t_scan_coup;
-/*
+
     int Flag_HBHENoiseFilter;
     int Flag_HBHENoiseIsoFilter;
     int Flag_EcalDeadCellTriggerPrimitiveFilter;
@@ -252,7 +252,7 @@ void RunExYukawa(const TString in_fname,
     //ecalBadCalibReducedMINIAODFilter --> recommended but not ready yet.
     //For this miniaod needs to be re-run but the recipe is note ready yet.
     int Flag_BadPFMuonFilter;
-*/    
+    
     
     t_input.Branch("event",&ev.event,"event/I");
     t_input.Branch("run",&ev.run,"run/i");
@@ -421,7 +421,7 @@ void RunExYukawa(const TString in_fname,
 //      cout << "Trigger = "<<hasMTrigger << endl;
 //      if(ev.isData && !hasMTrigger) continue;
 
-/*
+
         Flag_HBHENoiseFilter=(ev.met_filterBits)&0x1;
         Flag_HBHENoiseIsoFilter=(ev.met_filterBits>>1)&0x1;
         Flag_EcalDeadCellTriggerPrimitiveFilter=(ev.met_filterBits>>2)&0x1;
@@ -435,7 +435,7 @@ void RunExYukawa(const TString in_fname,
         ht.fill("h_flags",Flag_eeBadScFilter,1);      
      
         if (!(Flag_HBHENoiseFilter && Flag_HBHENoiseIsoFilter && Flag_EcalDeadCellTriggerPrimitiveFilter && Flag_goodVertices && Flag_globalSuperTightHalo2016Filter && Flag_BadPFMuonFilter)) continue;
-*/
+
 
       ht.fill("h_scan_mass_bc",ev.scan_mass,1);
 
