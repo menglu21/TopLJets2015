@@ -1,0 +1,6 @@
+{
+    "MC13TeV_2017_TTGamma_Dilept"        : [0.6343, 0,  "TTGamma_Dilept_TuneCP5_PSweights_13TeV_madgraph_pythia8", "ttgam_2l", 900, true, false, 1],
+    "MC13TeV_2017_ttHToNonbb_M125"       : [0.5269, 0, "/ttHToZG_ZToLL_M125_TuneCP5_13TeV-powheg-pythia8/RunIISummer19UL17MiniAODv2-106X_mc2017_realistic_v9-v1/MINIAODSIM", "TTH", 44, true, false, 1],
+    "MC13TeV_2017_tZq_ll"                : [0.07358, 0, "tZq_ll_4f_ckm_NLO_TuneCP5_PSweights_13TeV-amcatnlo-pythia8", "tZq", 600, true, false, 1],
+    "MC13TeV_2017_WZZ"                   : [0.05565, 0,     "WZZ", "VVV", 921, true, false, 1]
+}

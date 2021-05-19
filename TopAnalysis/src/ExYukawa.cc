@@ -196,7 +196,8 @@ void RunExYukawa(const TString in_fname,
   ht.addHist("h_m_top_charm_x", new TH1F("h_m_top_charm_x",";m(top,charm) ; Events", 100, 0,1000));
 
   ht.addHist("m_ll",		new TH1F("m_ll",   ";M(l+,l-) [GeV] ; Events", 50,0,600));
-
+  ht.addHist("h_flags", new TH1F("h_flags",   ";Flag ; Events", 10,-0.5,9.5));
+  ht.addHist("h_hadflav", new TH1F("h_hadflav",  ";Flavour ; Events", 6, -0.5,5.5));
 
 //  TH1F *a_test1 = new TH1F("a_test1","a_test1",30,0,60);//for debugging
 
@@ -222,68 +223,78 @@ void RunExYukawa(const TString in_fname,
   const char* tree600 = "Tree600";
   const char* tree700 = "Tree700";
 
-  TTree t_input(treename,treename);
+    TTree t_input(treename,treename);
 
 //  int t_event;
-  float CvsL1,CvsB1;
-  float CvsL2,CvsB2;
-  float CvsL3,CvsB3;
-  float t_m_lep_charm;
-  float t_m_lep_bottom;
-  float t_HT;
-  float t_dphi_ll;
-  float t_deepcsv;
-  float t_deepjet;
-  float t_pt_l1,t_pt_l2,t_eta_l1,t_eta_l2,t_phi_l1,t_phi_l2;
-  float t_pt_j1,t_pt_j2,t_pt_j3,t_eta_j1,t_eta_j2,t_eta_j3;
-  float t_phi_j1,t_phi_j2,t_phi_j3;
-  float t_met;
-  float t_weight, t_normWgt, t_norm;
-  float t_scan_mass, t_scan_rho, t_scan_coup;
+    float CvsL1,CvsB1;
+    float CvsL2,CvsB2;
+    float CvsL3,CvsB3;
+    float t_m_lep_charm;
+    float t_m_lep_bottom;
+    float t_HT;
+    float t_dphi_ll;
+    float t_deepcsv;
+    float t_deepjet;
+    float t_pt_l1,t_pt_l2,t_eta_l1,t_eta_l2,t_phi_l1,t_phi_l2;
+    float t_pt_j1,t_pt_j2,t_pt_j3,t_eta_j1,t_eta_j2,t_eta_j3;
+    float t_phi_j1,t_phi_j2,t_phi_j3;
+    float t_met;
+    float t_weight, t_normWgt, t_norm;
+    float t_scan_mass, t_scan_rho, t_scan_coup;
 
-  t_input.Branch("event",&ev.event,"event/I");
-  t_input.Branch("run",&ev.run,"run/i");
-  t_input.Branch("lumi",&ev.lumi,"lumi/i");
-  t_input.Branch("t_weight",&t_weight,"t_weight/F");
-  t_input.Branch("t_normWgt",&t_normWgt,"t_normWgt/F");
-  t_input.Branch("t_norm",&t_norm,"t_norm/F");
+    int Flag_HBHENoiseFilter;
+    int Flag_HBHENoiseIsoFilter;
+    int Flag_EcalDeadCellTriggerPrimitiveFilter;
+    int Flag_goodVertices;
+    int Flag_eeBadScFilter;
+    int Flag_globalSuperTightHalo2016Filter;
+    //int Flag_BadChargedCandidateFilter;//Not recommended yet.
+    //ecalBadCalibReducedMINIAODFilter --> recommended but not ready yet.
+    //For this miniaod needs to be re-run but the recipe is note ready yet.
+    int Flag_BadPFMuonFilter;
+    
+    
+    t_input.Branch("event",&ev.event,"event/I");
+    t_input.Branch("run",&ev.run,"run/i");
+    t_input.Branch("lumi",&ev.lumi,"lumi/i");
+    t_input.Branch("t_weight",&t_weight,"t_weight/F");
+    t_input.Branch("t_normWgt",&t_normWgt,"t_normWgt/F");
+    t_input.Branch("t_norm",&t_norm,"t_norm/F");
 
+    t_input.Branch("CvsL1",&CvsL1,"CvsL1/F");
+    t_input.Branch("CvsB1",&CvsB1,"CvsB1/F");
+    t_input.Branch("CvsL2",&CvsL2,"CvsL2/F");
+    t_input.Branch("CvsB2",&CvsB2,"CvsB2/F");
+    t_input.Branch("CvsL3",&CvsL3,"CvsL3/F");
+    t_input.Branch("CvsB3",&CvsB3,"CvsB3/F");
+    t_input.Branch("t_m_lep_jet1",&t_m_lep_charm,"t_m_lep_jet1/F");
+    t_input.Branch("t_m_lep_bottom",&t_m_lep_bottom,"t_m_lep_bottom/F");
+    t_input.Branch("t_HT",&t_HT,"t_HT/F");
+    t_input.Branch("t_dphi_ll",&t_dphi_ll,"t_dphi_ll/F");
+    t_input.Branch("t_deepcsv",&t_deepcsv,"t_deepcsv/F");
+    t_input.Branch("t_deepjet",&t_deepjet,"t_deepjet/F");
 
-  t_input.Branch("CvsL1",&CvsL1,"CvsL1/F");
-  t_input.Branch("CvsB1",&CvsB1,"CvsB1/F");
-  t_input.Branch("CvsL2",&CvsL2,"CvsL2/F");
-  t_input.Branch("CvsB2",&CvsB2,"CvsB2/F");
-  t_input.Branch("CvsL3",&CvsL3,"CvsL3/F");
-  t_input.Branch("CvsB3",&CvsB3,"CvsB3/F");
-  t_input.Branch("t_m_lep_jet1",&t_m_lep_charm,"t_m_lep_jet1/F");
-  t_input.Branch("t_m_lep_bottom",&t_m_lep_bottom,"t_m_lep_bottom/F");
-  t_input.Branch("t_HT",&t_HT,"t_HT/F");
-  t_input.Branch("t_dphi_ll",&t_dphi_ll,"t_dphi_ll/F");
-  t_input.Branch("t_deepcsv",&t_deepcsv,"t_deepcsv/F");
-  t_input.Branch("t_deepjet",&t_deepjet,"t_deepjet/F");
+    t_input.Branch("t_pt_l1", &t_pt_l1, "t_pt_l1/F");
+    t_input.Branch("t_pt_l2", &t_pt_l2, "t_pt_l2/F");
+    t_input.Branch("t_eta_l1", &t_eta_l1, "t_eta_l1/F");
+    t_input.Branch("t_eta_l2", &t_eta_l2, "t_eta_l2/F");
+    t_input.Branch("t_phi_l1", &t_phi_l1, "t_phi_l1/F");
+    t_input.Branch("t_phi_l2", &t_phi_l2, "t_phi_l2/F");
+    t_input.Branch("t_pt_j1", &t_pt_j1, "t_pt_j1/F");
+    t_input.Branch("t_pt_j2", &t_pt_j2, "t_pt_j2/F");
+    t_input.Branch("t_pt_j3", &t_pt_j3, "t_pt_j3/F");
+    t_input.Branch("t_eta_j1", &t_eta_j1, "t_eta_j1/F");
+    t_input.Branch("t_eta_j2", &t_eta_j2, "t_eta_j2/F");
+    t_input.Branch("t_eta_j3", &t_eta_j3, "t_eta_j3/F");
+    t_input.Branch("t_phi_j1", &t_phi_j1, "t_phi_j1/F");
+    t_input.Branch("t_phi_j2", &t_phi_j2, "t_phi_j2/F");
+    t_input.Branch("t_phi_j3", &t_phi_j3, "t_phi_j3/F");
+    t_input.Branch("t_met", &t_met, "t_met/F");
 
-
-  t_input.Branch("t_pt_l1", &t_pt_l1, "t_pt_l1/F");
-  t_input.Branch("t_pt_l2", &t_pt_l2, "t_pt_l2/F");
-  t_input.Branch("t_eta_l1", &t_eta_l1, "t_eta_l1/F");
-  t_input.Branch("t_eta_l2", &t_eta_l2, "t_eta_l2/F");
-  t_input.Branch("t_phi_l1", &t_phi_l1, "t_phi_l1/F");
-  t_input.Branch("t_phi_l2", &t_phi_l2, "t_phi_l2/F");
-  t_input.Branch("t_pt_j1", &t_pt_j1, "t_pt_j1/F");
-  t_input.Branch("t_pt_j2", &t_pt_j2, "t_pt_j2/F");
-  t_input.Branch("t_pt_j3", &t_pt_j3, "t_pt_j3/F");
-  t_input.Branch("t_eta_j1", &t_eta_j1, "t_eta_j1/F");
-  t_input.Branch("t_eta_j2", &t_eta_j2, "t_eta_j2/F");
-  t_input.Branch("t_eta_j3", &t_eta_j3, "t_eta_j3/F");
-  t_input.Branch("t_phi_j1", &t_phi_j1, "t_phi_j1/F");
-  t_input.Branch("t_phi_j2", &t_phi_j2, "t_phi_j2/F");
-  t_input.Branch("t_phi_j3", &t_phi_j3, "t_phi_j3/F");
-  t_input.Branch("t_met", &t_met, "t_met/F");
-
-  t_input.Branch("t_scan_mass", &t_scan_mass, "t_scan_mass/F");
-  t_input.Branch("t_scan_rho", &t_scan_rho, "t_scan_rho/F");
-  t_input.Branch("t_scan_coup", &t_scan_coup, "t_scan_coup/F");
-
+    t_input.Branch("t_scan_mass", &t_scan_mass, "t_scan_mass/F");
+    t_input.Branch("t_scan_rho", &t_scan_rho, "t_scan_rho/F");
+    t_input.Branch("t_scan_coup", &t_scan_coup, "t_scan_coup/F");
+    
   TTree *t_300 = t_input.CloneTree();
   t_300->SetName(tree300);
   TTree *t_350 = t_input.CloneTree();
@@ -406,12 +417,24 @@ void RunExYukawa(const TString in_fname,
         }
      }
 
-     Ntotal++;
+        Ntotal++;
 //      cout << "Trigger = "<<hasMTrigger << endl;
 //      if(ev.isData && !hasMTrigger) continue;
 
 
+        Flag_HBHENoiseFilter=(ev.met_filterBits)&0x1;
+        Flag_HBHENoiseIsoFilter=(ev.met_filterBits>>1)&0x1;
+        Flag_EcalDeadCellTriggerPrimitiveFilter=(ev.met_filterBits>>2)&0x1;
+        Flag_goodVertices=(ev.met_filterBits>>3)&0x1;
+        Flag_eeBadScFilter=(ev.met_filterBits>>4)&0x1;//Not suggested!
+        Flag_globalSuperTightHalo2016Filter=(ev.met_filterBits>>5)&0x1;
+        Flag_BadPFMuonFilter=(ev.met_filterBits>>6)&0x1;
+       // Flag_BadChargedCandidateFilter=.....;//Not recommended yet
+       // ecalBadCalibReducedMINIAODFilter // suggested but miniaod needs to be re-run. BUT NOT USABLE WITH UL YET! https://twiki.cern.ch/twiki/bin/viewauth/CMS/MissingETOptionalFiltersRun2#How_to_run_ecal_BadCalibReducedM  
 
+        ht.fill("h_flags",Flag_eeBadScFilter,1);      
+     
+        if (!(Flag_HBHENoiseFilter && Flag_HBHENoiseIsoFilter && Flag_EcalDeadCellTriggerPrimitiveFilter && Flag_goodVertices && Flag_globalSuperTightHalo2016Filter && Flag_BadPFMuonFilter)) continue;
 
 
       ht.fill("h_scan_mass_bc",ev.scan_mass,1);
@@ -668,6 +691,8 @@ void RunExYukawa(const TString in_fname,
       jets.push_back(j);
     }
 
+  
+        
   if (leptons[0].charge()*leptons[1].charge() < 0 && zmass > 70. && zmass < 110. && jets.size()>0) ht.fill("njets_bc",      jets.size(), evWgt, tags2);
 
         //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
@@ -748,6 +773,7 @@ t_weight=evWgt;
   for(size_t ij=0; ij<jets.size(); ij++){
     int idx=jets[ij].getJetIndex();
     bool passBtag(ev.j_btag[idx]>0);
+    ht.fill("h_hadflav",abs(ev.j_hadflav[idx]),1);
     if (jet_index==0){
       CvsL1 = ev.j_CvsL[idx];
       CvsB1 = ev.j_CvsB[idx];
