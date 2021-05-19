@@ -364,6 +364,7 @@ void MiniAnalyzer::genAnalysis(const edm::Event& iEvent, const edm::EventSetup& 
         ev_.g_eta[ev_.ng]  = genJet->eta();
         ev_.g_phi[ev_.ng]  = genJet->phi();
         ev_.g_m[ev_.ng]    = genJet->mass();
+        ev_.g_charge[ev_.ng] = genJet->charge();
         ev_.ng++;
 
         //gen level selection
@@ -390,6 +391,7 @@ void MiniAnalyzer::genAnalysis(const edm::Event& iEvent, const edm::EventSetup& 
         ev_.g_eta[ev_.ng]  = genLep->eta();
         ev_.g_phi[ev_.ng]  = genLep->phi();
         ev_.g_m[ev_.ng]    = genLep->mass();
+        ev_.g_charge[ev_.ng] = genLep->charge();
         ev_.ng++;
 
         //gen level selection
@@ -410,6 +412,7 @@ void MiniAnalyzer::genAnalysis(const edm::Event& iEvent, const edm::EventSetup& 
         ev_.g_eta[ev_.ng]  = genPhoton->eta();
         ev_.g_phi[ev_.ng]  = genPhoton->phi();
         ev_.g_m[ev_.ng]    = genPhoton->mass();
+        ev_.g_charge[ev_.ng]=genPhoton->charge();
         ev_.ng++;
 
         //gen level selection
@@ -922,13 +925,10 @@ void MiniAnalyzer::recAnalysis(const edm::Event& iEvent, const edm::EventSetup& 
 	  ev_.l_ip3d[ev_.nl]    = ip3dRes.second.value();
 	  ev_.l_ip3dsig[ev_.nl] = ip3dRes.second.significance();
 	}
-        //to reduce fakes
-        ev_.l_isGsfCtfScPixChargeConsistent[ev_.nl] = e.isGsfCtfScPixChargeConsistent();
-        
-        
       ev_.nl++;
 
-      
+      //to reduce fakes
+      ev_.l_isGsfCtfScPixChargeConsistent[ev_.nl] = e.isGsfCtfScPixChargeConsistent();
 
       if( corrP4.pt()>20 && passEta && passLooseId ) nrecleptons_++;
     }
@@ -1090,21 +1090,25 @@ void MiniAnalyzer::recAnalysis(const edm::Event& iEvent, const edm::EventSetup& 
       float CHM = j->chargedMultiplicity();
 
       bool tightLepVeto(true),looseJetID(true);//,tightJetId(true);
-      if(abs(j->eta())<2.6) {
+      if(abs(j->eta())<2.4) {
         looseJetID = (NHF<0.99 && NEMF<0.99 && NumConst>1 && CHF>0 && CHM>0 && CEMF<0.99);
-        tightLepVeto = (CEMF<0.8 && CHM>0 && CHF>0 && NumConst>1 && NEMF<0.9 && MUF <0.8 && NHF < 0.9 );//UL17
+        //tightJetID = (NHF<0.90 && NEMF<0.90 && NumConst>1 && CHF>0 && CHM>0 && CEMF<0.99);
+        tightLepVeto = (NHF<0.90 && NEMF<0.90 && NumConst>1 && MUF<0.8 && CHF>0 && CHM>0 && CEMF<0.80);
       }
       else if(abs(j->eta())<2.7) {
         looseJetID = (NHF<0.99 && NEMF<0.99 && NumConst>1);
-        tightLepVeto = (CEMF<0.8 && CHM>0 && NEMF<0.99 && MUF <0.8 && NHF < 0.9);//UL17
+        //tightJetID = (NHF<0.90 && NEMF<0.90 && NumConst>1);
+        tightLepVeto = (NHF<0.90 && NEMF<0.90 && NumConst>1 && MUF<0.8);
       }
       else if(abs(j->eta())<3.0) {
         looseJetID = (NHF<0.98 && NEMF>0.01 && NumNeutralParticles>2);
-        tightLepVeto =  (NEMF>0.01 && NEMF<0.99 && NumNeutralParticles>1);//UL17
+        //tightJetID = (NHF<0.98 && NEMF>0.01 && NumNeutralParticles>2);
+        tightLepVeto = (NHF<0.98 && NEMF>0.01 && NumNeutralParticles>2);
       }
       else {
         looseJetID = (NEMF<0.90 && NumNeutralParticles>10);
-        tightLepVeto = (NEMF<0.90 && NHF>0.2 && NumNeutralParticles>10);//UL17
+        //tightJetID = (NEMF<0.90 && NumNeutralParticles>10);
+        tightLepVeto = (NEMF<0.90 && NumNeutralParticles>10);
       }
 
       if(jetIdToUse_=="tightLepVeto") { if(!tightLepVeto) continue; }
