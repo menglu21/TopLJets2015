@@ -1,5 +1,4 @@
 #include "TopLJets2015/TopAnalysis/interface/MiniEvent.h"
-
 //
 void createMiniEventTree(TTree *t,MiniEvent_t &ev,Int_t njecUncs)
 {
@@ -39,6 +38,7 @@ void createMiniEventTree(TTree *t,MiniEvent_t &ev,Int_t njecUncs)
   t->Branch("g_eta",     ev.g_eta,    "g_eta[ng]/F");
   t->Branch("g_phi",     ev.g_phi,    "g_phi[ng]/F");
   t->Branch("g_m",       ev.g_m,      "g_m[ng]/F");
+  t->Branch("g_charge",  ev.g_charge, "g_charge[ng]/I");
 
   t->Branch("g_nchPV",       &ev.g_nchPV,      "g_nchPV/I");
   t->Branch("g_sumPVChPt",   &ev.g_sumPVChPt,  "g_sumPVChPt/F");
@@ -283,6 +283,7 @@ void attachToMiniEventTree(TTree *t,MiniEvent_t &ev,bool full)
   t->SetBranchAddress("g_eta",     ev.g_eta);
   t->SetBranchAddress("g_phi",     ev.g_phi);
   t->SetBranchAddress("g_m",       ev.g_m);
+  t->SetBranchAddress("g_charge",  ev.g_charge);
 
   t->SetBranchAddress("g_nchPV",       &ev.g_nchPV);
   t->SetBranchAddress("g_sumPVChPt",   &ev.g_sumPVChPt);

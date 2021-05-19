@@ -364,6 +364,7 @@ void MiniAnalyzer::genAnalysis(const edm::Event& iEvent, const edm::EventSetup& 
         ev_.g_eta[ev_.ng]  = genJet->eta();
         ev_.g_phi[ev_.ng]  = genJet->phi();
         ev_.g_m[ev_.ng]    = genJet->mass();
+        ev_.g_charge[ev_.ng]=genJet->charge();
         ev_.ng++;
 
         //gen level selection
@@ -390,6 +391,7 @@ void MiniAnalyzer::genAnalysis(const edm::Event& iEvent, const edm::EventSetup& 
         ev_.g_eta[ev_.ng]  = genLep->eta();
         ev_.g_phi[ev_.ng]  = genLep->phi();
         ev_.g_m[ev_.ng]    = genLep->mass();
+        ev_.g_charge[ev_.ng]=genLep->charge();
         ev_.ng++;
 
         //gen level selection
@@ -410,6 +412,7 @@ void MiniAnalyzer::genAnalysis(const edm::Event& iEvent, const edm::EventSetup& 
         ev_.g_eta[ev_.ng]  = genPhoton->eta();
         ev_.g_phi[ev_.ng]  = genPhoton->phi();
         ev_.g_m[ev_.ng]    = genPhoton->mass();
+        ev_.g_charge[ev_.ng]=genPhoton->charge();
         ev_.ng++;
 
         //gen level selection
