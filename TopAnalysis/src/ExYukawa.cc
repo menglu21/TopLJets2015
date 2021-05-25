@@ -90,7 +90,8 @@ void RunExYukawa(const TString in_fname,
 
   HistTool ht;
   ht.setNsyst(0);
-  ht.addHist("control_Z_mass",    new TH1F("control_Z_mass",    ";M(Z) [GeV];Events",40,70,110));
+  ht.addHist("control_Z_mass_overall", new TH1F("control_Z_mass_overall", ";M(Z) [GeV];Events",80,50,170));
+  ht.addHist("control_Z_mass",    new TH1F("control_Z_mass",    ";M(Z) [GeV];Events",80,50,170));
   ht.addHist("control_lep_pt_bc", new TH1F("control_lep_pt_bc", ";p_{T}(l) [GeV]; Events", 30,0,600));
   ht.addHist("control_lep_eta_bc",new TH1F("control_lep_eta_bc",";#eta(lepton) ; Events", 10,-2.5,2.5));
   ht.addHist("control_m_ll_bc",		new TH1F("control_m_ll_bc",   ";M(l+,l-) [GeV] ; Events", 20,12,600));
@@ -422,6 +423,7 @@ void RunExYukawa(const TString in_fname,
 //      if(ev.isData && !hasMTrigger) continue;
 
 
+//      Filters
         Flag_HBHENoiseFilter=(ev.met_filterBits)&0x1;
         Flag_HBHENoiseIsoFilter=(ev.met_filterBits>>1)&0x1;
         Flag_EcalDeadCellTriggerPrimitiveFilter=(ev.met_filterBits>>2)&0x1;
@@ -533,7 +535,7 @@ void RunExYukawa(const TString in_fname,
       //select jets
       btvSF.addBTagDecisions(ev);
       if(!ev.isData) btvSF.updateBTagDecisions(ev);
-      std::vector<Jet> allJets = selector.getGoodJets(ev,20.,2.4,leptons,{});
+      std::vector<Jet> allJets = selector.getGoodJets(ev,50.,2.4,leptons,{});
       bool passJets(allJets.size()>=minJetMultiplicity);
 
       //met
@@ -615,8 +617,11 @@ void RunExYukawa(const TString in_fname,
 
       float zmass = (leptons[0]+leptons[1]).M();
       if (leptons[0].charge()*leptons[1].charge() < 0){
-        ht.fill("control_Z_mass", zmass,        evWgt, tags2);
-        if (zmass > 70. && zmass < 110.){
+        ht.fill("control_Z_mass_overall", zmass,        evWgt, tags2);
+//        if (zmass > 50. && zmass < 170.){
+//        if (zmass > 50. && zmass < 170. &&  leptons[0].pt()>50 && leptons[0].pt()<100 && leptons[1].pt()>50 && leptons[1].pt()<100){
+          if (allJets.size() == 1){      
+          ht.fill("control_Z_mass", zmass,        evWgt, tags2);
           ht.fill("control_2_lep_pt_bc", leptons[0].pt(),evWgt, tags2);
           ht.fill("control_2_lep_pt_bc", leptons[1].pt(),evWgt, tags2);
           ht.fill("control_2_lep_eta_bc", leptons[0].eta(),evWgt, tags2);
