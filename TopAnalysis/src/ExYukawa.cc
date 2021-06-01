@@ -62,8 +62,10 @@ void RunExYukawa(const TString in_fname,
   BTagSFUtil btvSF(era,BTagEntry::OperatingPoint::OP_MEDIUM,"",0);
 
   //READ Cross section over sum(weight) for the MC sample
+
   TString dirin = gSystem->DirName(in_fname);
   TString baseMC = gSystem->BaseName(dirin);  cout<<"Base MC name: "<<baseMC<<endl;
+/*
   TString githashfromdir = gSystem->BaseName(gSystem->DirName(dirin));
   cout<<"Git hash: "<<githashfromdir<<endl;
   TFile *norm_file=TFile::Open("$CMSSW_BASE/src/TopLJets2015/TopAnalysis/data/era2017/genweights_"+githashfromdir+".root");
@@ -76,6 +78,7 @@ void RunExYukawa(const TString in_fname,
   TH1F *h_norm = (TH1F*)norm_file->Get(baseMC);
   float norm=h_norm->GetBinContent(1);
   cout<<"first bin content of the normalization histogram:  "<<norm<<endl;
+*/
 //  norm_file->Close();
 
 
@@ -97,10 +100,23 @@ void RunExYukawa(const TString in_fname,
   ht.addHist("control_m_ll_bc",		new TH1F("control_m_ll_bc",   ";M(l+,l-) [GeV] ; Events", 20,12,600));
   ht.addHist("control_pT_ll_bc",  new TH1F("control_pT_ll_bc",  ";p_{T}(l+,l-) [GeV] ; Events", 80,0,200));
   ht.addHist("control_y_ll_bc",  new TH1F("control_y_ll_bc",  ";y(l+,l-) [GeV] ; Events", 20,-5,5));
-
   ht.addHist("control_2_lep_pt_bc", new TH1F("control_2_lep_pt_bc", ";p_{T}(l) [GeV]; Events", 30,0,600));
   ht.addHist("control_2_lep_eta_bc",new TH1F("control_2_lep_eta_bc",";#eta(lepton) ; Events", 10,-2.5,2.5));
 
+  ht.addHist("isgsf_control_Z_mass_overall", new TH1F("isgsf_control_Z_mass_overall", ";M(Z) [GeV];Events",80,50,170));
+  ht.addHist("isgsf_control_Z_mass",    new TH1F("isgsf_control_Z_mass",    ";M(Z) [GeV];Events",80,50,170));
+  ht.addHist("isgsf_control_lep_pt_bc", new TH1F("isgsf_control_lep_pt_bc", ";p_{T}(l) [GeV]; Events", 30,0,600));
+  ht.addHist("isgsf_control_lep_eta_bc",new TH1F("isgsf_control_lep_eta_bc",";#eta(lepton) ; Events", 10,-2.5,2.5));
+  ht.addHist("isgsf_control_m_ll_bc",         new TH1F("isgsf_control_m_ll_bc",   ";M(l+,l-) [GeV] ; Events", 20,12,600));
+  ht.addHist("isgsf_control_pT_ll_bc",  new TH1F("isgsf_control_pT_ll_bc",  ";p_{T}(l+,l-) [GeV] ; Events", 80,0,200));
+  ht.addHist("isgsf_control_y_ll_bc",  new TH1F("isgsf_control_y_ll_bc",  ";y(l+,l-) [GeV] ; Events", 20,-5,5));
+  ht.addHist("isgsf_control_2_lep_pt_bc", new TH1F("isgsf_control_2_lep_pt_bc", ";p_{T}(l) [GeV]; Events", 30,0,600));
+  ht.addHist("isgsf_control_2_lep_eta_bc",new TH1F("isgsf_control_2_lep_eta_bc",";#eta(lepton) ; Events", 10,-2.5,2.5));
+
+  ht.addHist("OS_isgsf_control_m_ll_bc",         new TH1F("OS_isgsf_control_m_ll_bc",   ";M(l+,l-) [GeV] ; Events", 20,12,600));
+  ht.addHist("SS_isgsf_control_m_ll_bc",         new TH1F("SS_isgsf_control_m_ll_bc",   ";M(l+,l-) [GeV] ; Events", 20,12,600));
+  ht.addHist("OS_control_m_ll_bc",         new TH1F("OS_control_m_ll_bc",   ";M(l+,l-) [GeV] ; Events", 20,12,600));
+  ht.addHist("SS_control_m_ll_bc",         new TH1F("SS_control_m_ll_bc",   ";M(l+,l-) [GeV] ; Events", 20,12,600));
 
   ht.addHist("nvtx",         new TH1F("nvtx",        ";Vertex multiplicity;Events",35,0,140));
 
@@ -615,12 +631,17 @@ void RunExYukawa(const TString in_fname,
       float invariant_mass = (leptons[0]+leptons[1]).M();
       ht.fill("control_m_ll_bc",  invariant_mass,        evWgt, tags2);
 
+      int tag_isgsf = 0;
+      if (dielectron_event && (ev.l_isGsfCtfScPixChargeConsistent[1] && ev.l_isGsfCtfScPixChargeConsistent[1])) tag_isgsf = 1;
+      if (emu_event && ev.l_isGsfCtfScPixChargeConsistent[0]) tag_isgsf = 1;
+      if (mue_event && ev.l_isGsfCtfScPixChargeConsistent[1]) tag_isgsf = 1;
+
       float zmass = (leptons[0]+leptons[1]).M();
       if (leptons[0].charge()*leptons[1].charge() < 0){
         ht.fill("control_Z_mass_overall", zmass,        evWgt, tags2);
 //        if (zmass > 50. && zmass < 170.){
 //        if (zmass > 50. && zmass < 170. &&  leptons[0].pt()>50 && leptons[0].pt()<100 && leptons[1].pt()>50 && leptons[1].pt()<100){
-          if (allJets.size() == 1){      
+//          if (allJets.size() == 1){      
           ht.fill("control_Z_mass", zmass,        evWgt, tags2);
           ht.fill("control_2_lep_pt_bc", leptons[0].pt(),evWgt, tags2);
           ht.fill("control_2_lep_pt_bc", leptons[1].pt(),evWgt, tags2);
@@ -632,8 +653,37 @@ void RunExYukawa(const TString in_fname,
           }
           ht.fill("control_pT_ll_bc",(leptons[0]+leptons[1]).Pt(),evWgt, tags2);
           ht.fill("control_Y_ll_bc",(leptons[0]+leptons[1]).Eta(),evWgt, tags2);
-        }
+//        }
       }
+
+      if (tag_isgsf == 1){ 
+         ht.fill("isgsf_control_m_ll_bc",  invariant_mass,        evWgt, tags2);
+         if (leptons[0].charge()*leptons[1].charge() < 0 && tag_isgsf == 1){
+             ht.fill("isgsf_control_Z_mass_overall", zmass,        evWgt, tags2);
+             ht.fill("isgsf_control_Z_mass", zmass,        evWgt, tags2);
+             ht.fill("isgsf_control_2_lep_pt_bc", leptons[0].pt(),evWgt, tags2);
+             ht.fill("isgsf_control_2_lep_pt_bc", leptons[1].pt(),evWgt, tags2);
+             ht.fill("isgsf_control_2_lep_eta_bc", leptons[0].eta(),evWgt, tags2);
+             ht.fill("isgsf_control_2_lep_eta_bc", leptons[1].eta(),evWgt, tags2);
+             for (size_t in_nlep=0; in_nlep<leptons.size();in_nlep++){
+               ht.fill("isgsf_control_lep_pt_bc", leptons[in_nlep].pt(), evWgt, tags2);
+               ht.fill("isgsf_control_lep_eta_bc",leptons[in_nlep].eta(), evWgt, tags2);
+             }
+             ht.fill("isgsf_control_pT_ll_bc",(leptons[0]+leptons[1]).Pt(),evWgt, tags2);
+             ht.fill("isgsf_control_Y_ll_bc",(leptons[0]+leptons[1]).Eta(),evWgt, tags2);           
+         }
+      }
+
+     if (allJets.size() <= 3){
+      if (leptons[0].charge()*leptons[1].charge() < 0){
+         if (tag_isgsf == 1) ht.fill("OS_isgsf_control_m_ll_bc",  invariant_mass,        evWgt, tags2);  
+         ht.fill("OS_control_m_ll_bc",  invariant_mass,        evWgt, tags2);
+      }
+      if (leptons[0].charge()*leptons[1].charge() > 0){
+         if (tag_isgsf == 1) ht.fill("SS_isgsf_control_m_ll_bc",  invariant_mass,        evWgt, tags2);
+         ht.fill("SS_control_m_ll_bc",  invariant_mass,        evWgt, tags2);
+      }
+     }
 
       int num_btags = 0;
       for(size_t ij=0; ij<allJets.size(); ij++){
@@ -714,6 +764,8 @@ void RunExYukawa(const TString in_fname,
   if (dielectron_event && (!ev.l_isGsfCtfScPixChargeConsistent[0] || !ev.l_isGsfCtfScPixChargeConsistent[1])) continue;
   if (emu_event && !ev.l_isGsfCtfScPixChargeConsistent[0]) continue;
   if (mue_event && !ev.l_isGsfCtfScPixChargeConsistent[1]) continue;
+
+   
         
   if (leptons[0].charge()*leptons[1].charge() < 0) continue;
 
@@ -754,7 +806,7 @@ t_eta_l2=leptons[1].eta();
 t_phi_l1=leptons[0].phi();
 t_phi_l2=leptons[1].phi();
 t_met=ev.met_pt;
-t_norm=norm;
+//t_norm=norm;
 t_HT = HT;
 t_dphi_ll=delta_phi;
 t_scan_mass=ev.scan_mass;
