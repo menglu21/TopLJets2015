@@ -128,10 +128,14 @@ analysis = cms.EDAnalyzer("MiniAnalyzer",
                                                                'Flag_eeBadScFilter',
                                                                #'Flag_globalTightHalo2016Filter',//
                                                                'Flag_globalSuperTightHalo2016Filter',
-                                                               'Flag_BadPFMuonFilter'
+                                                               'Flag_BadPFMuonFilter',
+                                                               'Flag_BadPFMuonDzFilter',
+                                                               'Flag_ecalBadCalibFilter'
                                                                ),
-                          badChCandFilter        = cms.InputTag('Flag_BadChargedCandidateFilter'),#not recommended yet
-                          badPFMuonFilter        = cms.InputTag('BadPFMuonFilter'),
+#                          badChCandFilter        = cms.InputTag('Flag_BadChargedCandidateFilter'),#not recommended yet
+#                          badPFMuonFilter        = cms.InputTag('BadPFMuonFilter'),#???
+#                          badPFMuonDzFilter      = cms.InputTag('Flag_BadPFMuonDzFilter'),#????
+#                          ecalBadCalibFilter     = cms.InputTag('Flag_ecalBadCalibFilter'),#????
                           mets                   = cms.InputTag('slimmedMETsModifiedMET'),
                           pfCands                = cms.InputTag('packedPFCandidates'),
                           ctppsLocalTracks       = cms.InputTag('ctppsLocalTrackLiteProducer'),

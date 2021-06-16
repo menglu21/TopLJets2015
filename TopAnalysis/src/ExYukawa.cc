@@ -266,9 +266,9 @@ void RunExYukawa(const TString in_fname,
     int Flag_eeBadScFilter;
     int Flag_globalSuperTightHalo2016Filter;
     //int Flag_BadChargedCandidateFilter;//Not recommended yet.
-    //ecalBadCalibReducedMINIAODFilter --> recommended but not ready yet.
-    //For this miniaod needs to be re-run but the recipe is note ready yet.
     int Flag_BadPFMuonFilter;
+    int Flag_badPFMuonDzFilter;
+    int Flag_ecalBadCalibFilter;
     
     
     t_input.Branch("event",&ev.event,"event/I");
@@ -444,15 +444,36 @@ void RunExYukawa(const TString in_fname,
         Flag_HBHENoiseIsoFilter=(ev.met_filterBits>>1)&0x1;
         Flag_EcalDeadCellTriggerPrimitiveFilter=(ev.met_filterBits>>2)&0x1;
         Flag_goodVertices=(ev.met_filterBits>>3)&0x1;
-        Flag_eeBadScFilter=(ev.met_filterBits>>4)&0x1;//Not suggested!
+        Flag_eeBadScFilter=(ev.met_filterBits>>4)&0x1;//Not suggested for MC
         Flag_globalSuperTightHalo2016Filter=(ev.met_filterBits>>5)&0x1;
         Flag_BadPFMuonFilter=(ev.met_filterBits>>6)&0x1;
-       // Flag_BadChargedCandidateFilter=.....;//Not recommended yet
-       // ecalBadCalibReducedMINIAODFilter // suggested but miniaod needs to be re-run. BUT NOT USABLE WITH UL YET! https://twiki.cern.ch/twiki/bin/viewauth/CMS/MissingETOptionalFiltersRun2#How_to_run_ecal_BadCalibReducedM  
+ //     TO BE USED IN NEXT ROUND OF NTUPLE PRODUCTION!!!
+        Flag_badPFMuonDzFilter=(ev.met_filterBits>>7)&0x1;
+        Flag_ecalBadCalibFilter=(ev.met_filterBits>>8)&0x1;
+
 
         ht.fill("h_flags",Flag_eeBadScFilter,1);      
-     
-        if (!(Flag_HBHENoiseFilter && Flag_HBHENoiseIsoFilter && Flag_EcalDeadCellTriggerPrimitiveFilter && Flag_goodVertices && Flag_globalSuperTightHalo2016Filter && Flag_BadPFMuonFilter)) continue;
+   
+   /*  
+      cout<<Flag_HBHENoiseFilter<<"  "<<Flag_HBHENoiseIsoFilter<<"  "
+          <<Flag_EcalDeadCellTriggerPrimitiveFilter<<"  "
+          <<Flag_goodVertices<<"  "<<Flag_eeBadScFilter<<"  "
+          <<Flag_globalSuperTightHalo2016Filter<<"  "
+          <<Flag_BadPFMuonFilter<<"  "<<Flag_badPFMuonDzFilter<<"  "
+          <<Flag_ecalBadCalibFilter<<endl;
+  */
+
+        if (!(Flag_HBHENoiseFilter && 
+              Flag_HBHENoiseIsoFilter && 
+              Flag_EcalDeadCellTriggerPrimitiveFilter && 
+              Flag_goodVertices && 
+              Flag_globalSuperTightHalo2016Filter && 
+              Flag_BadPFMuonFilter)) continue;
+ // ----TO BE USED IN NEXT ROUND OF NTUPLE PRODUCTION!!!---             
+        if (!(Flag_badPFMuonDzFilter &&
+              Flag_ecalBadCalibFilter)) continue;
+        if (ev.isData && !Flag_eeBadScFilter) continue;
+//---------------------------------------------------------
 
 
       ht.fill("h_scan_mass_bc",ev.scan_mass,1);
