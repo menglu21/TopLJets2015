@@ -13,6 +13,7 @@ echo $foldername2
 if [ ! -d $foldername ]; then
   mkdir $foldername
 else
+  echo 'Output folder: '$foldername
   echo 'Folder exists. Do you want to erase it and a create a new one? (y/n)'
   read -r
   response=$REPLY
@@ -20,11 +21,11 @@ fi
 if [ $response = "y" ]; then
   rm -rf $foldername
   mkdir $foldername
-else
-  return
+#else
+#  return
 fi
-find /eos/cms/store/cmst3/group/top/RunIIUL/2017/6bfa3f2e/. -type d -exec basename {} \; > hadd.sh
-find /eos/cms/store/cmst3/group/top/RunIIUL/2017/6bfa3f2e/. -type d -exec basename {} \; > hadd1.sh
+find /eos/cms/store/group/phys_top/efe/7ed19ab9_ntuples/. -type d -exec basename {} \; > hadd.sh
+find /eos/cms/store/group/phys_top/efe/7ed19ab9_ntuples/. -type d -exec basename {} \; > hadd1.sh
 tail -n +2 hadd.sh > hadd_tmp.sh
 mv hadd_tmp.sh hadd.sh
 tail -n +2 hadd1.sh > hadd_tmp.sh

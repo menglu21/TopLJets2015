@@ -163,7 +163,8 @@ private:
   std::vector< edm::EDGetTokenT<std::vector<reco::ForwardProton> > > tokenRecoProtons_;
 
   //
-  edm::EDGetTokenT<bool> BadChCandFilterToken_,BadPFMuonFilterToken_;
+  //edm::EDGetTokenT<bool> BadChCandFilterToken_,BadPFMuonFilterToken_;
+  //edm::EDGetTokenT<bool> BadPFMuonDzFilterToken_,ecalBadCalibFilterToken_;
 
   //  edm::EDGetTokenT<edm::ValueMap<float> > petersonFragToken_;
 
@@ -228,8 +229,12 @@ MiniAnalyzer::MiniAnalyzer(const edm::ParameterSet& iConfig) :
   metToken_(consumes<pat::METCollection>(iConfig.getParameter<edm::InputTag>("mets"))),
   pfToken_(consumes<pat::PackedCandidateCollection>(iConfig.getParameter<edm::InputTag>("pfCands"))),
   ctppsToken_(consumes<std::vector<CTPPSLocalTrackLite> >(iConfig.getParameter<edm::InputTag>("ctppsLocalTracks"))),
+  /*
   BadChCandFilterToken_(consumes<bool>(iConfig.getParameter<edm::InputTag>("badChCandFilter"))),
   BadPFMuonFilterToken_(consumes<bool>(iConfig.getParameter<edm::InputTag>("badPFMuonFilter"))),
+  BadPFMuonDzFilterToken_(consumes<bool>(iConfig.getParameter<edm::InputTag>("badPFMuonDzFilter"))),
+  ecalBadCalibFilterToken_(consumes<bool>(iConfig.getParameter<edm::InputTag>("ecalBadCalibFilter"))),
+  */
   saveTree_( iConfig.getParameter<bool>("saveTree") ),
   savePF_( iConfig.getParameter<bool>("savePF") ),
   applyFilt_( iConfig.getParameter<bool>("applyFilt") )
@@ -1237,6 +1242,7 @@ void MiniAnalyzer::recAnalysis(const edm::Event& iEvent, const edm::EventSetup& 
 	}
     }
 
+/*  
   try{
     edm::Handle<bool> ifilterbadChCand;
     iEvent.getByToken(BadChCandFilterToken_, ifilterbadChCand);
@@ -1254,6 +1260,25 @@ void MiniAnalyzer::recAnalysis(const edm::Event& iEvent, const edm::EventSetup& 
   }
   catch(...){
   }
+  
+  try{
+    edm::Handle<bool> ifilterbadPFMuonDz;
+    iEvent.getByToken(BadPFMuonDzFilterToken_, ifilterbadPFMuonDz);
+    bool filterbadPFMuonDz = *ifilterbadPFMuonDz;
+    ev_.met_filterBits |= (filterbadPFMuonDz<<(metFiltersToUse_.size()+2));
+  }
+  catch(...){
+  }
+  
+  try{
+    edm::Handle<bool> ifilterecalBadCalibFilter;
+    iEvent.getByToken(ecalBadCalibFilterToken_, ifilterecalBadCalibFilter);
+    bool filterecalBadCalibFilter = *ifilterecalBadCalibFilter;
+    ev_.met_filterBits |= (filterecalBadCalibFilter<<(metFiltersToUse_.size()+3));
+  }
+  catch(...){
+  }
+*/
 
   //PF candidates
   LorentzVector vtxPt(0,0,0,0);
