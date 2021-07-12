@@ -10,6 +10,7 @@
 #include "TopLJets2015/TopAnalysis/interface/CommonTools.h"
 #include "TopLJets2015/TopAnalysis/interface/ExYukawa.h"
 #include "TopLJets2015/TopAnalysis/interface/L1PrefireEfficiencyWrapper.h"
+#include "TopLJets2015/TopAnalysis/interface/CtagScaleFactorsWrapper.h"
 
 #include <vector>
 #include <set>
@@ -60,6 +61,10 @@ void RunExYukawa(const TString in_fname,
 
   //CORRECTIONS: B-TAG CALIBRATION
   BTagSFUtil btvSF(era,BTagEntry::OperatingPoint::OP_MEDIUM,"",0);
+
+  //CORRECTIONS: C-TAG CALIBRATION
+  CtagScaleFactorsWrapper CtagSFWR(in_fname.Contains("Data13TeV"),era);
+
 
   //READ Cross section over sum(weight) for the MC sample
 
@@ -641,7 +646,9 @@ void RunExYukawa(const TString in_fname,
         EffCorrection_t l1prefireProb=l1PrefireWR.getCorrection(allJets,{});
         float leptonSF = muonSF*electronSF*emuSF;
 
-        evWgt  = normWgt*puWgt*l1prefireProb.first*leptonSF*dilepton_trig_SF;
+        EffCorrection_t Chargeflip_SF=lepEffH.getChargeFlipSF(in_fname,"Chi2",leptons[0].pt(),leptons[0].eta(),leptons[0].charge(),leptons[1].pt(),leptons[1].eta(),leptons[1].charge());
+
+        evWgt  = normWgt*puWgt*l1prefireProb.first*leptonSF*dilepton_trig_SF*Chargeflip_SF.first;
         t_normWgt = normWgt;
         evWgt *= (ev.g_nw>0 ? ev.g_w[0] : 1.0);//generator weights
       }
@@ -846,7 +853,7 @@ t_weight=evWgt;
    }
  );
 
-
+  float Ctag_SF=1.0;
   int jet_index=0;
   for(size_t ij=0; ij<jets.size(); ij++){
     int idx=jets[ij].getJetIndex();
@@ -882,17 +889,22 @@ t_weight=evWgt;
       t_phi_j3=jets[ij].Phi();
     }
     jet_index++;
+    // Just apply the C-tagging scale factor to CvsL and CvsB plots in current phase.
+    Ctag_SF = 1.0;
+    if(!ev.isData)   Ctag_SF=CtagSFWR.GetCtagSF("DeepCSV", jets[ij], ev);
     ht.fill("hf_csv",ev.j_csv[idx],evWgt,tags2);
     ht.fill("hf_deepcsv",ev.j_deepcsv[idx],evWgt,tags2);
     ht.fill("hf_probc",ev.j_probc[idx],evWgt,tags2);
     ht.fill("hf_probudsg",ev.j_probudsg[idx],evWgt,tags2);
     ht.fill("hf_probb",ev.j_probb[idx],evWgt,tags2);
     ht.fill("hf_probbb",ev.j_probbb[idx],evWgt,tags2);
-    ht.fill("hf_CvsL",ev.j_CvsL[idx],evWgt,tags2);
-    ht.fill("hf_CvsB",ev.j_CvsB[idx],evWgt,tags2);
-    ht.fill2D("hf_CvsL_vs_CvsB",ev.j_CvsL[idx],ev.j_CvsB[idx],evWgt,tags2);
+    ht.fill("hf_CvsL",ev.j_CvsL[idx],evWgt*Ctag_SF,tags2);
+    ht.fill("hf_CvsB",ev.j_CvsB[idx],evWgt*Ctag_SF,tags2);
+    ht.fill2D("hf_CvsL_vs_CvsB",ev.j_CvsL[idx],ev.j_CvsB[idx],evWgt*Ctag_SF,tags2);
     t_deepcsv=ev.j_deepcsv[idx];
 
+    Ctag_SF = 1.0;
+    if(!ev.isData)   Ctag_SF=CtagSFWR.GetCtagSF("DeepJet", jets[ij], ev);
     ht.fill("h_deepjet",ev.j_deepjet[idx],evWgt,tags2);
     ht.fill("h_deepjet_btag_loose",ev.j_deepjet_btag_loose[idx],evWgt,tags2);
     ht.fill("h_deepjet_btag_medium",ev.j_deepjet_btag_medium[idx],evWgt,tags2);
@@ -903,8 +915,8 @@ t_weight=evWgt;
     ht.fill("h_deepjet_probc",ev.j_deepjet_probc[idx],evWgt,tags2);
     ht.fill("h_deepjet_probuds",ev.j_deepjet_probuds[idx],evWgt,tags2);
     ht.fill("h_deepjet_probg",ev.j_deepjet_probg[idx],evWgt,tags2);
-    ht.fill("h_deepjet_CvsL",ev.j_deepjet_CvsL[idx],evWgt,tags2);
-    ht.fill("h_deepjet_CvsB",ev.j_deepjet_CvsB[idx],evWgt,tags2);
+    ht.fill("h_deepjet_CvsL",ev.j_deepjet_CvsL[idx],evWgt*Ctag_SF,tags2);
+    ht.fill("h_deepjet_CvsB",ev.j_deepjet_CvsB[idx],evWgt*Ctag_SF,tags2);
     t_deepjet=ev.j_deepjet[idx];
 
 

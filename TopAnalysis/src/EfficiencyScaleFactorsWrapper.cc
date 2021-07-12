@@ -217,6 +217,32 @@ void EfficiencyScaleFactorsWrapper::init(TString era, TString eleid)
     }
 //  }
 
+  //Charge Flip
+  TString ChargeFlip_SF_chi2, ChargeFlip_SF_MLE;
+  if(era_==2017){
+      ChargeFlip_SF_chi2 = era+"/ChargeFlipProbability_2017_chi2_Fit.root";
+      ChargeFlip_SF_MLE = era+"/ChargeFlipProbability_2017_MLE_Fit.root";
+  }
+  gSystem->ExpandPathName(ChargeFlip_SF_chi2);
+  fIn=TFile::Open(ChargeFlip_SF_chi2);
+  if(fIn && !fIn->IsZombie()) {
+    cout << "electrons: charge flip SF from" << ChargeFlip_SF_chi2 << endl;
+    scaleFactorsH_["ChargeFlip_chi2_data"]=(TH2F *)fIn->Get("data_CFRate");
+    scaleFactorsH_["ChargeFlip_chi2_MC"]=(TH2F *)fIn->Get("MC_CFRate");
+    scaleFactorsH_["ChargeFlip_chi2_data"]->SetDirectory(0);
+    scaleFactorsH_["ChargeFlip_chi2_MC"]->SetDirectory(0);
+  }
+  fIn->Close();
+  gSystem->ExpandPathName(ChargeFlip_SF_MLE);
+  fIn=TFile::Open(ChargeFlip_SF_MLE);
+  if(fIn && !fIn->IsZombie()) {
+    cout << "electrons: charge flip SF from" << ChargeFlip_SF_MLE << endl;
+    scaleFactorsH_["ChargeFlip_MLE_data"]=(TH2F *)fIn->Get("data_CFRate");
+    scaleFactorsH_["ChargeFlip_MLE_MC"]=(TH2F *)fIn->Get("MC_CFRate");
+    scaleFactorsH_["ChargeFlip_MLE_data"]->SetDirectory(0);
+    scaleFactorsH_["ChargeFlip_MLE_MC"]->SetDirectory(0);
+  }
+  fIn->Close();
 }
 
 
@@ -472,6 +498,48 @@ EffCorrection_t EfficiencyScaleFactorsWrapper::getEEEtaSF(float eta1,float eta2)
   }
 
   //cout<<"sf ee eta"<<sf.first<<"  "<<sf.second<<endl;
+  return sf;
+}
+
+EffCorrection_t EfficiencyScaleFactorsWrapper::getChargeFlipSF(TString File_name, TString Fit_type, float pt1,float eta1, int charge1, float pt2, float eta2, int charge2)
+{
+  EffCorrection_t sf(1.0,0.01); // Uncertainty part not yet be done.
+  if(File_name.Contains("TTTo") || File_name.Contains("DY")){ // Only apply to ttbar and DY process
+    TH2 *h_data=scaleFactorsH_["ChargeFlip_chi2_data"];
+    TH2 *h_MC  =scaleFactorsH_["ChargeFlip_chi2_MC"];
+    if(Fit_type.Contains("MLE")){
+      TH2 *h_data_MLE = scaleFactorsH_["ChargeFlip_MLE_data"];
+      TH2 *h_MC_MLE = scaleFactorsH_["ChargeFlip_MLE_MC"];
+      h_data = h_data_MLE;
+      h_MC = h_MC_MLE;
+    }
+    float pt1ForSF = pt1;
+    float pt2ForSF = pt2;
+    float eta1ForSF = fabs(eta1);
+    float eta2ForSF = fabs(eta2);
+    if (pt1 > h_data->GetXaxis()->GetXmax()) pt1ForSF = h_data->GetXaxis()->GetXmax() - 0.01;
+    if (pt1 < h_data->GetXaxis()->GetXmin()) pt1ForSF = h_data->GetXaxis()->GetXmin() + 0.01;
+    if (pt2 > h_data->GetXaxis()->GetXmax()) pt2ForSF = h_data->GetXaxis()->GetXmax() - 0.01;
+    if (pt2 < h_data->GetXaxis()->GetXmin()) pt2ForSF = h_data->GetXaxis()->GetXmin() + 0.01;
+    if (eta1 > h_data->GetYaxis()->GetXmax()) eta1ForSF = h_data->GetYaxis()->GetXmax() - 0.01;
+    if (eta1 < h_data->GetYaxis()->GetXmin()) eta1ForSF = h_data->GetYaxis()->GetXmin() + 0.01;
+    if (eta2 > h_data->GetYaxis()->GetXmax()) eta2ForSF = h_data->GetYaxis()->GetXmax() - 0.01;
+    if (eta2 < h_data->GetYaxis()->GetXmin()) eta2ForSF = h_data->GetYaxis()->GetXmin() + 0.01;
+    int   y1binForSF = h_data->GetYaxis()->FindBin(eta1ForSF);
+    int   x1binForSF = h_data->GetXaxis()->FindBin(pt1ForSF);
+    int   y2binForSF = h_data->GetYaxis()->FindBin(eta2ForSF);
+    int   x2binForSF = h_data->GetXaxis()->FindBin(pt2ForSF);
+    float data_CF,MC_CF,P1_data,P2_data,P1_MC,P2_MC;
+    P1_data = h_data->GetBinContent(x1binForSF,y1binForSF);
+    P2_data = h_data->GetBinContent(x2binForSF,y2binForSF);
+    P1_MC = h_MC->GetBinContent(x1binForSF, y1binForSF);
+    P2_MC = h_MC->GetBinContent(x2binForSF, y2binForSF);
+    data_CF = P1_data + P2_data - 2.*P1_data*P2_data;
+    MC_CF = P1_MC + P2_MC -2.*P1_MC*P2_MC;
+    if(charge1*charge2>0) sf.first = data_CF/MC_CF;
+    else if(charge1*charge2<0) sf.first = (1.-data_CF)/(1.-MC_CF);
+  }
+
   return sf;
 }
 //
