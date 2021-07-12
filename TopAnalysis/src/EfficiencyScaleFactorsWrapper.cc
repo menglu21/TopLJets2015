@@ -226,7 +226,7 @@ void EfficiencyScaleFactorsWrapper::init(TString era, TString eleid)
   gSystem->ExpandPathName(ChargeFlip_SF_chi2);
   fIn=TFile::Open(ChargeFlip_SF_chi2);
   if(fIn && !fIn->IsZombie()) {
-    cout << "Charge Flip SF from" << ChargeFlip_SF_chi2 << endl;
+    cout << "electrons: charge flip SF from" << ChargeFlip_SF_chi2 << endl;
     scaleFactorsH_["ChargeFlip_chi2_data"]=(TH2F *)fIn->Get("data_CFRate");
     scaleFactorsH_["ChargeFlip_chi2_MC"]=(TH2F *)fIn->Get("MC_CFRate");
     scaleFactorsH_["ChargeFlip_chi2_data"]->SetDirectory(0);
@@ -236,13 +236,12 @@ void EfficiencyScaleFactorsWrapper::init(TString era, TString eleid)
   gSystem->ExpandPathName(ChargeFlip_SF_MLE);
   fIn=TFile::Open(ChargeFlip_SF_MLE);
   if(fIn && !fIn->IsZombie()) {
-    cout << "Charge Flip SF from" << ChargeFlip_SF_MLE << endl;
+    cout << "electrons: charge flip SF from" << ChargeFlip_SF_MLE << endl;
     scaleFactorsH_["ChargeFlip_MLE_data"]=(TH2F *)fIn->Get("data_CFRate");
     scaleFactorsH_["ChargeFlip_MLE_MC"]=(TH2F *)fIn->Get("MC_CFRate");
     scaleFactorsH_["ChargeFlip_MLE_data"]->SetDirectory(0);
     scaleFactorsH_["ChargeFlip_MLE_MC"]->SetDirectory(0);
   }
-  cout<<"electrons: Charge flip SF from "<<ChargeFlip_SF_chi2<<" and "<<ChargeFlip_SF_MLE<<endl;
   fIn->Close();
 }
 
