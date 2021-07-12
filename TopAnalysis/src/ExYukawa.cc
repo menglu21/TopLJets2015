@@ -646,7 +646,7 @@ void RunExYukawa(const TString in_fname,
         EffCorrection_t l1prefireProb=l1PrefireWR.getCorrection(allJets,{});
         float leptonSF = muonSF*electronSF*emuSF;
 
-        EffCorrection_t Chargeflip_SF=lepEffH.getChargeFlipSF(in_fname,"MLE",leptons[0].pt(),leptons[0].eta(),leptons[0].charge(),leptons[1].pt(),leptons[1].eta(),leptons[1].charge());
+        EffCorrection_t Chargeflip_SF=lepEffH.getChargeFlipSF(in_fname,"Chi2",leptons[0].pt(),leptons[0].eta(),leptons[0].charge(),leptons[1].pt(),leptons[1].eta(),leptons[1].charge());
 
         evWgt  = normWgt*puWgt*l1prefireProb.first*leptonSF*dilepton_trig_SF*Chargeflip_SF.first;
         t_normWgt = normWgt;
