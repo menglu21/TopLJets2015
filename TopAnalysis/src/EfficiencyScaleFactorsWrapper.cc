@@ -242,6 +242,11 @@ void EfficiencyScaleFactorsWrapper::init(TString era, TString eleid)
     scaleFactorsH_["ChargeFlip_MLE_data"]->SetDirectory(0);
     scaleFactorsH_["ChargeFlip_MLE_MC"]->SetDirectory(0);
   }
+  chargeflip_SF = 1.0;
+  chargeflip_evwgt_woSF = 0.0;
+  chargeflip_evwgt_SF = 0.0;
+  chargeflip_count = 0;
+  chargeflip_ratio_count = 0;
   fIn->Close();
 }
 
@@ -539,9 +544,25 @@ EffCorrection_t EfficiencyScaleFactorsWrapper::getChargeFlipSF(TString File_name
     if(charge1*charge2>0) sf.first = data_CF/MC_CF;
     else if(charge1*charge2<0) sf.first = (1.-data_CF)/(1.-MC_CF);
   }
-
+  chargeflip_SF = sf.first;
+  chargeflip_count++;
   return sf;
 }
+
+void EfficiencyScaleFactorsWrapper::recordToChargeflipNormRatio(float evWgt){
+  if(!(chargeflip_count>chargeflip_ratio_count)) return; // Prevent from double-counting
+  chargeflip_ratio_count = chargeflip_count;
+  chargeflip_evwgt_woSF += evWgt/chargeflip_SF;
+  chargeflip_evwgt_SF += evWgt;
+}
+
+float EfficiencyScaleFactorsWrapper::getChargeflipNormRatio(bool isData){
+  if(isData) return 1.0;
+  if(chargeflip_evwgt_SF==0.0) return 1.0;
+  return chargeflip_evwgt_woSF/chargeflip_evwgt_SF;
+}
+
+
 //
 EfficiencyScaleFactorsWrapper::~EfficiencyScaleFactorsWrapper()
 {

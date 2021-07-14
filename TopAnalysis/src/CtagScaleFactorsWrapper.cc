@@ -50,19 +50,20 @@ void CtagScaleFactorsWrapper::init(TString era)
 
 }
 
-float CtagScaleFactorsWrapper::GetCtagSF(TString algorithm_type, std::vector<Jet> &jets, MiniEvent_t ev)
+float CtagScaleFactorsWrapper::GetCtagSF(TString name, TString algorithm_type, std::vector<Jet> &jets, MiniEvent_t ev, float evWgt)
 {
   if (ev.isData) return 1.0;
   float ctagWt = 1.;
   for (size_t ij=0; ij<jets.size();ij++) {
-    float SF = GetCtagSF(algorithm_type, jets[ij],ev);
+    float SF = GetCtagSF(name, algorithm_type, jets[ij],ev, evWgt);
+;
     ctagWt*=SF;
   }
   return ctagWt;
 
 }
 
-float CtagScaleFactorsWrapper::GetCtagSF(TString algorithm_type, Jet jet, MiniEvent_t ev)
+float CtagScaleFactorsWrapper::GetCtagSF(TString name, TString algorithm_type, Jet jet, MiniEvent_t ev, float evWgt)
 {
   if(ev.isData) return 1.0;
   float ctagWt = 1.;
@@ -106,7 +107,15 @@ float CtagScaleFactorsWrapper::GetCtagSF(TString algorithm_type, Jet jet, MiniEv
     ybin = wtHist->GetYaxis()->FindBin(CvsBval);
     ctagWt *= wtHist->GetBinContent(xbin,ybin);
   }
+  evWgt_woSF_H_[name] += evWgt;
+  evWgt_SF_H_[name] += evWgt*ctagWt;
   return ctagWt;
+}
+
+float CtagScaleFactorsWrapper::GetEvwgtRatio(bool isData, TString name){
+  if(isData) return 1.0;
+  if(evWgt_SF_H_[name]==0.0) return 1.0;
+  return evWgt_woSF_H_[name]/evWgt_SF_H_[name];
 }
 
 

@@ -459,7 +459,7 @@ void RunExYukawa(const TString in_fname,
 
         ht.fill("h_flags",Flag_eeBadScFilter,1);      
    
-   /*  
+  /* 
       cout<<Flag_HBHENoiseFilter<<"  "<<Flag_HBHENoiseIsoFilter<<"  "
           <<Flag_EcalDeadCellTriggerPrimitiveFilter<<"  "
           <<Flag_goodVertices<<"  "<<Flag_eeBadScFilter<<"  "
@@ -891,7 +891,7 @@ t_weight=evWgt;
     jet_index++;
     // Just apply the C-tagging scale factor to CvsL and CvsB plots in current phase.
     Ctag_SF = 1.0;
-    if(!ev.isData)   Ctag_SF=CtagSFWR.GetCtagSF("DeepCSV", jets[ij], ev);
+    if(!ev.isData)   Ctag_SF=CtagSFWR.GetCtagSF("DeepCSV_alljet", "DeepCSV", jets[ij], ev, evWgt);
     ht.fill("hf_csv",ev.j_csv[idx],evWgt,tags2);
     ht.fill("hf_deepcsv",ev.j_deepcsv[idx],evWgt,tags2);
     ht.fill("hf_probc",ev.j_probc[idx],evWgt,tags2);
@@ -904,7 +904,7 @@ t_weight=evWgt;
     t_deepcsv=ev.j_deepcsv[idx];
 
     Ctag_SF = 1.0;
-    if(!ev.isData)   Ctag_SF=CtagSFWR.GetCtagSF("DeepJet", jets[ij], ev);
+    if(!ev.isData)   Ctag_SF=CtagSFWR.GetCtagSF("DeepJet_alljet", "DeepJet", jets[ij], ev, evWgt);
     ht.fill("h_deepjet",ev.j_deepjet[idx],evWgt,tags2);
     ht.fill("h_deepjet_btag_loose",ev.j_deepjet_btag_loose[idx],evWgt,tags2);
     ht.fill("h_deepjet_btag_medium",ev.j_deepjet_btag_medium[idx],evWgt,tags2);
@@ -958,6 +958,7 @@ t_weight=evWgt;
 
 //   t_event = iev;
    t_input.Fill();
+   lepEffH.recordToChargeflipNormRatio(evWgt); //This can actually apply to any step that you want to normalize. But be careful that only apply once in the analysis.
    if (baseMC.Contains("scan",TString::kIgnoreCase)){
       if (ev.scan_mass > 299. && ev.scan_mass < 301.) t_300->Fill();
       if (ev.scan_mass > 349. && ev.scan_mass < 351.) t_350->Fill();
@@ -1023,6 +1024,14 @@ t_weight=evWgt;
      cout<<"Ntotal_after_trigger: "<<Ntotal_after_trig<<"   "<<100.*Ntotal_after_trig/Ntotal<<" %"<<endl;
      cout<<"Ntotal_after_all_selections: "<<N_after_all_selections<<"   "<<100.*N_after_all_selections/Ntotal<<" %"<<endl;
 
+     float r_chargeflip = lepEffH.getChargeflipNormRatio(in_fname.Contains("Data13TeV"));
+     float r_DeepCSV = CtagSFWR.GetEvwgtRatio(in_fname.Contains("Data13TeV"),"DeepCSV_alljet");
+     float r_DeepJet = CtagSFWR.GetEvwgtRatio(in_fname.Contains("Data13TeV"),"DeepJet_alljet");
+     cout<<"Chargeflip ratio r: "<<r_chargeflip<<endl;
+     cout<<"DeepCSV ratio r: "<<r_DeepCSV<<endl; // Can be used to scale the plots to corresponding ctagging plot.
+     cout<<"DeepJet ratio r: "<<r_DeepJet<<endl;
+
+
     f->Close();
 
   //save histos to file
@@ -1036,6 +1045,11 @@ t_weight=evWgt;
     it.second->SetDirectory(fOut); it.second->Write();
   }
 
+  //save chargeflip normalized infomation
+    TBranch* b_chargeflip_evWgt = t_input.Branch("norm_evWgt_chargeflip", &r_chargeflip, "norm_evWgt_chargeflip/F");
+    b_chargeflip_evWgt->Fill();
+  
+
   t_input.Write();
   if (baseMC.Contains("scan",TString::kIgnoreCase)){
      t_300->Write();
@@ -1045,6 +1059,8 @@ t_weight=evWgt;
      t_600->Write();
      t_700->Write();
   }
+
+
 
   fOut->Close();
 
