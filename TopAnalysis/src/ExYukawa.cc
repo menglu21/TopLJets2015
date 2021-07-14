@@ -1045,6 +1045,11 @@ t_weight=evWgt;
     it.second->SetDirectory(fOut); it.second->Write();
   }
 
+  //save chargeflip normalized infomation
+    TBranch* b_chargeflip = t_input.Branch("norm_evWgt_chargeflip", &r_chargeflip, "norm_evWgt_chargeflip/F");
+    b_chargeflip->Fill();
+  
+
   t_input.Write();
   if (baseMC.Contains("scan",TString::kIgnoreCase)){
      t_300->Write();
@@ -1054,10 +1059,6 @@ t_weight=evWgt;
      t_600->Write();
      t_700->Write();
   }
-
-  //save chargeflip normalized infomation
-  TBranch* b_chargeflip = t_input.Branch("r_chargeflip", &r_chargeflip, "r_chargeflip/F");
-  b_chargeflip->Fill();
 
 
 
