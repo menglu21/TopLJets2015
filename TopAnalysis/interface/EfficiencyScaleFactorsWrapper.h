@@ -25,6 +25,9 @@ class EfficiencyScaleFactorsWrapper
   EffCorrection_t getEEPtSF(float pt1, float pt2);
   EffCorrection_t getEEEtaSF(float eta1, float eta2);
   EffCorrection_t getChargeFlipSF(TString File_name, TString Fit_type, float pt1,float eta1, int charge1, float pt2, float eta2, int charge2);
+  void recordToChargeflipNormRatio(float evWgt);
+  float getChargeflipNormRatio(bool isData);
+
   ~EfficiencyScaleFactorsWrapper();
 
  private:
@@ -33,6 +36,8 @@ class EfficiencyScaleFactorsWrapper
   std::map<TString,TH2 *> scaleFactorsH_;
   std::map<TString,TH1 *> scaleFactors1DH_;
   std::map<TString,TGraphAsymmErrors *> scaleFactorsGr_;
+  float chargeflip_SF,chargeflip_evwgt_woSF,chargeflip_evwgt_SF;
+  int chargeflip_count, chargeflip_ratio_count;
 };
 
 #endif
