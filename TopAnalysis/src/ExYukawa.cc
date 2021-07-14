@@ -1046,8 +1046,8 @@ t_weight=evWgt;
   }
 
   //save chargeflip normalized infomation
-    TBranch* b_chargeflip = t_input.Branch("norm_evWgt_chargeflip", &r_chargeflip, "norm_evWgt_chargeflip/F");
-    b_chargeflip->Fill();
+    TBranch* b_chargeflip_evWgt = t_input.Branch("norm_evWgt_chargeflip", &r_chargeflip, "norm_evWgt_chargeflip/F");
+    b_chargeflip_evWgt->Fill();
   
 
   t_input.Write();
