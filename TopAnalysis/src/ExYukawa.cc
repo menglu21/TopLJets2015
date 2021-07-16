@@ -453,12 +453,14 @@ void RunExYukawa(const TString in_fname,
         Flag_globalSuperTightHalo2016Filter=(ev.met_filterBits>>5)&0x1;
         Flag_BadPFMuonFilter=(ev.met_filterBits>>6)&0x1;
  //     TO BE USED IN NEXT ROUND OF NTUPLE PRODUCTION!!!
-        Flag_badPFMuonDzFilter=(ev.met_filterBits>>7)&0x1;
+/* 
+       Flag_badPFMuonDzFilter=(ev.met_filterBits>>7)&0x1;
         Flag_ecalBadCalibFilter=(ev.met_filterBits>>8)&0x1;
-
+*/
 
         ht.fill("h_flags",Flag_eeBadScFilter,1);      
-   
+          
+ 
   /* 
       cout<<Flag_HBHENoiseFilter<<"  "<<Flag_HBHENoiseIsoFilter<<"  "
           <<Flag_EcalDeadCellTriggerPrimitiveFilter<<"  "
@@ -475,9 +477,11 @@ void RunExYukawa(const TString in_fname,
               Flag_globalSuperTightHalo2016Filter && 
               Flag_BadPFMuonFilter)) continue;
  // ----TO BE USED IN NEXT ROUND OF NTUPLE PRODUCTION!!!---             
+/*
         if (!(Flag_badPFMuonDzFilter &&
               Flag_ecalBadCalibFilter)) continue;
         if (ev.isData && !Flag_eeBadScFilter) continue;
+*/
 //---------------------------------------------------------
 
 
@@ -801,11 +805,12 @@ void RunExYukawa(const TString in_fname,
   std::vector<TString> tags3={"inc"};
   tags3.push_back(to_string(ev.scan_mass));
 
-
-
- // if(ev.met_pt < 30.) continue;
-
+  if (ev.met_pt < 30.) continue;
   if (jets.size() < 3) continue;
+  if (leptons[0].DeltaR(leptons[1]) < 0.3) continue; 
+  if (invariant_mass < 20.) continue;
+  if (invariant_mass > 76. && invariant_mass < 106.) continue;
+
 
   float HT = 0;
   for(size_t ij=0; ij<jets.size(); ij++){
@@ -846,6 +851,8 @@ t_weight=evWgt;
 
  if(!passJets) continue;//not in recent previous tests. 
  if(num_btags < minNum_btags) continue;//not in recent previous tests.
+
+
 
  sort(jets.begin(),jets.end(),
    [](const Jet& a, const Jet& b){
