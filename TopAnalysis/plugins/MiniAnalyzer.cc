@@ -208,6 +208,7 @@ private:
 //
 MiniAnalyzer::MiniAnalyzer(const edm::ParameterSet& iConfig) :
   trigObjsTag_(iConfig.getParameter<edm::InputTag>("trigObjs")),
+  trigObjsToken_(consumes<std::vector<pat::TriggerObjectStandAlone> >(trigObjsTag_)),
   generatorToken_(consumes<GenEventInfoProduct>(edm::InputTag("generator"))),
   generatorevtToken_(consumes<GenEventInfoProduct>(edm::InputTag("generator",""))),
 
