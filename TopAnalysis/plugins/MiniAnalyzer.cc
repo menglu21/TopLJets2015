@@ -118,7 +118,6 @@ public:
   string scanId_public;
 private:
   virtual void beginJob() override;
-  std::vector<const pat::TriggerObjectStandAlone*> getMatchedObjs(const float eta,const float phi,const std::vector<pat::TriggerObjectStandAlone>& trigObjs,const float maxDeltaR);
   void genAnalysis(const edm::Event& iEvent, const edm::EventSetup& iSetup);
   void recAnalysis(const edm::Event& iEvent, const edm::EventSetup& iSetup);
 
@@ -133,9 +132,6 @@ private:
 
   bool isSoftMuon(const reco::Muon & recoMu,const reco::Vertex &vertex);
   bool isMediumMuon2016ReReco(const reco::Muon & recoMu);
-
-  edm::InputTag trigObjsTag_;
-  edm::EDGetTokenT<std::vector<pat::TriggerObjectStandAlone> > trigObjsToken_;
 
   // member data
   edm::EDGetTokenT<GenEventInfoProduct> generatorToken_;
@@ -207,8 +203,6 @@ private:
 // constructors and destructor
 //
 MiniAnalyzer::MiniAnalyzer(const edm::ParameterSet& iConfig) :
-  trigObjsTag_(iConfig.getParameter<edm::InputTag>("trigObjs")),
-  trigObjsToken_(consumes<std::vector<pat::TriggerObjectStandAlone> >(trigObjsTag_)),
   generatorToken_(consumes<GenEventInfoProduct>(edm::InputTag("generator"))),
   generatorevtToken_(consumes<GenEventInfoProduct>(edm::InputTag("generator",""))),
 
@@ -816,25 +810,6 @@ void MiniAnalyzer::recAnalysis(const edm::Event& iEvent, const edm::EventSetup& 
   // ELECTRON SELECTION: cf. https://twiki.cern.ch/twiki/bin/view/CMS/CutBasedElectronIdentificationRun2
   edm::Handle<edm::View<pat::Electron> > electrons;
   iEvent.getByToken(electronToken_, electrons);
-
-  edm::Handle<std::vector<pat::TriggerObjectStandAlone> > trigObjsHandle;
-  iEvent.getByToken(trigObjsToken_, trigObjsHandle);
-  std::vector<pat::TriggerObjectStandAlone> unpackedTrigObjs;
-  for(auto& trigObj : *trigObjsHandle){
-    unpackedTrigObjs.push_back(trigObj);
-    unpackedTrigObjs.back().unpackFilterLabels(iEvent,*h_trigRes);
-  }
-  for(auto& ele : *electrons){
-    const float eta = ele.superCluster()->eta();
-    const float phi = ele.superCluster()->phi();
-    std::vector<const pat::TriggerObjectStandAlone*> matchedTrigObjs = getMatchedObjs(eta,phi,unpackedTrigObjs,0.1);
-    for(const auto trigObj : matchedTrigObjs){
-        if(trigObj->hasFilterLabel("hltEle32L1DoubleEGWPTightGsfTrackIsoFilter") &&
-         trigObj->hasFilterLabel("hltEGL1SingleEGOrFilter") ) {
-          ev_.HLT_Ele32_WPTight_Gsf=true;
-        }
-    }
-  }
 
   for (const pat::Electron &e : *electrons)
     {
@@ -1507,17 +1482,6 @@ MiniAnalyzer::endRun(const edm::Run& iRun,
     std::cout << e.what() << endl
 	      << "Failed to retrieve LHERunInfoProduct" << std::endl;
   }
-}
-
-std::vector<const pat::TriggerObjectStandAlone*> MiniAnalyzer::getMatchedObjs(const float eta,const float phi,const std::vector<pat::TriggerObjectStandAlone>& trigObjs,const float maxDeltaR)
-{
-  std::vector<const pat::TriggerObjectStandAlone*> matchedObjs;
-  const float maxDR2 = maxDeltaR*maxDeltaR;
-  for(auto& trigObj : trigObjs){
-    const float dR2 = reco::deltaR2(eta,phi,trigObj.eta(),trigObj.phi());
-    if(dR2<maxDR2) matchedObjs.push_back(&trigObj);
-  }
-  return matchedObjs;
 }
 
 //-------------

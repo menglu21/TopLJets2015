@@ -12,7 +12,6 @@ struct MiniEvent_t
   }
 
   Bool_t isData;
-  Bool_t HLT_Ele32_WPTight_Gsf;
   UInt_t run,lumi;
   ULong64_t event;
   Float_t beamXangle, instLumi;
