@@ -44,6 +44,7 @@ class SelectionTool {
   bool hasTriggerBit(TString triggerName,unsigned int word);
   std::vector<Particle> flaggedLeptons(MiniEvent_t &ev);
   std::vector<Particle> selLeptons(std::vector<Particle> &flaggedLeptons,int muQualBit=LOOSE, int eleQualBit=LOOSE, double minPt=0., double maxEta=99., std::vector<Particle> veto={});
+  std::vector<Particle> selLooseLeptons(std::vector<Particle> &flaggedLeptons,int muQualBit0=TIGHT, int muQualBit=LOOSE, int eleQualBit0=TIGHT, int eleQualBit=VETO, double minPt=0., double maxEta=99., std::vector<Particle> veto={});
   std::vector<Particle> selGoodMuons(std::vector<Particle> &flaggedLeptons,int muQualBit=LOOSE, double minPt=0., double maxEta=99., std::vector<Particle> veto={});
   std::vector<Particle> selFakeable_Muons(MiniEvent_t &ev,std::vector<Particle> &flaggedLeptons,int muQualBit=LOOSE, double minPt=0., double maxEta=99., std::vector<Particle> veto={});
   std::vector<Particle> selGoodElectrons(std::vector<Particle> &flaggedLeptons,int eleQualBit=LOOSE, double minPt=0., double maxEta=99., std::vector<Particle> veto={});

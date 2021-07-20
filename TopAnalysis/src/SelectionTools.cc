@@ -338,6 +338,36 @@ std::vector<Particle> SelectionTool::selLeptons(std::vector<Particle> &leptons,i
   return selLeptons;
 }
 
+//select loose but not tight leptons
+std::vector<Particle> SelectionTool::selLooseLeptons(std::vector<Particle> &leptons,int muQualBit0,int muQualBit,int eleQualBit0,int eleQualBit,double minPt, double maxEta,std::vector<Particle> veto){
+  std::vector<Particle> selLooseLeptons;
+  for(size_t i =0; i<leptons.size(); i++)
+    {
+      //check quality flag
+      if(leptons[i].id()==11 && (leptons[i].hasQualityFlag(eleQualBit0) || !leptons[i].hasQualityFlag(eleQualBit) )) continue;
+      if(leptons[i].id()==13 && (leptons[i].hasQualityFlag(muQualBit0) || !leptons[i].hasQualityFlag(muQualBit) )) continue;
+
+      //check kinematics
+      if(leptons[i].pt()<minPt || fabs(leptons[i].eta())>maxEta) continue;
+
+      //check if this lepton should be vetoed by request
+      bool skipThisLepton(false);
+      for(auto &vetoL : veto){
+        if(vetoL.originalReference()!=leptons[i].originalReference()) continue;
+        skipThisLepton=true;
+        break;
+      }
+      if(skipThisLepton) continue;
+
+
+      //lepton is selected
+      selLooseLeptons.push_back(leptons[i]);
+    }
+
+  //all done here
+  return selLooseLeptons;
+}
+
 // select good muon, these muon are same with those in function SelectionTool::selLeptons
 std::vector<Particle> SelectionTool::selGoodMuons(std::vector<Particle> &leptons,int muQualBit,double minPt, double maxEta,std::vector<Particle> veto){
   std::vector<Particle> selGoodMuons;
